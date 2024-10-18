@@ -1,7 +1,7 @@
 # trophees-nsi
 
 Please respect the following defined architecture:
-
+```
 ├── sources/
 │   ├── assets/
 │   │   ├── images/
@@ -26,3 +26,4 @@ Please respect the following defined architecture:
 │   │       ├── input_handler.py
 │   │       ├── sound_manager.py
 │   │       └── game_constants.py
+```
