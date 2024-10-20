@@ -1,1 +1,14 @@
-.env
+# Dossiers générés automatiquement par Python
+__pycache__/
+*.pyc
+
+# Environnements virtuels
+venv/
+.env/
+
+# Fichiers de configuration spécifiques à l'IDE
+.vscode/
+
+# Fichiers de logs et autres fichiers temporaires
+*.log
+*.tmp
