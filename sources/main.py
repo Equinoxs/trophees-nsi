@@ -2,6 +2,9 @@
 
 from src.classes.utils import GameLoop, TimeHandler, ControlHandler
 
+control_handlers = None
+time_handler = None
+
 def main():
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()

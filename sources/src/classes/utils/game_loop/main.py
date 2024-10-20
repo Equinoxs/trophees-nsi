@@ -10,14 +10,16 @@ class GameLoop:
 
 		while self.running:
 			self.update(control_handler, time_handler)
+			pygame.display.flip() # Rafraîchit l'écran
 
 		pygame.quit()
 
 
 	def update(self, control_handler, time_handler):
 		control_handler.handleEvents(pygame)
+  
 		if control_handler.is_activated('quit'):
 			self.running = False
 
-		# player.update() qui appellerait self.map.update() qui mettrait à jour tout le jeu
 		time_handler.update()
+		# player.update() qui appellerait self.map.update() qui mettrait à jour tout le jeu
