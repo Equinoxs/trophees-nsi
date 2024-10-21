@@ -8,6 +8,7 @@ venv/
 
 # Fichiers de configuration spécifiques à l'IDE
 .vscode/
+.idea/
 
 # Fichiers de logs et autres fichiers temporaires
 *.log

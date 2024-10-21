@@ -1,6 +1,7 @@
 import pygame
 from .. import Vector2
 
+
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str, frame: tuple = (0, 10_000)):
 		self.position = position
@@ -14,8 +15,10 @@ class Sprite:
 		right = (self.frame[1] + deplacement) * coeff
 
 		# Vérifier que la fenêtre de cadrage ne dépasse pas les limites de l'image
-		if left < 0: left = 0
-		if right > width: right = width
+		if left < 0:
+			left = 0
+		if right > width:
+			right = width
 
 		# Rogner l'image (subsurface)
 		self.image = self.image.subsurface((left, 0, right - left, height))

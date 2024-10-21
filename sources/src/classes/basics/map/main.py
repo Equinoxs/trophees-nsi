@@ -1,6 +1,6 @@
 class Map:
 	def __init__(self):
-		self.elements = [] # Une liste de tous les MapElements de la map
+		self.elements = []  # Une liste de tous les MapElements de la map
 
 	def update(self):
 		for element in self.elements:

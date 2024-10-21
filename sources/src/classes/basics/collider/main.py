@@ -1,11 +1,11 @@
 from .. import Vector2
 
+
 class Collider:
 	def __init__(self, points: list[Vector2] = []):
-		self.points = points # La hitbox sous forme d'un polygone
+		self.points = points  # La hitbox sous forme d'un polygone
 		# exemple: un rectangle serait [(0, 0), (1, 0), (1, 1), (0, 1)]
 		# Le premier point est toujours à l'origine, pour simplifier les calculs
-
 
 	# représentons le joueur comme un point, si ce point est à moins de 50cm
 	# d'un segment d'une hitbox, une collision sera détectée
@@ -19,8 +19,7 @@ class Collider:
 			OB = self.points[i - 1]
 			OP = point
 			PA = OA - OP
-			AB = OB - OA # D'après la relation de Chasles
-   
+			AB = OB - OA  # D'après la relation de Chasles
 			if PA.get_norm() > 20:
 				return False
 

@@ -22,12 +22,12 @@ class Vector2:
 	def get_norm(self):
 		return (self.x ** 2 + self.y ** 2) ** (1/2)
 
-	def normalize(self): # règle la norme du vecteur à 1
+	def normalize(self):  # règle la norme du vecteur à 1
 		norm = self.get_norm()
 		if norm != 0:
 			self.x /= norm
 			self.y /= norm
-   
+
 	def scalar_product(self, vector_2):
 		return self.x * vector_2.get_x() + self.y * vector_2.get_y()
 
@@ -40,7 +40,6 @@ class Vector2:
 
 	def convert_to_tuple(self):
 		return (self.x, self.y)
-
 
 	def __add__(self, other):
 		if isinstance(other, Vector2):

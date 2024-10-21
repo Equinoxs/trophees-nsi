@@ -1,6 +1,7 @@
 from .. import Vector2
 from .....main import time_handler
 
+
 class Movable:
 	def __init__(self):
 		self.speed_vector = Vector2(0, 0)

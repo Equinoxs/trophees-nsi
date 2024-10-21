@@ -1,5 +1,6 @@
 import pygame
 
+
 class GameLoop:
 	def __init__(self, control_handler, time_handler):
 		self.running = True
@@ -10,14 +11,12 @@ class GameLoop:
 
 		while self.running:
 			self.update(control_handler, time_handler)
-			pygame.display.flip() # Rafraîchit l'écran
+			pygame.display.flip()  # Rafraîchit l'écran
 
 		pygame.quit()
 
-
 	def update(self, control_handler, time_handler):
 		control_handler.handleEvents(pygame)
-  
 		if control_handler.is_activated('quit'):
 			self.running = False
 

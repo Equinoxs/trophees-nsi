@@ -1,5 +1,6 @@
 from .....main import time_handler
 
+
 class Animatable:
 	def __init__(self, animation_scheme: list[float] = []):
 		self.running = True
@@ -14,23 +15,22 @@ class Animatable:
 	def resume(self):
 		self.running = True
 
-
-	def animation_must_update(self): # Renvoie vrai si le MapElement doit etre animé
+	def animation_must_update(self):  # Renvoie vrai si le MapElement doit etre animé
 		self.dt += time_handler.get_delta_time()
 		if len(self.scheme) == 0:
-			return False # pas d'animation
+			return False  # pas d'animation
 
-		if self.running == False:
+		if not self.running:
 			return False
 
 		if self.dt < self.scheme[self.index + 1]:
-			return False # tros tôt
+			return False  # trop tôt
 
 		if self.index == len(self.scheme) - 1:
-			self.index = 0 # si la dernière image est affiché, on revient au début
-			if self.infinite == False:
+			self.index = 0  # si la dernière image est affiché, on revient au début
+			if not self.infinite:
 				self.running = False
 				return False
 		else:
-			self.index += 1 # sinon, on passe à la suivante
+			self.index += 1  # sinon, on passe à la suivante
 		return True

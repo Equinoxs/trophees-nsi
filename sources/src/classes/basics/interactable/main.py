@@ -1,6 +1,7 @@
 from typing import Callable
 from .....main import control_handler
 
+
 class Interactable:
 	def __init__(self, interaction: Callable = None):
 		if interaction is None:
