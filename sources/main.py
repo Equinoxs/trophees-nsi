@@ -2,7 +2,7 @@
 
 from src.classes.utils import GameLoop, TimeHandler, ControlHandler
 
-control_handlers = None
+control_handler = None
 time_handler = None
 
 def main():
