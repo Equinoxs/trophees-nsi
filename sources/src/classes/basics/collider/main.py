@@ -13,6 +13,7 @@ class Collider:
 		if len(self.points) == 0:
 			return False
 
+		closest_vector = None
 		for i in range(0, len(self.points) - 1):
 			# Posons
 			OA = self.points[i]
@@ -26,18 +27,19 @@ class Collider:
 			# Calculons le projeté orthogonal de PA sur AB
 			t = AB.scalar_product(PA) / AB.scalar_product(AB)
 			if t <= 0:
-				distance = PA.get_norm()
-				if distance > 0.5:
-					return False
+				if PA.get_norm() < closest_vector.get_norm():
+					closest_vector = PA
 			if t >= 1:
-				distance = (PA + AB).get_norm()
-				if distance > 0.5:
-					return False
+				PB = PA + AB
+				if PB.get_norm() < closest_vector.get_norm():
+					closest_vector = PB
 
 			orthogonal_projected = OA + t * AB
 			orthogonal_vector = OP - orthogonal_projected
-			distance = orthogonal_vector.get_norm()
-			if distance > 0.5:
-				return False
-			else:
-				return orthogonal_vector.normalize()
+			if orthogonal_vector.get_norm() < closest_vector.get_norm():
+				closest_vector = orthogonal_vector
+
+		if closest_vector.get_norm() < 0.5:
+			return closest_vector.normalize()
+		else:
+			return False

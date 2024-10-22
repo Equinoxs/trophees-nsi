@@ -1,7 +1,7 @@
 class ControlHandler:
 	def __init__(self):
-		self.resetEvents()
 		self.events = {}
+		self.resetEvents()
 
 	def resetEvents(self):
 		self.events = {
