@@ -7,6 +7,7 @@ class Sprite:
 		self.position = position
 		self.image = pygame.image.load(image_path)
 		self.frame = frame  # le bord gauche et le bord droit
+		self.frame_width = self.frame[1] - self.frame[0]
 
 	def move_frame(self, deplacement, coeff=1):
 		# Récupérer la taille de l'image

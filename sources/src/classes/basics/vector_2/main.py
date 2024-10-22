@@ -37,6 +37,11 @@ class Vector2:
 	def add(self, vector2):
 		self.x += vector2.get_x()
 		self.y += vector2.get_y()
+  
+	def orthogonal_projection(self, vector2):
+		t = self.scalar_product(vector2) / self.scalar_product(self)
+		orthogonal_projected = t * self
+		return orthogonal_projected
 
 	def convert_to_tuple(self):
 		return (self.x, self.y)
