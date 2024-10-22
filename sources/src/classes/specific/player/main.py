@@ -5,8 +5,8 @@ from .....main import control_handler, time_hander
 
 
 class Player(MapObject):
-	def __init__(self, map: Map, position: Vector2, image_path: str, frame: tuple[int, int] = (0, 10_000), z_index: int = 0):
-		MapObject.__init__(self, position, image_path, frame, z_index)
+	def __init__(self, map: Map, position: Vector2, image_path: str, z_index: int = 0):
+		MapObject.__init__(self, position, image_path, z_index)
 		self.map = map
 
 	def change_map(self, map: Map):

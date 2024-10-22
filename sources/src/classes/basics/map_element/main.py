@@ -2,9 +2,9 @@ from .. import Sprite, SoundMaker, Animatable, Vector2
 
 
 class MapElement(Sprite, SoundMaker, Animatable):
-	def __init__(self, position: Vector2, image_path: str, frame: tuple[int, int] = (0, 10_000), z_index: int = 0):
+	def __init__(self, position: Vector2, image_path: str, z_index: int = 0):
 		SoundMaker.__init__(self, position)
-		Sprite.__init__(self, position, image_path, frame)
+		Sprite.__init__(self, position, image_path)
 		Animatable.__init__(self)
 		self.z_index = z_index  # Un z_index de 1 s'affichera au-dessus d'un z_index de 0
 
