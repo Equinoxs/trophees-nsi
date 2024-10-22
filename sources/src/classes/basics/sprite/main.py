@@ -1,35 +1,43 @@
 import pygame
+import json
+import os
+
 from .. import Vector2
 
 
 class Sprite:
-	def __init__(self, position: Vector2, image_path: str, frame: tuple = (0, 10_000)):
+	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
-		self.image = pygame.image.load(image_path)
-		self.frame = frame  # le bord gauche et le bord droit
-		self.frame_width = self.frame[1] - self.frame[0]
+  
+		path = os.path.join(os.path.abspath(__file__), '../../../../assets/images', image_path)
+		self.image = pygame.image.load(os.path.join(path, image_path + '.png'))
+		with open(os.path.join(path, image_path + '.json'), 'r') as file:
+			data = json.load(file)
+   
+		self.image_data = data  # les infos de l'image
+		self.magnification_coeff = 1  # image x fois plus grande
+		self.frame_index = 0  # première frame au début
 
-	def move_frame(self, deplacement, coeff=1):
+	def go_next_frame(self, coeff=1):
 		# Récupérer la taille de l'image
-		width, height = self.image.get_size()
-		left = self.frame[0] + deplacement
-		right = (self.frame[1] + deplacement) * coeff
-
-		# Vérifier que la fenêtre de cadrage ne dépasse pas les limites de l'image
-		if left < 0:
-			left = 0
-		if right > width:
-			right = width
+		if self.frame_index == len(self.image_data['widths']):
+			self.frame_index = 0
+		else:
+			self.frame_index += 1
+  
+		_, height = self.image.get_size()
+		left = sum(self.data['widths'][0:self.index(-1)])
+		right = (left + self.data['widths'][self.frame_index]) * coeff
 
 		# Rogner l'image (subsurface)
 		self.image = self.image.subsurface((left, 0, right - left, height))
 
-	def magnify(self, magnification_coeff):
+	def set_magnification(self, magnification_coeff):
 		width, height = self.image.get_size()
 
 		# Redimensionner l'image (scale)
-		self.image = pygame.transform.scale(self.image, (int(width * magnification_coeff), int(height * magnification_coeff)))
-		self.move_frame(0, magnification_coeff)
+		self.image = pygame.transform.scale(self.image, width * magnification_coeff, height * magnification_coeff)
+		self.magnification_coeff = magnification_coeff
 
 	def rotate(self, angle):
 		# Rotation de l'image

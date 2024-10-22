@@ -1,11 +1,17 @@
+import json
+import os
+
 from .. import Vector2
 
 
 class Collider:
-	def __init__(self, points: list[Vector2] = []):
-		self.points = points  # La hitbox sous forme d'un polygone
-		# exemple: un rectangle serait [(0, 0), (1, 0), (1, 1), (0, 1)]
-		# Le premier point est toujours à l'origine, pour simplifier les calculs
+	def __init__(self, image_path: str):
+		self.image_path = image_path
+  
+		path = os.path.join(os.path.abspath(__file__), '../../../../assets/images', image_path, image_path + '.json')
+		with open(path, 'r') as file:
+			data = json.load(file)
+		self.hitbox = data['hitbox']
 
 	# représentons le joueur comme un point, si ce point est à moins de 50cm
 	# d'un segment d'une hitbox, une collision sera détectée
@@ -16,8 +22,8 @@ class Collider:
 		closest_vector = None
 		for i in range(0, len(self.points) - 1):
 			# Posons
-			OA = self.points[i]
-			OB = self.points[i - 1]
+			OA = self.hitbox[i]
+			OB = self.hitbox[i - 1]
 			OP = point
 			PA = OA - OP
 			AB = OB - OA  # D'après la relation de Chasles
