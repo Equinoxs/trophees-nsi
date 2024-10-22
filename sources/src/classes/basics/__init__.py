@@ -1,9 +1,9 @@
 from .animatable.main import Animatable
 # from .body.main import Body
-# from .collider.main import Collider
-# from .interactable.main import Interactable
+from .collider.main import Collider
+from .interactable.main import Interactable
 from .map.main import Map
-# from .map_element.main import MapElement
+from .map_element.main import MapElement
 # from .map_object.main import MapObject
 from .movable.main import Movable
 # from .npc.main import NPC

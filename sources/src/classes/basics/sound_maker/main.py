@@ -2,8 +2,8 @@ from ...utils import SoundTrack
 
 
 class SoundMaker:
-    def __init__(self):
-        self.position = None  # défini dans les classes enfant
+    def __init__(self, position):
+        self.position = position  # défini dans les classes enfant
         self.sound_track = None
 
     def load_sound(self, sound_path: str, loop: bool = False, is_music: bool = False):

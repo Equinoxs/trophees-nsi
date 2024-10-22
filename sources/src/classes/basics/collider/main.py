@@ -25,7 +25,8 @@ class Collider:
 				return False
 
 			# Calculons le projeté orthogonal de PA sur AB
-			t = AB.scalar_product(PA) / AB.scalar_product(AB)
+			orthogonal_projected = AB.orthogonal_projection(PA) + OP
+			t = orthogonal_projected.get_norm() / AB.get_norm()
 			if t <= 0:
 				if PA.get_norm() < closest_vector.get_norm():
 					closest_vector = PA
@@ -34,7 +35,6 @@ class Collider:
 				if PB.get_norm() < closest_vector.get_norm():
 					closest_vector = PB
 
-			orthogonal_projected = OA + t * AB
 			orthogonal_vector = OP - orthogonal_projected
 			if orthogonal_vector.get_norm() < closest_vector.get_norm():
 				closest_vector = orthogonal_vector
