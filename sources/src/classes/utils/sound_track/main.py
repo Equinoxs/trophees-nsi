@@ -1,6 +1,7 @@
 import pygame
 
 from ...basics import Vector2
+from ...utils import SoundMixer
 
 
 class SoundTrack:
@@ -20,6 +21,8 @@ class SoundTrack:
             self.play_amount = -1  # -1 = jouer indéfiniment
         else:
             self.play_amount = 1
+
+        SoundMixer().add_sound_track(self)
 
     def init(self):
         self.sound_object = pygame.mixer.Sound(self.sound_path)

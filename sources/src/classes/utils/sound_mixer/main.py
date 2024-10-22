@@ -2,7 +2,15 @@ from ...basics import Vector2
 from math import pi
 
 
-class SoundMixer:
+class SoundMixer(object):
+    _instance = None
+
+    # singleton
+    def __new__(cls, *args, **kwargs):
+        if not isinstance(cls._instance, cls):
+            cls._instance = object.__new__(cls, *args, **kwargs)
+        return cls._instance
+
     def __init__(self):
         self.sound_tracks = []
 
