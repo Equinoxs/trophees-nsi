@@ -1,5 +1,1 @@
 pygame
-
-bibliothèques natives à Python
-json
-os
