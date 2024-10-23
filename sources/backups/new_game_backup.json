@@ -1,0 +1,6 @@
+{
+	"player": {
+		"position": [0, 0],
+		"image_path": "player_walking"
+	}
+}
