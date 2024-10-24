@@ -1,10 +1,6 @@
 # Point d'entrée du jeu
 
-from src.classes.utils import GameLoop, TimeHandler, ControlHandler, SaveHandler
-
-control_handler = None
-time_handler = None
-save_handler = None
+from src.classes import TimeHandler, ControlHandler, SaveHandler, GameLoop
 
 
 def main():

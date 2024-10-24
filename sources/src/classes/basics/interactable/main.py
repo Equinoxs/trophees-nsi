@@ -1,5 +1,5 @@
 from typing import Callable
-from .....main import control_handler
+from src.classes import ControlHandler
 
 
 class Interactable:
@@ -12,7 +12,7 @@ class Interactable:
 		return
 
 	def must_interact(self, self_position, player_position):
-		if not control_handler.is_activated('interacted'):
+		if not ControlHandler().is_activated('interacted'):
 			return False
 		elif self_position.distance_to(player_position) <= 2:
 			return True

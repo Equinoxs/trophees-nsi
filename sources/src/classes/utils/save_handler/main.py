@@ -3,17 +3,25 @@ import os
 
 
 class SaveHandler:
+	_instance = None
+
+	# singleton
+	def __new__(cls, *args, **kwargs):
+		if not isinstance(cls._instance, cls):
+			cls._instance = object.__new__(cls, *args, **kwargs)
+		return cls._instance
+
 	def __init__(self):
 		self.default_save_path = os.path.join(
 			os.path.abspath(__file__),
-			'../../../../backups/new_game_backup.json'
+			'../../../../../backups/new_game_backup.json'
 		)
 		return
 
 	def get_data_from_last_save(self):
 		path = os.path.join(
 			os.path.abspath(__file__),
-			'../../../../backups/automatic/main-save.json'
+			'../../../../../backups/automatic/main-save.json'
 		)
 		with open(path, 'r') as save:
 			data = json.load(save)

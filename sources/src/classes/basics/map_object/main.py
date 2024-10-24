@@ -1,6 +1,6 @@
 from typing import Callable
 
-from .. import MapElement, Collider, Interactable, Movable, Vector2
+from src.classes import MapElement, Collider, Interactable, Movable, Vector2
 
 
 class MapObject(MapElement, Collider, Interactable, Movable):

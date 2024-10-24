@@ -1,7 +1,6 @@
 import pygame
 
-from ...basics import Vector2
-from ...utils import SoundMixer
+from src.classes import Vector2, SoundMixer
 
 
 class SoundTrack:
