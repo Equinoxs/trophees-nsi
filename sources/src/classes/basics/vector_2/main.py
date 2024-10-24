@@ -13,6 +13,10 @@ class Vector2:
 		self.x = x
 		self.y = y
 
+	def copy(self, position):
+		self.x = position.get_x()
+		self.y = position.get_y()
+
 	def get_x(self):
 		return self.x
 
@@ -37,7 +41,7 @@ class Vector2:
 	def add(self, vector2):
 		self.x += vector2.get_x()
 		self.y += vector2.get_y()
-  
+
 	def orthogonal_projection(self, vector2):
 		t = self.scalar_product(vector2) / self.scalar_product(self)
 		orthogonal_projected = t * self

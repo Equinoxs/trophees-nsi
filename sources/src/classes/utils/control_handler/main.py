@@ -14,7 +14,12 @@ class ControlHandler:
 	def resetEvents(self):
 		self.events = {
 			'pause': False,
-			'quit': False
+			'quit': False,
+			'interacted': False,
+			'go_forward': False,
+			'go_backward': False,
+			'go_right': False,
+			'go_left': False
 		}
 
 	def handleEvents(self, pygame):

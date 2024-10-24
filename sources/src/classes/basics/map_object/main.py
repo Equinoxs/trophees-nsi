@@ -11,11 +11,11 @@ class MapObject(MapElement, Collider, Interactable, Movable):
 		Movable.__init__(self)
 
 	def update(self, player):
-		MapElement.update(self)
+		MapElement.update(self, player)
 
-		if self.must_interact():
+		if self.must_interact(self.position, player.get_position()):
 			self.interaction(self, player)
 
 		collision = self.collides_with_player(player.position)
-		if collision.isinstance(Vector2):
+		if type(collision) != bool and collision.isinstance(Vector2):
 			player.speed_vector -= collision.set_norm(collision.orthogonal_projection(player.speed_vector).get_norm())

@@ -9,14 +9,17 @@ class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
   
-		path = os.path.join(os.path.abspath(__file__), '../../../../assets/images', image_path)
-		self.image = pygame.image.load(os.path.join(path, image_path + '.png'))
-		with open(os.path.join(path, image_path + '.json'), 'r') as file:
+		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path, image_path)
+		self.image = pygame.image.load(path + '.png')
+		with open(path + '.json', 'r') as file:
 			data = json.load(file)
    
 		self.image_data = data  # les infos de l'image
 		self.magnification_coeff = 1  # image x fois plus grande
 		self.frame_index = 0  # première frame au début
+
+	def get_position(self):
+		return self.position
 
 	def go_next_frame(self, coeff=1):
 		# Récupérer la taille de l'image
@@ -43,5 +46,5 @@ class Sprite:
 		# Rotation de l'image
 		self.image = pygame.transform.rotate(self.image, angle)
 
-	def move(self, x, y):
-		self.position.set_all(x, y)
+	def move(self, position: Vector2):
+		self.position.copy(position)
