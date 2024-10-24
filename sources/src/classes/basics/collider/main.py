@@ -1,7 +1,7 @@
 import json
 import os
 
-from .. import Vector2
+from src.classes import Vector2
 
 
 class Collider:

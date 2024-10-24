@@ -1,7 +1,6 @@
 from typing import Callable
 
-from ...basics import MapObject, Vector2, MapElement, Map
-from .....main import control_handler, time_hander
+from src.classes import ControlHandler, Vector2, Map, MapObject
 
 
 class Player(MapObject):
@@ -15,16 +14,16 @@ class Player(MapObject):
 	def update(self):
 		MapObject.update(self)
 
-		if control_handler.is_activated('go_forward'):
+		if ControlHandler().is_activated('go_forward'):
 			self.speed_vector.set_y(-1)
-		elif control_handler.is_activated('go_backward'):
+		elif ControlHandler().is_activated('go_backward'):
 			self.speed_vector.set_y(1)
 		else:
 			self.speed_vector.set_y(0)
 
-		if control_handler.is_activated('go_left'):
+		if ControlHandler().is_activated('go_left'):
 			self.speed_vector.set_x(-1)
-		elif control_handler.is_activated('go_right'):
+		elif ControlHandler().is_activated('go_right'):
 			self.speed_vector.set_x(1)
 		else:
 			self.speed_vector.set_x(0)

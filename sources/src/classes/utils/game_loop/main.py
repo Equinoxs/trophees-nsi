@@ -1,17 +1,25 @@
 import pygame
 
-from .....main import control_handler, time_handler, save_handler
-from ...specific import Player
+from src.classes import ControlHandler, TimeHandler, SaveHandler, Player
+
 
 class GameLoop:
+	_instance = None
+
+	# singleton
+	def __new__(cls, *args, **kwargs):
+		if not isinstance(cls._instance, cls):
+			cls._instance = object.__new__(cls, *args, **kwargs)
+		return cls._instance
+
 	def __init__(self):
 		self.running = True
-		time_handler.set_clock(pygame.time.Clock())
+		TimeHandler().set_clock(pygame.time.Clock())
 
 		pygame.init()
 		self.screen = pygame.display.set_mode((1280, 720))
   
-		self.saved_data = save_handler.get_data_from_last_save()
+		self.saved_data = SaveHandler().get_data_from_last_save()
 		self.player = Player(self.saved_data['player']['position'], self.saved_data['player']['image'], self.saved_data['player']['z_index'])
 
 		while self.running:
@@ -21,9 +29,9 @@ class GameLoop:
 		pygame.quit()
 
 	def update(self):
-		control_handler.handleEvents(pygame)
-		if control_handler.is_activated('quit'):
+		ControlHandler().handleEvents(pygame)
+		if ControlHandler().is_activated('quit'):
 			self.running = False
 
-		time_handler.update()
+		TimeHandler().update()
 		self.player.update()

@@ -1,4 +1,4 @@
-from .. import Sprite, SoundMaker, Animatable, Vector2
+from src.classes import Sprite, Animatable, Vector2, SoundMaker
 
 
 class MapElement(Sprite, SoundMaker, Animatable):

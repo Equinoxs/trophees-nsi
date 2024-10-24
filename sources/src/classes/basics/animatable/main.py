@@ -1,4 +1,4 @@
-from .....main import time_handler
+from src.classes import TimeHandler
 
 
 class Animatable:
@@ -16,7 +16,7 @@ class Animatable:
 		self.running = True
 
 	def animation_must_update(self):  # Renvoie vrai si le MapElement doit etre animé
-		self.dt += time_handler.get_delta_time()
+		self.dt += TimeHandler().get_delta_time()
 		if len(self.scheme) == 0:
 			return False  # pas d'animation
 

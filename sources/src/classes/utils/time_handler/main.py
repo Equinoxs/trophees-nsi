@@ -1,4 +1,12 @@
 class TimeHandler:
+	_instance = None
+
+	# singleton
+	def __new__(cls, *args, **kwargs):
+		if not isinstance(cls._instance, cls):
+			cls._instance = object.__new__(cls, *args, **kwargs)
+		return cls._instance
+
 	def __init__(self):
 		self.clock = None
 		self.dt = 0  # temps écoulé depuis le dernier rafraichissement en seconde

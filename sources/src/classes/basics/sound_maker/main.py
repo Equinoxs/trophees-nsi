@@ -1,4 +1,4 @@
-from ...utils import SoundTrack
+from src.classes import SoundTrack
 
 
 class SoundMaker:

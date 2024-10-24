@@ -1,5 +1,6 @@
-from ...basics import Vector2
 from math import pi
+
+from src.classes import Vector2
 
 
 class SoundMixer(object):
