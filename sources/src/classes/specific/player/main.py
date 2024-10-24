@@ -12,7 +12,7 @@ class Player(MapObject):
 		self.map = map
 
 	def update(self):
-		MapObject.update(self)
+		MapObject.update(self, self)
 
 		if ControlHandler().is_activated('go_forward'):
 			self.speed_vector.set_y(-1)

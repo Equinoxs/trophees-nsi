@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import ControlHandler, TimeHandler, SaveHandler, Player
+from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player
 
 
 class GameLoop:
@@ -14,13 +14,21 @@ class GameLoop:
 
 	def __init__(self):
 		self.running = True
-		TimeHandler().set_clock(pygame.time.Clock())
-
 		pygame.init()
+		TimeHandler().set_clock(pygame.time.Clock())
 		self.screen = pygame.display.set_mode((1280, 720))
-  
+
 		self.saved_data = SaveHandler().get_data_from_last_save()
-		self.player = Player(self.saved_data['player']['position'], self.saved_data['player']['image'], self.saved_data['player']['z_index'])
+		self.player = Player(
+    		None,
+			# Convertir la position sous forme de list en Vector2
+			Vector2(
+				self.saved_data['player']['position'][0],
+				self.saved_data['player']['position'][1]
+    		),
+			self.saved_data['player']['image_path'],
+			self.saved_data['player']['z_index']
+		)
 
 		while self.running:
 			self.update()

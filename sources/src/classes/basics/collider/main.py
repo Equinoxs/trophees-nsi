@@ -8,7 +8,7 @@ class Collider:
 	def __init__(self, image_path: str):
 		self.image_path = image_path
   
-		path = os.path.join(os.path.abspath(__file__), '../../../../assets/images', image_path, image_path + '.json')
+		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path, image_path + '.json')
 		with open(path, 'r') as file:
 			data = json.load(file)
 		self.hitbox = data['hitbox']
@@ -16,11 +16,11 @@ class Collider:
 	# représentons le joueur comme un point, si ce point est à moins de 50cm
 	# d'un segment d'une hitbox, une collision sera détectée
 	def collides_with_player(self, point):
-		if len(self.points) == 0:
+		if len(self.hitbox) == 0:
 			return False
 
-		closest_vector = None
-		for i in range(0, len(self.points) - 1):
+		closest_vector = Vector2(1_000, 1_000)
+		for i in range(0, len(self.hitbox) - 1):
 			# Posons
 			OA = self.hitbox[i]
 			OB = self.hitbox[i - 1]

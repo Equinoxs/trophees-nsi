@@ -5,36 +5,45 @@ import os
 class SaveHandler:
 	_instance = None
 
-	# singleton
+	# Singleton pattern
 	def __new__(cls, *args, **kwargs):
-		if not isinstance(cls._instance, cls):
-			cls._instance = object.__new__(cls, *args, **kwargs)
+		if cls._instance is None:
+			cls._instance = super(SaveHandler, cls).__new__(cls)
 		return cls._instance
 
 	def __init__(self):
+		# Il faut utiliser os.path.dirname pour remonter le chemin correctement
 		self.default_save_path = os.path.join(
-			os.path.abspath(__file__),
-			'../../../../../backups/new_game_backup.json'
+			os.path.dirname(os.path.abspath(__file__)),
+			'../../../../backups/new_game_backup.json'
 		)
-		return
 
 	def get_data_from_last_save(self):
+		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
 		path = os.path.join(
-			os.path.abspath(__file__),
-			'../../../../../backups/automatic/main-save.json'
+			os.path.dirname(os.path.abspath(__file__)),
+			'../../../../backups/automatic/main-save.json'
 		)
-		with open(path, 'r') as save:
-			data = json.load(save)
-		if data == {}:
+
+		# Ouverture du fichier de sauvegarde principale
+		try:
+			with open(path, 'r') as save:
+				data = json.load(save)
+		except FileNotFoundError:
+			# Si le fichier de sauvegarde principale est vide ou inexistant, on utilise le backup par défaut
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
 		return data
 
 	def save(self, data, backup_path):
-		path = path = os.path.join(
-			os.path.abspath(__file__),
+		# Correction de la redondance du mot-clé 'path'
+		path = os.path.join(
+			os.path.dirname(os.path.abspath(__file__)),
 			'../../../../backups',
-   			backup_path
+			backup_path
 		)
+
+		# Enregistrement des données dans le fichier JSON
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4)
+   

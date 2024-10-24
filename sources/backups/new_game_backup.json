@@ -1,6 +1,7 @@
 {
 	"player": {
 		"position": [0, 0],
-		"image_path": "player_walking"
+		"image_path": "player_walking",
+		"z_index": 1
 	}
 }
