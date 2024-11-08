@@ -3,5 +3,21 @@
 		"position": [0, 0],
 		"image_path": "player_walking",
 		"z_index": 1
+	},
+	"map": {
+		"image_path": "test_map",
+		"width": 1000,
+		"height": 1000,
+		"elements": [
+			{"type": "MapElement", "position": [100,100], "image_path": "test_element", "z_index": 1}
+		]
+	},
+	"keybinds": {
+		"pause": 27, 
+		"interacted": 101,
+		"go_forward": 122,
+		"go_backward": 115,
+		"go_right": 100,
+		"go_left": 113
 	}
 }

@@ -1,3 +1,4 @@
+from src.classes import SaveHandler
 class ControlHandler:
 	_instance = None
 
@@ -10,6 +11,8 @@ class ControlHandler:
 	def __init__(self):
 		self.events = {}
 		self.resetEvents()
+		save = SaveHandler().load_save()
+		self.keybinds = save["keybinds"]
 
 	def resetEvents(self):
 		self.events = {
@@ -28,6 +31,12 @@ class ControlHandler:
 			match event.type:
 				case pygame.QUIT:
 					self.events['quit'] = True
+				case pygame.KEYDOWN | pygame.KEYUP:
+					for action in self.keybinds:
+						if self.keybinds[action] == event.key:
+							self.events[action] = True if event == pygame.KEYDOWN else False
+							break
+				
 		
 	def is_activated(self, event):
 		if self.events[event]:
