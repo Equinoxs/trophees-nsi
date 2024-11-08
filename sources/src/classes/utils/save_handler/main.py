@@ -4,6 +4,7 @@ import os
 
 class SaveHandler:
 	_instance = None
+	current_save = None
 
 	# singleton
 	def __new__(cls, *args, **kwargs):
@@ -34,8 +35,16 @@ class SaveHandler:
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
 		return data
+	
+	def load_save(self, force = False):
+		if self.current_save is None or force:
+			self.current_save = self.get_data_from_last_save()
+		return self.current_save
+	
+	def save(self, automatic = False):
+		save_data(self.current_save, "manual" if not automatic else "automatic")
 
-	def save(self, data, backup_path):
+	def save_data(self, data, backup_path):
 		# Correction de la redondance du mot-clé 'path'
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),

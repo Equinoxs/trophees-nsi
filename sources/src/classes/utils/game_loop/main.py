@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player
+from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player, Map
 
 
 class GameLoop:
@@ -18,9 +18,14 @@ class GameLoop:
 		TimeHandler().set_clock(pygame.time.Clock())
 		self.screen = pygame.display.set_mode((1280, 720))
 
-		self.saved_data = SaveHandler().get_data_from_last_save()
+		self.saved_data = SaveHandler().load_save()
 		self.player = Player(
-    		None,
+			Map(
+				self.saved_data['map']['image_path'],
+				self.saved_data['map']['width'],
+				self.saved_data['map']['height'],
+				self.saved_data['map']['elements'] # TODO: faire une compréhension de liste pour caster en le type spécifique du MapElement
+			),
 			# Convertir la position sous forme de list en Vector2
 			Vector2(
 				self.saved_data['player']['position'][0],

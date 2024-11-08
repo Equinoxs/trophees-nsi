@@ -4,10 +4,11 @@
 
 # Classes n'important personne
 from .basics.vector_2.main import Vector2
-from .utils.control_handler.main import ControlHandler
 from .utils.save_handler.main import SaveHandler
 from .utils.time_handler.main import TimeHandler
-from .basics.map.main import Map
+
+# ControlHandler import SaveHandler
+from .utils.control_handler.main import ControlHandler
 
 # SoundMaker importe SoundTrack qui importe SoundMixer
 from .utils.sound_mixer.main import SoundMixer
@@ -18,6 +19,9 @@ from .basics.sound_maker.main import SoundMaker
 from .basics.sprite.main import Sprite
 from .basics.animatable.main import Animatable
 from .basics.map_element.main import MapElement
+
+# Map import MapElement
+from .basics.map.main import Map
 
 # MapObject importe MapElement, Movable, Collider et Interactable
 from .basics.movable.main import Movable
