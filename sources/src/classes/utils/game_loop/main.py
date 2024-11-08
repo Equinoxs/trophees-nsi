@@ -35,6 +35,8 @@ class GameLoop:
 			self.saved_data['player']['z_index']
 		)
 
+		self.control_handler = ControlHandler() # pour ne pas réinitialiser ControlHandler à chaque tour de boucle
+
 		while self.running:
 			self.update()
 			pygame.display.flip()  # Rafraîchit l'écran
@@ -42,9 +44,9 @@ class GameLoop:
 		pygame.quit()
 
 	def update(self):
-		ControlHandler().handleEvents(pygame)
-		if ControlHandler().is_activated('quit'):
+		self.control_handler.handleEvents(pygame)
+		if self.control_handler.is_activated('quit'):
 			self.running = False
-
+			
 		TimeHandler().update()
 		self.player.update()
