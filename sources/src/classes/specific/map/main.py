@@ -1,4 +1,4 @@
-from src.classes import MapElement, Vector2, NPC
+from src.classes import MapElement, MapObject, Vector2, NPC
 
 def list_transform(list):
 	new_list = []
@@ -8,8 +8,7 @@ def list_transform(list):
 
 class Map:
 
-	def __init__(self, image_path: str, elements: list):
-		self.image_path = image_path
+	def __init__(self, elements: list):
 		self.elements = []
 		for el in elements:
 			match el["type"]:
@@ -21,7 +20,16 @@ class Map:
 						),
 						el["image_path"],
 						el["z_index"]
-					))
+					)),
+	   
+				case "MapObject":
+					self.elements.append(MapObject(
+						Vector2(
+							el["position"][0], el["position"][1]
+						),
+						el["image_path"],
+						el["z_index"]
+					)),
 
 				case "NPC":
 					self.elements.append(NPC(

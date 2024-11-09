@@ -7,10 +7,7 @@ class Movable:
 
 	def apply_force(self, force: Vector2):
 		if TimeHandler().is_running():
-			self.speed_vector.add(Vector2(
-				force.get_x() * TimeHandler().get_delta_time(),
-				force.get_y() * TimeHandler().get_delta_time()
-			))
+			self.speed_vector.add(force * TimeHandler().get_delta_time())
 
 	def move(self, sprite_position: Vector2):
 		sprite_position.add(Vector2(

@@ -35,7 +35,6 @@ class NPC(MapObject):
 			self.speed_vector.set_x(0)
 
 		self.speed_vector.set_norm(self.speed)
-		self.move(self.position + self.speed_vector)
 
 	def update_pattern(self):
 		if self.following_pattern or self.back_to_initial:
@@ -48,7 +47,7 @@ class NPC(MapObject):
 					self.objective_index -= len(self.pattern)
 				self.objective = self.pattern[self.objective_index]
 				self.walking_time = self.objective.get_norm() / self.speed # v = d/t <=> t = d/v
-			self.position += (self.objective - self.position).set_norm(self.speed * dt)
+			self.apply_force((self.objective - self.position).set_norm(self.speed * dt))
 
 	def update(self):
 		MapObject.update(self)

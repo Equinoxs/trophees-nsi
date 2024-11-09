@@ -13,6 +13,9 @@ class Collider:
 			data = json.load(file)
 		self.hitbox = data['hitbox']
 
+	def transform_to_vector2(self, arr: list):
+		return Vector2(arr[0], arr[1])
+
 	# représentons le joueur comme un point, si ce point est à moins de 50cm
 	# d'un segment d'une hitbox, une collision sera détectée
 	def collides_with_player(self, point):
@@ -22,8 +25,8 @@ class Collider:
 		closest_vector = Vector2(1_000, 1_000)
 		for i in range(0, len(self.hitbox) - 1):
 			# Posons
-			OA = self.hitbox[i]
-			OB = self.hitbox[i - 1]
+			OA = self.transform_to_vector2(self.hitbox[i])
+			OB = self.transform_to_vector2(self.hitbox[i - 1])
 			OP = point
 			PA = OA - OP
 			AB = OB - OA  # D'après la relation de Chasles
