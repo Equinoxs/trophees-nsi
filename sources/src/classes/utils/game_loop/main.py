@@ -22,17 +22,9 @@ class GameLoop:
 		self.player = Player(
 			Map(
 				self.saved_data['map']['image_path'],
-				self.saved_data['map']['width'],
-				self.saved_data['map']['height'],
-				self.saved_data['map']['elements'] # TODO: faire une compréhension de liste pour caster en le type spécifique du MapElement
+				self.saved_data['map']['elements']
 			),
-			# Convertir la position sous forme de list en Vector2
-			Vector2(
-				self.saved_data['player']['position'][0],
-				self.saved_data['player']['position'][1]
-    		),
-			self.saved_data['player']['image_path'],
-			self.saved_data['player']['z_index']
+			self.saved_data['player']['npc_name']
 		)
 
 		while self.running:

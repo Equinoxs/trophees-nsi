@@ -8,10 +8,12 @@ from src.classes import Vector2
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
-  
-		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path, image_path)
-		self.image = pygame.image.load(path + '.png')
-		with open(path + '.json', 'r') as file:
+
+		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path + '.png')
+		json_path = os.path.join('/'.join(png_path.split('/')[0:-1]), 'info.json')
+		self.image = pygame.image.load(png_path)
+		self.image_path = image_path
+		with open(json_path, 'r') as file:
 			data = json.load(file)
    
 		self.image_data = data  # les infos de l'image

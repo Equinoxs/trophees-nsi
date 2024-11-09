@@ -8,12 +8,12 @@ class TimeHandler:
 		return cls._instance
 
 	def __init__(self):
-		if not hasattr(self, 'initialized'):
+		if not hasattr(self, '_initialized'):
+			self._initialized = True  # Empêche une nouvelle initialisation
 			self.clock = None
 			self.dt = 0  # Temps écoulé depuis le dernier rafraîchissement en seconde
 			self.coeff = 1  # Un coeff de 2 fait écouler le temps 2 fois plus vite
 			self.running = True
-			self.initialized = True  # Empêche une nouvelle initialisation
 
 	def set_clock(self, pygame_clock):
 		self.clock = pygame_clock
