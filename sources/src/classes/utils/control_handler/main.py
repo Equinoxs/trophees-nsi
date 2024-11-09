@@ -9,8 +9,10 @@ class ControlHandler:
 		return cls._instance
 
 	def __init__(self):
-		self.events = {}
-		self.resetEvents()
+		if not hasattr(self, "_initialized"):
+			self._initialized = True
+			self.events = {}
+			self.resetEvents()
 		save = SaveHandler().load_save()
 		self.keybinds = save["keybinds"]
 

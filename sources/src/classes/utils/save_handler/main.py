@@ -42,7 +42,7 @@ class SaveHandler:
 		return self.current_save
 	
 	def save(self, automatic = False):
-		save_data(self.current_save, "manual" if not automatic else "automatic")
+		self.save_data(self.current_save, "manual" if not automatic else "automatic")
 
 	def save_data(self, data, backup_path):
 		# Correction de la redondance du mot-clé 'path'

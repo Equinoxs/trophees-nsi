@@ -1,6 +1,6 @@
 from typing import Callable
 
-from src.classes import MapElement, Collider, Interactable, Movable, Vector2
+from src.classes import MapElement, Collider, Interactable, Movable, Vector2, Player
 
 
 class MapObject(MapElement, Collider, Interactable, Movable):
@@ -10,12 +10,12 @@ class MapObject(MapElement, Collider, Interactable, Movable):
 		Collider.__init__(self, image_path)
 		Movable.__init__(self)
 
-	def update(self, player):
-		MapElement.update(self, player)
+	def update(self):
+		MapElement.update(self)
 
-		if self.must_interact(self.position, player.get_position()):
-			self.interaction(self, player)
+		if self.must_interact(self.position, Player().focus.get_position()):
+			self.interaction(self)
 
-		collision = self.collides_with_player(player.position)
+		collision = self.collides_with_player(Player().focus.get_position())
 		if isinstance(collision, Vector2):
-			player.speed_vector -= collision.set_norm(collision.orthogonal_projection(player.speed_vector).get_norm())
+			Player().focus.speed_vector -= collision.set_norm(collision.orthogonal_projection(Player().focus.speed_vector).get_norm())

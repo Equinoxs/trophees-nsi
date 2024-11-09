@@ -31,6 +31,12 @@ class Vector2:
 		if norm != 0:
 			self.x /= norm
 			self.y /= norm
+   
+	def set_norm(self, norm):
+		self.normalize()
+		self.x *= norm
+		self.y *= norm
+		return self
 
 	def scalar_product(self, vector_2):
 		return self.x * vector_2.get_x() + self.y * vector_2.get_y()
