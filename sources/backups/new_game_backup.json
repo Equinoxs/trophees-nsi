@@ -1,13 +1,17 @@
 {
 	"player": {
-		"npc_name": "nathan"
+		"current_npc_name": "nathan",
+		"current_map_name": "test"
 	},
-	"map": {
-		"image_path": "test_map/image",
-		"elements": [
-			{"type": "MapElement", "position": [0, 0], "image_path": "test_element/image", "z_index": 0},
-			{"type": "NPC", "pattern": [[60, 60], [80, 60], [60, 80]], "position": [100, 100], "image_path": "nathan/walking", "z_index": 1}
-		]
+	"maps": {
+		"test": {
+			"image_path": "test_map/image",
+			"elements": [
+				{"type": "MapElement", "position": [0, 0], "image_path": "test_element/image", "z_index": 0},
+				{"type": "MapObject", "position": [10, 10], "image_path": "test_object/image", "z_index": 1},
+				{"type": "NPC", "pattern": [[60, 60], [80, 60], [60, 80]], "position": [100, 100], "image_path": "nathan/walking", "z_index": 2}
+			]
+		}
 	},
 	"keybinds": {
 		"pause": 27,

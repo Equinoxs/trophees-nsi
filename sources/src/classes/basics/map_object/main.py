@@ -18,4 +18,5 @@ class MapObject(MapElement, Collider, Interactable, Movable):
 
 		collision = self.collides_with_player(Player().focus.get_position())
 		if isinstance(collision, Vector2):
-			Player().focus.speed_vector -= collision.set_norm(collision.orthogonal_projection(Player().focus.speed_vector).get_norm())
+			Player().get_focus().apply_force(collision.set_norm(collision.orthogonal_projection(Player().focus.speed_vector).get_norm()))
+		self.move(self.position)

@@ -13,27 +13,23 @@ class GameLoop:
 		return cls._instance
 
 	def __init__(self):
-		self.running = True
-		pygame.init()
-		TimeHandler().set_clock(pygame.time.Clock())
-		self.screen = pygame.display.set_mode((1280, 720))
+		if not hasattr(self, "_initialized"):
+			self._initialized = True
+			self.running = True
+			pygame.init()
+			TimeHandler().set_clock(pygame.time.Clock())
+			self.screen = pygame.display.set_mode((1280, 720))
 
-		self.saved_data = SaveHandler().load_save()
-		self.player = Player(
-			Map(
-				self.saved_data['map']['image_path'],
-				self.saved_data['map']['elements']
-			),
-			self.saved_data['player']['npc_name']
-		)
+			self.saved_data = SaveHandler().load_save()
+			self.player = Player(Map(self.saved_data['maps'][self.saved_data["player"]["current_map_name"]]['elements']), self.saved_data['player']['current_npc_name'])
 
-		self.control_handler = ControlHandler() # pour ne pas réinitialiser ControlHandler à chaque tour de boucle
+			self.control_handler = ControlHandler() # pour ne pas réinitialiser ControlHandler à chaque tour de boucle
 
-		while self.running:
-			self.update()
-			pygame.display.flip()  # Rafraîchit l'écran
+			while self.running:
+				self.update()
+				pygame.display.flip()  # Rafraîchit l'écran
 
-		pygame.quit()
+			pygame.quit()
 
 	def update(self):
 		self.control_handler.handleEvents(pygame)

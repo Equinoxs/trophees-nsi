@@ -15,7 +15,7 @@ class Sprite:
 		self.image_path = image_path
 		with open(json_path, 'r') as file:
 			data = json.load(file)
-   
+
 		self.image_data = data  # les infos de l'image
 		self.magnification_coeff = 1  # image x fois plus grande
 		self.frame_index = 0  # première frame au début
@@ -48,5 +48,5 @@ class Sprite:
 		# Rotation de l'image
 		self.image = pygame.transform.rotate(self.image, angle)
 
-	def move(self, position: Vector2):
+	def move_to(self, position: Vector2):
 		self.position.copy(position)
