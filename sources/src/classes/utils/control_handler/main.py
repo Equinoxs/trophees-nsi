@@ -36,7 +36,7 @@ class ControlHandler:
 				case pygame.KEYDOWN | pygame.KEYUP:
 					for action in self.keybinds:
 						if self.keybinds[action] == event.key:
-							self.events[action] = True if event == pygame.KEYDOWN else False
+							self.events[action] = True if event.type == pygame.KEYDOWN else False
 							break
 				
 		
