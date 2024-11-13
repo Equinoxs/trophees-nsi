@@ -31,13 +31,14 @@ from .specific.npc.main import NPC
 # Map importe NPC
 from .specific.map.main import Map
 
+# GameLoop importe Camera
+from .utils.camera.main import Camera
 from .utils.game_loop.main import GameLoop
 
 
 
 # Classes restantes :
 
-# from .utils.camera.main import Camera
 # from .specific.tree.main import Tree
 # from .specific.mini_map.main import MiniMap
 # from .specific.button.main import Button

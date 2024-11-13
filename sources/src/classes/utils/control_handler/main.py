@@ -12,11 +12,11 @@ class ControlHandler:
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
 			self.events = {}
-			self.resetEvents()
+			self.reset_events()
 		save = SaveHandler().load_save()
 		self.keybinds = save["keybinds"]
 
-	def resetEvents(self):
+	def reset_events(self):
 		self.events = {
 			'pause': False,
 			'quit': False,
@@ -27,8 +27,8 @@ class ControlHandler:
 			'go_left': False
 		}
 
-	def handleEvents(self, pygame):
-		self.resetEvents()
+	def handle_events(self, pygame):
+		# self.reset_events()
 		for event in pygame.event.get():
 			match event.type:
 				case pygame.QUIT:
