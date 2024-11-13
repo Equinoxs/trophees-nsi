@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player, Map
+from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player, Map, Camera
 
 
 class GameLoop:
@@ -20,6 +20,8 @@ class GameLoop:
 			TimeHandler().set_clock(pygame.time.Clock())
 			self.screen = pygame.display.set_mode((1280, 720))
 
+			self.camera = Camera(self.screen)
+
 			self.saved_data = SaveHandler().load_save()
 			self.player = Player(Map(self.saved_data['maps'][self.saved_data["player"]["current_map_name"]]['elements']), self.saved_data['player']['current_npc_name'])
 
@@ -32,9 +34,10 @@ class GameLoop:
 			pygame.quit()
 
 	def update(self):
-		self.control_handler.handleEvents(pygame)
+		self.control_handler.handle_events(pygame)
 		if self.control_handler.is_activated('quit'):
 			self.running = False
-			
+
 		TimeHandler().update()
 		self.player.update()
+		self.camera.update()

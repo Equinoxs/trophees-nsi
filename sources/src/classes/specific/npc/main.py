@@ -33,8 +33,9 @@ class NPC(MapObject):
 			self.speed_vector.set_x(1)
 		else:
 			self.speed_vector.set_x(0)
-
-		self.speed_vector.set_norm(self.speed)
+		# il va beaucoup trop lentement
+		self.speed_vector.set_norm(self.speed*100)
+		# self.speed_vector.set_norm(self.speed)
 
 	def update_pattern(self):
 		if self.following_pattern or self.back_to_initial:

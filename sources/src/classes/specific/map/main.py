@@ -60,3 +60,6 @@ class Map:
 		for element in self.elements:
 			if element == element_to_remove:
 				self.elements.pop(element_to_remove)
+
+	def get_elements(self):
+		return self.elements
