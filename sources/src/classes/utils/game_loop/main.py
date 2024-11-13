@@ -1,4 +1,5 @@
 import pygame
+import time
 
 from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player, Map, Camera
 
@@ -18,12 +19,10 @@ class GameLoop:
 			self.running = True
 			pygame.init()
 			TimeHandler().set_clock(pygame.time.Clock())
-			self.screen = pygame.display.set_mode((1280, 720))
-
-			self.camera = Camera(self.screen)
-
+			self.screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
 			self.saved_data = SaveHandler().load_save()
 			self.player = Player(Map(self.saved_data['maps'][self.saved_data["player"]["current_map_name"]]['elements']), self.saved_data['player']['current_npc_name'])
+			self.camera = Camera(self.screen)
 
 			self.control_handler = ControlHandler() # pour ne pas réinitialiser ControlHandler à chaque tour de boucle
 

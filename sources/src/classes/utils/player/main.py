@@ -15,7 +15,7 @@ class Player:
 			self._initialized = True
 			self.map = map
 			self.focus = self.map.search_by_name(npc_name)
-   
+
 	def get_map(self):
 		return self.map
 
