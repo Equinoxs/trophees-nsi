@@ -20,7 +20,7 @@ class TimeHandler:
 
 	def update(self):
 		if self.clock:
-			self.dt = self.clock.tick(60) / 1000 / self.coeff
+			self.dt = self.clock.tick() / 1000 / self.coeff
 
 	def set_coeff(self, coeff):
 		if coeff > 0:  # S'assurer que le coefficient est positif

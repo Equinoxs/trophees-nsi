@@ -39,18 +39,23 @@ class Sprite:
 		# print("LEFT", self.image_data['widths'][0:self.frame_index], len(self.image_data['widths']))
 		left = sum(self.image_data['widths'][0:self.frame_index])
 		# print("WIDTHS", self.image_data['widths'], self.frame_index)
-		right = (left + self.image_data['widths'][self.frame_index]) * coeff
+		right = int((left + self.image_data['widths'][self.frame_index]) * coeff)
+		if right % 2 == 0:
+			right -= 1
 		# print("RIGHT", (left + self.image_data['widths'][self.frame_index]))
 
 		# Rogner l'image (subsurface)
 		# print("SUBSURFACE", (left, 0, right - left, height))
 		self.image = self.original_image.subsurface((left, 0, right - left, height))
 
+	def get_magnification(self):
+		return self.magnification_coeff
+
 	def set_magnification(self, magnification_coeff):
 		width, height = self.image.get_size()
 
 		# Redimensionner l'image (scale)
-		self.image = pygame.transform.scale(self.image, width * magnification_coeff, height * magnification_coeff)
+		self.image = pygame.transform.scale(self.image, (width * magnification_coeff, height * magnification_coeff))
 		self.magnification_coeff = magnification_coeff
 
 	def rotate(self, angle):

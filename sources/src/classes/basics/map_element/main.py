@@ -14,9 +14,6 @@ class MapElement(Sprite, SoundMaker, Animatable):
 	def set_z_index(self, z_index: int):
 		self.z_index = z_index
 
-	def update(self):  # player est ici pour ne pas faire de distinction avec la surcharge de MapObject
+	def update(self):
 		if self.animation_must_update():
-			self.move_frame(self.frame_width)
-
-	def render(self, screen):
-		screen.blit(self.image, self.position.convert_to_tuple())
+			self.go_next_frame()
