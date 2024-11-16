@@ -17,7 +17,7 @@ class Collider:
 		return Vector2(arr[0], arr[1])
 
 	# Collision entre un point et une hitbox segmentée
-	def collides_with_player(self, point: Vector2):
+	def collides_with_player(self, point: Vector2, position: Vector2):
 		if len(self.hitbox) == 0:
 			return False
 
@@ -26,8 +26,8 @@ class Collider:
 
 		for i in range(len(self.hitbox)):
 			# Points du segment
-			A = self.transform_to_vector2(self.hitbox[i])
-			B = self.transform_to_vector2(self.hitbox[i - 1])
+			A = self.transform_to_vector2(self.hitbox[i]) + position
+			B = self.transform_to_vector2(self.hitbox[i - 1]) + position
 			AB = B - A
 			AP = point - A
 
