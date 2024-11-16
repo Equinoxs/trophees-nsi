@@ -19,7 +19,7 @@ class MapObject(MapElement, Collider, Interactable, Movable):
 			self.interaction(Player())
 
 		width, height = Player().get_focus().get_image().get_size()
-		collision = self.collides_with_player(Player().focus.get_position() + Vector2(width // 2, 0.8 * height))
+		collision = self.collides_with_player(Player().focus.get_position() + Vector2(width // 2, height), self.position)
 		if isinstance(collision, Vector2):
 			object_s_reaction = collision.set_norm(collision.orthogonal_projection(Player().focus.speed_vector * 100 * Camera().get_zoom()).get_norm())
 			Player().get_focus().apply_force(object_s_reaction)
