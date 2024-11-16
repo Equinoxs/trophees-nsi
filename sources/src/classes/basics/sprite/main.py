@@ -19,8 +19,16 @@ class Sprite:
 
 		self.image_data = data  # les infos de l'image
 		self.magnification_coeff = 1  # image x fois plus grande
-		self.frame_index = -1  # première frame au début
-		self.go_next_frame()
+		self.vertical_flip = False
+		self.horizontal_flip = False
+
+	def switch_horizontal_flip(self):
+		self.horizontal_flip = not self.horizontal_flip
+		self.image = pygame.transform.flip(self.image, True, self.vertical_flip)
+
+	def switch_vertical_flip(self):
+		self.vertical_flip = not self.vertical_flip
+		self.image = pygame.transform.flip(self.image, self.horizontal_flip, True)
 
 	def get_position(self):
 		return self.position
@@ -28,25 +36,27 @@ class Sprite:
 	def get_image(self):
 		return self.image
 
-	def go_next_frame(self, coeff=1):
-		# Récupérer la taille de l'image
-		if self.frame_index == len(self.image_data['widths']) - 1:
-			self.frame_index = 0
+	def get_image_data(self):
+		return self.image_data
+
+	def go_to_frame(self, frame_index, coeff=1):
+		width, height = self.image.get_size()
+		left = sum(frame["width"] for frame in self.image_data['widths'][0:frame_index])
+
+		if len(self.image_data['widths']) == 0:
+			right = width
 		else:
-			self.frame_index += 1
-  
-		_, height = self.image.get_size()
-		# print("LEFT", self.image_data['widths'][0:self.frame_index], len(self.image_data['widths']))
-		left = sum(self.image_data['widths'][0:self.frame_index])
-		# print("WIDTHS", self.image_data['widths'], self.frame_index)
-		right = int((left + self.image_data['widths'][self.frame_index]) * coeff)
-		if right % 2 == 0:
-			right -= 1
-		# print("RIGHT", (left + self.image_data['widths'][self.frame_index]))
+			right = int((left + self.image_data['widths'][frame_index]["width"]) * coeff)
+
+		# Ajuster pour éviter les erreurs liées à des tailles impaires
+		right += right % 2 - 1
+		height += height % 2 - 1
 
 		# Rogner l'image (subsurface)
-		# print("SUBSURFACE", (left, 0, right - left, height))
 		self.image = self.original_image.subsurface((left, 0, right - left, height))
+
+		# Réappliquer les inversions d'axes
+		self.image = pygame.transform.flip(self.image, self.horizontal_flip, self.vertical_flip)
 
 	def get_magnification(self):
 		return self.magnification_coeff

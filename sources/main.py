@@ -2,6 +2,7 @@
 
 from src.classes import TimeHandler, ControlHandler, SaveHandler, GameLoop
 
+game_loop = None
 
 def main():
     control_handler = ControlHandler()

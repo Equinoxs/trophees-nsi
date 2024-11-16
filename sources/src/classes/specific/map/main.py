@@ -28,7 +28,8 @@ class Map:
 							el["position"][0], el["position"][1]
 						),
 						el["image_path"],
-						el["z_index"]
+						el["z_index"],
+						el["interaction"]
 					)),
 
 				case "NPC":
@@ -38,7 +39,8 @@ class Map:
 							el["position"][0], el["position"][1]
 						),
 						el["image_path"],
-						el["z_index"]
+						el["z_index"],
+						el["interaction"]
 					))
 
 				case _:

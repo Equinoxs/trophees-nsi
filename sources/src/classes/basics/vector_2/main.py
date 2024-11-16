@@ -31,6 +31,7 @@ class Vector2:
 		if norm != 0:
 			self.x /= norm
 			self.y /= norm
+		return self
    
 	def set_norm(self, norm):
 		self.normalize()
@@ -49,9 +50,13 @@ class Vector2:
 		self.y += vector2.get_y()
 
 	def orthogonal_projection(self, vector2):
-		t = self.scalar_product(vector2) / self.scalar_product(self)
-		orthogonal_projected = t * self
-		return orthogonal_projected
+		self_dot_self = self.scalar_product(self)
+		if self_dot_self != 0:
+			t = self.scalar_product(vector2) / self.scalar_product(self)
+			orthogonal_projected = self * t
+			return orthogonal_projected
+		else:
+			return Vector2(0, 0)
 
 	def convert_to_tuple(self):
 		return (self.x, self.y)

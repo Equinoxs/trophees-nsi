@@ -32,6 +32,12 @@ class GameLoop:
 
 			pygame.quit()
 
+	def get_player(self):
+		return self.player
+
+	def get_camera(self):
+		return self.camera
+
 	def update(self):
 		self.control_handler.handle_events(pygame)
 		if self.control_handler.is_activated('quit'):
