@@ -1,12 +1,10 @@
 {
 	"widths": [
-		44,
-		44,
-		44,
-		44,
-		44
+		{ "width": 44, "time": 0.5 },
+		{ "width": 44, "time": 0.5 },
+		{ "width": 44, "time": 0.5 },
+		{ "width": 44, "time": 0.5 },
+		{ "width": 44, "time": 0.5 }
 	],
-	"hitbox": [
-		[0, 0]
-	]
+	"hitbox": []
 }

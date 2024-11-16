@@ -8,6 +8,9 @@ from .utils.save_handler.main import SaveHandler
 from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
+# Camera importe Player
+from .utils.camera.main import Camera
+
 # ControlHandler import SaveHandler
 from .utils.control_handler.main import ControlHandler
 
@@ -31,8 +34,7 @@ from .specific.npc.main import NPC
 # Map importe NPC
 from .specific.map.main import Map
 
-# GameLoop importe Camera
-from .utils.camera.main import Camera
+# GameLoop importe tout (directement ou indirectement)
 from .utils.game_loop.main import GameLoop
 
 
