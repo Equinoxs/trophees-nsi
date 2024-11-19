@@ -1,10 +1,21 @@
 {
-	"widths": [
-		{ "width": 44, "time": 0.5 },
-		{ "width": 44, "time": 0.5 },
-		{ "width": 44, "time": 0.5 },
-		{ "width": 44, "time": 0.5 },
-		{ "width": 44, "time": 0.5 }
-	],
+	"animations": {
+		"posing": {
+			"width":[
+				{ "width": 44, "time": 1000 }
+			],
+			"height": 200
+		},
+		"walking": {
+			"widths": [
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 }
+			],
+			"height": 200
+		}
+	},
 	"hitbox": []
 }
