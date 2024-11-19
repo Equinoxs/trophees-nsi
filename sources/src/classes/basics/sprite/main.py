@@ -37,14 +37,16 @@ class Sprite:
 	def get_image_data(self):
 		return self.image_data
 
-	def go_to_frame(self, frame_index, coeff=1):
+	def go_to_frame(self, frame_index, animation_name, coeff=1):
 		width, height = self.image.get_size()
-		left = sum(frame["width"] for frame in self.image_data['widths'][0:frame_index])
+		if self.image_data['animations'] == {}:
+			return
+		left = sum(frame["width"] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])
 
-		if len(self.image_data['widths']) == 0:
+		if len(self.image_data['animations'][animation_name]['widths']) == 0:
 			right = width
 		else:
-			right = int((left + self.image_data['widths'][frame_index]["width"]) * coeff)
+			right = int((left + self.image_data['animations'][animation_name]['widths'][frame_index]["width"]) * coeff)
 
 		# Ajuster pour éviter les erreurs liées à des tailles impaires
 		right += right % 2 - 1

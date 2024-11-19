@@ -1,7 +1,6 @@
 import pygame
-import time
 
-from src.classes import Vector2, ControlHandler, TimeHandler, SaveHandler, Player, Map, Camera
+from src.classes import Camera
 
 
 class GameLoop:
@@ -10,21 +9,23 @@ class GameLoop:
 	# singleton
 	def __new__(cls, *args, **kwargs):
 		if not isinstance(cls._instance, cls):
-			cls._instance = object.__new__(cls, *args, **kwargs)
+			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self):
+	def __init__(self, control_handler = None, time_handler = None, save_handler = None, player = None, sound_mixer = None):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
-			self.running = True
 			pygame.init()
-			TimeHandler().set_clock(pygame.time.Clock())
 			self.screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
-			self.saved_data = SaveHandler().load_save()
-			self.player = Player(Map(self.saved_data['maps'][self.saved_data["player"]["current_map_name"]]['elements']), self.saved_data['player']['current_npc_name'])
+			self.running = True
+			self.time_handler = time_handler
+			self.time_handler.set_clock(pygame.time.Clock())
+			self.save_handler = save_handler
+			self.saved_data = self.save_handler.load_save()
+			self.player = player
 			self.camera = Camera(self.screen)
-
-			self.control_handler = ControlHandler() # pour ne pas réinitialiser ControlHandler à chaque tour de boucle
+			self.control_handler = control_handler
+			self.sound_mixer = sound_mixer
 
 			while self.running:
 				self.update()
@@ -43,6 +44,6 @@ class GameLoop:
 		if self.control_handler.is_activated('quit'):
 			self.running = False
 
-		TimeHandler().update()
+		self.time_handler.update()
 		self.player.update()
 		self.camera.update()
