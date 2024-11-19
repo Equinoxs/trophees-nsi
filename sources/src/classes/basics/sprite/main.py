@@ -2,20 +2,18 @@ import pygame
 import json
 import os
 
-from src.classes import Vector2
+from src.classes import Vector2, SaveHandler
 
 
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
 
-		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path + '.png')
-		json_path = os.path.join('/'.join(png_path.split('/')[0:-1]), 'info.json')
+		data, png_path = SaveHandler().load_image(image_path)
+
 		self.original_image = pygame.image.load(png_path)
 		self.image = pygame.image.load(png_path)
 		self.image_path = image_path
-		with open(json_path, 'r') as file:
-			data = json.load(file)
 
 		self.image_data = data  # les infos de l'image
 		self.magnification_coeff = 1  # image x fois plus grande

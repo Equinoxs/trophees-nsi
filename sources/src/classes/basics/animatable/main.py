@@ -1,13 +1,14 @@
-from src.classes import TimeHandler
+from src.classes import TimeHandler, SaveHandler
 
 
 class Animatable:
-	def __init__(self, scheme):
+	def __init__(self, image_path: str):
 		self.running = True
-		self.scheme = scheme
 		self.dt = 0
 		self.frame_index = 0
 		self.infinite = True
+		self.animations = SaveHandler().load_image(image_path)["animations"]
+		self.animation_name = ''
 
 	def stop_animation(self):
 		self.running = False

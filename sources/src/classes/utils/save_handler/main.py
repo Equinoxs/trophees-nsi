@@ -18,6 +18,7 @@ class SaveHandler:
 			os.path.dirname(os.path.abspath(__file__)),
 			'../../../../backups/new_game_backup.json'
 		)
+		self.images_data = []
 
 	def get_data_from_last_save(self):
 		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
@@ -56,3 +57,16 @@ class SaveHandler:
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4)
    
+	def get_image_data(self, dir_name: str):
+		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', dir_name, 'image.png')
+		json_path = os.path.join('/'.join(png_path.split('/')[0:-1]), 'info.json')
+
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+		
+		return data, png_path
+	
+	def load_image(self, dir_name: str, force = False):
+		if dir_name not in self.images_data or force:
+			self.images_data[dir_name] = self.get_image_data(dir_name)
+		return self.images_data[dir_name]
