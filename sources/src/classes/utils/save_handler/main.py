@@ -18,7 +18,7 @@ class SaveHandler:
 			os.path.dirname(os.path.abspath(__file__)),
 			'../../../../backups/new_game_backup.json'
 		)
-		self.images_data = []
+		self.images_data = {}
 
 	def get_data_from_last_save(self):
 		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects

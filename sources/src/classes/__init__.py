@@ -8,8 +8,9 @@ from .utils.save_handler.main import SaveHandler
 from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
-# Camera importe Player
+# GameLoop importe Camera qui importe Player
 from .utils.camera.main import Camera
+from .utils.game_loop.main import GameLoop
 
 # ControlHandler import SaveHandler
 from .utils.control_handler.main import ControlHandler
@@ -24,18 +25,17 @@ from .basics.sprite.main import Sprite
 from .basics.animatable.main import Animatable
 from .basics.map_element.main import MapElement
 
-# NPC importe MapObject importe MapElement, Movable, Collider et Interactable
+# MapObject importe MapElement, Movable, Collider et Interactable
 from .basics.movable.main import Movable
 from .basics.collider.main import Collider
 from .basics.interactable.main import Interactable
 from .basics.map_object.main import MapObject
+
+# Objets enfants de MapObject :
 from .specific.npc.main import NPC
 
 # Map importe NPC
 from .specific.map.main import Map
-
-# GameLoop importe tout (directement ou indirectement)
-from .utils.game_loop.main import GameLoop
 
 
 

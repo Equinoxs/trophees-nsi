@@ -7,8 +7,9 @@ class Animatable:
 		self.dt = 0
 		self.frame_index = 0
 		self.infinite = True
-		self.animations = SaveHandler().load_image(image_path)["animations"]
-		self.animation_name = ''
+		data, _ = SaveHandler().load_image(image_path)
+		self.animations = data['animations']
+		self.animation_name = 'walking'  # --> cas particulier pour les tests, à rendre ça dynamique
 
 	def stop_animation(self):
 		self.running = False
@@ -22,18 +23,20 @@ class Animatable:
 
 	def update_index_animation(self):  # Renvoie vrai si le MapElement doit être animé
 		self.dt += TimeHandler().get_delta_time()
-		if len(self.scheme) == 0 or not self.running:
+		if self.animations == {} or not self.running:
 			return
 
+		scheme = self.animations[self.animation_name]['widths']
+
 		# Calcul du nombre de frames à sauter
-		while self.dt >= self.scheme[self.frame_index]["time"]:
-			self.dt -= self.scheme[self.frame_index]["time"]
+		while self.dt >= scheme[self.frame_index]["time"]:
+			self.dt -= scheme[self.frame_index]["time"]
 			self.frame_index += 1
 
 			# Si on dépasse la dernière frame
-			if self.frame_index >= len(self.scheme):
+			if self.frame_index >= len(scheme):
 				if self.infinite:
 					self.frame_index = 0  # Boucle au début
 				else:
-					self.frame_index = len(self.scheme) - 1  # Reste sur la dernière frame
+					self.frame_index = len(scheme) - 1  # Reste sur la dernière frame
 					self.running = False

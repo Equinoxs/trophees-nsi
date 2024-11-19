@@ -1,6 +1,3 @@
-from src.classes import SaveHandler, Map
-
-
 class Player:
 	_instance = None
 
@@ -10,16 +7,11 @@ class Player:
 			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self, map_name = None, npc_name = None):
+	def __init__(self, map = None, npc_name = None):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
+			self.map = map
 			self.focus = self.map.search_by_name(npc_name)
-			self.map = None
-			self.initialize_map(map_name)
-		
-	def initialize_map(self, map_name):
-		saved_data = SaveHandler().load_save()
-		self.map = Map(saved_data['maps'][saved_data["player"]["current_map_name"]]['elements']), self.saved_data['player']['current_npc_name']
 
 	def get_map(self):
 		return self.map
