@@ -1,4 +1,4 @@
-from src.classes import MapElement, MapObject, Vector2, NPC
+from src.classes import MapElement, MapObject, Vector2, NPC, SaveHandler
 
 def list_transform(list):
 	new_list = []
@@ -8,11 +8,37 @@ def list_transform(list):
 
 class Map:
 
-	def __init__(self, elements: list):
+	def __init__(self, map_name: str):
 		self.elements = []
+		self.load_elements_from(map_name)
+ 
+	def search_by_name(self, npc_name: str):
+		for el in self.elements:
+			if isinstance(el, NPC) and el.image_path.split('/')[0] == npc_name:
+				return el
+		return None
+
+	def update(self):
+		for element in self.elements:
+			element.update()
+
+	def add(self, element):
+		self.elements.append(element)
+
+	def remove(self, element_to_remove):
+		for index, element in enumerate(self.elements):
+			if element == element_to_remove:
+				return self.elements.pop(index)
+
+	def get_elements(self):
+		return self.elements
+
+	def load_elements_from(self, map_name):
+		self.elements = []
+		elements = SaveHandler().load_save()['maps'][map_name]['elements']
 		for el in elements:
 			match el["type"]:
-	   
+
 				case "MapElement":
 					self.elements.append(MapElement(
 						Vector2(
@@ -45,23 +71,3 @@ class Map:
 
 				case _:
 					raise NotImplementedError
- 
-	def search_by_name(self, npc_name: str):
-		for el in self.elements:
-			if isinstance(el, NPC) and el.image_path.split('/')[0] == npc_name:
-				return el
-
-	def update(self):
-		for element in self.elements:
-			element.update()
-
-	def add(self, element):
-		self.elements.append(element)
-
-	def remove(self, element_to_remove):
-		for element in self.elements:
-			if element == element_to_remove:
-				self.elements.pop(element_to_remove)
-
-	def get_elements(self):
-		return self.elements

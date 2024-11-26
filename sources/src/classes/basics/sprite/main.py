@@ -19,6 +19,7 @@ class Sprite:
 		self.magnification_coeff = 1  # image x fois plus grande
 		self.vertical_flip = False
 		self.horizontal_flip = False
+		self.go_to_frame(0, 'walking')  # à rendre ça dynamique
 
 	def switch_horizontal_flip(self):
 		self.horizontal_flip = not self.horizontal_flip

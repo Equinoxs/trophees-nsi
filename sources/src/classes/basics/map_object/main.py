@@ -14,14 +14,15 @@ class MapObject(MapElement, Collider, Interactable, Movable):
 		# Mise à jour de l'élément de la carte
 		MapElement.update(self)
 
-		# Vérification si le joueur doit interagir avec l'objet
-		if self.must_interact(self.position, Player().focus.get_position()):
-			self.interaction(Player())
-
+		# Vérification des collisions
 		width, height = Player().get_focus().get_image().get_size()
-		collision = self.collides_with_player(Player().focus.get_position() + Vector2(width // 2, height), self.position)
-		if isinstance(collision, Vector2):
-			object_s_reaction = collision.set_norm(collision.orthogonal_projection(Player().focus.speed_vector * 100 * Camera().get_zoom()).get_norm())
+		closest_vector = self.closest_vector_to(Player().focus.get_position() + Vector2(width // 2, height), self.position)
+  
+		if closest_vector.get_norm() < 10 * Camera().get_zoom():
+
+			object_s_reaction = closest_vector.set_norm(closest_vector.orthogonal_projection(Player().focus.speed_vector * 100 * Camera().get_zoom()).get_norm())
 			Player().get_focus().apply_force(object_s_reaction)
+
+		self.handle_interaction(closest_vector)
 
 		self.move(self.position)
