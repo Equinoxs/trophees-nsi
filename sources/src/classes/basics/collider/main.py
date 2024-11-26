@@ -17,9 +17,10 @@ class Collider:
 		return Vector2(arr[0], arr[1])
 
 	# Collision entre un point et une hitbox segmentée
-	def collides_with_player(self, point: Vector2, position: Vector2):
+	# point est la position du player et position est la position du premier point de la hitbox
+	def closest_vector_to(self, point: Vector2, position: Vector2):
 		if len(self.hitbox) == 0:
-			return False
+			return Vector2(10, 10)  # Pas de hitbox, pas de collision
 
 		closest_distance = float('inf')
 		closest_vector = None
@@ -62,7 +63,7 @@ class Collider:
 				closest_distance = distance
 				closest_vector = distance_vector
 
-		if closest_distance < 10 * Camera().get_zoom():  # Rayon de collision en pixels
-			return closest_vector.normalize()  # Retourne la direction de la collision
+		if closest_vector is None:
+			return Vector2(10, 10)
 		else:
-			return False
+			return closest_vector

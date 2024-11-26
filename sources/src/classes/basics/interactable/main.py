@@ -1,4 +1,4 @@
-from src.classes import ControlHandler
+from src.classes import ControlHandler, Player
 from src.utils import interactions
 
 
@@ -12,8 +12,6 @@ class Interactable:
 		else:
 			self.interaction = interactions.get(interaction)
 
-	def must_interact(self, self_position, player_position):
-		if not ControlHandler().is_activated('interacted'):
-			return False
-		elif self_position.distance_to(player_position) <= 60:
-			return True
+	def handle_interaction(self, closest_vector):
+		if ControlHandler().is_activated('interacted') and closest_vector.get_norm() <= 50:
+			self.interaction(Player())
