@@ -1,5 +1,5 @@
 from math import pi
-
+from pygame import mixer
 from src.classes import Vector2
 
 
@@ -15,6 +15,7 @@ class SoundMixer(object):
 	def __init__(self):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
+			mixer.init()
 			self.sound_tracks = []
 
 	def add_sound_track(self, sound_track):

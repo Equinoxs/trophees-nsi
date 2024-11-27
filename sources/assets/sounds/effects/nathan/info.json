@@ -1,7 +1,10 @@
 {
 	"sounds": {
 		"goose": {
-			"animation": "walking"
+			"extension": "opus"
+		},
+		"meow": {
+			"extension": "opus"
 		}
 	}
 }
