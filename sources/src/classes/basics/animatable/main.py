@@ -10,6 +10,12 @@ class Animatable:
 		data, _ = SaveHandler().load_image(image_path)
 		self.animations = data['animations']
 		self.animation_name = 'walking'  # --> cas particulier pour les tests, à rendre ça dynamique
+		self.animation_sound_data = self.animation_sound_path = None
+		if self.animation_name not in self.animations: return
+		if "sound" in self.animations[self.animation_name]:
+			self.animation_sound_data, self.animation_sound_path = SaveHandler().load_sound(image_path, self.animations[self.animation_name]["sound"])
+			self.load_sound(self.animation_sound_path)
+
 
 	def stop_animation(self):
 		self.running = False
@@ -40,3 +46,9 @@ class Animatable:
 				else:
 					self.frame_index = len(scheme) - 1  # Reste sur la dernière frame
 					self.running = False
+
+
+	def update_animation_sound(self):
+		if self.animation_sound_data is None: return
+		if not self.get_busy() and self.running: self.play_sound()
+		if not self.running: self.stop_sound()

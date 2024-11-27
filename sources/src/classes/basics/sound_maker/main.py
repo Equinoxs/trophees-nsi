@@ -22,3 +22,6 @@ class SoundMaker:
 
     def unpause(self):
         self.sound_track.pause()
+
+    def get_busy(self):
+        return self.sound_track.get_busy()

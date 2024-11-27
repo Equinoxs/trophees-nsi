@@ -4,13 +4,13 @@ from src.classes import TimeHandler, ControlHandler, SaveHandler, GameLoop, Map,
 
 
 def main():
-    # Initialisation des singletons
+	# Initialisation des singletons
+	sound_mixer = SoundMixer()
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()
 	save_handler = SaveHandler()
 	saved_data = save_handler.load_save()
 	player = Player(Map(saved_data["player"]["current_map_name"]), saved_data['player']['current_npc_name'])
-	sound_mixer = SoundMixer()
 	game_loop = GameLoop(control_handler, time_handler, save_handler, player, sound_mixer)
 	return 0
 

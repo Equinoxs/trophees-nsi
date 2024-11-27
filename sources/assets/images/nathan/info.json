@@ -14,7 +14,8 @@
 				{ "width": 44, "time": 0.2 },
 				{ "width": 44, "time": 0.2 }
 			],
-			"height": 200
+			"height": 200,
+			"sound": "meow"
 		}
 	},
 	"hitbox": []
