@@ -19,6 +19,7 @@ class SaveHandler:
 			'../../../../backups/new_game_backup.json'
 		)
 		self.images_data = {}
+		self.sounds_data = {}
 
 	def get_data_from_last_save(self):
 		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
@@ -56,7 +57,7 @@ class SaveHandler:
 		# Enregistrement des données dans le fichier JSON
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4)
-   
+
 	def get_image_data(self, dir_name: str):
 		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', dir_name, 'image.png')
 		json_path = os.path.join('/'.join(png_path.split('/')[0:-1]), 'info.json')
@@ -70,3 +71,22 @@ class SaveHandler:
 		if dir_name not in self.images_data or force:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
+
+	def get_sound_data(self, dir_name: str, snd_name: str):
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+		if not snd_name in data["sounds"]: return None
+
+		snd_path = json_path = os.path.join('/'.join(json_path.split('/')[0:-1]), snd_name + "." + data["sounds"][snd_name]["extension"])
+
+		return data, snd_path
+
+	def load_sound(self, dir_name: str, snd_name: str, force = False):
+		if dir_name not in self.sounds_data or force:
+			self.sounds_data[dir_name] = {}
+			self.sounds_data[dir_name][snd_name] = self.get_sound_data(dir_name, snd_name)
+		elif snd_name not in self.sounds_data[dir_name] or force:
+			self.sounds_data[dir_name][snd_name] = self.get_sound_data(dir_name, snd_name)
+
+		return self.sounds_data[dir_name][snd_name]
