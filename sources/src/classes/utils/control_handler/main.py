@@ -41,3 +41,6 @@ class ControlHandler:
 			return True
 		else:
 			return False
+
+	def finish_event(self, event):
+		self.events[event] = False

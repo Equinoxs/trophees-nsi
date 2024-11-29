@@ -45,8 +45,8 @@ class Sprite:
 		left = sum(frame["width"] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])
 
 		bottom = 0
-		for animation_key, val in enumerate(self.image_data['animations']):
-			bottom += val["height"]
+		for animation_key in self.image_data['animations']:
+			bottom += self.image_data['animations'][animation_key]["height"]
 			if animation_key == animation_name:
 				break
 

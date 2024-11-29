@@ -25,7 +25,7 @@ class SoundTrack:
 
     def init(self):
         self.sound_object = pygame.mixer.Sound(self.sound_path)
-        self.channel_object = pygame.mixer.find_channel()
+        self.channel_object = SoundMixer().find_channel()
 
     def play(self):
         if self.is_music:
@@ -34,13 +34,17 @@ class SoundTrack:
             if self.channel_object is None:
                 self.init()
             self.channel_object.play(self.sound_object, self.play_amount)
+            print(self.sound_path.split("/")[-1], "played on channel", self.channel_object, "sound", self.channel_object.get_sound(), self.sound_object)
 
     def stop(self):
         if self.is_music:
             pygame.mixer.music.stop()
         else:
-            if self.channel_object is not None:
+            if self.channel_object is not None and self.get_busy():
+                print(self.sound_path.split("/")[-1], "stopped on channel", self.channel_object, "sound", self.channel_object.get_sound(), self.sound_object)
+
                 self.channel_object.stop()
+
 
     def pause(self):
         if self.is_music:
