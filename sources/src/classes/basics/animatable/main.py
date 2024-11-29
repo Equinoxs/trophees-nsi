@@ -14,14 +14,18 @@ class Animatable:
 		if self.animation_name not in self.animations: return
 		if "sound" in self.animations[self.animation_name]:
 			self.animation_sound_data, self.animation_sound_path = SaveHandler().load_sound(image_path, self.animations[self.animation_name]["sound"])
-			self.load_sound(self.animation_sound_path)
+			self.load_sound(self.animation_sound_path, loop=self.infinite)
 
 
 	def stop_animation(self):
 		self.running = False
+		if self.animation_sound_data is not None:
+			self.stop_sound(self.animation_sound_path)
 
 	def resume_animation(self):
 		self.running = True
+		if self.animation_sound_data is not None and not self.get_busy(self.animation_sound_path):
+			self.play_sound(self.animation_sound_path)
 
 	def reset_animation_state(self):
 		self.frame_index = 0
@@ -46,9 +50,3 @@ class Animatable:
 				else:
 					self.frame_index = len(scheme) - 1  # Reste sur la dernière frame
 					self.running = False
-
-
-	def update_animation_sound(self):
-		if self.animation_sound_data is None: return
-		if not self.get_busy() and self.running: self.play_sound()
-		if not self.running: self.stop_sound()

@@ -2,7 +2,7 @@ from src.classes import ControlHandler, Player
 from src.utils import interactions
 
 
-def default_interaction(player):
+def default_interaction(self, player):
     return
 
 class Interactable:
@@ -14,4 +14,5 @@ class Interactable:
 
 	def handle_interaction(self, closest_vector):
 		if ControlHandler().is_activated('interacted') and closest_vector.get_norm() <= 50:
-			self.interaction(Player())
+			self.interaction(self, Player())
+			ControlHandler().finish_event('interacted')
