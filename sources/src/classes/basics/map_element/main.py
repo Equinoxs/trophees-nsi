@@ -23,11 +23,9 @@ class MapElement(Sprite, SoundMaker, Animatable):
         
         def render(self):
             Camera().get_screen().blit(
-                self.image,
-                (
-                    Camera().get_zoom() * (self.position.x - Camera().get_camera().x),
-                    Camera().get_zoom() * (self.position.y - Camera().get_camera().y)
-                )
-            )
-
-
+                                       self.image,
+                                       (
+                                        Camera().get_zoom() * (self.position.x - Camera().get_camera().x),
+                                        Camera().get_zoom() * (self.position.y - Camera().get_camera().y)
+                                        )
+                                       )
