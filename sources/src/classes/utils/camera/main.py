@@ -24,17 +24,17 @@ class Camera:
 	def get_zoom(self):
 		return self.zoom
 
+	def get_screen(self):
+		return self.screen
+
+	def get_camera(self):
+		return self.camera
+
 	def update(self):
 		elements = Player().get_map().get_elements()
 		width, height = Player().get_focus().get_image().get_size()
-		self.camera.center = (self.zoom * (self.player_pos.get_x() + width / 2), self.zoom * (self.player_pos.get_y() + height / 2))
+		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
 		# Remplir l'écran de noir
 		self.screen.fill((0,) * 3)
 		for element in elements:
-			self.screen.blit(
-	   			element.get_image(),
-				(
-					self.zoom * (element.get_position().get_x() - self.camera.x),
-			 		self.zoom * (element.get_position().get_y() - self.camera.y)
-				)
-			)
+			element.render()

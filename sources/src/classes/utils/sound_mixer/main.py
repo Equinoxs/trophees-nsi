@@ -17,6 +17,7 @@ class SoundMixer(object):
 			self._initialized = True
 			mixer.init()
 			self.sound_tracks = []
+			self.channels = []
 
 	def add_sound_track(self, sound_track):
 		self.sound_tracks.append(sound_track)
@@ -32,3 +33,16 @@ class SoundMixer(object):
 				sound_track.release_channel()
 			else:"""
 			sound_track.set_volume(1/(4*pi*(sound_track.distance_to(player_position)**2)))  # à vérifier...
+
+	def find_channel(self):
+		# renvoyer une channel libérée
+		channel = None
+		for idx, c in enumerate(self.channels):
+			if c is None:
+				channel = mixer.Channel(idx)
+		channel = mixer.Channel(len(self.channels)) if channel is None else channel
+		self.channels.append(channel)
+		return channel
+
+	def release_channel(self, channel):
+		self.channels = [c if c is not channel else None for c in self.channels]

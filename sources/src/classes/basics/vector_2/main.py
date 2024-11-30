@@ -16,6 +16,7 @@ class Vector2:
 	def copy(self, position):
 		self.x = position.get_x()
 		self.y = position.get_y()
+		return self
 
 	def get_x(self):
 		return self.x

@@ -13,3 +13,6 @@ venv/
 # Fichiers de logs et autres fichiers temporaires
 *.log
 *.tmp
+
+# Autres fichiers
+*.orig

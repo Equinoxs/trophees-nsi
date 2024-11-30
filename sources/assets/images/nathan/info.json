@@ -1,7 +1,7 @@
 {
 	"animations": {
-		"posing": {
-			"width":[
+		"inactive": {
+			"widths":[
 				{ "width": 44, "time": 1000 }
 			],
 			"height": 200
@@ -18,5 +18,7 @@
 			"sound": "meow"
 		}
 	},
-	"hitbox": []
+	"hitbox": [
+		[22, 200]
+	]
 }

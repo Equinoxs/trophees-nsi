@@ -6,9 +6,41 @@
 	"maps": {
 		"test": {
 			"elements": [
-				{ "type": "MapElement", "position": [0, 0], "image_path": "test_element", "z_index": 0 },
-				{ "type": "MapObject", "position": [50, 50], "image_path": "test_object", "z_index": 1, "interaction": "test" },
-				{ "type": "NPC", "pattern": [[60, 60], [80, 60], [60, 80]], "position": [0, 0], "image_path": "nathan", "z_index": 2, "interaction": "", "sound": "goose" }
+				{
+					"type": "MapElement",
+					"position": [0, 0],
+					"image_path": "test_element",
+					"z_index": 0,
+					"name": "test_element"
+				},
+				{
+					"type": "MapObject",
+					"position": [50, 50],
+					"image_path": "test_object",
+					"z_index": 1,
+					"interaction": "test",
+					"name": "test_object"
+				},
+				{
+					"type": "NPC",
+					"pattern_timeline": [],
+					"position": [0, 0],
+					"image_path": "nathan",
+					"z_index": 2,
+					"interaction": "",
+					"sound": "goose",
+					"name": "nathan"
+				},
+				{
+					"type": "NPC",
+					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [300, 250], [300, -20]],
+					"position": [50, 40],
+					"image_path": "nathan",
+					"z_index": 2,
+					"interaction": "test",
+					"sound": "goose",
+					"name": "alan"
+				}
 			]
 		}
 	},
