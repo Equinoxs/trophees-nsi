@@ -2,14 +2,14 @@ import pygame
 import json
 import os
 
-from src.classes import Vector2, SaveHandler
+from src.classes import Vector2, DataHandler
 
 
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
 
-		data, png_path = SaveHandler().load_image(image_path)
+		data, png_path = DataHandler().load_image(image_path)
 
 		self.original_image = pygame.image.load(png_path)
 		self.image = pygame.image.load(png_path)

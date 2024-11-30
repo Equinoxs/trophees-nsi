@@ -12,18 +12,16 @@ class NPC(MapObject):
 		self.pattern_timeline = pattern_timeline
 		self.pattern = list(filter(lambda val: isinstance(val, Vector2), self.pattern_timeline))
 		self.following_pattern = True
-		self.back_to_initial = False
-		self.walking_time = 0
-		self.objective_index = 0
-		self.objective = self.pattern[self.objective_index] if len(self.pattern) > 0 else None
+		self.pattern_index = 0
+
+		self.objective = self.pattern[self.pattern_index] if len(self.pattern) > 0 else None
+
 		self.delta_time_event = None
-		self.is_moving = False
+		self.is_moving = False  # permet de SAVOIR si le NPC se dirige vers un objectif
+		self.must_move = True  # permet de CONTRÔLER si le NPC doit se diriger vers son objectif
 
 	def go_initial(self):
-		self.following_pattern = False
-		self.back_to_initial = True
-		self.objective = self.initial_position
-		self.walking_time = (self.objective - self.position).get_norm() / self.speed
+		self.set_objective(self.initial_position)
 
 	def turn_right(self):
 		if self.horizontal_flip:
@@ -70,23 +68,25 @@ class NPC(MapObject):
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
-		self.walking_time = ((self.objective - self.position).get_norm() / self.speed * 1.5) / (100 * Camera().get_zoom()) 
+
+	def stop_moving(self):
+		self.speed_vector.set_all(0, 0)
+		self.must_move = False
+		self.change_animation('inactive')
+		self.reset_animation_state()
+
+	def resume_moving(self):
+		self.must_move = True
 
 	# Cette méthode se charge de véhiculer les NPC à un point fixé (a.k.a. self.objective)
 	# Elle est appelé à chaque frame
 	def move_npc_to_objective(self):
-		if self.objective is not None:
-			dt = TimeHandler().get_delta_time()
-			if self.walking_time > 0:
-				self.walking_time -= dt
-			else:
-				self.change_animation('inactive')
-				self.reset_animation_state()
-				self.objective = None
-				self.speed_vector.set_all(0, 0)
+		if self.objective is not None and self.must_move:
+			relative_objective = self.objective - self.position
+			if relative_objective.get_norm() <= 1:
+				self.stop_moving()
 				return False
 
-			relative_objective = self.objective - self.position
 			self.speed_vector.copy(relative_objective).set_norm(self.speed / 1.5 * 100 * Camera().get_zoom())
 			self.change_animation('walking')
 
@@ -96,9 +96,7 @@ class NPC(MapObject):
 				self.turn_right()
 			return True
 		else:
-			self.change_animation('inactive')
-			self.reset_animation_state()
-			self.speed_vector.set_all(0, 0)
+			self.stop_moving()
 			return False
 
 	# Cette méthode est appelé à chaque fois que le NPC à atteint un objectif de son pattern
@@ -109,21 +107,16 @@ class NPC(MapObject):
 		for index, value in enumerate(self.pattern_timeline):
 			if isinstance(value, Vector2):
 				count_vector2 += 1
-				if count_vector2 == self.objective_index + 1:
+				if count_vector2 == self.pattern_index + 1:
 					index_in_timeline = index - 1
 					break
 
 		if isinstance(self.pattern_timeline[index_in_timeline], Vector2):
 			return False
 
-		if self.delta_time_event is None:
-			self.delta_time_event = 0
-		elif self.delta_time_event is not None:
-			self.delta_time_event += TimeHandler().get_delta_time()
-
-		do_again = self.pattern_timeline[index_in_timeline](self, self.delta_time_event)
+		do_again = self.pattern_timeline[index_in_timeline](self, TimeHandler().add_chrono_tag(self.name))
 		if do_again == False:
-			self.delta_time_event = None
+			TimeHandler().remove_chrono_tag(self.name)
 		return do_again
 
 	# Se charge du bon déroulement de self.pattern_timeline et gère donc les appels de
@@ -132,10 +125,10 @@ class NPC(MapObject):
 		if not self.pattern:
 			return
 
-		if self.following_pattern or self.back_to_initial:
+		if self.following_pattern:
 			if not self.is_moving:
 				do_again = self.handle_events()
-    
+
 				if do_again:
 					self.objective = None
 					self.change_animation('inactive')
@@ -144,8 +137,9 @@ class NPC(MapObject):
 
 				else:
 					# Le personnage a atteint son obj, n'active pas d'évènements, on lui donne un autre objectif
-					self.objective_index = (self.objective_index + 1) % len(self.pattern)
-					self.set_objective(self.pattern[self.objective_index])
+					self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
+					self.set_objective(self.pattern[self.pattern_index])
+					self.resume_moving()
 		else:
 			self.objective = None
 

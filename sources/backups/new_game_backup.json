@@ -27,7 +27,7 @@
 					"position": [0, 0],
 					"image_path": "nathan",
 					"z_index": 2,
-					"interaction": "",
+					"interaction": "default",
 					"sound": "goose",
 					"name": "nathan"
 				},

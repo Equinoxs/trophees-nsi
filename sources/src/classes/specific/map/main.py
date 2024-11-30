@@ -1,21 +1,4 @@
-from src.classes import MapElement, MapObject, Vector2, NPC, SaveHandler
-from src.utils import interactions
-
-def get_interaction(interaction_name):
-    if interaction_name == '':
-        interaction_name = 'default'
-    return interactions.get(interaction_name)
-
-def list_transform(list2: list):
-	new_list = []
-	for el in list2:
-		if type(el) == list:
-			new_list.append(Vector2(el[0], el[1]))
-		elif type(el) == str:
-			new_list.append(get_interaction(el))
-		else:
-			raise ValueError
-	return new_list
+from src.classes import MapElement, MapObject, Vector2, NPC, DataHandler
 
 class Map:
 
@@ -50,41 +33,35 @@ class Map:
 
 	def load_elements_from(self, map_name):
 		self.elements = []
-		elements = SaveHandler().load_save()['maps'][map_name]['elements']
+		elements = DataHandler().load_save()['maps'][map_name]['elements']
 		for el in elements:
-			match el["type"]:
+			match el['type']:
 
-				case "MapElement":
+				case 'MapElement':
 					self.elements.append(MapElement(
-						el["name"],
-    					Vector2(
-							el["position"][0], el["position"][1]
-						),
-						el["image_path"],
-						el["z_index"]
+						el['name'],
+						el['position'],
+						el['image_path'],
+						el['z_index']
 					)),
 	   
-				case "MapObject":
+				case 'MapObject':
 					self.elements.append(MapObject(
-						el["name"],
-						Vector2(
-							el["position"][0], el["position"][1]
-						),
-						el["image_path"],
-						el["z_index"],
-						get_interaction(el["interaction"])
+						el['name'],
+						el['position'],
+						el['image_path'],
+						el['z_index'],
+						el['interaction']
 					)),
 
-				case "NPC":
+				case 'NPC':
 					self.elements.append(NPC(
-						el["name"],
-						list_transform(el["pattern_timeline"]),
-						Vector2(
-							el["position"][0], el["position"][1]
-						),
-						el["image_path"],
-						el["z_index"],
-						get_interaction(el["interaction"])
+						el['name'],
+						el['pattern_timeline'],
+						el['position'],
+						el['image_path'],
+						el['z_index'],
+						el['interaction']
 					))
 
 				case _:

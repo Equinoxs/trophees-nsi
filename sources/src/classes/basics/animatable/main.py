@@ -1,4 +1,4 @@
-from src.classes import TimeHandler, SaveHandler
+from src.classes import TimeHandler, DataHandler
 
 
 class Animatable:
@@ -7,13 +7,13 @@ class Animatable:
 		self.dt = 0
 		self.frame_index = 0
 		self.infinite = True
-		data, _ = SaveHandler().load_image(image_path)
+		data, _ = DataHandler().load_image(image_path)
 		self.animations = data['animations']
 		self.animation_name = 'inactive'
 		self.animation_sound_data = self.animation_sound_path = None
 		if self.animation_name not in self.animations: return
 		if "sound" in self.animations[self.animation_name]:
-			self.animation_sound_data, self.animation_sound_path = SaveHandler().load_sound(image_path, self.animations[self.animation_name]["sound"])
+			self.animation_sound_data, self.animation_sound_path = DataHandler().load_sound(image_path, self.animations[self.animation_name]["sound"])
 			self.load_sound(self.animation_sound_path, loop=self.infinite)
 
 	def change_animation(self, animation_name):

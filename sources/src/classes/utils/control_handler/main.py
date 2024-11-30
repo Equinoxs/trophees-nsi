@@ -1,4 +1,4 @@
-from src.classes import SaveHandler
+from src.classes import DataHandler
 class ControlHandler:
 	_instance = None
 
@@ -21,7 +21,7 @@ class ControlHandler:
 				'go_left': False,
 				'sprint': False
 			}
-			save = SaveHandler().load_save()
+			save = DataHandler().load_save()
 			self.keybinds = save["keybinds"]
 
 	def handle_events(self, pygame):

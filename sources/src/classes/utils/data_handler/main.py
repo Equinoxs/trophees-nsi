@@ -1,8 +1,11 @@
 import json
 import os
 
+from src.classes import Vector2
+from src.utils import interactions
 
-class SaveHandler:
+
+class DataHandler:
 	_instance = None
 	current_save = None
 
@@ -36,6 +39,15 @@ class SaveHandler:
 			# Si le fichier de sauvegarde principale est vide ou inexistant, on utilise le backup par défaut
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
+
+		for map in data['maps']:
+			for element_index in range(len(data['maps'][map]['elements'])):
+				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
+				if 'pattern_timeline' in data['maps'][map]['elements'][element_index]:
+					data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'])
+				if 'interaction' in data['maps'][map]['elements'][element_index]:
+					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
+
 		return data
 	
 	def load_save(self, force = False):
@@ -44,7 +56,7 @@ class SaveHandler:
 		return self.current_save
 	
 	def save(self, automatic = False):
-		self.save_data(self.current_save, "manual" if not automatic else "automatic")
+		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
 
 	def save_data(self, data, backup_path):
 		# Correction de la redondance du mot-clé 'path'
@@ -76,9 +88,9 @@ class SaveHandler:
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
 		with open(json_path, 'r') as file:
 			data = json.load(file)
-		if not snd_name in data["sounds"]: return None
+		if not snd_name in data['sounds']: return None
 
-		snd_path = json_path = os.path.join('/'.join(json_path.split('/')[0:-1]), snd_name + "." + data["sounds"][snd_name]["extension"])
+		snd_path = json_path = os.path.join('/'.join(json_path.split('/')[0:-1]), snd_name + '.' + data['sounds'][snd_name]['extension'])
 
 		return data, snd_path
 
@@ -90,3 +102,26 @@ class SaveHandler:
 			self.sounds_data[dir_name][snd_name] = self.get_sound_data(dir_name, snd_name)
 
 		return self.sounds_data[dir_name][snd_name]
+
+	def get_interaction(self, interaction_name: str = 'default'):
+		if interaction_name == '':
+			interaction_name = 'default'
+		return interactions.get(interaction_name)
+
+	def list_to_vector2(self, list2: list):
+		if type(list2) == list and len(list2) == 2:
+			return Vector2(list2[0], list2[1])
+		else:
+			raise AttributeError
+
+	def list_transform(self, list2: list):
+		new_list = []
+		for el in list2:
+			if type(el) == list:
+				new_list.append(Vector2(el[0], el[1]))
+			elif type(el) == str:
+				new_list.append(self.get_interaction(el))
+			else:
+				raise ValueError
+		return new_list
+
