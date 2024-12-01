@@ -34,27 +34,17 @@ class NPC(MapObject):
 	def update_player(self):
 		if ControlHandler().is_activated('go_forward'):
 			self.speed_vector.set_y(-1)
-			self.change_animation('walking')
 		elif ControlHandler().is_activated('go_backward'):
 			self.speed_vector.set_y(1)
-			self.change_animation('walking')
 		else:
 			self.speed_vector.set_y(0)
 
 		if ControlHandler().is_activated('go_left'):
 			self.speed_vector.set_x(-1)
-			self.change_animation('walking')
-			self.turn_left()
 		elif ControlHandler().is_activated('go_right'):
 			self.speed_vector.set_x(1)
-			self.change_animation('walking')
-			self.turn_right()
 		else:
 			self.speed_vector.set_x(0)
-   
-		if not ControlHandler().is_activated('go_forward') and not ControlHandler().is_activated('go_backward') and not ControlHandler().is_activated('go_left') and not ControlHandler().is_activated('go_right'):
-			self.change_animation('inactive')
-			self.reset_animation_state()
 
 		if ControlHandler().is_activated('sprint'):
 			self.sprint = True
@@ -72,11 +62,26 @@ class NPC(MapObject):
 	def stop_moving(self):
 		self.speed_vector.set_all(0, 0)
 		self.must_move = False
-		self.change_animation('inactive')
-		self.reset_animation_state()
 
 	def resume_moving(self):
 		self.must_move = True
+
+	def handle_animation(self):
+		if abs(self.speed_vector.get_y()) >= abs(2 * self.speed_vector.get_x()) + 1:  # ajout d'une constante pour prévenir des instabilités numériques
+			if self.speed_vector.get_y() > 0:
+				self.change_animation('walking_backward')
+			elif self.speed_vector.get_y() < 0:
+				self.change_animation('walking_forward')
+		elif abs(self.speed_vector.get_x()) > 1:
+			if self.speed_vector.get_x() < 0:
+				self.turn_left()
+			elif self.speed_vector.get_x() > 0:
+				self.turn_right()
+			self.change_animation('walking')
+		else:  # Pas de mouvement ou vitesse négligeable
+			self.change_animation('inactive')
+			self.reset_animation_state()
+
 
 	# Cette méthode se charge de véhiculer les NPC à un point fixé (a.k.a. self.objective)
 	# Elle est appelé à chaque frame
@@ -88,7 +93,6 @@ class NPC(MapObject):
 				return False
 
 			self.speed_vector.copy(relative_objective).set_norm(self.speed / 1.5 * 100 * Camera().get_zoom())
-			self.change_animation('walking')
 
 			if relative_objective.get_x() < 0:
 				self.turn_left()
@@ -131,8 +135,6 @@ class NPC(MapObject):
 
 				if do_again:
 					self.objective = None
-					self.change_animation('inactive')
-					self.reset_animation_state()
 					return  # on empêche le redéfinissement de l'objectif, le résultat sera le même la prochaine fois
 
 				else:
@@ -148,6 +150,7 @@ class NPC(MapObject):
 	def update(self):
 		MapObject.update(self)
 		self.update_pattern()
+		self.handle_animation()
 
 	def render(self):
 		width, height = self.image.get_size()
