@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Vector2, SoundMixer
+from src.classes import Vector2, SoundMixer, LogHandler
 
 
 class SoundTrack:
@@ -34,14 +34,14 @@ class SoundTrack:
             if self.channel_object is None:
                 self.init()
             self.channel_object.play(self.sound_object, self.play_amount)
-            print(self.sound_path.split("/")[-1], "played on channel", self.channel_object, "sound", self.channel_object.get_sound(), self.sound_object)
+            LogHandler().add(f'{self.sound_path.split("/")[-1]} played on channel {SoundMixer().get_index_of_channel(self.channel_object)} sound {id(self.channel_object.get_sound())} object {id(self.sound_object)}')
 
     def stop(self):
         if self.is_music:
             pygame.mixer.music.stop()
         else:
             if self.channel_object is not None and self.get_busy():
-                print(self.sound_path.split("/")[-1], "stopped on channel", self.channel_object, "sound", self.channel_object.get_sound(), self.sound_object)
+                LogHandler().add(f'{self.sound_path.split("/")[-1]} stopped on channel {SoundMixer().get_index_of_channel(self.channel_object)} sound {id(self.channel_object.get_sound())} object {id(self.sound_object)}')
 
                 self.channel_object.stop()
 
@@ -71,4 +71,12 @@ class SoundTrack:
 
     def release_channel(self):
         if not self.is_music:
+            SoundMixer().release_channel(self.channel_object)
             del self.channel_object  # libérer une Channel
+
+    def get_debug_string(self):
+        return f'Channel {SoundMixer().get_index_of_channel(self.channel_object)}: {id(self.sound_object)} ({self.sound_path.split("/")[-1]}) {"playing" if self.get_busy() else "idling"}'
+
+    def remove(self):
+        self.release_channel()
+        SoundMixer().remove_sound_track(self)

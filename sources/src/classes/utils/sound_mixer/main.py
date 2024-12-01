@@ -1,6 +1,6 @@
 from math import pi
 from pygame import mixer
-from src.classes import Vector2
+from src.classes import Vector2, LogHandler
 
 
 class SoundMixer(object):
@@ -39,10 +39,20 @@ class SoundMixer(object):
 		channel = None
 		for idx, c in enumerate(self.channels):
 			if c is None:
-				channel = mixer.Channel(idx)
-		channel = mixer.Channel(len(self.channels)) if channel is None else channel
+				LogHandler().add(f'Assigning channel {idx}')
+				self.channels[idx] = mixer.Channel(idx)
+				return self.channels[idx]
+
+		LogHandler().add(f'Assigning channel {len(self.channels)}')
+		channel = mixer.Channel(len(self.channels))
 		self.channels.append(channel)
 		return channel
 
 	def release_channel(self, channel):
 		self.channels = [c if c is not channel else None for c in self.channels]
+
+	def get_index_of_channel(self, channel):
+		return self.channels.index(channel)
+
+	def generate_debug_data(self):
+		return ['==== Channels info ===='] + ([sound_track.get_debug_string() for sound_track in self.sound_tracks] if len(self.sound_tracks) > 0 else ['No channel'])

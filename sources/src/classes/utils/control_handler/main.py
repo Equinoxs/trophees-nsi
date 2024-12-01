@@ -19,7 +19,8 @@ class ControlHandler:
 				'go_backward': False,
 				'go_right': False,
 				'go_left': False,
-				'sprint': False
+				'sprint': False,
+				'debug_pause': False
 			}
 			save = DataHandler().load_save()
 			self.keybinds = save["keybinds"]
