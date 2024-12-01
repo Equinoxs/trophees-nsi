@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Camera
+from src.classes import Camera, DEBUG
 
 
 class GameLoop:
@@ -43,6 +43,9 @@ class GameLoop:
 		self.control_handler.handle_events(pygame)
 		if self.control_handler.is_activated('quit'):
 			self.running = False
+
+		if DEBUG and self.control_handler.is_activated('debug_pause'):
+			return
 
 		self.time_handler.update()
 		self.player.update()

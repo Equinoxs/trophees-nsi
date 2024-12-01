@@ -51,6 +51,7 @@
 		"go_backward": 115,
 		"go_right": 100,
 		"go_left": 113,
-		"sprint": 1073742049
+		"sprint": 1073742049,
+		"debug_pause": 106
 	}
 }

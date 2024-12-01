@@ -16,7 +16,6 @@ class SoundMaker:
 
     def stop_sound(self, sound_path: str):
         if self.sound_tracks[sound_path].get_busy():
-            print("BUSY")
             self.sound_tracks[sound_path].stop()
 
     def pause(self, sound_path: str):
@@ -30,3 +29,7 @@ class SoundMaker:
 
     def is_sound_loaded(self, sound_path: str):
         return sound_path in self.sound_tracks
+
+    def remove_sound(self, sound_path: str):
+        self.sound_tracks[sound_path].remove()
+        del self.sound_tracks[sound_path]

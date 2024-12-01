@@ -1,3 +1,6 @@
+# Constante de debug
+DEBUG = True
+
 # Il est important de mettre les classes dans l'ordre d'importation.
 # ex : si A importe B, alors on devra importer B avant A dans ce fichier
 # afin que B soit complètement initialisé quand A importera B
@@ -7,7 +10,9 @@ from .basics.vector_2.main import Vector2
 from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
-# GameLoop importe Camera qui importe Player
+# GameLoop importe Camera qui importe Player et SoundMixer
+from .utils.log_handler.main import LogHandler
+from .utils.sound_mixer.main import SoundMixer
 from .utils.camera.main import Camera
 from .utils.game_loop.main import GameLoop
 
@@ -18,7 +23,6 @@ from .utils.data_handler.main import DataHandler
 from .utils.control_handler.main import ControlHandler
 
 # SoundMaker importe SoundTrack qui importe SoundMixer
-from .utils.sound_mixer.main import SoundMixer
 from .utils.sound_track.main import SoundTrack
 from .basics.sound_maker.main import SoundMaker
 
