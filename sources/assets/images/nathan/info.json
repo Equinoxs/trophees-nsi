@@ -16,6 +16,27 @@
 			],
 			"height": 200,
 			"sound": "meow"
+		},
+		"walking_foreward": {
+			"widths": [
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 }
+			],
+			"height": 200
+		},
+
+		"walking_backwiew": {
+			"widths": [
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 }
+			],
+			"height": 200
 		}
 	},
 	"hitbox": [
