@@ -39,7 +39,8 @@
 					"z_index": 2,
 					"interaction": "test",
 					"sound": "goose",
-					"name": "alan"
+					"name": "alan",
+					"side_effects": ["npc_side_effect_test"]
 				}
 			]
 		}

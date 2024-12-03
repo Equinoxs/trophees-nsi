@@ -43,10 +43,22 @@ class DataHandler:
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
 				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
+
 				if 'pattern_timeline' in data['maps'][map]['elements'][element_index]:
 					data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'])
+				else:
+					data['maps'][map]['elements'][element_index]['pattern_timeline'] = []
+
 				if 'interaction' in data['maps'][map]['elements'][element_index]:
 					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
+				else:
+					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction('default')
+
+				if 'side_effects' in data['maps'][map]['elements'][element_index]:
+					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'])
+				else:
+					data['maps'][map]['elements'][element_index]['side_effects'] = []
+
 
 		return data
 	

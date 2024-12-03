@@ -1,8 +1,8 @@
 from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera
 
 class NPC(MapObject):
-	def __init__(self, name: str, pattern_timeline: list, position: Vector2, image_path: str, z_index: int, interaction: str = None):
-		MapObject.__init__(self, name, position, image_path, z_index, interaction)
+	def __init__(self, name: str, pattern_timeline: list, position: Vector2, image_path: str, z_index: int, interaction: str = None, side_effects: list = []):
+		MapObject.__init__(self, name, position, image_path, z_index, interaction, side_effects)
 		self.initial_position = Vector2(position.get_x(), position.get_y())
 
 		self.sprint = False
