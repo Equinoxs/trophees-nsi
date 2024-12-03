@@ -1,27 +1,25 @@
-from typing import Callable
-
-from src.classes import MapElement, Collider, Interactable, Movable, Vector2, Player, Camera
+from src.classes import MapElement, Collider, Interactable, Movable, SideEffectsManager, Vector2, Player, Camera
 
 
-class MapObject(MapElement, Collider, Interactable, Movable):
-	def __init__(self, name: str, position: Vector2, image_path: str, z_index: int = 0, interaction: str = ''):
+class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager):
+	def __init__(self, name: str, position: Vector2, image_path: str, z_index: int = 0, interaction: str = None, side_effects: list = []):
 		MapElement.__init__(self, name, position, image_path, z_index)
 		Interactable.__init__(self, interaction)
 		Collider.__init__(self, image_path)
 		Movable.__init__(self)
+		SideEffectsManager.__init__(self, side_effects)
 
 	def update(self):
 		# Mise à jour de l'élément de la carte
 		MapElement.update(self)
 
 		# Vérification des collisions
-		closest_vector = self.closest_vector_to(Player().focus.get_position(), self.position)
-  
-		if closest_vector.get_norm() < 10 * Camera().get_zoom():
+		closest_vector = self.closest_vector_to(self.position)
 
-			object_s_reaction = closest_vector.set_norm(closest_vector.orthogonal_projection(Player().focus.speed_vector * 100 * Camera().get_zoom()).get_norm())
-			Player().get_focus().apply_force(object_s_reaction)
+		if closest_vector.get_norm() < 5 * Camera().get_zoom():
+			object_s_reaction = closest_vector.set_norm(closest_vector.orthogonal_projection(Player().get_focus().get_speed_vector() + self.speed_vector).get_norm())
+			Player().get_focus().get_speed_vector().add(object_s_reaction)
 
 		self.handle_interaction(closest_vector)
-
 		self.move(self.position)
+		self.apply_side_effects()

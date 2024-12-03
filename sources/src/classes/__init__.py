@@ -32,6 +32,7 @@ from .basics.animatable.main import Animatable
 from .basics.map_element.main import MapElement
 
 # MapObject importe MapElement, Movable, Collider et Interactable
+from .basics.side_effects_manager.main import SideEffectsManager
 from .basics.movable.main import Movable
 from .basics.collider.main import Collider
 from .basics.interactable.main import Interactable

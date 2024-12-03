@@ -1,7 +1,7 @@
 import json
 import os
 
-from src.classes import Vector2, DataHandler
+from src.classes import Vector2, DataHandler, Player
 
 
 class Collider:
@@ -14,13 +14,13 @@ class Collider:
 		self.hitbox = data['hitbox']
 
 	# Collision entre un point et une hitbox segmentée
-	# point est la position du player et position est la position du premier point de la hitbox
-	def closest_vector_to(self, point: Vector2, position: Vector2):
-		if len(self.hitbox) == 0:
+	def closest_vector_to(self, position: Vector2):
+		if len(self.hitbox) == 0 or self == Player().get_focus():
 			return Vector2(10, 10)  # Pas de hitbox, pas de collision
 
 		closest_distance = float('inf')
 		closest_vector = None
+		point = Player().get_focus().get_position()
 
 		for i in range(len(self.hitbox)):
 			# Points du segment
@@ -54,7 +54,7 @@ class Collider:
 		# Si la hitbox est un seul point (pas de segment)
 		if len(self.hitbox) == 1:
 			point_in_hitbox = DataHandler().list_to_vector2(self.hitbox[0])
-			distance_vector = point - point_in_hitbox
+			distance_vector = point - (point_in_hitbox + position)
 			distance = distance_vector.get_norm()
 			if distance < closest_distance:
 				closest_distance = distance
