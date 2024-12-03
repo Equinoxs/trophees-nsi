@@ -28,11 +28,11 @@
 		},
 		"walking": {
 			"widths": [
-				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.1 },
 				{ "width": 44, "time": 0.4 },
 				{ "width": 44, "time": 0.3 },
 				{ "width": 49, "time": 0.4 },
-				{ "width": 38, "time": 0.3 }
+				{ "width": 38, "time": 0.2 }
 			],
 			"height": 93,
 			"sound": "meow"

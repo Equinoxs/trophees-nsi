@@ -45,23 +45,23 @@ class Sprite:
 		left = sum(frame["width"] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])
 
 		top = 0
-		bottom = 0
 		for animation_key, val in self.image_data['animations'].items():
-			bottom += val["height"]
 			if animation_key == animation_name:
+				subsurface_height = val["height"]
 				break
 			top += val["height"]
 
 		if len(self.image_data['animations'][animation_name]['widths']) == 0:
-			right = width
+			subsurface_width = width
 		else:
-			right = int((left + self.image_data['animations'][animation_name]['widths'][frame_index]["width"]) * coeff)
+			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]["width"]) * coeff)
 
 		# Ajuster pour éviter les erreurs liées à des tailles impaires
-		right += right % 2 - 1
+		subsurface_width += subsurface_width % 2 - 1
+		subsurface_height += subsurface_height % 2 - 1
 
 		# Rogner l'image (subsurface)
-		self.image = self.original_image.subsurface((left, top, right - left, bottom - top))
+		self.image = self.original_image.subsurface((left, top, subsurface_width, subsurface_height))
 
 		# Réappliquer les inversions d'axes
 		self.image = pygame.transform.flip(self.image, self.horizontal_flip, self.vertical_flip)
