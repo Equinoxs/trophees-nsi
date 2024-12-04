@@ -23,7 +23,7 @@ class SoundTrack:
 		if loop:
 			self.play_amount = -1  # -1 = jouer indéfiniment
 		else:
-			self.play_amount = 1
+			self.play_amount = 0
 		if self.channel is None:
 			self.channel = SoundMixer().find_channel()
 		self.channel.play(self.sounds[sound_name], self.play_amount)
