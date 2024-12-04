@@ -96,15 +96,16 @@ class DataHandler:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
 
-	def get_sound_data(self, dir_name: str, sound_name: str):
+	def get_sound_track_data(self, dir_name: str):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
 		with open(json_path, 'r') as file:
 			data = json.load(file)
-		if not sound_name in data['sounds']: return None
 
-		sound_path = os.path.join('/'.join(json_path.split('/')[0:-1]), sound_name + '.' + data['sounds'][sound_name]['extension'])
+		sound_paths = {}
+		for sound_name in data['sounds']:
+			sound_paths[sound_name] = os.path.join('/'.join(json_path.split('/')[0:-1]), sound_name + '.' + data['sounds'][sound_name]['extension'])
 
-		return data, sound_path
+		return data, sound_paths
 
 	def load_sound(self, dir_name: str, sound_name: str, force = False):
 		if dir_name == 'music': return self.load_music(sound_name)
