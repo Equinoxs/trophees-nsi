@@ -2,12 +2,12 @@ from src.classes import MapElement, Collider, Interactable, Movable, SideEffects
 
 
 class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager):
-	def __init__(self, name: str, position: Vector2, image_path: str, z_index: int = 0, interaction: str = None, side_effects: list = []):
-		MapElement.__init__(self, name, position, image_path, z_index)
-		Interactable.__init__(self, interaction)
-		Collider.__init__(self, image_path)
+	def __init__(self, data):
+		MapElement.__init__(self, data)
+		Interactable.__init__(self, data['interaction'])
+		Collider.__init__(self, data['image_path'])
 		Movable.__init__(self)
-		SideEffectsManager.__init__(self, side_effects)
+		SideEffectsManager.__init__(self, data['side_effects'])
 
 	def update(self):
 		# Mise à jour de l'élément de la carte

@@ -1,12 +1,11 @@
-from src.classes import MapElement, MapObject, Vector2, NPC, DataHandler, TimeHandler, SoundMaker
+from src.classes import MapElement, MapObject, NPC, DataHandler, TimeHandler, SoundMixer
 
-class Map(SoundMaker):
+class Map:
 
 	def __init__(self, map_name: str):
-		SoundMaker.__init__(self, None)
 		self.elements = []
 		self.load_elements_from(map_name)
-		self.load_sound('music', map_name, loop=True, is_music=True, needs_playing=True, default_volume=0.3)
+		SoundMixer().play_music('wstheme')
 
 	def sort_elements(self):
 		self.elements.sort(key=lambda x: (x.get_z_index(), x.get_position().get_y()))
@@ -20,8 +19,9 @@ class Map(SoundMaker):
 	def update(self):
 		running = TimeHandler().is_running()
 		self.sort_elements()
-		for element in self.elements:
-			if running: element.update()
+		if running:
+			for element in self.elements:
+				element.update()
 
 	def add(self, element):
 		self.elements.append(element)
@@ -37,37 +37,17 @@ class Map(SoundMaker):
 	def load_elements_from(self, map_name):
 		self.elements = []
 		elements = DataHandler().load_save()['maps'][map_name]['elements']
-		for el in elements:
-			match el['type']:
+		for element in elements:
+			match element['type']:
 
 				case 'MapElement':
-					self.elements.append(MapElement(
-						el['name'],
-						el['position'],
-						el['image_path'],
-						el['z_index']
-					)),
+					self.elements.append(MapElement(element)),
 	   
 				case 'MapObject':
-					self.elements.append(MapObject(
-						el['name'],
-						el['position'],
-						el['image_path'],
-						el['z_index'],
-						el['interaction'],
-						el['side_effects']
-					)),
+					self.elements.append(MapObject(element)),
 
 				case 'NPC':
-					self.elements.append(NPC(
-						el['name'],
-						el['pattern_timeline'],
-						el['position'],
-						el['image_path'],
-						el['z_index'],
-						el['interaction'],
-						el['side_effects']
-					))
+					self.elements.append(NPC(element))
 
 				case _:
 					raise NotImplementedError
