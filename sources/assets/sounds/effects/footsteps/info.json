@@ -1,15 +1,15 @@
 {
 	"sounds": {
-		"concrete": {
+		"walking_concrete": {
 			"extension": "opus"
 		},
-		"gravel": {
+		"walking_gravel": {
 			"extension": "opus"
 		},
-		"hallway": {
+		"walking_hallway": {
 			"extension": "opus"
 		},
-		"wooden": {
+		"walking_wooden": {
 			"extension": "opus"
 		}
 	}

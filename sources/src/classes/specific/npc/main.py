@@ -1,15 +1,15 @@
 from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera
 
 class NPC(MapObject):
-	def __init__(self, name: str, pattern_timeline: list, position: Vector2, image_path: str, z_index: int, interaction: str = None, side_effects: list = []):
-		MapObject.__init__(self, name, position, image_path, z_index, interaction, side_effects)
-		self.initial_position = Vector2(position.get_x(), position.get_y())
+	def __init__(self, data):
+		MapObject.__init__(self, data)
+		self.initial_position = Vector2(data['position'].get_x(), data['position'].get_y())
 
 		self.sprint = False
 		self.speed = 1.38  # m/s = 5 km/h
 		self.speed_vector = Vector2(0, 0)
   
-		self.pattern_timeline = pattern_timeline
+		self.pattern_timeline = data['pattern_timeline']
 		self.pattern = list(filter(lambda val: isinstance(val, Vector2), self.pattern_timeline))
 		self.following_pattern = True
 		self.pattern_index = 0
