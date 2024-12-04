@@ -10,6 +10,7 @@ def default(self):
 
 def test(self):
 	GameLoop().get_player().get_focus().get_position().set_all(-20, -20)
+	self.play_sound('nathan', 'goose')
 
 
 # Les évenements que les NPC ont avec le décor dans leur pattern timeline :

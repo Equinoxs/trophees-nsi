@@ -1,6 +1,6 @@
 import pygame.font
 
-from src.classes import Player, SoundMixer, DEBUG, LogHandler
+from src.classes import Player, SoundMixer, DEBUG, LogHandler, TimeHandler
 
 class Camera:
 	_instance = None
@@ -35,13 +35,19 @@ class Camera:
 	def update(self):
 		elements = Player().get_map().get_elements()
 		width, height = Player().get_focus().get_image().get_size()
+		screen_width, screen_height = self.screen.get_size()
+
 		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
 		# Remplir l'écran de noir
 		self.screen.fill((0,) * 3)
 		for element in elements:
 			element.render()
+		if not TimeHandler().is_running():
+			fg_surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
+			fg_surface.fill((0, 0, 0, 192))
+			self.screen.blit(fg_surface, (0, 0, screen_width, screen_height))
+
 		if DEBUG:
-			screen_width, screen_height = self.screen.get_size()
 
 			pygame.font.init()
 			font = pygame.font.Font(pygame.font.get_default_font(), 50)
@@ -68,4 +74,4 @@ class Camera:
 			for idx, text in enumerate(log):
 				text_surface = font.render(text, True, (0, 255, 0))
 				text_width, _ = text_surface.get_size()
-				self.screen.blit(text_surface, (screen_width-text_width, screen_height-15*(1+idx)))
+				self.screen.blit(text_surface, (screen_width-longest_text_width, screen_height-15*(1+idx)))

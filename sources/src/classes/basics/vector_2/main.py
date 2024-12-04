@@ -76,3 +76,6 @@ class Vector2:
 		if type(scalar) == float or type(scalar) == int:
 			return Vector2(scalar * self.x, scalar * self.y)
 		return NotImplemented
+
+	def __repr__(self):
+		return f"<Vector2({self.x}, {self.y})>"

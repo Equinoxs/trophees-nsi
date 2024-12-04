@@ -1,14 +1,16 @@
-from src.classes import MapElement, MapObject, Vector2, NPC, DataHandler
+from src.classes import MapElement, MapObject, Vector2, NPC, DataHandler, TimeHandler, SoundMaker
 
-class Map:
+class Map(SoundMaker):
 
 	def __init__(self, map_name: str):
+		SoundMaker.__init__(self, None)
 		self.elements = []
 		self.load_elements_from(map_name)
+		self.load_sound('music', map_name, loop=True, is_music=True, needs_playing=True, default_volume=0.3)
 
 	def sort_elements(self):
 		self.elements.sort(key=lambda x: (x.get_z_index(), x.get_position().get_y()))
- 
+
 	def search_by_name(self, npc_name: str):
 		for el in self.elements:
 			if isinstance(el, NPC) and el.name == npc_name:
@@ -16,9 +18,10 @@ class Map:
 		return None
 
 	def update(self):
+		running = TimeHandler().is_running()
 		self.sort_elements()
 		for element in self.elements:
-			element.update()
+			if running: element.update()
 
 	def add(self, element):
 		self.elements.append(element)

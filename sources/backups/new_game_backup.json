@@ -33,7 +33,7 @@
 				},
 				{
 					"type": "NPC",
-					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [300, 250], [300, -20]],
+					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [500, 250], [300, -20]],
 					"position": [50, 40],
 					"image_path": "nathan",
 					"z_index": 2,
@@ -42,7 +42,8 @@
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]
 				}
-			]
+			],
+			"music": "wstheme"
 		}
 	},
 	"keybinds": {

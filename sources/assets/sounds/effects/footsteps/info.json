@@ -1,0 +1,16 @@
+{
+	"sounds": {
+		"concrete": {
+			"extension": "opus"
+		},
+		"gravel": {
+			"extension": "opus"
+		},
+		"hallway": {
+			"extension": "opus"
+		},
+		"wooden": {
+			"extension": "opus"
+		}
+	}
+}

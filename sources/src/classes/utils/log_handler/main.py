@@ -15,7 +15,11 @@ class LogHandler:
             self.log = []
             self.length = 10
 
-    def add(self, log: str):
+    def add(self, *args):
+        log = ""
+        for idx, arg in enumerate(args):
+            log += str(arg)
+            if not idx == len(args)-1: log += " "
         if DEBUG:
             print(log)
         self.log.append(log)

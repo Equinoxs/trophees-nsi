@@ -14,7 +14,9 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 95
+			"height": 95,
+			"sound_type": "footsteps",
+			"sound_file": "hallway"
 		},
 		"walking_backward": {
 			"widths": [
@@ -24,7 +26,9 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 91
+			"height": 91,
+			"sound_type": "footsteps",
+			"sound_file": "gravel"
 		},
 		"walking": {
 			"widths": [
@@ -35,7 +39,8 @@
 				{ "width": 38, "time": 0.2 }
 			],
 			"height": 93,
-			"sound": "meow"
+			"sound_type": "footsteps",
+			"sound_file": "wooden"
 		}
 	},
 	"hitbox": [
