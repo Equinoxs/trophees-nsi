@@ -28,7 +28,7 @@
 					"image_path": "nathan",
 					"z_index": 2,
 					"interaction": "default",
-					"sound": "goose",
+					"authorized_sound_tracks": ["footsteps", "animals"],
 					"name": "nathan"
 				},
 				{
@@ -38,7 +38,7 @@
 					"image_path": "nathan",
 					"z_index": 2,
 					"interaction": "test",
-					"sound": "goose",
+					"authorized_sound_tracks": ["footsteps", "animals"],
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]
 				}
