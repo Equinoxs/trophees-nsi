@@ -6,18 +6,18 @@ DEBUG = True
 # afin que B soit complètement initialisé quand A importera B
 
 # Classes n'important personne
+from .utils.game_loop.main import GameLoop
+from .utils.log_handler.main import LogHandler
 from .basics.vector_2.main import Vector2
 from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
-# GameLoop importe Camera qui importe Player et SoundMixer
-from .utils.log_handler.main import LogHandler
-from .utils.sound_mixer.main import SoundMixer
-from .utils.camera.main import Camera
-from .utils.game_loop.main import GameLoop
-
 # DataHandler importe utils/interactions qui importe GameLoop
 from .utils.data_handler.main import DataHandler
+
+# Camera qui importe Player et SoundMixer
+from .utils.sound_mixer.main import SoundMixer
+from .utils.camera.main import Camera
 
 # ControlHandler import DataHandler
 from .utils.control_handler.main import ControlHandler

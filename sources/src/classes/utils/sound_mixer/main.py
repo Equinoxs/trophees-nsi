@@ -1,6 +1,6 @@
 from math import pi
 from pygame import mixer
-from src.classes import Vector2, LogHandler, Player, TimeHandler
+from src.classes import DataHandler, LogHandler, Player, TimeHandler
 
 
 class SoundMixer(object):
@@ -57,3 +57,8 @@ class SoundMixer(object):
 
 	def generate_debug_data(self):
 		return ['==== Channels info ===='] + ([sound_track.get_debug_string() for sound_track in self.sound_tracks if sound_track.get_debug_string() is not None] if len(self.sound_tracks) > 0 else ['No channel'])
+
+	def play_music(self, music_name):
+		mixer.music.load(DataHandler().load_music(music_name)[1])
+		mixer.music.set_volume(0.25)
+		mixer.music.play()

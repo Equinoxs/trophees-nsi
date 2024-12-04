@@ -42,8 +42,7 @@
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]
 				}
-			],
-			"music": "wstheme"
+			]
 		}
 	},
 	"keybinds": {

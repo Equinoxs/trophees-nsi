@@ -24,6 +24,7 @@ class DataHandler:
 		self.images_data = {}
 		self.sounds_data = {}
 
+
 	def get_data_from_last_save(self):
 		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
 		path = os.path.join(
@@ -58,17 +59,16 @@ class DataHandler:
 					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'])
 				else:
 					data['maps'][map]['elements'][element_index]['side_effects'] = []
-
-
+    
+				if 'authorized_sound_tracks' not in data['maps'][map]['elements'][element_index]:
+					data['maps'][map]['elements'][element_index]['authorized_sound_tracks'] = []
 		return data
-	
+
 	def load_save(self, force = False):
 		if self.current_save is None or force:
 			self.current_save = self.get_data_from_last_save()
 		return self.current_save
-	
-	def save(self, automatic = False):
-		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
+
 
 	def save_data(self, data, backup_path):
 		# Correction de la redondance du mot-clé 'path'
@@ -81,6 +81,10 @@ class DataHandler:
 		# Enregistrement des données dans le fichier JSON
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4)
+
+	def save(self, automatic = False):
+		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
+
 
 	def get_image_data(self, dir_name: str):
 		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', dir_name, 'image.png')
@@ -96,6 +100,7 @@ class DataHandler:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
 
+
 	def get_sound_track_data(self, dir_name: str):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
 		with open(json_path, 'r') as file:
@@ -107,8 +112,8 @@ class DataHandler:
 
 		return data, sound_paths
 
+
 	def load_sound(self, dir_name: str, sound_name: str, force = False):
-		if dir_name == 'music': return self.load_music(sound_name)
 		if dir_name not in self.sounds_data or force:
 			self.sounds_data[dir_name] = {}
 			self.sounds_data[dir_name][sound_name] = self.get_sound_data(dir_name, sound_name)
@@ -117,9 +122,7 @@ class DataHandler:
 
 		return self.sounds_data[dir_name][sound_name]
 
-	def load_music(self, map_name: str):
-		music_name = self.load_save()['maps'][map_name]['music']
-
+	def load_music(self, music_name: str):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/music/info.json')
 
 		with open(json_path, 'r') as file:
