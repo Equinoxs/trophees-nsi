@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Camera, DEBUG
+from src.classes import DEBUG
 
 
 class GameLoop:
@@ -12,7 +12,7 @@ class GameLoop:
 			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self, control_handler = None, time_handler = None, save_handler = None, player = None, sound_mixer = None):
+	def __init__(self, control_handler = None, time_handler = None, save_handler = None, player = None, sound_mixer = None, camera = None):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
 			pygame.init()
@@ -23,7 +23,7 @@ class GameLoop:
 			self.save_handler = save_handler
 			self.saved_data = self.save_handler.load_save()
 			self.player = player
-			self.camera = Camera(self.screen)
+			self.camera = camera
 			self.control_handler = control_handler
 			self.sound_mixer = sound_mixer
 			self.paused = False
