@@ -13,36 +13,31 @@ class Animatable:
 		self.animation_name = 'inactive'
 		self.animation_sound_data = self.animation_sound_path = None
 		if self.animation_name not in self.animations: return
-		self.update_sound()
+		if 'sound_type' in self.animations[self.animation_name]:
+			LogHandler().add(f'{self.name} * Loading sound: {self.animations[self.animation_name]["sound"]}')
+			self.load_sound(self.animations[self.animation_name]['sound_type'], self.animations[self.animation_name]['sound_file'], loop=self.infinite, needs_playing=True)
 
 	def change_animation(self, animation_name):
 		if self.animation_name == animation_name: return
-		LogHandler().add(f'{self.name} * Changing animation: {self.animation_name} -> {animation_name}')
-		self.animation_name = animation_name
-		if self.animation_sound_data is not None:
-			LogHandler().add(f'{self.name} * Stopping sound: {self.animation_sound_path.split("/")[-1]}')
-			self.stop_sound(self.animation_sound_path)
-			self.remove_sound(self.animation_sound_path)
-		self.update_sound()
-		if self.animation_sound_data is not None and not self.get_busy(self.animation_sound_path):
-			LogHandler().add(f'{self.name} * Playing sound: {self.animation_sound_path.split("/")[-1]}')
-			self.play_sound(self.animation_sound_path)
 
-	def update_sound(self):
-		self.animation_sound_data, self.animation_sound_path = None, None
-		if "sound" in self.animations[self.animation_name]:
-			self.animation_sound_data, self.animation_sound_path = DataHandler().load_sound(self.image_path, self.animations[self.animation_name]["sound"])
-			LogHandler().add(f'{self.name} * Loading sound: {self.animation_sound_path.split("/")[-1]}')
-			self.load_sound(self.animation_sound_path, loop=self.infinite)
+		LogHandler().add(f'{self.name} * Changing animation: {self.animation_name} -> {animation_name}')
+
+		previous_sound_type = self.animations[self.animation_name]['sound_type'] if 'sound_type' in self.animations[self.animation_name] else None
+		self.animation_name = animation_name
+		if 'sound_type' in self.animations[self.animation_name]: # besoin de changer le son
+			LogHandler().add(f'{self.name} * Changing sound: {self.animations[self.animation_name]["sound_file"]}')
+			self.change_sound(self.animations[self.animation_name]['sound_type'], self.animations[self.animation_name]['sound_file'], needs_playing=True)
+		else: # pas de son dans la nouvelle animation
+			self.stop_sound(previous_sound_type)
+			self.remove_sound(previous_sound_type)
 
 	def stop_animation(self):
 		self.running = False
-		if self.animation_sound_data is not None:
-			self.stop_sound(self.animation_sound_path)
+		if 'sound_type' in self.animations[self.animation_name]:
+			self.stop_sound(self.animations[self.animation_name]['sound_type'])
 
 	def resume_animation(self):
 		self.running = True
-
 
 	def reset_animation_state(self):
 		self.frame_index = 0

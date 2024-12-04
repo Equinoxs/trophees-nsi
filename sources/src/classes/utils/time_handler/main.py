@@ -12,7 +12,7 @@ class TimeHandler:
 			self._initialized = True  # Empêche une nouvelle initialisation
 			self.clock = None
 			self.dt = 0  # Temps écoulé depuis le dernier rafraîchissement en seconde
-			self.coeff = 1  # Un coeff de 2 fait écouler le temps 2 fois plus vite
+			self.coeff = 1  # Un coeff de 2 fait écouler le temps 2 fois plus lentement
 			self.running = True
 			self.chrono_tags = {}
 

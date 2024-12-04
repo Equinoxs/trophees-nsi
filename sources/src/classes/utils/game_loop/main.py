@@ -26,6 +26,7 @@ class GameLoop:
 			self.camera = Camera(self.screen)
 			self.control_handler = control_handler
 			self.sound_mixer = sound_mixer
+			self.paused = False
 
 			while self.running:
 				self.update()
@@ -44,9 +45,21 @@ class GameLoop:
 		if self.control_handler.is_activated('quit'):
 			self.running = False
 
-		if DEBUG and self.control_handler.is_activated('debug_pause'):
+		if self.control_handler.is_activated('pause'):
+			if self.time_handler.is_running(): self.time_handler.stop()
+			self.paused = not self.paused
+			self.control_handler.finish_event('pause')
+			self.camera.update()
 			return
 
 		self.time_handler.update()
+		self.sound_mixer.update()
+
+		if self.paused or (DEBUG and self.control_handler.is_activated('debug_pause')):
+			if self.time_handler.is_running(): self.time_handler.stop()
+			return
+
+		if not self.time_handler.is_running(): self.time_handler.resume()
+
 		self.player.update()
 		self.camera.update()

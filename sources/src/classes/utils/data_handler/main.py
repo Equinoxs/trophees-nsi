@@ -96,24 +96,36 @@ class DataHandler:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
 
-	def get_sound_data(self, dir_name: str, snd_name: str):
+	def get_sound_data(self, dir_name: str, sound_name: str):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
 		with open(json_path, 'r') as file:
 			data = json.load(file)
-		if not snd_name in data['sounds']: return None
+		if not sound_name in data['sounds']: return None
 
-		snd_path = json_path = os.path.join('/'.join(json_path.split('/')[0:-1]), snd_name + '.' + data['sounds'][snd_name]['extension'])
+		sound_path = os.path.join('/'.join(json_path.split('/')[0:-1]), sound_name + '.' + data['sounds'][sound_name]['extension'])
 
-		return data, snd_path
+		return data, sound_path
 
-	def load_sound(self, dir_name: str, snd_name: str, force = False):
+	def load_sound(self, dir_name: str, sound_name: str, force = False):
+		if dir_name == 'music': return self.load_music(sound_name)
 		if dir_name not in self.sounds_data or force:
 			self.sounds_data[dir_name] = {}
-			self.sounds_data[dir_name][snd_name] = self.get_sound_data(dir_name, snd_name)
-		elif snd_name not in self.sounds_data[dir_name] or force:
-			self.sounds_data[dir_name][snd_name] = self.get_sound_data(dir_name, snd_name)
+			self.sounds_data[dir_name][sound_name] = self.get_sound_data(dir_name, sound_name)
+		elif sound_name not in self.sounds_data[dir_name] or force:
+			self.sounds_data[dir_name][sound_name] = self.get_sound_data(dir_name, sound_name)
 
-		return self.sounds_data[dir_name][snd_name]
+		return self.sounds_data[dir_name][sound_name]
+
+	def load_music(self, map_name: str):
+		music_name = self.load_save()['maps'][map_name]['music']
+
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/music/info.json')
+
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+		if not music_name in data['sounds']: return None
+
+		return data, os.path.join('/'.join(json_path.split('/')[0:-1]), music_name + '.' + data['sounds'][music_name]['extension'])
 
 	def get_interaction(self, interaction_name: str = 'default'):
 		if interaction_name == '':
