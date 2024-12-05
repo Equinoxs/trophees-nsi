@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Vector2, SoundMixer
+from src.classes import Vector2, SoundMixer, TimeHandler
 
 
 class SoundTrack:
@@ -34,11 +34,13 @@ class SoundTrack:
 
 	def pause(self):
 		self.paused = True
-		self.stop()
+		if self.channel is not None and self.get_busy():
+			self.channel.pause()
 
 	def unpause(self):
 		self.paused = False
-		self.play()
+		if self.channel is not None and self.get_busy():
+			self.channel.unpause()
 
 	def set_volume(self, volume: float):
 		return self.channel.set_volume(volume)

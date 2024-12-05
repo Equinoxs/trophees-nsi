@@ -2,7 +2,7 @@ import json
 import os
 
 from src.classes import Vector2
-from src.utils import interactions
+from src.classes import interactions, pattern_events, side_effects
 
 
 class DataHandler:
@@ -46,17 +46,15 @@ class DataHandler:
 				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
 
 				if 'pattern_timeline' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'])
+					data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'], self.get_pattern_event)
 				else:
 					data['maps'][map]['elements'][element_index]['pattern_timeline'] = []
 
 				if 'interaction' in data['maps'][map]['elements'][element_index]:
 					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
-				else:
-					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction('default')
 
 				if 'side_effects' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'])
+					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'], self.get_side_effect)
 				else:
 					data['maps'][map]['elements'][element_index]['side_effects'] = []
     
@@ -131,10 +129,26 @@ class DataHandler:
 
 		return data, os.path.join('/'.join(json_path.split('/')[0:-1]), music_name + '.' + data['sounds'][music_name]['extension'])
 
-	def get_interaction(self, interaction_name: str = 'default'):
-		if interaction_name == '':
-			interaction_name = 'default'
+	def get_interaction(self, interaction_name: str = None):
+		if interaction_name == '' or interaction_name is None or interaction_name not in interactions:
+			def default(self):
+				return
+			return default
 		return interactions.get(interaction_name)
+
+	def get_side_effect(self, side_effect_name: str = None):
+		if side_effect_name == '' or side_effect_name is None or side_effect_name not in side_effects:
+			def default(self):
+				return
+			return default
+		return side_effects.get(side_effect_name)
+
+	def get_pattern_event(self, pattern_event_name: str = None):
+		if pattern_event_name == '' or pattern_event_name is None or pattern_event_name not in pattern_events:
+			def default(self, delta_time):
+				return
+			return default
+		return pattern_events.get(pattern_event_name)
 
 	def list_to_vector2(self, list2: list):
 		if type(list2) == list and len(list2) == 2:
@@ -142,14 +156,13 @@ class DataHandler:
 		else:
 			raise AttributeError
 
-	def list_transform(self, list2: list):
+	def list_transform(self, list2: list, function_collecting_metohd):
 		new_list = []
 		for el in list2:
 			if type(el) == list:
 				new_list.append(Vector2(el[0], el[1]))
 			elif type(el) == str:
-				new_list.append(self.get_interaction(el))
+				new_list.append(function_collecting_metohd(el))
 			else:
 				raise ValueError
 		return new_list
-
