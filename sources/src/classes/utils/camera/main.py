@@ -1,6 +1,7 @@
 import pygame.font
 
-from src.classes import Player, SoundMixer, DEBUG, LogHandler, TimeHandler
+from src.classes import Player, DEBUG, LogHandler, TimeHandler, SoundMixer
+
 
 class Camera:
 	_instance = None
@@ -48,30 +49,4 @@ class Camera:
 			self.screen.blit(fg_surface, (0, 0, screen_width, screen_height))
 
 		if DEBUG:
-
-			pygame.font.init()
-			font = pygame.font.Font(pygame.font.get_default_font(), 50)
-			# Texte DEBUG
-			text_surface = font.render("DEBUG", True, (255, 0, 0))
-			text_width, _ = text_surface.get_size()
-			self.screen.blit(text_surface, (screen_width - text_width, 0))
-
-			font = pygame.font.Font(pygame.font.get_default_font(), 15)
-
-			# Infos Channels
-			for idx, text in enumerate(SoundMixer().generate_debug_data()):
-				self.screen.blit(font.render(text, True, (255, 0, 0)), (0, 15*idx))
-
-			# Log
-			log = LogHandler().get_log()[::-1]
-			longest_text_surface = font.render(max(log, key=len), False, (0, 0, 0))
-			longest_text_width, _ = longest_text_surface.get_size()
-			del longest_text_surface
-			bg_surface = pygame.Surface(pygame.Rect(screen_width-longest_text_width, screen_height-len(log)*15, screen_width, screen_height).size, pygame.SRCALPHA)
-			bg_surface.fill((0, 0, 0, 192))
-			self.screen.blit(bg_surface, (screen_width-longest_text_width, screen_height-len(log)*15))
-
-			for idx, text in enumerate(log):
-				text_surface = font.render(text, True, (0, 255, 0))
-				text_width, _ = text_surface.get_size()
-				self.screen.blit(text_surface, (screen_width-longest_text_width, screen_height-15*(1+idx)))
+			LogHandler().render(self.screen, SoundMixer())

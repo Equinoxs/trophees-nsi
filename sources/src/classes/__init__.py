@@ -13,9 +13,15 @@ from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
 # DataHandler importe utils/interactions qui importe GameLoop
+from .basics.interactable.data_functions import interactions
+from .specific.npc.data_functions import pattern_events
+from .basics.side_effects_manager.data_functions import side_effects
 from .utils.data_handler.main import DataHandler
 
-# Camera qui importe Player et SoundMixer
+# Camera importe Player et SoundMixer
+from .utils.data_handler.main import DataHandler
+
+# Camera importe Player et SoundMixer
 from .utils.sound_mixer.main import SoundMixer
 from .utils.camera.main import Camera
 

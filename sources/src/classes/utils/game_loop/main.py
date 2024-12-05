@@ -26,6 +26,7 @@ class GameLoop:
 			self.camera = camera
 			self.control_handler = control_handler
 			self.sound_mixer = sound_mixer
+			self.can_pause = True
 			self.paused = False
 
 			while self.running:
@@ -40,17 +41,29 @@ class GameLoop:
 	def get_camera(self):
 		return self.camera
 
+	def get_control_handler(self):
+		return self.control_handler
+
+	def get_sound_mixer(self):
+		return self.sound_mixer
+
+	def get_time_handler(self):
+		return self.time_handler
+
 	def update(self):
 		self.control_handler.handle_events(pygame)
 		if self.control_handler.is_activated('quit'):
 			self.running = False
 
 		if self.control_handler.is_activated('pause'):
-			if self.time_handler.is_running(): self.time_handler.stop()
-			self.paused = not self.paused
+			if self.can_pause:
+				self.paused = True
+				self.can_pause = not self.paused
 			self.control_handler.finish_event('pause')
 			self.camera.update()
 			return
+		else:
+			self.can_pause = True
 
 		self.time_handler.update()
 		self.sound_mixer.update()
