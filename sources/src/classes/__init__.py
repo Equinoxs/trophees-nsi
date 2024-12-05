@@ -12,10 +12,15 @@ from .basics.vector_2.main import Vector2
 from .utils.time_handler.main import TimeHandler
 from .utils.player.main import Player
 
+# MissionHandler importe Mission
+from .basics.mission.main import Mission
+from .utils.mission_handler.main import MissionHandler
+
 # DataHandler importe utils/interactions qui importe GameLoop
 from .basics.interactable.data_functions import interactions
 from .specific.npc.data_functions import pattern_events
 from .basics.side_effects_manager.data_functions import side_effects
+from .basics.mission.data_functions import missions
 from .utils.data_handler.main import DataHandler
 
 # Camera importe Player et SoundMixer
