@@ -1,7 +1,9 @@
 {
 	"player": {
 		"current_npc_name": "nathan",
-		"current_map_name": "test"
+		"current_map_name": "test",
+		"level": 1,
+		"accomplished_missions": []
 	},
 	"maps": {
 		"test": {
@@ -37,7 +39,7 @@
 					"position": [50, 40],
 					"image_path": "nathan",
 					"z_index": 2,
-					"interaction": "test",
+					"interaction": "start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "animals"],
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]

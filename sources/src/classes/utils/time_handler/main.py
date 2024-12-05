@@ -30,11 +30,12 @@ class TimeHandler:
 	def set_clock(self, pygame_clock):
 		self.clock = pygame_clock
 
-	def update(self):
+	def update(self, paused: bool = False):
 		if self.clock:
 			self.dt = self.clock.tick() / 1000 / self.coeff
-		for key in self.chrono_tags:
-			self.chrono_tags[key] += self.dt
+		if not paused:
+			for key in self.chrono_tags:
+				self.chrono_tags[key] += self.dt
 
 	def set_coeff(self, coeff):
 		if coeff > 0:  # S'assurer que le coefficient est positif

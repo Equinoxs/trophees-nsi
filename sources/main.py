@@ -1,7 +1,7 @@
 # Point d'entrée du jeu
 
 import pygame
-from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera
+from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler
 
 
 def main():
@@ -13,9 +13,10 @@ def main():
 	time_handler = TimeHandler()
 	save_handler = DataHandler()
 	saved_data = save_handler.load_save()
-	player = Player(Map(saved_data["player"]["current_map_name"]), saved_data['player']['current_npc_name'])
+	player = Player(Map(saved_data["player"]["current_map_name"]), saved_data['player'])
 	camera = Camera(screen)
-	game_loop = GameLoop(control_handler, time_handler, save_handler, player, sound_mixer, camera)
+	mission_handler = MissionHandler(DataHandler().load_missions())
+	game_loop = GameLoop(control_handler, time_handler, save_handler, player, sound_mixer, camera, mission_handler)
 	return 0
 
 

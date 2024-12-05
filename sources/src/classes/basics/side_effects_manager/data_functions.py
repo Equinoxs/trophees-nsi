@@ -3,6 +3,8 @@ from src.classes import GameLoop, TimeHandler
 # Cet effet fait disparaître le pnj pendant 3 secondes si le joueur s'approche trop près
 # Une fois le pnj réapparu au bout des 3 secondes, il ne peut plus redisparaître
 def npc_side_effect_test(self):
+	if GameLoop().get_player().get_focus() == self:
+		return  # On ne veut pas que cet effet s'applique si on est le focus du Player
 	time = TimeHandler().add_chrono_tag('first_side_effect')
 	effect_made = self.side_effect_data('data_test')
  

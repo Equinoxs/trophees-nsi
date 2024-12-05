@@ -1,8 +1,8 @@
 import json
 import os
 
-from src.classes import Vector2
-from src.classes import interactions, pattern_events, side_effects
+from src.classes import Vector2, MissionHandler
+from src.classes import interactions, pattern_events, side_effects, missions
 
 
 class DataHandler:
@@ -23,6 +23,7 @@ class DataHandler:
 		)
 		self.images_data = {}
 		self.sounds_data = {}
+		self.missions_data = None
 
 
 	def get_data_from_last_save(self):
@@ -57,7 +58,7 @@ class DataHandler:
 					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'], self.get_side_effect)
 				else:
 					data['maps'][map]['elements'][element_index]['side_effects'] = []
-    
+
 				if 'authorized_sound_tracks' not in data['maps'][map]['elements'][element_index]:
 					data['maps'][map]['elements'][element_index]['authorized_sound_tracks'] = []
 		return data
@@ -129,7 +130,24 @@ class DataHandler:
 
 		return data, os.path.join('/'.join(json_path.split('/')[0:-1]), music_name + '.' + data['sounds'][music_name]['extension'])
 
+	def get_missions_data(self):
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../mission_handler/missions.json')
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+		for mission in data['missions']:
+			data['missions'][mission]['objectives'] = missions[mission]
+		return data['missions']
+
+	def load_missions(self, force: bool = False):
+		if self.missions_data is None or force:
+			self.missions_data = self.get_missions_data()
+		return self.missions_data
+			
 	def get_interaction(self, interaction_name: str = None):
+		if len(interaction_name) >= 7 and interaction_name[:7] == 'start_' and interaction_name[7:] in missions:
+			def start_new_mission(self):
+				MissionHandler().start_mission(interaction_name[7:])
+			return start_new_mission
 		if interaction_name == '' or interaction_name is None or interaction_name not in interactions:
 			def default(self):
 				return

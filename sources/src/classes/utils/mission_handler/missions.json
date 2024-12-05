@@ -1,0 +1,9 @@
+{
+	"missions": {
+		"mission_test": {
+			"required_level": 1,
+			"description": "The first Avenger: McGuire",
+			"rewards": 0.5
+		}
+	}
+}

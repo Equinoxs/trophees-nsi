@@ -6,6 +6,7 @@ class NPC(MapObject):
 		self.initial_position = Vector2(data['position'].get_x(), data['position'].get_y())
 
 		self.sprint = False
+		self.is_player = False
 		self.speed = 1.38  # m/s = 5 km/h
 		self.speed_vector = Vector2(0, 0)
   
@@ -58,6 +59,9 @@ class NPC(MapObject):
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
+
+	def set_is_player(self, new_state: bool):
+		self.is_player = new_state
 
 	def stop_moving(self):
 		self.speed_vector.set_all(0, 0)
@@ -149,7 +153,10 @@ class NPC(MapObject):
 
 	def update(self):
 		MapObject.update(self)
-		self.update_pattern()
+		if self.is_player:
+			self.update_player()
+		else:
+			self.update_pattern()
 		self.handle_animation()
 
 	def render(self):

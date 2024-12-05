@@ -12,7 +12,7 @@ class GameLoop:
 			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self, control_handler = None, time_handler = None, save_handler = None, player = None, sound_mixer = None, camera = None):
+	def __init__(self, control_handler = None, time_handler = None, save_handler = None, player = None, sound_mixer = None, camera = None, mission_handler = None):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
 			pygame.init()
@@ -26,6 +26,7 @@ class GameLoop:
 			self.camera = camera
 			self.control_handler = control_handler
 			self.sound_mixer = sound_mixer
+			self.mission_handler = mission_handler
 			self.can_pause = True
 			self.paused = False
 
@@ -65,14 +66,19 @@ class GameLoop:
 		else:
 			self.can_pause = True
 
-		self.time_handler.update()
+		self.time_handler.update(self.paused)
 		self.sound_mixer.update()
 
+		if not self.paused:
+			self.mission_handler.update()
+
 		if self.paused or (DEBUG and self.control_handler.is_activated('debug_pause')):
-			if self.time_handler.is_running(): self.time_handler.stop()
+			if self.time_handler.is_running():
+				self.time_handler.stop()
 			return
 
-		if not self.time_handler.is_running(): self.time_handler.resume()
+		if not self.time_handler.is_running():
+			self.time_handler.resume()
 
 		self.player.update()
 		self.camera.update()
