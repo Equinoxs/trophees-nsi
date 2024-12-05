@@ -9,21 +9,13 @@ class ControlHandler:
 		return cls._instance
 
 	def __init__(self):
-		if not hasattr(self, "_initialized"):
+		if not hasattr(self, '_initialized'):
 			self._initialized = True
-			self.events = {
-				'pause': False,
-				'quit': False,
-				'interacted': False,
-				'go_forward': False,
-				'go_backward': False,
-				'go_right': False,
-				'go_left': False,
-				'sprint': False,
-				'debug_pause': False
-			}
 			save = DataHandler().load_save()
-			self.keybinds = save["keybinds"]
+			self.events = { 'quit': False }
+			self.keybinds = save['keybinds']
+			for action in self.keybinds:
+				self.events[action] = False
 
 	def handle_events(self, pygame):
 		for event in pygame.event.get():
