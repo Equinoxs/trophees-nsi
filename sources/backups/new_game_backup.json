@@ -30,7 +30,7 @@
 					"image_path": "nathan",
 					"z_index": 2,
 					"interaction": "default",
-					"authorized_sound_tracks": ["footsteps", "animals"],
+					"authorized_sound_tracks": ["footsteps"],
 					"name": "nathan"
 				},
 				{
@@ -40,7 +40,7 @@
 					"image_path": "nathan",
 					"z_index": 2,
 					"interaction": "start_mission_test",
-					"authorized_sound_tracks": ["footsteps", "animals"],
+					"authorized_sound_tracks": ["footsteps"],
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]
 				}
@@ -54,7 +54,6 @@
 		"go_backward": 115,
 		"go_right": 100,
 		"go_left": 113,
-		"sprint": 1073742049,
-		"debug_pause": 106
+		"sprint": 1073742049
 	}
 }

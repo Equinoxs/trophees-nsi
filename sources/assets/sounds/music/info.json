@@ -2,6 +2,33 @@
 	"sounds": {
 		"wstheme": {
 			"extension": "opus"
+		},
+		"8-bit": {
+			"extension": "mp3"
+		},
+		"80s": {
+			"extension": "mp3"
+		},
+		"cherry": {
+			"extension": "mp3"
+		},
+		"easy-way": {
+			"extension": "mp3"
+		},
+		"funky-electro": {
+			"extension": "mp3"
+		},
+		"funny-bgm": {
+			"extension": "mp3"
+		},
+		"lasers": {
+			"extension": "mp3"
+		},
+		"strangerthanks": {
+			"extension": "mp3"
+		},
+		"tryhard": {
+			"extension": "mp3"
 		}
 	}
 }

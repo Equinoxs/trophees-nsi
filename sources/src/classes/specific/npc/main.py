@@ -62,6 +62,10 @@ class NPC(MapObject):
 
 	def set_is_player(self, new_state: bool):
 		self.is_player = new_state
+		if new_state == True:
+			self.gimme_all_sound_tracks()
+		else:
+			self.dont_gimme_all_sound_tracks()
 
 	def stop_moving(self):
 		self.speed_vector.set_all(0, 0)
@@ -153,11 +157,11 @@ class NPC(MapObject):
 
 	def update(self):
 		MapObject.update(self)
+		self.handle_animation()
 		if self.is_player:
 			self.update_player()
 		else:
 			self.update_pattern()
-		self.handle_animation()
 
 	def render(self):
 		width, height = self.image.get_size()

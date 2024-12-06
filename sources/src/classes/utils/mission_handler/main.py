@@ -1,4 +1,4 @@
-from src.classes import Mission, Player
+from src.classes import Mission, Player, LogHandler
 
 
 class MissionHandler:
@@ -20,13 +20,23 @@ class MissionHandler:
 
 	def initialize_missions(self):
 		for name, data in self.missions_data.items():
-			self.missions[name] = Mission(data)
+			self.missions[name] = Mission(data, name)
 
 	def start_mission(self, mission_name: str):
-		self.missions[mission_name].start()
+		if mission_name in self.missions and self.current_mission is None and mission_name not in Player().get_accomplished_missions():
+			self.current_mission = self.missions[mission_name]
+			self.current_mission.start()
+			LogHandler().add(f'{Player().get_focus().get_name()} * start mission {self.current_mission.get_name()}')
 
 	def update(self):
 		if self.current_mission is not None:
-			if not self.current_mission.update():
+			indicator = self.current_mission.update()
+			if indicator == 1:
+				LogHandler().add(f'{Player().get_focus().get_name()} * accomplish mission {self.current_mission.get_name()}')
 				Player().add_accomplished_mission(self.current_mission)
 				self.current_mission = None  # La mission est terminée
+			elif indicator == -1:
+				LogHandler().add(f'{Player().get_focus().get_name()} * fail mission {self.current_mission.get_name()}')
+				self.current_mission = None  # La mission est échouée
+			elif indicator == 0:
+				return  # la missions continue, le state n'a pas besoin d'être changé

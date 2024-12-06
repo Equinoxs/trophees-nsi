@@ -111,6 +111,15 @@ class DataHandler:
 
 		return data, sound_paths
 
+	def get_all_sound_tracks_data(self):
+		data = {}
+		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects/')
+		for dir_name in os.listdir(path):
+			full_path = os.path.join(path, dir_name)
+			if os.path.isdir(full_path):
+				data[dir_name] = self.get_sound_track_data(dir_name)[1]
+		return data
+
 
 	def load_sound(self, dir_name: str, sound_name: str, force = False):
 		if dir_name not in self.sounds_data or force:
@@ -142,11 +151,11 @@ class DataHandler:
 		if self.missions_data is None or force:
 			self.missions_data = self.get_missions_data()
 		return self.missions_data
-			
+
 	def get_interaction(self, interaction_name: str = None):
-		if len(interaction_name) >= 7 and interaction_name[:7] == 'start_' and interaction_name[7:] in missions:
+		if len(interaction_name) > 6 and interaction_name[:6] == 'start_' and interaction_name[6:] in missions:
 			def start_new_mission(self):
-				MissionHandler().start_mission(interaction_name[7:])
+				MissionHandler().start_mission(interaction_name[6:])
 			return start_new_mission
 		if interaction_name == '' or interaction_name is None or interaction_name not in interactions:
 			def default(self):

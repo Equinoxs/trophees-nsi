@@ -1,7 +1,5 @@
 import pygame
 
-from src.classes import DEBUG
-
 
 class GameLoop:
 	_instance = None
@@ -51,6 +49,9 @@ class GameLoop:
 	def get_time_handler(self):
 		return self.time_handler
 
+	def is_game_paused(self):
+		return self.paused
+
 	def update(self):
 		self.control_handler.handle_events(pygame)
 		if self.control_handler.is_activated('quit'):
@@ -58,27 +59,18 @@ class GameLoop:
 
 		if self.control_handler.is_activated('pause'):
 			if self.can_pause:
-				self.paused = True
-				self.can_pause = not self.paused
+				self.paused = not self.paused
+				self.can_pause = False
 			self.control_handler.finish_event('pause')
 			self.camera.update()
 			return
 		else:
 			self.can_pause = True
 
+		# Updates
 		self.time_handler.update(self.paused)
 		self.sound_mixer.update()
-
+		self.player.update()
 		if not self.paused:
 			self.mission_handler.update()
-
-		if self.paused or (DEBUG and self.control_handler.is_activated('debug_pause')):
-			if self.time_handler.is_running():
-				self.time_handler.stop()
-			return
-
-		if not self.time_handler.is_running():
-			self.time_handler.resume()
-
-		self.player.update()
 		self.camera.update()
