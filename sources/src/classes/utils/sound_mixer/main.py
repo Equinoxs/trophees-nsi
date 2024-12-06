@@ -1,6 +1,6 @@
 from math import pi
 from pygame import mixer
-from src.classes import DataHandler, LogHandler, Player, TimeHandler
+from src.classes import DataHandler, LogHandler, Player, GameLoop
 
 
 class SoundMixer(object):
@@ -18,6 +18,7 @@ class SoundMixer(object):
 			mixer.init()
 			self.sound_tracks = []
 			self.channels = []
+			self.musics_historic = []
 
 	def add_sound_track(self, sound_track):
 		self.sound_tracks.append(sound_track)
@@ -28,7 +29,7 @@ class SoundMixer(object):
 	def update(self):
 		player_position = Player().get_focus().get_position()
 		for sound_track in self.sound_tracks:
-			if not TimeHandler().is_running():
+			if GameLoop().is_game_paused():
 				sound_track.pause()
 			elif sound_track.get_paused():
 				sound_track.unpause()
@@ -59,6 +60,11 @@ class SoundMixer(object):
 		return ['==== Channels info ===='] + ([sound_track.get_debug_string() for sound_track in self.sound_tracks if sound_track.get_debug_string() is not None] if len(self.sound_tracks) > 0 else ['No channel'])
 
 	def play_music(self, music_name):
+		self.musics_historic.append(music_name)
 		mixer.music.load(DataHandler().load_music(music_name)[1])
 		mixer.music.set_volume(0.25)
 		mixer.music.play()
+
+	def play_music_prev(self):
+		if len(self.musics_historic) >= 2:
+			self.play_music(self.musics_historic[-2])

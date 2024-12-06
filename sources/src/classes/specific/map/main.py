@@ -1,4 +1,4 @@
-from src.classes import MapElement, MapObject, NPC, DataHandler, TimeHandler, SoundMixer
+from src.classes import MapElement, MapObject, NPC, DataHandler, GameLoop, SoundMixer
 
 class Map:
 
@@ -17,9 +17,9 @@ class Map:
 		return None
 
 	def update(self):
-		running = TimeHandler().is_running()
+		paused = GameLoop().is_game_paused()
 		self.sort_elements()
-		if running:
+		if not paused:
 			for element in self.elements:
 				element.update()
 

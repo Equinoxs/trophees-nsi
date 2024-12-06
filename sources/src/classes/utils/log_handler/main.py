@@ -22,7 +22,8 @@ class LogHandler:
 		log = ""
 		for idx, arg in enumerate(args):
 			log += str(arg)
-			if not idx == len(args)-1: log += " "
+			if idx != len(args) - 1:
+				log += " "
 		if DEBUG:
 			print(log)
 		self.log.append(log)
