@@ -1,0 +1,40 @@
+{
+    "buttons": [
+      {
+        "type": "button",
+        "label": "I I",
+        "x": 1205,
+        "y": 15,
+        "width": 60,
+        "height": 50,
+        "color": [145, 77, 17],
+        "text_color": [255, 255, 255],
+        "font_size": 60,
+        "action": "pause_game"
+      },
+      {
+        "type": "button",
+        "label": "Unpause",
+        "x": 540,
+        "y": 300,
+        "width": 200,
+        "height": 50,
+        "color": [0, 128, 255],
+        "text_color": [255, 255, 255],
+        "font_size": 36,
+        "action": "unpause_game"
+      },
+      {
+        "type": "button",
+        "label": "Quit",
+        "x": 540,
+        "y": 400,
+        "width": 200,
+        "height": 50,
+        "color": [255, 0, 0],
+        "text_color": [255, 255, 255],
+        "font_size": 36,
+        "action": "quit_game"
+      }
+    ]
+  }

@@ -2,7 +2,6 @@ import pygame.font
 
 from src.classes import Player, DEBUG, LogHandler, TimeHandler, SoundMixer
 
-
 class Camera:
 	_instance = None
 
@@ -33,20 +32,18 @@ class Camera:
 	def get_camera(self):
 		return self.camera
 
-	def update(self):
-		elements = Player().get_map().get_elements()
-		width, height = Player().get_focus().get_image().get_size()
-		screen_width, screen_height = self.screen.get_size()
+def update(self):
+    from src.classes.specific.menu.main import MenuHandler  # Import local
 
-		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
-		# Remplir l'écran de noir
-		self.screen.fill((0,) * 3)
-		for element in elements:
-			element.render()
-		if not TimeHandler().is_running():
-			fg_surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
-			fg_surface.fill((0, 0, 0, 192))
-			self.screen.blit(fg_surface, (0, 0, screen_width, screen_height))
+    elements = Player().get_map().get_elements()
+    width, height = Player().get_focus().get_image().get_size()
+    screen_width, screen_height = self.screen.get_size()
 
-		if DEBUG:
-			LogHandler().render(self.screen, SoundMixer())
+    self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
+    self.screen.fill((0,) * 3)  # Fill screen with black
+
+    for element in elements:
+        element.render()
+
+    # Render active menu
+    MenuHandler().render(self.screen)
