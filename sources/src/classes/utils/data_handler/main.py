@@ -24,6 +24,7 @@ class DataHandler:
 		self.images_data = {}
 		self.sounds_data = {}
 		self.missions_data = None
+		self.ui_elements_data = {}
 
 
 	def get_data_from_last_save(self):
@@ -193,3 +194,14 @@ class DataHandler:
 			else:
 				raise ValueError
 		return new_list
+
+	def get_ui_elements_data(self):
+		"""
+		Charge les données du fichier JSON contenant les éléments UI.
+        """
+		json_path = r'../ui_element/data.json'
+
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+
+		return data["buttons"]
