@@ -1,0 +1,10 @@
+{
+	"sounds": {
+		"hit-door": {
+			"extension": "mp3"
+		},
+		"typewriter": {
+			"extension": "mp3"
+		}
+	}
+}

@@ -33,7 +33,7 @@ class LogHandler:
 
 	def get_log(self):
 		return ['==== Log ===='] + self.log[-self.length:]
-  
+
 	def render(self, screen, sound_mixer):
 		screen_width, screen_height = screen.get_size()
 		pygame.font.init()

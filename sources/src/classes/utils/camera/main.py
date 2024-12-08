@@ -1,6 +1,4 @@
-import pygame.font
-
-from src.classes import Player, DEBUG, LogHandler, TimeHandler, SoundMixer
+from src.classes import Player, MenuHandler, LogHandler, SoundMixer
 
 class Camera:
 	_instance = None
@@ -32,18 +30,12 @@ class Camera:
 	def get_camera(self):
 		return self.camera
 
-def update(self):
-    from src.classes.specific.menu.main import MenuHandler  # Import local
+	def update(self):
+		_, height = Player().get_focus().get_image().get_size()
+		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
+		self.screen.fill((0,) * 3)  # Couleur de fond = noir
 
-    elements = Player().get_map().get_elements()
-    width, height = Player().get_focus().get_image().get_size()
-    screen_width, screen_height = self.screen.get_size()
-
-    self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
-    self.screen.fill((0,) * 3)  # Fill screen with black
-
-    for element in elements:
-        element.render()
-
-    # Render active menu
-    MenuHandler().render(self.screen)
+		for element in Player().get_map().get_elements():
+			element.render()
+		LogHandler().render(self.screen, SoundMixer())
+		MenuHandler().render(self.screen)

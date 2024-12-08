@@ -8,8 +8,9 @@ DEBUG = True
 # Classes n'important personne
 from .utils.game_loop.main import GameLoop
 from .utils.log_handler.main import LogHandler
-from .basics.vector_2.main import Vector2
 from .utils.time_handler.main import TimeHandler
+from .basics.vector_2.main import Vector2
+from .basics.ui_element.main import UIElement
 from .utils.player.main import Player
 
 # MissionHandler importe Mission
@@ -23,15 +24,18 @@ from .basics.side_effects_manager.data_functions import side_effects
 from .basics.mission.data_functions import missions
 from .utils.data_handler.main import DataHandler
 
-# Camera importe Player et SoundMixer
-from .utils.data_handler.main import DataHandler
+# ControlHandler importe DataHandler
+from .utils.control_handler.main import ControlHandler
+
+# MenuHandler importe DataHandler et Menu qui importe Button qui importe ButtonActions
+from .specific.button.actions import ButtonActions
+from .specific.button.main import Button
+from .specific.menu.main import Menu
+from .utils.menu_handler.main import MenuHandler
 
 # Camera importe Player et SoundMixer
 from .utils.sound_mixer.main import SoundMixer
 from .utils.camera.main import Camera
-
-# ControlHandler import DataHandler
-from .utils.control_handler.main import ControlHandler
 
 # SoundMaker importe SoundTrack qui importe SoundMixer
 from .utils.sound_track.main import SoundTrack
@@ -54,12 +58,3 @@ from .specific.npc.main import NPC
 
 # Map importe NPC
 from .specific.map.main import Map
-
-
-
-# Classes restantes :
-
-# from .specific.tree.main import Tree
-# from .specific.mini_map.main import MiniMap
-# from .specific.button.main import Button
-# from .basics.ui_element.main import UIElement

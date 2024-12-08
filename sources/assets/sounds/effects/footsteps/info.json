@@ -1,5 +1,8 @@
 {
 	"sounds": {
+		"single_footstep": {
+			"extension": "mp3"
+		},
 		"walking_concrete": {
 			"extension": "opus"
 		},
@@ -11,6 +14,12 @@
 		},
 		"walking_wooden": {
 			"extension": "opus"
+		},
+		"walking_concrete-2": {
+			"extension": "mp3"
+		},
+		"walking_leaves": {
+			"extension": "mp3"
 		}
 	}
 }
