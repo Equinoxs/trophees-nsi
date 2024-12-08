@@ -1,0 +1,22 @@
+{
+	"sounds": {
+		"alright": {
+			"extension": "mp3"
+		},
+		"grognement": {
+			"extension": "mp3"
+		},
+		"okay": {
+			"extension": "mp3"
+		},
+		"scream": {
+			"extension": "mp3"
+		},
+		"voice": {
+			"extension": "mp3"
+		},
+		"whisle": {
+			"extension": "mp3"
+		}
+	}
+}

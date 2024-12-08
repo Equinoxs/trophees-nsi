@@ -1,0 +1,10 @@
+{
+	"sounds": {
+		"hit-metal": {
+			"extension": "mp3"
+		},
+		"hit": {
+			"extension": "mp3"
+		}
+	}
+}

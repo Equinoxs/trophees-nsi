@@ -19,19 +19,19 @@ class DataHandler:
 		# Il faut utiliser os.path.dirname pour remonter le chemin correctement
 		self.default_save_path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
-			'../../../../backups/new_game_backup.json'
+			'..', '..', '..', '..', 'backups', 'new_game_backup.json'
 		)
 		self.images_data = {}
 		self.sounds_data = {}
 		self.missions_data = None
-		self.ui_elements_data = {}
+		self.menus_data = None
 
 
 	def get_data_from_last_save(self):
 		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
-			'../../../../backups/automatic/main-save.json'
+			'..', '..', '..', '..', 'backups', 'automatic', 'main-save.json'
 		)
 
 		# Ouverture du fichier de sauvegarde principale
@@ -74,7 +74,7 @@ class DataHandler:
 		# Correction de la redondance du mot-clé 'path'
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
-			'../../../../backups',
+			'..', '..', '..', '..', 'backups',
 			backup_path
 		)
 
@@ -87,8 +87,8 @@ class DataHandler:
 
 
 	def get_image_data(self, dir_name: str):
-		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', dir_name, 'image.png')
-		json_path = os.path.join('/'.join(png_path.split('/')[0:-1]), 'info.json')
+		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', dir_name, 'image.png')
+		json_path = os.path.join(os.path.dirname(png_path), 'info.json')
 
 		with open(json_path, 'r') as file:
 			data = json.load(file)
@@ -102,19 +102,19 @@ class DataHandler:
 
 
 	def get_sound_track_data(self, dir_name: str):
-		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects', dir_name, 'info.json')
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'sounds', 'effects', dir_name, 'info.json')
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 
 		sound_paths = {}
 		for sound_name in data['sounds']:
-			sound_paths[sound_name] = os.path.join('/'.join(json_path.split('/')[0:-1]), sound_name + '.' + data['sounds'][sound_name]['extension'])
+			sound_paths[sound_name] = os.path.join(os.path.dirname(json_path), sound_name + '.' + data['sounds'][sound_name]['extension'])
 
 		return data, sound_paths
 
 	def get_all_sound_tracks_data(self):
 		data = {}
-		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/effects/')
+		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'sounds', 'effects')
 		for dir_name in os.listdir(path):
 			full_path = os.path.join(path, dir_name)
 			if os.path.isdir(full_path):
@@ -132,16 +132,17 @@ class DataHandler:
 		return self.sounds_data[dir_name][sound_name]
 
 	def load_music(self, music_name: str):
-		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/sounds/music/info.json')
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'sounds', 'music', 'info.json')
 
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 		if not music_name in data['sounds']: return None
 
-		return data, os.path.join('/'.join(json_path.split('/')[0:-1]), music_name + '.' + data['sounds'][music_name]['extension'])
+		return data, os.path.join(os.path.dirname(json_path), music_name + '.' + data['sounds'][music_name]['extension'])
+
 
 	def get_missions_data(self):
-		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../mission_handler/missions.json')
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'mission_handler', 'missions.json')
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 		for mission in data['missions']:
@@ -152,6 +153,22 @@ class DataHandler:
 		if self.missions_data is None or force:
 			self.missions_data = self.get_missions_data()
 		return self.missions_data
+
+
+	def get_menus_data(self):
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'menu_handler', 'info.json')
+
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+
+		return data["menus"]
+
+	def load_menus(self, force: bool = False):
+		if self.menus_data is None or force:
+			self.menus_data = self.get_menus_data()
+		return self.menus_data
+
+
 
 	def get_interaction(self, interaction_name: str = None):
 		if len(interaction_name) > 6 and interaction_name[:6] == 'start_' and interaction_name[6:] in missions:
@@ -194,14 +211,3 @@ class DataHandler:
 			else:
 				raise ValueError
 		return new_list
-
-	def get_ui_elements_data(self):
-		"""
-		Charge les données du fichier JSON contenant les éléments UI.
-        """
-		json_path = r'../ui_element/data.json'
-
-		with open(json_path, 'r') as file:
-			data = json.load(file)
-
-		return data["buttons"]

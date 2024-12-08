@@ -1,0 +1,19 @@
+{
+	"sounds": {
+		"fail-trumpet": {
+			"extension": "mp3"
+		},
+		"fail": {
+			"extension": "mp3"
+		},
+		"funny-drum": {
+			"extension": "mp3"
+		},
+		"game-over": {
+			"extension": "mp3"
+		},
+		"magical-hit": {
+			"extension": "mp3"
+		}
+	}
+}

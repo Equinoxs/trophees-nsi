@@ -1,10 +1,9 @@
-# Point d'entrée du jeu
-
 import pygame
-from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler
+
+from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler
 
 
-def main():
+def main() -> int:
 	# Initialisation des singletons
 	pygame.init()
 	screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
@@ -16,9 +15,22 @@ def main():
 	player = Player(Map(saved_data["player"]["current_map_name"]), saved_data['player'])
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
-	game_loop = GameLoop(control_handler, time_handler, save_handler, player, sound_mixer, camera, mission_handler)
+	menu_handler = MenuHandler()
+
+	game_loop = GameLoop(
+		control_handler,
+		time_handler,
+		save_handler,
+		player,
+		sound_mixer,
+		camera,
+		mission_handler,
+		menu_handler
+	)
+
 	return 0
 
 
+# Point d'entrée du jeu
 if __name__ == "__main__":
 	main()
