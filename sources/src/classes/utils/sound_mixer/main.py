@@ -16,6 +16,7 @@ class SoundMixer(object):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
 			mixer.init()
+			mixer.set_num_channels(16)
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []

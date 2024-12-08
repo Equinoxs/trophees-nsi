@@ -1,6 +1,6 @@
 {
 	"sounds": {
-		"hit-metal": {
+		"hit_metal": {
 			"extension": "mp3"
 		},
 		"hit": {

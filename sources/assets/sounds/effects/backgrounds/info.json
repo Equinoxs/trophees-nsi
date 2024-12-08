@@ -1,12 +1,12 @@
 {
 	"sounds": {
-		"birds-more": {
+		"birds_more": {
 			"extension": "mp3"
 		},
 		"birds": {
 			"extension": "mp3"
 		},
-		"machine-background": {
+		"machine_background": {
 			"extension": "mp3"
 		}
 	}
