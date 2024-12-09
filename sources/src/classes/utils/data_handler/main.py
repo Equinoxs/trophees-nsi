@@ -1,7 +1,7 @@
 import json
 import os
 
-from src.classes import Vector2, MissionHandler
+from src.classes import Vector2, MissionHandler, TimeHandler, Player, LogHandler, SAVE
 from src.classes import interactions, pattern_events, side_effects, missions
 
 
@@ -16,15 +16,19 @@ class DataHandler:
 		return cls._instance
 
 	def __init__(self):
-		# Il faut utiliser os.path.dirname pour remonter le chemin correctement
-		self.default_save_path = os.path.join(
-			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups', 'new_game_backup.json'
-		)
-		self.images_data = {}
-		self.sounds_data = {}
-		self.missions_data = None
-		self.menus_data = None
+		if not hasattr(self, '_initialized'):
+			self._initialized = True  # Empêche une nouvelle initialisation
+			# Il faut utiliser os.path.dirname pour remonter le chemin correctement
+			self.default_save_path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'new_game_backup.json'
+			)
+			self.images_data = {}
+			self.sounds_data = {}
+			self.missions_data = None
+			self.menus_data = None
+			self.current_save_chrono_tag = None
+			self.last_save_player_position = None
 
 
 	def get_data_from_last_save(self):
@@ -38,10 +42,12 @@ class DataHandler:
 		try:
 			with open(path, 'r') as save:
 				data = json.load(save)
+				LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
 		except FileNotFoundError:
 			# Si le fichier de sauvegarde principale est vide ou inexistant, on utilise le backup par défaut
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
+				LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
 
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
@@ -74,16 +80,26 @@ class DataHandler:
 		# Correction de la redondance du mot-clé 'path'
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups',
-			backup_path
+			'..', '..', '..', '..', 'backups', backup_path, 'main-save.json'
 		)
+
+		TimeHandler().add_chrono_tag('last_save', reset=True)
+		self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())
 
 		# Enregistrement des données dans le fichier JSON
 		with open(path, 'w') as file:
-			json.dump(data, file, indent=4)
+			json.dump(data, file, indent=4, cls=JSONEncoder)
 
 	def save(self, automatic = False):
+		if not SAVE: return  # ne pas faire de sauvegardes (debug)
+		LogHandler().add("Automatic save done")
 		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
+
+
+	def must_save(self):
+		if self.last_save_player_position is None:
+			self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())  # faire une copie de l'objet pour éviter d'accéder à la même instance
+		return Player().get_focus().get_position().distance_to(self.last_save_player_position) > 100 or TimeHandler().add_chrono_tag('last_save') > 300  # 5 minutes
 
 
 	def get_image_data(self, dir_name: str):
@@ -161,7 +177,7 @@ class DataHandler:
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 
-		return data["menus"]
+		return data['menus']
 
 	def load_menus(self, force: bool = False):
 		if self.menus_data is None or force:
@@ -201,13 +217,20 @@ class DataHandler:
 		else:
 			raise AttributeError
 
-	def list_transform(self, list2: list, function_collecting_metohd):
+	def list_transform(self, list2: list, function_collecting_method):
 		new_list = []
 		for el in list2:
 			if type(el) == list:
 				new_list.append(Vector2(el[0], el[1]))
 			elif type(el) == str:
-				new_list.append(function_collecting_metohd(el))
+				new_list.append(function_collecting_method(el))
 			else:
 				raise ValueError
 		return new_list
+
+
+class JSONEncoder(json.JSONEncoder):
+	def default(self, obj):
+		if isinstance(obj, Vector2): return obj.convert_to_tuple()
+		if callable(obj): return obj.__name__  # fonctions d'interaction
+		return super().default(obj)

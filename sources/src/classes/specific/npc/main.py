@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera
+from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler
 
 class NPC(MapObject):
 	def __init__(self, data):
@@ -56,6 +56,7 @@ class NPC(MapObject):
 		if self.sprint:
 			speed_px *= 1.5
 		self.speed_vector.set_norm(speed_px)
+		if DataHandler().must_save(): DataHandler().save(automatic=True)
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
