@@ -16,7 +16,7 @@ class Player:
 			self.focus = self.map.search_by_name(data_player['current_npc_name'])
 			self.focus.set_is_player(True)
 			if self.focus is None:
-				raise ValueError(f'NPC {data_player['current_npc_name']} not found in map {self.map.map_name}')
+				raise ValueError(f'NPC {data_player["current_npc_name"]} not found in map {self.map.map_name}')  # Python <3.12 compat
 			else:
 				width, height = self.focus.get_image().get_size()
 				self.focus.get_position().set_all(self.focus.get_position().get_x() - width // 2, self.focus.get_position().get_y() - height)
