@@ -49,6 +49,7 @@ class Vector2:
 	def add(self, vector2):
 		self.x += vector2.get_x()
 		self.y += vector2.get_y()
+		return self
 
 	def orthogonal_projection(self, vector2):
 		self_dot_self = self.scalar_product(self)

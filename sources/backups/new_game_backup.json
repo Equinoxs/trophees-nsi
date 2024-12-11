@@ -43,6 +43,14 @@
 					"authorized_sound_tracks": ["footsteps"],
 					"name": "alan",
 					"side_effects": ["npc_side_effect_test"]
+				},
+				{
+					"type": "GroundSurface",
+					"position": [0, 0],
+					"image_path": "grass",
+					"z_index": 0.5,
+					"name": "parquet",
+					"boundaries": [[0, 0], [300, -30], [50, 300]]
 				}
 			]
 		}

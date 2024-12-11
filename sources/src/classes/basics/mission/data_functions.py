@@ -9,13 +9,13 @@ def objective1():
 	if time > 10:
 		TimeHandler().remove_chrono_tag('objective1')  # On libère le chrono tag
 		GameLoop().get_sound_mixer().play_music_prev()
-		Player().get_focus().play_sound('goose')
+		Player().get_focus().play_sound('game_over')
 		return -1  # mission échouée
 	else:
 		if Player().get_focus().get_position().get_y() <= 0:
 			TimeHandler().remove_chrono_tag('objective1')
 			GameLoop().get_sound_mixer().play_music_prev()
-			Player().get_focus().play_sound('meow')
+			Player().get_focus().play_sound('magical_hit')
 			return 1  # objectif réussi
 		else:
 			return 0  # objectif en cours

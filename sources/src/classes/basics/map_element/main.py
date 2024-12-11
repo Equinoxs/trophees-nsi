@@ -27,7 +27,7 @@ class MapElement(Sprite, SoundMaker, Animatable):
 	def update(self):
 		self.update_index_animation()
 		self.go_to_frame(self.frame_index, self.animation_name)
-		
+
 	def render(self):
 		Camera().get_screen().blit(
 			self.image,
