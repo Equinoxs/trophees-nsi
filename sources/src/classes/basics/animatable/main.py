@@ -21,7 +21,7 @@ class Animatable:
 		self.animation_name = animation_name
 		if 'sound' in self.animations[self.animation_name]:  # besoin de changer le son
 			LogHandler().add(f'{self.name} * Changing sound: {self.animations[self.animation_name]["sound"]}')
-			self.play_sound(self.animations[self.animation_name]['sound'])
+			self.play_sound(self.animations[self.animation_name]['sound'], loop=True)
 		else:  # pas de son dans la nouvelle animation
 			self.stop_sound(previous_sound)
 

@@ -46,6 +46,7 @@ from .basics.sound_maker.main import SoundMaker
 from .basics.sprite.main import Sprite
 from .basics.animatable.main import Animatable
 from .basics.map_element.main import MapElement
+from .specific.ground_surface.main import GroundSurface
 
 # MapObject importe MapElement, Movable, Collider et Interactable
 from .basics.side_effects_manager.main import SideEffectsManager

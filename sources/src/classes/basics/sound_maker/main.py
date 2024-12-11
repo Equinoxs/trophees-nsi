@@ -9,16 +9,16 @@ class SoundMaker:
 		for sound_track_name in authorized_sound_tracks:
 			self.sound_tracks[sound_track_name] = SoundTrack(position, DataHandler().get_sound_track_data(sound_track_name)[1])
 
-	def play_sound(self, sound_name: str = None):
+	def play_sound(self, sound_name: str = None, loop: bool = False):
 		if sound_name is None:
 			raise AttributeError
 		for name, sound_track in self.sound_tracks.items():
 			if sound_track.contains(sound_name):
-				self.sound_tracks[name].play(sound_name)
+				self.sound_tracks[name].play(sound_name, loop)
 				return
 		for name, sound_track in self.all_sound_tracks.items():
 			if sound_track.contains(sound_name):
-				sound_track.play(sound_name)
+				sound_track.play(sound_name, loop)
 				return
 
 	def stop_sound_track(self, sound_track_name: str):

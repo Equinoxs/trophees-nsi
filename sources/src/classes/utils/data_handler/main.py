@@ -66,6 +66,11 @@ class DataHandler:
 				else:
 					data['maps'][map]['elements'][element_index]['side_effects'] = []
 
+				if 'boundaries' in data['maps'][map]['elements'][element_index]:
+					data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
+				else:
+					data['maps'][map]['elements'][element_index]['boundaries'] = []
+
 				if 'authorized_sound_tracks' not in data['maps'][map]['elements'][element_index]:
 					data['maps'][map]['elements'][element_index]['authorized_sound_tracks'] = []
 		return data
@@ -217,13 +222,13 @@ class DataHandler:
 		else:
 			raise AttributeError
 
-	def list_transform(self, list2: list, function_collecting_method):
+	def list_transform(self, list2: list, collecting_method = None):
 		new_list = []
 		for el in list2:
 			if type(el) == list:
 				new_list.append(Vector2(el[0], el[1]))
-			elif type(el) == str:
-				new_list.append(function_collecting_method(el))
+			elif type(el) == str and collecting_method is not None:
+				new_list.append(collecting_method(el))
 			else:
 				raise ValueError
 		return new_list
