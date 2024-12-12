@@ -32,47 +32,47 @@ class DataHandler:
 
 
 	def get_data_from_last_save(self):
-		# Il faut utiliser os.path.dirname pour éviter des chemins incorrects
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
 			'..', '..', '..', '..', 'backups', 'automatic', 'main-save.json'
 		)
 
-		# Ouverture du fichier de sauvegarde principale
+		model = {
+			'type': 'required',
+			'image_path': 'required',
+			'name': 'required',
+			'position': [0, 0],
+			'authorized_sound_tracks': [],
+			'z_index': 0,
+			'interaction': 'default',
+			'pattern_timeline': [],
+			'pattern_type': 'loop',
+			'side_effects': [],
+			'boundaries': []
+		}
+
 		try:
 			with open(path, 'r') as save:
 				data = json.load(save)
 				LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
 		except FileNotFoundError:
-			# Si le fichier de sauvegarde principale est vide ou inexistant, on utilise le backup par défaut
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
 				LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
 
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
+				# Pour s'assurer que tous les objets aient leurs propriétés définies
+				for required_key, default_value in model.items():
+					if required_key not in data['maps'][map]['elements'][element_index]:
+						data['maps'][map]['elements'][element_index][required_key] = data['maps'][map]['elements'][element_index].get(required_key, default_value)
+
+				# Post-processing
 				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
-
-				if 'pattern_timeline' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'], self.get_pattern_event)
-				else:
-					data['maps'][map]['elements'][element_index]['pattern_timeline'] = []
-
-				if 'interaction' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
-
-				if 'side_effects' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'], self.get_side_effect)
-				else:
-					data['maps'][map]['elements'][element_index]['side_effects'] = []
-
-				if 'boundaries' in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
-				else:
-					data['maps'][map]['elements'][element_index]['boundaries'] = []
-
-				if 'authorized_sound_tracks' not in data['maps'][map]['elements'][element_index]:
-					data['maps'][map]['elements'][element_index]['authorized_sound_tracks'] = []
+				data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'], self.get_pattern_event)
+				data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
+				data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'], self.get_side_effect)
+				data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
 		return data
 
 	def load_save(self, force = False):

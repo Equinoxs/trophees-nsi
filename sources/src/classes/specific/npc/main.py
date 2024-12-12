@@ -14,6 +14,7 @@ class NPC(MapObject):
 		self.pattern = list(filter(lambda val: isinstance(val, Vector2), self.pattern_timeline))
 		self.following_pattern = True
 		self.pattern_index = 0
+		self.pattern_type = data['pattern_type']
 
 		self.objective = self.pattern[self.pattern_index] if len(self.pattern) > 0 else None
 
@@ -112,11 +113,12 @@ class NPC(MapObject):
 			self.stop_moving()
 			return False
 
-	# Cette méthode est appelé à chaque fois que le NPC à atteint un objectif de son pattern
-	# Elle gère ainsi les appels aux fonctions qui doivent être appelé dans le pattern
+	# Cette méthode est appelée à chaque fois que le NPC a atteint un objectif de son pattern
+	# Elle gère ainsi les appels aux fonctions définies dans le pattern
 	def handle_events(self):
 		count_vector2 = 0
-		index_in_timeline = 0
+		index_in_timeline = None
+
 		for index, value in enumerate(self.pattern_timeline):
 			if isinstance(value, Vector2):
 				count_vector2 += 1
@@ -124,12 +126,13 @@ class NPC(MapObject):
 					index_in_timeline = index - 1
 					break
 
-		if isinstance(self.pattern_timeline[index_in_timeline], Vector2):
+		if index_in_timeline is None or not callable(self.pattern_timeline[index_in_timeline]):
 			return False
 
 		do_again = self.pattern_timeline[index_in_timeline](self, TimeHandler().add_chrono_tag(self.name))
-		if do_again == False:
+		if do_again is False:
 			TimeHandler().remove_chrono_tag(self.name)
+
 		return do_again
 
 	# Se charge du bon déroulement de self.pattern_timeline et gère donc les appels de
@@ -148,6 +151,13 @@ class NPC(MapObject):
 
 				else:
 					# Le personnage a atteint son obj, n'active pas d'évènements, on lui donne un autre objectif
+					if self.pattern_index + 1 == len(self.pattern):
+						match self.pattern_type:
+							case 'loop':
+								self.pattern_index = 0
+							case 'back_and_forth':
+								self.pattern_index = 0
+								self.pattern.reverse()
 					self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
 					self.set_objective(self.pattern[self.pattern_index])
 					self.resume_moving()
