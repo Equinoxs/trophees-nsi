@@ -80,6 +80,9 @@ class GameLoop:
 		self.paused = False
 		self.menu_handler.set_current_menu('in_game')
 
+	def throw_event(self, event):
+		self.get_player().get_map().throw_event(event)
+
 	def update(self):
 		self.control_handler.handle_events()
 		if self.control_handler.is_activated('quit'):

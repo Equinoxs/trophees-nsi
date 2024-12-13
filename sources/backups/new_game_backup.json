@@ -2,7 +2,6 @@
 	"player": {
 		"current_npc_name": "nathan",
 		"current_map_name": "bletchley_park",
-		"level": 1,
 		"accomplished_missions": []
 	},
 	"maps": {
@@ -11,7 +10,6 @@
 				{
 					"type": "GroundSurface",
 					"name": "background",
-					"position": [0, 0],
 					"image_path": "test_element",
 					"z_index": -1,
 					"boundaries": [[-3000, -3000], [3000, -3000], [3000, 3000], [-3000, 3000]]
@@ -19,44 +17,42 @@
 				{
 					"type": "GroundSurface",
 					"name": "garden",
-					"position": [0, 0],
 					"image_path": "grass",
-					"z_index": 0,
 					"boundaries": [[-500, -500], [500, -500], [500, 500], [-500, 500]]
 				},
 				{
 					"type": "GroundSurface",
 					"name": "house",
-					"position": [0, 0],
 					"image_path": "wooden_floor_1",
-					"z_index": 0,
-					"boundaries": [[50, 50], [250, 50], [250, 150], [270, 150], [270, 200], [250, 200], [250, 400], [50, 400]]
+					"boundaries": [[50, 50], [250, 50], [250, 150], [270, 150], [270, 200], [250, 200], [250, 400], [50, 400]],
+					"required_level": 5
 				},
 				{
 					"type": "GroundSurface",
 					"name": "path_to_house",
-					"position": [0, 0],
 					"image_path": "tiling",
-					"z_index": 0,
 					"boundaries": [[270, 150], [270, 200], [500, 200], [500, 150], [420, 150], [420, -30], [-200, -30], [-200, -100], [-240, -100], [-240, 20], [370, 20], [370, 150]]
 				},
 				{
 					"type": "GroundSurface",
+					"name": "beach",
+					"image_path": "sand",
+					"boundaries": [[-150, -75], [-80, -190], [-165, -290], [-350, -260], [-370, -210], [-280, -50]]
+				},
+				{
+					"type": "GroundSurface",
 					"name": "lake",
-					"position": [0, 0],
 					"image_path": "water",
-					"z_index": 0,
 					"boundaries": [[-150, -100], [-100, -180], [-190, -250], [-300, -230], [-330, -200], [-260, -80]]
 				},
 				{
 					"type": "NPC",
 					"name": "nathan",
-					"pattern_timeline": [],
+					"level": 2,
 					"position": [0, 0],
 					"image_path": "nathan",
 					"z_index": 2,
-					"interaction": "default",
-					"authorized_sound_tracks": ["footsteps"]
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",
@@ -66,9 +62,9 @@
 					"position": [50, 40],
 					"image_path": "nathan",
 					"z_index": 2,
-					"interaction": "start_mission_test",
+					"interaction": "house_proprietary_start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
-					"side_effects": ["npc_side_effect_test"]
+					"side_effects": ["visit_player"]
 				}
 			]
 		},

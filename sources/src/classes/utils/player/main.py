@@ -7,19 +7,15 @@ class Player:
 			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self, map = None, data_player = None):
+	def __init__(self, map = None, data_player: dict = None):
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.map = map
-			self.level = data_player['level']
 			self.accomplished_missions = data_player['accomplished_missions']
 			self.focus = self.map.search_by_name(data_player['current_npc_name'])
 			self.focus.set_is_player(True)
 			if self.focus is None:
-				raise ValueError(f'NPC {data_player["current_npc_name"]} not found in map {self.map.map_name}')  # Python <3.12 compat
-			else:
-				width, height = self.focus.get_image().get_size()
-				self.focus.get_position().set_all(self.focus.get_position().get_x() - width // 2, self.focus.get_position().get_y() - height)
+				raise ValueError(f'NPC {data_player["current_npc_name"]} not found in map {self.map.map_name}')
 
 	def get_map(self):
 		return self.map
@@ -33,7 +29,10 @@ class Player:
 		return self.focus
 
 	def get_level(self):
-		return self.level
+		return int(self.focus.get_level())
+
+	def set_level(self, level: int):
+		self.focus.set_level(level)
 
 	def get_accomplished_missions(self):
 		return self.accomplished_missions
