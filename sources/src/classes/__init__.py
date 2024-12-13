@@ -6,7 +6,7 @@ SAVE = False
 # ex : si A importe B, alors on devra importer B avant A dans ce fichier
 # afin que B soit complètement initialisé quand A importera B
 
-# Classes n'important personne
+# Classes n'important personne (sauf GameLoop)
 from .utils.game_loop.main import GameLoop
 from .utils.log_handler.main import LogHandler
 from .utils.time_handler.main import TimeHandler

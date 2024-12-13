@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler
+from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler, GameLoop
 
 class NPC(MapObject):
 	def __init__(self, data):
@@ -9,6 +9,8 @@ class NPC(MapObject):
 		self.is_player = False
 		self.speed = 1.38  # m/s = 5 km/h
 		self.speed_vector = Vector2(0, 0)
+		self.level = None
+		self.set_level(data['level'])
   
 		self.pattern_timeline = data['pattern_timeline']
 		self.pattern = list(filter(lambda val: isinstance(val, Vector2), self.pattern_timeline))
@@ -21,6 +23,14 @@ class NPC(MapObject):
 		self.delta_time_event = None
 		self.is_moving = False  # permet de SAVOIR si le NPC se dirige vers un objectif
 		self.must_move = True  # permet de CONTRÔLER si le NPC doit se diriger vers son objectif
+
+	def get_level(self):
+		return self.level
+
+	def set_level(self, level: float):
+		self.level = level
+		if self.is_player:
+			GameLoop().throw_event('player_level_change')
 
 	def go_initial(self):
 		self.set_objective(self.initial_position)
@@ -61,6 +71,13 @@ class NPC(MapObject):
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
+		if self.objective is None:
+			self.stop_moving()
+		else:
+			self.resume_moving()
+
+	def set_following_pattern(self, new_following_pattern: bool):
+		self.following_pattern = new_following_pattern
 
 	def set_is_player(self, new_state: bool):
 		self.is_player = new_state
@@ -158,12 +175,9 @@ class NPC(MapObject):
 							case 'back_and_forth':
 								self.pattern_index = 0
 								self.pattern.reverse()
-					self.pattern_index = (self.pattern_index + 1) % len(self.pattern)
+					self.pattern_index += 1
 					self.set_objective(self.pattern[self.pattern_index])
 					self.resume_moving()
-		else:
-			self.objective = None
-
 		self.is_moving = self.move_npc_to_objective()
 
 	def update(self):

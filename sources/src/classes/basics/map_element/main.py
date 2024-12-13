@@ -24,6 +24,9 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		if len(self.z_indexes_historic) >= 2:
 			self.set_z_index(self.z_indexes_historic[-2])
 
+	def catch_event(self, event):
+		pass
+
 	def update(self):
 		self.update_index_animation()
 		self.go_to_frame(self.frame_index, self.animation_name)

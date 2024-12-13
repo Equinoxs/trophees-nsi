@@ -12,7 +12,7 @@ def main() -> int:
 	time_handler = TimeHandler()
 	save_handler = DataHandler()
 	saved_data = save_handler.load_save()
-	player = Player(Map(saved_data["player"]["current_map_name"]), saved_data['player'])
+	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'])
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
 	menu_handler = MenuHandler()
@@ -32,5 +32,5 @@ def main() -> int:
 
 
 # Point d'entrée du jeu
-if __name__ == "__main__":
+if __name__ == '__main__':
 	main()

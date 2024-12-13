@@ -1,5 +1,5 @@
 import pygame
-from src.classes import MapElement, Vector2
+from src.classes import MapElement, Vector2, Player, Camera
 
 
 class GroundSurface(MapElement):
@@ -7,6 +7,8 @@ class GroundSurface(MapElement):
 		super().__init__(data)
 		self.boundaries: list[Vector2] = data['boundaries']
 		self.pattern_image = self.image.copy()
+		self.required_level = data['required_level']
+		self.does_player_see = False
 
 		# Calcul de la largeur et de la hauteur maximales
 		max_width, max_height = 0, 0
@@ -42,8 +44,33 @@ class GroundSurface(MapElement):
 		masked_surface = pygame.Surface((max_width, max_height), pygame.SRCALPHA)
 		masked_surface.blit(big_rectangle, (0, 0))
 		masked_surface.blit(mask_surface, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-
 		self.image = masked_surface
+		self.access_overlay = self.image.copy()
+		filter_surface = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
+		filter_surface.fill((0, 0, 0, 200))
+		self.access_overlay.blit(filter_surface, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
+
+	def catch_event(self, event):
+		MapElement.catch_event(self, event)
+		if event == 'player_level_change':
+			if Player().get_level() < self.required_level:
+				self.does_player_see = False
+			else:
+				self.does_player_see = True
 
 	def update(self):
-		pass
+		if Player().get_level() < self.required_level:
+			self.does_player_see = False
+		else:
+			self.does_player_see = True
+
+	def render(self):
+		super().render()
+		if not self.does_player_see:
+			Camera().get_screen().blit(
+				self.access_overlay,
+				(
+					Camera().get_zoom() * (self.position.x - Camera().get_camera().x),
+					Camera().get_zoom() * (self.position.y - Camera().get_camera().y)
+				)
+			)

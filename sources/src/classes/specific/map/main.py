@@ -34,6 +34,10 @@ class Map:
 	def get_elements(self):
 		return self.elements
 
+	def throw_event(self, event):
+		for element in self.elements:
+			element.catch_event(event)
+
 	def load_elements_from(self, map_name):
 		self.elements = []
 		elements = DataHandler().load_save()['maps'][map_name]['elements']

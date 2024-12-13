@@ -25,6 +25,27 @@ def npc_side_effect_test(self):
 		self.side_effect_data('npc_side_effect_test_cleared', True)
 
 
+def visit_player(self):
+	distance = self.get_position().distance_to(GameLoop().get_player().get_focus().get_position())
+	out = self.side_effect_data('visit_player_out')
+	if distance < 80:
+		if out:
+			self.play_sound('okay')
+		self.side_effect_data('visit_player_out', False)
+		TimeHandler().remove_chrono_tag('visit_player')
+		self.set_following_pattern(False)
+		self.set_objective(GameLoop().get_player().get_focus().get_position())
+		self.move_npc_to_objective()
+		if distance < 30:
+			self.stop_moving()
+	else:
+		if not out:
+			self.side_effect_data('visit_player_out', True)
+			self.set_following_pattern(True)
+			self.set_objective(None)
+
+
 side_effects = {
-	"npc_side_effect_test": npc_side_effect_test
+	"npc_side_effect_test": npc_side_effect_test,
+	"visit_player": visit_player
 }

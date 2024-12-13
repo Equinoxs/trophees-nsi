@@ -47,8 +47,10 @@ class DataHandler:
 			'interaction': 'default',
 			'pattern_timeline': [],
 			'pattern_type': 'loop',
+			'level': 1,
 			'side_effects': [],
-			'boundaries': []
+			'boundaries': [],
+			'required_level': 0
 		}
 
 		try:
@@ -82,7 +84,6 @@ class DataHandler:
 
 
 	def save_data(self, data, backup_path):
-		# Correction de la redondance du mot-clé 'path'
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
 			'..', '..', '..', '..', 'backups', backup_path, 'main-save.json'
@@ -91,12 +92,12 @@ class DataHandler:
 		TimeHandler().add_chrono_tag('last_save', reset=True)
 		self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())
 
-		# Enregistrement des données dans le fichier JSON
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4, cls=JSONEncoder)
 
 	def save(self, automatic = False):
-		if not SAVE: return  # ne pas faire de sauvegardes (debug)
+		if not SAVE:
+			return  # ne pas faire de sauvegardes (debug)
 		LogHandler().add("Automatic save done")
 		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
 
@@ -236,6 +237,8 @@ class DataHandler:
 
 class JSONEncoder(json.JSONEncoder):
 	def default(self, obj):
-		if isinstance(obj, Vector2): return obj.convert_to_tuple()
-		if callable(obj): return obj.__name__  # fonctions d'interaction
+		if isinstance(obj, Vector2):
+			return obj.convert_to_tuple()
+		if callable(obj):
+			return obj.__name__  # fonctions d'interaction
 		return super().default(obj)
