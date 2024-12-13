@@ -9,7 +9,9 @@ class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
 
-		data, png_path = DataHandler().load_image(image_path)
+		if not hasattr(self, 'image_type'):
+			self.image_type = ''
+		data, png_path = DataHandler().load_image(image_path, self.image_type)
 
 		self.original_image = pygame.image.load(png_path)
 		self.image = pygame.image.load(png_path)
