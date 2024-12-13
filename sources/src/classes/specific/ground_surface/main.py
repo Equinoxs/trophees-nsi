@@ -4,6 +4,7 @@ from src.classes import MapElement, Vector2
 
 class GroundSurface(MapElement):
 	def __init__(self, data):
+		self.image_type = 'ground_surface'
 		super().__init__(data)
 		self.boundaries: list[Vector2] = data['boundaries']
 		self.pattern_image = self.image.copy()

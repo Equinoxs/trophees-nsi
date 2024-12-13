@@ -7,7 +7,7 @@ class Animatable:
 		self.frame_index = 0
 		self.infinite = True
 		self.image_path = image_path
-		data, _ = DataHandler().load_image(image_path)
+		data, _ = DataHandler().load_image(image_path, self.image_type)
 		self.animations = data['animations']
 		self.animation_name = 'inactive'
 		self.dt = 0
