@@ -116,7 +116,8 @@ class DataHandler:
 		
 		return data, png_path
 	
-	def load_image(self, dir_name: str, force = False):
+	def load_image(self, dir_name: str, image_type: str = '', force = False):
+		dir_name = os.path.join(image_type, dir_name)
 		if dir_name not in self.images_data or force:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
