@@ -112,8 +112,16 @@ class DataHandler:
 		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', dir_name, 'image.png')
 		json_path = os.path.join(os.path.dirname(png_path), 'info.json')
 
+		model = {
+			'animations': {},
+			'hitbox': []
+		}
+
 		with open(json_path, 'r') as file:
 			data = json.load(file)
+
+		for required_key, default_value in model.items():
+			data[required_key] = data.get(required_key, default_value)
 		
 		return data, png_path
 	
@@ -199,9 +207,7 @@ class DataHandler:
 				MissionHandler().start_mission(interaction_name[6:])
 			return start_new_mission
 		if interaction_name == '' or interaction_name is None or interaction_name not in interactions:
-			def default(self):
-				return
-			return default
+			return None
 		return interactions.get(interaction_name)
 
 	def get_side_effect(self, side_effect_name: str = None):
@@ -214,7 +220,7 @@ class DataHandler:
 	def get_pattern_event(self, pattern_event_name: str = None):
 		if pattern_event_name == '' or pattern_event_name is None or pattern_event_name not in pattern_events:
 			def default(self, delta_time):
-				return
+				pass
 			return default
 		return pattern_events.get(pattern_event_name)
 

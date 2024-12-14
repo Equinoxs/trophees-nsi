@@ -31,8 +31,10 @@ class Mission:
 			self.indicator = self.objectives[self.objective_index]()
 		elif self.indicator == 1:
 			self.objective_index += 1
+			self.inidcator = 0
 			if self.objective_index == len(self.objectives):
 				return 1  # mission_réussie
 		elif self.indicator == -1:
+			self.indicator = 0
 			return -1  # mission échouée
 		return 0  # en cours

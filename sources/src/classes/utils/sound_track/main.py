@@ -16,7 +16,7 @@ class SoundTrack:
 		SoundMixer().add_sound_track(self)
 
 	def contains(self, sound_name: str):
-		return sound_name in self.sounds
+		return sound_name in set(self.sounds)
 
 	def play(self, sound_name: str, loop: bool = False):
 		self.current_sound_name = sound_name
@@ -54,7 +54,7 @@ class SoundTrack:
 
 	def get_debug_string(self):
 		if self.current_sound_name is not None:
-			return f'Channel {SoundMixer().get_index_of_channel(self.channel)}: {id(self.sounds[self.current_sound_name])} ({self.current_sound_name}) {"playing" if self.get_busy() else "idling"}'
+			return f'Channel {SoundMixer().get_index_of_channel(self.channel)}: {id(self.sounds[self.current_sound_name])} ({self.current_sound_name}) {"play" if self.get_busy() else "idle"}'
 		return ''
 
 	def remove(self):

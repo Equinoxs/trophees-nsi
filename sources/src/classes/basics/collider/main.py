@@ -5,13 +5,8 @@ from src.classes import Vector2, DataHandler, Player
 
 
 class Collider:
-	def __init__(self, image_path: str):
-		self.image_path = image_path
-
-		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../../assets/images', image_path.split('/')[0], 'info.json')
-		with open(path, 'r') as file:
-			data = json.load(file)
-		self.hitbox = data['hitbox']
+	def __init__(self, hitbox: list[list[int]]):
+		self.hitbox = hitbox
 
 	# Collision entre un point et une hitbox segmentée
 	def closest_vector_to(self, position: Vector2):

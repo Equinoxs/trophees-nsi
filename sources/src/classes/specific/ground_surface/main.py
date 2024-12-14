@@ -10,6 +10,7 @@ class GroundSurface(MapElement):
 		self.pattern_image = self.image.copy()
 		self.required_level = data['required_level']
 		self.does_player_see = False
+		self.ground_type = self.image_data['type']
 
 		# Calcul de la largeur et de la hauteur maximales
 		max_width, max_height = 0, 0
@@ -58,6 +59,28 @@ class GroundSurface(MapElement):
 				self.does_player_see = False
 			else:
 				self.does_player_see = True
+
+	def get_ground_type(self):
+		return self.ground_type
+
+	def point_in_boundaries(self, point):
+		x, y = point.convert_to_tuple()
+		n = len(self.boundaries)
+		inside = False
+
+		px1, py1 = self.boundaries[0].convert_to_tuple()
+		for i in range(1, n + 1):
+			px2, py2 = self.boundaries[i % n].convert_to_tuple()
+			if y > min(py1, py2):
+				if y <= max(py1, py2):
+					if x <= max(px1, px2):
+						if py1 != py2:
+							xinters = (y - py1) * (px2 - px1) / (py2 - py1) + px1
+						if px1 == px2 or x <= xinters:
+							inside = not inside
+			px1, py1 = px2, py2
+
+		return inside
 
 	def update(self):
 		if Player().get_level() < self.required_level:

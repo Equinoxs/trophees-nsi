@@ -42,11 +42,11 @@ class SoundMixer(object):
 		channel = None
 		for idx, c in enumerate(self.channels):
 			if c is None:
-				LogHandler().add(f'Assigning channel {idx}')
+				LogHandler().add(f'Assign channel {idx}')
 				self.channels[idx] = mixer.Channel(idx)
 				return self.channels[idx]
 
-		LogHandler().add(f'Assigning channel {len(self.channels)}')
+		LogHandler().add(f'Assign channel {len(self.channels)}')
 		channel = mixer.Channel(len(self.channels))
 		self.channels.append(channel)
 		return channel

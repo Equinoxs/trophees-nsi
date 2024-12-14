@@ -19,7 +19,8 @@ class GameLoop:
 		sound_mixer = None,
 		camera = None,
 		mission_handler = None,
-		menu_handler = None
+		menu_handler = None,
+		log_handler = None
 	):
 
 		if not hasattr(self, '_initialized'):
@@ -37,6 +38,7 @@ class GameLoop:
 			self.sound_mixer = sound_mixer
 			self.mission_handler = mission_handler
 			self.menu_handler = menu_handler
+			self.log_handler = log_handler
 
 			self.paused = False
 			self.can_pause = True
@@ -65,6 +67,9 @@ class GameLoop:
 
 	def get_menu_handler(self):
 		return self.menu_handler
+
+	def get_log_handler(self):
+		return self.log_handler
 
 	def is_game_paused(self):
 		return self.paused

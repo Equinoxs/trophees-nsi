@@ -14,8 +14,7 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 95,
-			"sound": "walking_hallway"
+			"height": 95
 		},
 		"walking_backward": {
 			"widths": [
@@ -25,8 +24,7 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 91,
-			"sound": "walking_hallway"
+			"height": 91
 		},
 		"walking": {
 			"widths": [
@@ -36,8 +34,7 @@
 				{ "width": 49, "time": 0.4 },
 				{ "width": 38, "time": 0.2 }
 			],
-			"height": 93,
-			"sound": "walking_hallway"
+			"height": 93
 		}
 	},
 	"hitbox": [
