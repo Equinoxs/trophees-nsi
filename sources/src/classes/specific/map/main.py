@@ -16,13 +16,6 @@ class Map:
 				return el
 		return None
 
-	def update(self):
-		paused = GameLoop().is_game_paused()
-		self.sort_elements()
-		if not paused:
-			for element in self.elements:
-				element.update()
-
 	def add(self, element):
 		self.elements.append(element)
 
@@ -58,3 +51,15 @@ class Map:
 
 				case _:
 					raise NotImplementedError
+
+	def update(self):
+		if not GameLoop().is_game_paused():
+			for element in self.elements:
+				element.update()
+			self.sort_elements()
+
+	def which_surface(self, position):
+		for i in range(len(self.elements) - 1, 0, -1):
+			if isinstance(self.elements[i], GroundSurface) and self.elements[i].point_in_boundaries(position):
+				return self.elements[i].get_ground_type()
+		return None

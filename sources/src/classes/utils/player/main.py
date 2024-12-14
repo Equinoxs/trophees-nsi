@@ -33,12 +33,14 @@ class Player:
 
 	def set_level(self, level: int):
 		self.focus.set_level(level)
+		self.map.throw_event('player_level_change')
 
 	def get_accomplished_missions(self):
 		return self.accomplished_missions
 
-	def add_accomplished_mission(self, mission_name: str):
-		self.accomplished_missions.append(mission_name)
+	def add_accomplished_mission(self, mission):
+		self.accomplished_missions.append(mission.get_name())
+		self.set_level(self.get_level() + mission.get_rewards())
 
 	def change_focus(self, npc_name):
 		self.focus.set_is_player(False)

@@ -25,7 +25,7 @@
 					"name": "house",
 					"image_path": "wooden_floor_1",
 					"boundaries": [[50, 50], [250, 50], [250, 150], [270, 150], [270, 200], [250, 200], [250, 400], [50, 400]],
-					"required_level": 5
+					"required_level": 3
 				},
 				{
 					"type": "GroundSurface",

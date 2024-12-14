@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler
+from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler
 
 
 def main() -> int:
@@ -16,6 +16,7 @@ def main() -> int:
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
 	menu_handler = MenuHandler()
+	log_handler = LogHandler()
 
 	game_loop = GameLoop(
 		control_handler,
@@ -25,7 +26,8 @@ def main() -> int:
 		sound_mixer,
 		camera,
 		mission_handler,
-		menu_handler
+		menu_handler,
+		log_handler
 	)
 
 	return 0

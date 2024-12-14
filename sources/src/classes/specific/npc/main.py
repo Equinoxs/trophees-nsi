@@ -1,7 +1,9 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler, GameLoop
+from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler, GameLoop, Player
+
 
 class NPC(MapObject):
 	def __init__(self, data):
+		self.image_type = 'npc'
 		MapObject.__init__(self, data)
 		self.initial_position = Vector2(data['position'].get_x(), data['position'].get_y())
 
@@ -9,6 +11,7 @@ class NPC(MapObject):
 		self.is_player = False
 		self.speed = 1.38  # m/s = 5 km/h
 		self.speed_vector = Vector2(0, 0)
+		self.walking_on = None
 		self.level = None
 		self.set_level(data['level'])
   
@@ -181,7 +184,16 @@ class NPC(MapObject):
 		self.is_moving = self.move_npc_to_objective()
 
 	def update(self):
-		MapObject.update(self)
+		if self.speed_vector.get_norm() > 1:
+			surface_type = Player().get_map().which_surface(self.position)
+			if surface_type != self.walking_on:
+				self.walking_on = surface_type
+				self.set_animation_sound_name(f'walking_{self.walking_on}')
+		elif self.walking_on is not None:
+			self.walking_on = None
+			self.set_animation_sound_name(self.walking_on)
+
+		super().update()
 		self.handle_animation()
 		if self.is_player:
 			self.update_player()

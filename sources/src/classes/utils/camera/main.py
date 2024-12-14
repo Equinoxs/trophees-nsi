@@ -1,4 +1,6 @@
-from src.classes import Player, MenuHandler, LogHandler, SoundMixer
+import pygame
+
+from src.classes import Player, MenuHandler, LogHandler, SoundMixer, GameLoop
 
 class Camera:
 	_instance = None
@@ -38,4 +40,8 @@ class Camera:
 		for element in Player().get_map().get_elements():
 			element.render()
 		LogHandler().render(self.screen, SoundMixer())
+		if GameLoop().is_game_paused():
+			overlay = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
+			overlay.fill((0, 0, 0, 100))
+			self.screen.blit(overlay, (0, 0))
 		MenuHandler().render(self.screen)
