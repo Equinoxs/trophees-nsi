@@ -20,6 +20,9 @@
 		},
 		"walking_leaves": {
 			"extension": "mp3"
+		},
+		"walking_carpet": {
+			"extension": "mp3"
 		}
 	}
 }

@@ -35,6 +35,12 @@
 				},
 				{
 					"type": "GroundSurface",
+					"name": "carpet_test",
+					"image_path": "carpet",
+					"boundaries": [[70, 150], [70, 200], [300, 200], [300, 150]]
+				},
+				{
+					"type": "GroundSurface",
 					"name": "beach",
 					"image_path": "sand",
 					"boundaries": [[-150, -75], [-80, -190], [-165, -290], [-350, -260], [-370, -210], [-280, -50]]
