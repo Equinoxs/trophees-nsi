@@ -37,7 +37,7 @@
 					"type": "GroundSurface",
 					"name": "carpet_test",
 					"image_path": "carpet_1",
-					"boundaries": [[70, 150], [70, 200], [300, 200], [300, 150]]
+					"boundaries": [[80, 300], [80, 100], [220, 100], [220, 300]]
 				},
 				{
 					"type": "GroundSurface",
