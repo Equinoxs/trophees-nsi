@@ -36,7 +36,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "carpet_test",
-					"image_path": "carpet",
+					"image_path": "carpet_1",
 					"boundaries": [[70, 150], [70, 200], [300, 200], [300, 150]]
 				},
 				{
@@ -48,7 +48,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "lake",
-					"image_path": "water",
+					"image_path": "water_1",
 					"boundaries": [[-150, -100], [-100, -180], [-190, -250], [-300, -230], [-330, -200], [-260, -80]]
 				},
 				{
@@ -91,6 +91,7 @@
 					"interaction": "test",
 					"name": "test_object"
 				},
+				
 				{
 					"type": "NPC",
 					"pattern_timeline": [],
