@@ -17,7 +17,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "garden",
-					"image_path": "grass",
+					"image_path": "flower_grass",
 					"boundaries": [[-500, -500], [500, -500], [500, 500], [-500, 500]]
 				},
 				{
