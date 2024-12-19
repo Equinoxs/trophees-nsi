@@ -33,8 +33,9 @@ class Camera:
 		return self.camera
 
 	def update(self):
-		_, height = Player().get_focus().get_image().get_size()
-		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
+		camera_width, camera_height = self.frame.w, self.frame.h
+		width, height = Player().get_focus().get_image().get_size()
+		self.camera.center = (self.player_pos.get_x() + (camera_width // 2) * (self.zoom-1), self.player_pos.get_y() - height // 2)
 		self.screen.fill((0,) * 3)  # Couleur de fond = noir
 
 		for element in Player().get_map().get_elements():

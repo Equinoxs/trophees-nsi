@@ -72,6 +72,8 @@ class Sprite:
 		return self.magnification_coeff
 
 	def set_magnification(self, magnification_coeff):
+		if magnification_coeff == self.magnification_coeff:
+			return
 		width, height = self.image.get_size()
 
 		# Redimensionner l'image (scale)
