@@ -10,7 +10,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "background",
-					"image_path": "test_element",
+					"image_path": "dirt",
 					"z_index": -1,
 					"boundaries": [[-3000, -3000], [3000, -3000], [3000, 3000], [-3000, 3000]]
 				},
