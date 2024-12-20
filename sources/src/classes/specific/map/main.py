@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, MapElement, MapObject, NPC, GroundSurface
+from src.classes import DataHandler, GameLoop, SoundMixer, MapElement, MapObject, NPC, GroundSurface, Wall
 
 class Map:
 
@@ -48,6 +48,9 @@ class Map:
 
 				case 'GroundSurface':
 					self.elements.append(GroundSurface(element))
+
+				case 'Wall':
+					self.elements.append(Wall(element))
 
 				case _:
 					raise NotImplementedError

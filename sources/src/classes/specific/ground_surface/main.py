@@ -71,13 +71,19 @@ class GroundSurface(MapElement):
 		px1, py1 = self.boundaries[0].convert_to_tuple()
 		for i in range(1, n + 1):
 			px2, py2 = self.boundaries[i % n].convert_to_tuple()
-			if y > min(py1, py2):
-				if y <= max(py1, py2):
-					if x <= max(px1, px2):
-						if py1 != py2:
-							xinters = (y - py1) * (px2 - px1) / (py2 - py1) + px1
-						if px1 == px2 or x <= xinters:
-							inside = not inside
+
+			# Vérifie si le point est dans la plage de y des deux sommets
+			if min(py1, py2) < y <= max(py1, py2):
+				# Calcule l'intersection sur l'axe X avec la frontière du polygone
+				if px1 != px2:  # Évite une division par zéro
+					xinters = (y - py1) * (px2 - px1) / (py2 - py1) + px1
+				else:
+					xinters = px1
+
+				# Vérifie si le point est à gauche ou sur l'intersection
+				if x <= xinters:
+					inside = not inside
+
 			px1, py1 = px2, py2
 
 		return inside
