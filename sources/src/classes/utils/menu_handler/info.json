@@ -5,10 +5,10 @@
 				"type": "Button",
 				"label": "Pause",
 				"x": 15,
-				"y": 65,
+				"y": 75,
 				"width": 150,
 				"height": 50,
-				"color": [145, 77, 17],
+				"color": [130, 117, 88],
 				"text_color": [255, 255, 255],
 				"font_size": 60,
 				"action": "pause_game"
@@ -18,11 +18,11 @@
 			{
 				"type": "Button",
 				"label": "Unpause",
-				"x": 15,
-				"y": 65,
+				"x": 540,
+				"y": 250,
 				"width": 200,
 				"height": 50,
-				"color": [0, 128, 255],
+				"color": [153, 153, 153],
 				"text_color": [255, 255, 255],
 				"font_size": 36,
 				"action": "unpause_game"
@@ -30,15 +30,28 @@
 			{
 				"type": "Button",
 				"label": "Quit",
-				"x": 15,
-				"y": 130,
+				"x": 540,
+				"y": 390,
 				"width": 200,
 				"height": 50,
-				"color": [255, 0, 0],
-				"text_color": [0, 0, 0],
+				"color": [153, 153, 153],
+				"text_color": [150, 0, 0],
 				"font_size": 36,
 				"action": "quit_game"
+			},
+			{
+				"type": "Button",
+				"label": "Settings",
+				"x": 540,
+				"y": 320,
+				"width": 200,
+				"height": 50,
+				"color": [153, 153, 153],
+				"text_color": [0, 0, 0],
+				"font_size": 36,
+				"action": "open_settings"
 			}
+
 		]
 	}
 }

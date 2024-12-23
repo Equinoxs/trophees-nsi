@@ -1,4 +1,5 @@
-from src.classes import Menu, DataHandler
+import pygame
+from src.classes import Menu, DataHandler, GameLoop
 
 
 class MenuHandler:
@@ -34,5 +35,10 @@ class MenuHandler:
 			self.current_menu.update()
 
 	def render(self, screen):
+		if GameLoop().is_game_paused():
+			# Dessiner le rectangle en arrière-plan
+			pygame.draw.rect(screen, (130, 117, 88), (390, 210, 500, 280))  # Rectangle en arrière-plan
+
 		if self.current_menu is not None:
+			# Dessiner le menu (et donc les boutons) par-dessus
 			self.current_menu.render(screen)
