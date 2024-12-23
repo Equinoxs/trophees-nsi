@@ -1,6 +1,4 @@
 import pygame
-import json
-import os
 
 from src.classes import Vector2, DataHandler
 
@@ -8,20 +6,22 @@ from src.classes import Vector2, DataHandler
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
 		self.position = position
-
+		self.vertical_flip = False
+		self.horizontal_flip = False
+		self.magnification_coeff = 1  # image x fois plus grande
 		if not hasattr(self, 'image_type'):
 			self.image_type = ''
-		data, png_path = DataHandler().load_image(image_path, self.image_type)
+   
+		if hasattr(self, 'image'):
+			return
 
+		data, png_path = DataHandler().load_image(image_path, self.image_type)
 		self.original_image = pygame.image.load(png_path)
 		self.image = pygame.image.load(png_path)
 		self.image_path = image_path
-
 		self.image_data = data  # les infos de l'image
-		self.magnification_coeff = 1  # image x fois plus grande
-		self.vertical_flip = False
-		self.horizontal_flip = False
-		self.go_to_frame(0, 'walking')  # à rendre ça dynamique
+		self.go_to_frame(0, 'inactive')
+
 
 	def switch_horizontal_flip(self):
 		self.horizontal_flip = not self.horizontal_flip

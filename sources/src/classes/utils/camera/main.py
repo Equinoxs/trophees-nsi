@@ -2,6 +2,7 @@ import pygame
 
 from src.classes import Player, MenuHandler, LogHandler, SoundMixer, GameLoop
 
+
 class Camera:
 	_instance = None
 
@@ -28,6 +29,9 @@ class Camera:
 
 	def get_screen(self):
 		return self.screen
+
+	def get_frame(self):
+		return self.frame
 
 	def get_camera(self):
 		return self.camera

@@ -1,12 +1,12 @@
-import json
-import os
-
 from src.classes import Vector2, DataHandler, Player
 
 
 class Collider:
 	def __init__(self, hitbox: list[list[int]]):
-		self.hitbox = hitbox
+		if hasattr(self, 'boundaries'):
+			self.hitbox = self.boundaries
+		else:
+			self.hitbox = hitbox
 
 	# Collision entre un point et une hitbox segmentée
 	def closest_vector_to(self, position: Vector2):

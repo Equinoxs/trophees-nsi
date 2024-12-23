@@ -6,12 +6,11 @@ class Animatable:
 		self.animation_running = True  # indique si l'animation tourne
 		self.frame_index = 0
 		self.infinite = True
-		self.image_path = image_path
-		data, _ = DataHandler().load_image(image_path, self.image_type)
-		self.animations = data['animations']
 		self.animation_name = 'inactive'
-		self.animation_sound_name = None
 		self.dt = 0
+		self.animation_sound_name = None
+		self.image_path = image_path
+		self.animations = self.image_data['animations']
 
 	def set_animation_sound_name(self, sound_name: str = None):
 		if sound_name:

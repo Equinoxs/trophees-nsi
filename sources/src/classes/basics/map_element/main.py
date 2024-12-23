@@ -1,4 +1,4 @@
-from src.classes import Sprite, Animatable, Vector2, SoundMaker, Camera
+from src.classes import Sprite, Animatable, SoundMaker, Camera
 
 
 class MapElement(Sprite, SoundMaker, Animatable):
@@ -32,10 +32,20 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		self.go_to_frame(self.frame_index, self.animation_name)
 
 	def render(self):
+		screen_width = Camera().get_frame().x
+		screen_height = Camera().get_frame().y
+		camera_x = Camera().get_camera().x
+		camera_y = Camera().get_camera().y
+		width, height = self.image.get_size()
+
+		if self.position.x + width < camera_x and self.position.x > camera_x + screen_width:
+			if self.position.y + height < camera_y and self.position.y > camera_y + screen_height:
+				return
+
 		Camera().get_screen().blit(
 			self.image,
 			(
-				Camera().get_zoom() * (self.position.x - Camera().get_camera().x),
-				Camera().get_zoom() * (self.position.y - Camera().get_camera().y)
+				Camera().get_zoom() * (self.position.x - camera_x),
+				Camera().get_zoom() * (self.position.y - camera_y)
 			)
 		)
