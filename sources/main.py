@@ -1,12 +1,13 @@
 import pygame
 
-from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler
+from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 def main() -> int:
-	# Initialisation des singletons
 	pygame.init()
-	screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
+	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED, vsync=1)
+
+	# Initialisation des singletons
 	sound_mixer = SoundMixer()
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()
@@ -19,6 +20,7 @@ def main() -> int:
 	log_handler = LogHandler()
 
 	game_loop = GameLoop(
+		screen,
 		control_handler,
 		time_handler,
 		save_handler,

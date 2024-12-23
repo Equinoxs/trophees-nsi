@@ -1,4 +1,5 @@
 import pygame
+
 from src.classes import MapElement, Vector2, Player, Camera
 
 

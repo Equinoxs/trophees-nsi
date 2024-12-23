@@ -12,6 +12,7 @@ class GameLoop:
 
 	def __init__(
 		self,
+		screen = None,
 		control_handler = None,
 		time_handler = None,
 		save_handler = None,
@@ -25,11 +26,15 @@ class GameLoop:
 
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
-			pygame.init()
-			self.screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
+
 			self.running = True
+			self.paused = False
+			self.can_pause = True
+
+			self.screen = screen
+
+			# singletons
 			self.time_handler = time_handler
-			self.time_handler.set_clock(pygame.time.Clock())
 			self.save_handler = save_handler
 			self.saved_data = self.save_handler.load_save()
 			self.player = player
@@ -40,8 +45,7 @@ class GameLoop:
 			self.menu_handler = menu_handler
 			self.log_handler = log_handler
 
-			self.paused = False
-			self.can_pause = True
+			self.time_handler.set_clock(pygame.time.Clock())
 
 			# Main loop
 			while self.running:

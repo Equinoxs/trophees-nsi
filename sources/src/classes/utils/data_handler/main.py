@@ -50,7 +50,10 @@ class DataHandler:
 			'level': 1,
 			'side_effects': [],
 			'boundaries': [],
-			'required_level': 0
+			'required_level': 0,
+			'wall_type': 'wall_1',
+			'wall_height': 80,
+			'wall_width': 10
 		}
 
 		try:
@@ -130,6 +133,21 @@ class DataHandler:
 		if dir_name not in self.images_data or force:
 			self.images_data[dir_name] = self.get_image_data(dir_name)
 		return self.images_data[dir_name]
+
+	def load_wall_images(self, dir_name: str):
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', 'wall', dir_name, 'info.json')
+
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+
+		front_path = os.path.join(os.path.dirname(json_path), data['images']['front'] + '.png')
+		side_path = os.path.join(os.path.dirname(json_path), data['images']['side'] + '.png')
+		top_path = os.path.join(os.path.dirname(json_path), data['images']['top'] + '.png')
+
+		return data, front_path, side_path, top_path
+
+
+
 
 
 	def get_sound_track_data(self, dir_name: str):
@@ -227,6 +245,8 @@ class DataHandler:
 	def list_to_vector2(self, list2: list):
 		if type(list2) == list and len(list2) == 2:
 			return Vector2(list2[0], list2[1])
+		elif isinstance(list2, Vector2):
+			return list2
 		else:
 			raise AttributeError
 

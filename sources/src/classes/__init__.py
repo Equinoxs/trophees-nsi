@@ -1,6 +1,8 @@
 # Constantes
 DEBUG = True
 SAVE = False
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 800
 
 # Il est important de mettre les classes dans l'ordre d'importation.
 # ex : si A importe B, alors on devra importer B avant A dans ce fichier

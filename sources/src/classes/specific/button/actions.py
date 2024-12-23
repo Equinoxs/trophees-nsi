@@ -1,9 +1,6 @@
-import pygame
-import sys
-
 from src.classes import GameLoop, LogHandler
 
-screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
+
 class ButtonActions:
 	_instance = None
 
@@ -14,12 +11,11 @@ class ButtonActions:
 		return cls._instance
 
 	def __init__(self):
-		self.screen = pygame.display.set_mode((1280, 720), flags=pygame.SCALED, vsync=1)
-		return
+		pass
 
 	def pause_game(self):
 		GameLoop().pause_game()
-		GameLoop().get_menu_handler().render(self.screen)  # Rendu du menu avec le rectangle
+		GameLoop().get_menu_handler().render(GameLoop().get_camera().get_screen())  # Rendu du menu avec le rectangle
 
 	def unpause_game(self):
 		GameLoop().unpause_game()
