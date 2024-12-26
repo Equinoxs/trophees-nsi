@@ -22,7 +22,7 @@ class GroundSurface(MapElement):
 			max_height = max(max_height, vector.get_y())
 			relative_position.set_y(min(relative_position.get_y(), vector.get_y()))
 		self.position.add(relative_position)
-		self.boundaries = [vector.add(relative_position * -1) for vector in self.boundaries]
+		self.positive_boundaries = [vector.copy().add(relative_position * -1) for vector in self.boundaries]
 		max_width -= relative_position.get_x()
 		max_height -= relative_position.get_y()
 
@@ -40,7 +40,7 @@ class GroundSurface(MapElement):
 		mask_surface.fill((0, 0, 0, 0))
 		pygame.draw.polygon(
 			mask_surface, (255, 255, 255, 255),
-			[(vector.get_x(), vector.get_y()) for vector in self.boundaries]
+			[vector.convert_to_tuple() for vector in self.positive_boundaries]
 		)
 
 		# Application du masque pour générer l'image finale
@@ -66,26 +66,26 @@ class GroundSurface(MapElement):
 
 	def point_in_boundaries(self, point):
 		x, y = point.convert_to_tuple()
-		n = len(self.boundaries)
 		inside = False
+		n = len(self.boundaries)
+		
+		for i in range(n):
+			px1, py1 = self.boundaries[i].convert_to_tuple()
+			px2, py2 = self.boundaries[(i + 1) % n].convert_to_tuple()
 
-		px1, py1 = self.boundaries[0].convert_to_tuple()
-		for i in range(1, n + 1):
-			px2, py2 = self.boundaries[i % n].convert_to_tuple()
-
-			# Vérifie si le point est dans la plage de y des deux sommets
-			if min(py1, py2) < y <= max(py1, py2):
-				# Calcule l'intersection sur l'axe X avec la frontière du polygone
-				if px1 != px2:  # Évite une division par zéro
-					xinters = (y - py1) * (px2 - px1) / (py2 - py1) + px1
+			# Vérifie si le point est entre les y des deux sommets
+			if (py1 <= y < py2) or (py2 <= y < py1):
+				# Évite la division par zéro pour les segments verticaux
+				if px1 == px2:
+					intersection_x = px1
 				else:
-					xinters = px1
+					# Calcule l'intersection avec la ligne horizontale passant par y
+					a = (py2 - py1) / (px2 - px1)
+					intersection_x = px1 + (y - py1) / a
 
-				# Vérifie si le point est à gauche ou sur l'intersection
-				if x <= xinters:
+				# Si le point est à gauche de l'intersection, change l'état
+				if x < intersection_x:
 					inside = not inside
-
-			px1, py1 = px2, py2
 
 		return inside
 
@@ -96,12 +96,6 @@ class GroundSurface(MapElement):
 			self.does_player_see = True
 
 	def render(self):
-		super().render()
-		if not self.does_player_see:
-			Camera().get_screen().blit(
-				self.access_overlay,
-				(
-					Camera().get_zoom() * (self.position.x - Camera().get_camera().x),
-					Camera().get_zoom() * (self.position.y - Camera().get_camera().y)
-				)
-			)
+		rendered = super().render()
+		if not self.does_player_see and rendered:
+			Camera().draw(self.access_overlay, self.position)

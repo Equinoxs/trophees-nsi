@@ -68,6 +68,44 @@ class Sprite:
 		# Réappliquer les inversions d'axes
 		self.image = pygame.transform.flip(self.image, self.horizontal_flip, self.vertical_flip)
 
+	def skew_image(self, surface: pygame.Surface, horizontal_skew: int, vertical_skew: int):
+		width, height = surface.get_size()
+		new_width = int(width + abs(horizontal_skew))
+		new_height = int(height + abs(vertical_skew))
+		skewed_image = pygame.Surface((new_width, new_height), pygame.SRCALPHA)
+		
+		x_offset = min(0, horizontal_skew)
+		y_offset = min(0, vertical_skew)
+		
+		for x in range(new_width):
+			for y in range(new_height):
+				original_x = x - horizontal_skew * (y / height) + x_offset
+				original_y = y - vertical_skew * (x / width) + y_offset
+
+				if 0 <= original_x < width and 0 <= original_y < height:
+					color = surface.get_at((int(original_x), int(original_y)))
+					skewed_image.set_at((x, y), color)
+
+		return skewed_image
+
+	def fill_surface(self, surface: pygame.Surface, width: int, height: int):
+		surface_width, surface_height = surface.get_size()
+		filled_surface = pygame.Surface((width, height), pygame.SRCALPHA)
+		filled_surface.fill((0,) * 4)
+		
+		# Remplissage bord à bord
+		for x in range(0, width, surface_width):
+			for y in range(0, height, surface_height):
+				blit_width = min(surface_width, width - x)
+				blit_height = min(surface_height, height - y)
+				
+				temp_surface = pygame.Surface((blit_width, blit_height), pygame.SRCALPHA)
+				temp_surface.blit(surface, (0, 0))
+				
+				filled_surface.blit(temp_surface, (x, y))
+
+		return filled_surface
+
 	def get_magnification(self):
 		return self.magnification_coeff
 

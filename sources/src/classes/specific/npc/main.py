@@ -202,10 +202,7 @@ class NPC(MapObject):
 
 	def render(self):
 		width, height = self.image.get_size()
-		Camera().get_screen().blit(
-			self.image,
-			(
-				Camera().get_zoom() * (self.position.x - width / 2 - Camera().get_camera().x),
-				Camera().get_zoom() * (self.position.y - height - Camera().get_camera().y)
-			)
-		)
+		x, y = self.position.convert_to_tuple()
+		self.position.set_all(x - width // 2, y - height)
+		super().render()
+		self.position.set_all(x, y)

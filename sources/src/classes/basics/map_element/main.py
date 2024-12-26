@@ -38,14 +38,10 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		camera_y = Camera().get_camera().y
 		width, height = self.image.get_size()
 
-		if self.position.x + width < camera_x and self.position.x > camera_x + screen_width:
-			if self.position.y + height < camera_y and self.position.y > camera_y + screen_height:
-				return
+		rendered = False
+		if self.position.x + width > camera_x or self.position.x < camera_x + screen_width:
+			if self.position.y + height > camera_y or self.position.y < camera_y + screen_height:
+				Camera().draw(self.image, self.position)
+				rendered = True
 
-		Camera().get_screen().blit(
-			self.image,
-			(
-				Camera().get_zoom() * (self.position.x - camera_x),
-				Camera().get_zoom() * (self.position.y - camera_y)
-			)
-		)
+		return rendered

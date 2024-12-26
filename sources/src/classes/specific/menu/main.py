@@ -18,6 +18,6 @@ class Menu:
 		for ui_element in self.ui_elements:
 			ui_element.update()
 
-	def render(self, screen):
+	def render(self):
 		for element in self.ui_elements:
-			element.render(screen)
+			element.render()
