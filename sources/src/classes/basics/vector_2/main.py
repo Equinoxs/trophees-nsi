@@ -1,5 +1,8 @@
+import math
+
+
 class Vector2:
-	def __init__(self, x, y):
+	def __init__(self, x = 0, y = 0):
 		self.x = x
 		self.y = y
 
@@ -13,10 +16,13 @@ class Vector2:
 		self.x = x
 		self.y = y
 
-	def copy(self, position):
-		self.x = position.get_x()
-		self.y = position.get_y()
-		return self
+	def copy(self, position = None):
+		if position is not None:
+			self.x = position.get_x()
+			self.y = position.get_y()
+			return self
+		else:
+			return Vector2(self.x, self.y)
 
 	def get_x(self):
 		return self.x
@@ -62,6 +68,13 @@ class Vector2:
 
 	def convert_to_tuple(self):
 		return (self.x, self.y)
+
+	def angle_to(self, vector):
+		scalar_product = self.scalar_product(vector)
+		cos_theta = scalar_product / (self.get_norm() * vector.get_norm())
+		cos_theta = max(-1, min(1, cos_theta))
+		angle = math.acos(cos_theta)
+		return angle  # en radians
 
 	def __add__(self, other):
 		if isinstance(other, Vector2):

@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import DEBUG
+from src.classes import GameLoop, DEBUG, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class LogHandler:
@@ -34,20 +34,19 @@ class LogHandler:
 	def get_log(self):
 		return ['==== Log ===='] + self.log[-self.length:]
 
-	def render(self, screen, sound_mixer):
-		screen_width, screen_height = screen.get_size()
+	def render(self):
 		pygame.font.init()
 		font = pygame.font.Font(pygame.font.get_default_font(), 50)
 
 		# Texte DEBUG
 		text_surface = font.render("DEBUG", True, (255, 0, 0))
 		text_width, _ = text_surface.get_size()
-		screen.blit(text_surface, (screen_width - text_width, 0))
+		GameLoop().get_camera().draw(text_surface, (SCREEN_WIDTH - text_width, 0), 'log_handler')
 		font = pygame.font.Font(pygame.font.get_default_font(), 15)
 
 		# Infos Channels
-		for idx, text in enumerate(sound_mixer.generate_debug_data()):
-			screen.blit(font.render(text, True, (255, 0, 0)), (0, 15*idx))
+		for idx, text in enumerate(GameLoop().get_sound_mixer().generate_debug_data()):
+			GameLoop().get_camera().draw(font.render(text, True, (255, 0, 0)), (0, 15*idx), 'log_handler')
 
 		# Log
 		log = LogHandler().get_log()[::-1]
@@ -55,10 +54,10 @@ class LogHandler:
 		longest_text_width, _ = longest_text_surface.get_size()
 		del longest_text_surface
 
-		bg_surface = pygame.Surface(pygame.Rect(screen_width-longest_text_width, screen_height-len(log)*15, screen_width, screen_height).size, pygame.SRCALPHA)
+		bg_surface = pygame.Surface(pygame.Rect(SCREEN_WIDTH - longest_text_width, SCREEN_HEIGHT - len(log)*15, SCREEN_WIDTH, SCREEN_HEIGHT).size, pygame.SRCALPHA)
 		bg_surface.fill((0, 0, 0, 192))
-		screen.blit(bg_surface, (screen_width-longest_text_width, screen_height-len(log)*15))
+		GameLoop().get_camera().draw(bg_surface, (SCREEN_WIDTH - longest_text_width, SCREEN_HEIGHT - len(log)*15), 'log_handler')
 		for idx, text in enumerate(log):
 			text_surface = font.render(text, True, (0, 255, 0))
 			text_width, _ = text_surface.get_size()
-			screen.blit(text_surface, (screen_width-longest_text_width, screen_height-15*(1+idx)))
+			GameLoop().get_camera().draw(text_surface, (SCREEN_WIDTH - longest_text_width, SCREEN_HEIGHT-15*(1+idx)), 'log_handler')

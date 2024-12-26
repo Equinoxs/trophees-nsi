@@ -15,7 +15,6 @@ class ButtonActions:
 
 	def pause_game(self):
 		GameLoop().pause_game()
-		GameLoop().get_menu_handler().render(GameLoop().get_camera().get_screen())  # Rendu du menu avec le rectangle
 
 	def unpause_game(self):
 		GameLoop().unpause_game()
