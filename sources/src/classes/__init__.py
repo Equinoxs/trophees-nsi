@@ -59,6 +59,7 @@ from .basics.map_object.main import MapObject
 
 # Objets enfants de MapObject :
 from .specific.npc.main import NPC
+from .specific.tree.main import Tree
 from .specific.wall.main import Wall
 
 # Map importe NPC

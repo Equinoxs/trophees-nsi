@@ -6,6 +6,8 @@ class Collider:
 		self.hitbox = hitbox
 		if not hasattr(self, 'hitbox_closed'):
 			self.hitbox_closed = True
+		if not hasattr(self, 'hitbox_action_radius'):
+			self.hitbox_action_radius = 5
 
 	# Collision entre un point et une hitbox segmentée
 	def closest_vector_to(self, position: Vector2):
