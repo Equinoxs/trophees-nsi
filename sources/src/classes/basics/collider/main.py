@@ -3,10 +3,9 @@ from src.classes import Vector2, DataHandler, Player
 
 class Collider:
 	def __init__(self, hitbox: list[list[int]]):
-		if hasattr(self, 'boundaries'):
-			self.hitbox = self.boundaries
-		else:
-			self.hitbox = hitbox
+		self.hitbox = hitbox
+		if not hasattr(self, 'hitbox_closed'):
+			self.hitbox_closed = True
 
 	# Collision entre un point et une hitbox segmentée
 	def closest_vector_to(self, position: Vector2):
@@ -17,7 +16,12 @@ class Collider:
 		closest_vector = None
 		point = Player().get_focus().get_position()
 
-		for i in range(len(self.hitbox)):
+		if self.hitbox_closed:
+			iterators = range(len(self.hitbox))
+		else:
+			iterators = range(1, len(self.hitbox))
+
+		for i in iterators:
 			# Points du segment
 			A = DataHandler().list_to_vector2(self.hitbox[i]) + position
 			B = DataHandler().list_to_vector2(self.hitbox[i - 1]) + position
