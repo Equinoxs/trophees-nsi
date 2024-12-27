@@ -1,7 +1,7 @@
 # `Animatable` - gestion de l'animation des `Sprite`
 ## Description
 Cette classe permet aux `Sprite` d'avoir une animation. Celle-ci est composée de plusieurs *frames*, rassemblées dans **une seule** image, et placées côte à côte. Chaque ligne de l'image représente une animation différente. 
->![Animation](sources/assets/images/npc/nathan/image.png) \
+>![Animation](/sources/assets/images/npc/nathan/image.png) \
 > *Exemple d'image d'animation.*
 
 Les informations de l'animation sont présentes dans le fichier `info.json` associé. Chaque entrée du dictionnaire des animations représente une ligne de l'image et chaque entrée du tableau `widths` représente une *frame* de l'animation. 
