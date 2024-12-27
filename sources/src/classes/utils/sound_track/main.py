@@ -1,79 +1,94 @@
 import pygame
-
+import numpy as np
 from src.classes import Vector2, SoundMixer, TimeHandler
 
-
 class SoundTrack:
-	def __init__(self, position: Vector2,  sound_paths: list[str]):
-		self.sounds = {}
-		self.current_sound_name = None
-		for sound_name, sound_path in sound_paths.items():
-			self.sounds[sound_name] = pygame.mixer.Sound(sound_path)
-		self.position = position
-		self.channel = SoundMixer().find_channel()
-		self.paused = None
-		self.play_amount = None
-		SoundMixer().add_sound_track(self)
+    def __init__(self, position: Vector2, sound_paths: list[str]):
+        self.sounds = {}
+        self.current_sound_name = None
+        for sound_name, sound_path in sound_paths.items():
+            self.sounds[sound_name] = pygame.mixer.Sound(sound_path)
+        self.position = position
+        self.channel = SoundMixer().find_channel()
+        self.paused = None
+        self.play_amount = None
+        SoundMixer().add_sound_track(self)
 
-	def contains(self, sound_name: str):
-		return sound_name in set(self.sounds)
+    def contains(self, sound_name: str):
+        return sound_name in set(self.sounds)
 
-	def play(self, sound_name: str, loop: bool = False):
-		self.current_sound_name = sound_name
-		if loop:
-			self.play_amount = -1  # -1 = jouer indéfiniment
-		else:
-			self.play_amount = 0
-		if self.channel is None:
-			self.channel = SoundMixer().find_channel()
-		self.channel.play(self.sounds[sound_name], self.play_amount)
+    def play(self, sound_name: str, loop: bool = False):
+        self.current_sound_name = sound_name
+        if loop:
+            self.play_amount = -1
+        else:
+            self.play_amount = 0
+        if self.channel is None:
+            self.channel = SoundMixer().find_channel()
+        self.channel.play(self.sounds[sound_name], self.play_amount)
 
-	def stop(self):
-		if self.channel is not None and self.get_busy():
-			self.channel.stop()
+    def stop(self):
+        if self.channel is not None and self.get_busy():
+            self.channel.stop()
 
-	def pause(self):
-		self.paused = True
-		if self.channel is not None and self.get_busy():
-			self.channel.pause()
+    def pause(self):
+        self.paused = True
+        if self.channel is not None and self.get_busy():
+            self.channel.pause()
 
-	def unpause(self):
-		self.paused = False
-		if self.channel is not None and self.get_busy():
-			self.channel.unpause()
+    def unpause(self):
+        self.paused = False
+        if self.channel is not None and self.get_busy():
+            self.channel.unpause()
 
-	def set_volume(self, volume: float):
-		return self.channel.set_volume(volume)
+    def set_volume(self, volume: float):
+        return self.channel.set_volume(volume)
 
-	def get_busy(self):
-		return self.channel.get_busy()
+    def set_pitch(self, sound_name: str):
+        original_sound = self.sounds[sound_name]
+        raw_data = pygame.sndarray.array(original_sound)
+        original_sample_rate = pygame.mixer.get_init()[0]
+        pitch = np.random.uniform(0.95, 1.05)
 
-	def release_channel(self):
-		SoundMixer().release_channel(self.channel)
-		del self.channel  # libérer une Channel
+        new_length = int(len(raw_data) / pitch)
+        new_data = np.interp(
+            np.linspace(0, len(raw_data), new_length),
+            np.arange(len(raw_data)),
+            raw_data[:, 0]
+        ).astype(raw_data.dtype)
 
-	def get_debug_string(self):
-		if self.current_sound_name is not None:
-			return f'Channel {SoundMixer().get_index_of_channel(self.channel)}: {id(self.sounds[self.current_sound_name])} ({self.current_sound_name}) {"play" if self.get_busy() else "idle"}'
-		return ''
+        new_sound = pygame.sndarray.make_sound(new_data)
+        return new_sound
+    
+    def get_busy(self):
+        return self.channel.get_busy()
 
-	def remove(self):
-		self.release_channel()
-		SoundMixer().remove_sound_track(self)
+    def release_channel(self):
+        SoundMixer().release_channel(self.channel)
+        del self.channel  # libérer une Channel
 
-	def distance_to(self, vector2: Vector2):
-		if self.position is None:
-			return 0
-		return self.position.distance_to(vector2)
+    def get_debug_string(self):
+        if self.current_sound_name is not None:
+            return f'Channel {SoundMixer().get_index_of_channel(self.channel)}: {id(self.sounds[self.current_sound_name])} ({self.current_sound_name}) {"play" if self.get_busy() else "idle"}'
+        return ''
 
-	def get_position(self):
-		return self.position
+    def remove(self):
+        self.release_channel()
+        SoundMixer().remove_sound_track(self)
 
-	def get_play_amount(self):
-		return self.play_amount
+    def distance_to(self, vector2: Vector2):
+        if self.position is None:
+            return 0
+        return self.position.distance_to(vector2)
 
-	def get_loop(self):
-		return self.play_amount == -1
+    def get_position(self):
+        return self.position
 
-	def get_paused(self):
-		return self.paused
+    def get_play_amount(self):
+        return self.play_amount
+
+    def get_loop(self):
+        return self.play_amount == -1
+
+    def get_paused(self):
+        return self.paused

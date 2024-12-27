@@ -59,8 +59,8 @@ class Sprite:
 			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]["width"]) * coeff)
 
 		# Ajuster pour éviter les erreurs liées à des tailles impaires
-		subsurface_width -= subsurface_width % 2 + 1
-		subsurface_height -= subsurface_height % 2 + 1
+		subsurface_width -= subsurface_width % 2
+		subsurface_height -= subsurface_height % 2
 
 		# Rogner l'image (subsurface)
 		self.image = self.original_image.subsurface((left, top, subsurface_width, subsurface_height))

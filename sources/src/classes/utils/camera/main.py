@@ -47,7 +47,7 @@ class Camera:
 
 	def update(self):
 		_, height = Player().get_focus().get_image().get_size()
-		self.camera.center = (self.zoom * self.player_pos.get_x(), self.zoom * (self.player_pos.get_y() - height / 2))
+		self.camera.center = (self.zoom * int(self.player_pos.get_x()), self.zoom * (int(self.player_pos.get_y()) - height / 2))
 		self.screen.fill((0,) * 3)  # Couleur de fond = noir
 
 		for surface_name in self.surfaces.keys():
