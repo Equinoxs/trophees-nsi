@@ -203,6 +203,6 @@ class NPC(MapObject):
 	def render(self):
 		width, height = self.image.get_size()
 		x, y = self.position.convert_to_tuple()
-		self.position.set_all(x - width // 2, y - height)
+		self.position.set_all(int(x) - width // 2, int(y) - height)
 		super().render()
 		self.position.set_all(x, y)
