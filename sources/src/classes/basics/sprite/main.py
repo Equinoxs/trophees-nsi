@@ -9,18 +9,24 @@ class Sprite:
 		self.vertical_flip = False
 		self.horizontal_flip = False
 		self.magnification_coeff = 1  # image x fois plus grande
+
 		if not hasattr(self, 'image_type'):
 			self.image_type = ''
-   
+
 		if hasattr(self, 'image'):
 			return
-
-		data, png_path = DataHandler().load_image(image_path, self.image_type)
-		self.original_image = pygame.image.load(png_path)
-		self.image = pygame.image.load(png_path)
-		self.image_path = image_path
-		self.image_data = data  # les infos de l'image
-		self.go_to_frame(0, 'inactive')
+		elif image_path is not None:
+			data, png_path = DataHandler().load_image(image_path, self.image_type)
+			self.original_image = pygame.image.load(png_path)
+			self.image = pygame.image.load(png_path)
+			self.image_path = image_path
+			self.image_data = data  # les infos de l'image
+			self.go_to_frame(0, 'inactive')
+		else:
+			self.original_image = None
+			self.image = None
+			self.image_path = ''
+			self.image_data = {}
 
 
 	def switch_horizontal_flip(self):
@@ -44,19 +50,19 @@ class Sprite:
 		width, height = self.image.get_size()
 		if self.image_data['animations'] == {}:
 			return
-		left = sum(frame["width"] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])
+		left = sum(frame['width'] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])
 
 		top = 0
 		for animation_key, val in self.image_data['animations'].items():
 			if animation_key == animation_name:
-				subsurface_height = val["height"]
+				subsurface_height = val['height']
 				break
-			top += val["height"]
+			top += val['height']
 
 		if len(self.image_data['animations'][animation_name]['widths']) == 0:
 			subsurface_width = width
 		else:
-			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]["width"]) * coeff)
+			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]['width']) * coeff)
 
 		# Ajuster pour éviter les erreurs liées à des tailles impaires
 		subsurface_width -= subsurface_width % 2

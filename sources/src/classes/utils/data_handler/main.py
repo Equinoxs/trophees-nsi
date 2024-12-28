@@ -39,8 +39,8 @@ class DataHandler:
 
 		model = {
 			'type': 'required',
-			'image_path': 'required',
-			'name': 'required',
+			'image_path': None,
+			'name': 'anonymous',
 			'position': [0, 0],
 			'authorized_sound_tracks': [],
 			'z_index': 0,

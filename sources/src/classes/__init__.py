@@ -1,5 +1,5 @@
 # Constantes
-DEBUG = True
+DEBUG = False
 SAVE = False
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
@@ -33,6 +33,10 @@ from .utils.control_handler.main import ControlHandler
 # MenuHandler importe DataHandler et Menu qui importe Button qui importe ButtonActions
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
+
+# Objets enfants de Button
+from .specific.mini_map.main import MiniMap
+
 from .specific.menu.main import Menu
 from .utils.menu_handler.main import MenuHandler
 
@@ -58,8 +62,14 @@ from .basics.interactable.main import Interactable
 from .basics.map_object.main import MapObject
 
 # Objets enfants de MapObject :
+from .basics.pillar_object.main import PillarObject
+from .basics.ridge_object.main import RidgeObject
+from .basics.base_object.main import BaseObject
 from .specific.npc.main import NPC
 from .specific.tree.main import Tree
+from .specific.wall_segment.main import WallSegment
+
+# Wall importe WallSegment
 from .specific.wall.main import Wall
 
 # Map importe NPC

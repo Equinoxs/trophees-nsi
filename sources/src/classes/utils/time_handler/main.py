@@ -1,3 +1,6 @@
+from src.classes import GameLoop
+
+
 class TimeHandler:
 	_instance = None
 
@@ -30,10 +33,10 @@ class TimeHandler:
 	def set_clock(self, pygame_clock):
 		self.clock = pygame_clock
 
-	def update(self, paused: bool = False):
+	def update(self):
 		if self.clock:
 			self.dt = self.clock.tick() / 1000 / self.coeff
-		if not paused:
+		if not GameLoop().is_game_paused():
 			for key in self.chrono_tags:
 				self.chrono_tags[key] += self.dt
 

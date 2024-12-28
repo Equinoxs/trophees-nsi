@@ -83,7 +83,6 @@ class GameLoop:
 
 	def pause_game(self):
 		self.paused = True
-		self.menu_handler.set_current_menu('game_paused')
 
 	def unpause_game(self):
 		self.paused = False
@@ -102,15 +101,17 @@ class GameLoop:
 			if self.can_pause:
 				if self.paused:
 					self.unpause_game()
+					self.menu_handler.get_button_actions().do('focus_on_game')
 				else:
 					self.pause_game()
+					self.menu_handler.get_button_actions().do('pause_game')
 				self.can_pause = False
 			self.control_handler.finish_event('pause')
 		else:
 			self.can_pause = True
 
 		# Updates
-		self.time_handler.update(self.paused)
+		self.time_handler.update()
 		self.menu_handler.update()
 		self.sound_mixer.update()
 		if not self.paused:

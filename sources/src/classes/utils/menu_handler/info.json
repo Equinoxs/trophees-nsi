@@ -5,32 +5,50 @@
 				"type": "Button",
 				"label": "Pause",
 				"x": 15,
-				"y": 75,
-				"width": 150,
-				"height": 50,
+				"y": 15,
+				"width": "auto",
+				"height": "auto",
 				"color": [130, 117, 88],
 				"text_color": [255, 255, 255],
 				"font_size": 60,
 				"action": "pause_game"
+			},
+			{
+				"type": "MiniMap",
+				"x": 50,
+				"y": -50,
+				"height": 150
 			}
 		],
 		"game_paused": [
 			{
+				"type": "UIElement",
+				"color": [0, 0, 0, 180]
+			},
+			{
+				"type": "UIElement",
+				"color": [50, 50, 50],
+				"x": "center",
+				"y": "center",
+				"width": 500,
+                "height": 400
+			},
+			{
 				"type": "Button",
 				"label": "Unpause",
-				"x": 540,
+				"x": "center",
 				"y": 250,
 				"width": 200,
 				"height": 50,
 				"color": [153, 153, 153],
 				"text_color": [255, 255, 255],
 				"font_size": 36,
-				"action": "unpause_game"
+				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Quit",
-				"x": 540,
+				"x": "center",
 				"y": 390,
 				"width": 200,
 				"height": 50,
@@ -42,7 +60,7 @@
 			{
 				"type": "Button",
 				"label": "Settings",
-				"x": 540,
+				"x": "center",
 				"y": 320,
 				"width": 200,
 				"height": 50,
@@ -51,7 +69,30 @@
 				"font_size": 36,
 				"action": "open_settings"
 			}
-
+		],
+		"map_opened": [
+			{
+				"type": "UIElement",
+				"color": [0, 0, 0, 180]
+			},
+			{
+				"type": "MiniMap",
+				"x": 270,
+				"y": "center",
+				"height": 700
+			},
+			{
+				"type": "Button",
+				"label": "Close",
+				"color": [100, 100, 100],
+				"text_color": [255, 255, 255],
+				"font_size": 36,
+                "x": 50,
+                "y": 40,
+                "width": "auto",
+                "height": "auto",
+				"action": "focus_on_game"
+			}
 		]
 	}
 }

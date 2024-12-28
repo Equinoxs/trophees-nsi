@@ -60,6 +60,13 @@ class SoundMixer(object):
 	def generate_debug_data(self):
 		return ['==== Channels info ===='] + ([sound_track.get_debug_string() for sound_track in self.sound_tracks if sound_track.get_debug_string() is not None] if len(self.sound_tracks) > 0 else ['No channel'])
 
+	def pause_music(self):
+		mixer.music.pause()
+
+	def unpause_music(self):
+		if not mixer.music.get_busy():
+			mixer.music.unpause()
+
 	def play_music(self, music_name):
 		self.musics_historic.append(music_name)
 		mixer.music.load(DataHandler().load_music(music_name)[1])

@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, MapElement, MapObject, NPC, GroundSurface, Wall, Tree
+from src.classes import DataHandler, GameLoop, SoundMixer, NPC, GroundSurface, Wall, Tree
 
 
 class Map:
@@ -37,13 +37,6 @@ class Map:
 		elements = DataHandler().load_save()['maps'][map_name]['elements']
 		for element in elements:
 			match element['type']:
-
-				case 'MapElement':
-					self.elements.append(MapElement(element)),
-	   
-				case 'MapObject':
-					self.elements.append(MapObject(element)),
-
 				case 'NPC':
 					self.elements.append(NPC(element))
 
@@ -51,7 +44,7 @@ class Map:
 					self.elements.append(GroundSurface(element))
 
 				case 'Wall':
-					self.elements.append(Wall(element))
+					Wall(element, self)  # Ce n'est pas un MapElement
 
 				case "Tree":
 					self.elements.append(Tree(element))

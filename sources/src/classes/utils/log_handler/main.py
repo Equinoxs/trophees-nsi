@@ -13,17 +13,17 @@ class LogHandler:
 		return cls._instance
 
 	def __init__(self):
-		if not hasattr(self, "_initialized"):
+		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.log = []
 			self.length = 10
 
 	def add(self, *args):
-		log = ""
+		log = ''
 		for idx, arg in enumerate(args):
 			log += str(arg)
 			if idx != len(args) - 1:
-				log += " "
+				log += ' '
 		if DEBUG:
 			print(log)
 		self.log.append(log)
@@ -35,11 +35,14 @@ class LogHandler:
 		return ['==== Log ===='] + self.log[-self.length:]
 
 	def render(self):
+		if not DEBUG:
+			return
+
 		pygame.font.init()
 		font = pygame.font.Font(pygame.font.get_default_font(), 50)
 
 		# Texte DEBUG
-		text_surface = font.render("DEBUG", True, (255, 0, 0))
+		text_surface = font.render('DEBUG', True, (255, 0, 0))
 		text_width, _ = text_surface.get_size()
 		GameLoop().get_camera().draw(text_surface, (SCREEN_WIDTH - text_width, 0), 'log_handler')
 		font = pygame.font.Font(pygame.font.get_default_font(), 15)
