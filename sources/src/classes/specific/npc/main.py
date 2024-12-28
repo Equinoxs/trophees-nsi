@@ -1,10 +1,10 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, MapObject, Camera, DataHandler, GameLoop, Player
+from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player
 
 
-class NPC(MapObject):
+class NPC(PillarObject):
 	def __init__(self, data):
 		self.image_type = 'npc'
-		MapObject.__init__(self, data)
+		super().__init__(data)
 		self.initial_position = Vector2(data['position'].get_x(), data['position'].get_y())
 
 		self.sprint = False

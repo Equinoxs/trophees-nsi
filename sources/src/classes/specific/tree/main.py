@@ -1,7 +1,7 @@
-from src.classes import MapObject, Vector2
+from src.classes import PillarObject, Vector2
 
 
-class Tree(MapObject):
+class Tree(PillarObject):
 	def __init__(self, data):
 		self.image_type = 'tree'
 

@@ -1,5 +1,4 @@
-import pygame
-from src.classes import Menu, DataHandler, GameLoop, SCREEN_WIDTH, SCREEN_HEIGHT
+from src.classes import Menu, DataHandler, ButtonActions, SCREEN_WIDTH
 
 
 class MenuHandler:
@@ -17,14 +16,29 @@ class MenuHandler:
 			self.menus = {}
 			self.load_menus()
 			self.current_menu = None
+			self.current_menu_name = None
 			self.set_current_menu('in_game')
-			self.actions = {}
+			self.button_actions = ButtonActions()
+			self.message_displayed = None
+
+	def get_button_actions(self):
+		return self.button_actions
+
+	def get_menu(self, menu_name):
+		return self.menus[menu_name]
 
 	def load_menus(self):
 		menus = DataHandler().load_menus()
 
 		for name, data in menus.items():
 			self.menus[name] = Menu(data)
+			self.current_menu_name = name
+
+	def get_current_menu_name(self):
+		return self.current_menu_name
+
+	def get_current_menu(self):
+		return self.current_menu
 
 	def set_current_menu(self, menu_name: str):
 		if menu_name in self.menus:
@@ -35,10 +49,5 @@ class MenuHandler:
 			self.current_menu.update()
 
 	def render(self):
-		if GameLoop().is_game_paused():
-			pause_overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
-			pause_overlay.fill((0, 0, 0, 200))
-			GameLoop().get_camera().draw(pause_overlay, (0, 0), 'menu')
-
 		if self.current_menu is not None:
 			self.current_menu.render()

@@ -7,6 +7,6 @@ class Button(UIElement):
 		self.action_name = data['action']
 
 	def update(self):
-		UIElement.update(self)
+		super().update()
 		if ControlHandler().is_clicked(self):
 			ButtonActions().do(self.action_name)

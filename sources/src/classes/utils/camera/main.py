@@ -21,7 +21,7 @@ class Camera:
 			self.player_pos = Player().get_focus().get_position()
 			self.zoom = 1
 			elements = Player().get_map().get_elements()
-			self.surfaces = {}
+			self.surfaces = { 'mini_map': pygame.Surface((1200, 1200), pygame.SRCALPHA) }
 			for element in elements:
 				element.set_magnification(element.get_magnification() * self.zoom)
 
@@ -35,7 +35,7 @@ class Camera:
 	def get_screen(self):
 		return self.screen
 
-	def get_surface(self, surface_name: str):
+	def get_surface(self, surface_name: str)->pygame.Surface:
 		self._create_surface(surface_name)
 		return self.surfaces[surface_name]
 
@@ -73,6 +73,7 @@ class Camera:
 
 		match surface_target_name:
 			case 'map':
-				self.surfaces[surface_target_name].blit(surface_to_draw, (x * self.zoom - self.camera.x, y * self.zoom - self.camera.y))
+				self.surfaces['map'].blit(surface_to_draw, (x * self.zoom - self.camera.x, y * self.zoom - self.camera.y))
+				self.surfaces['mini_map'].blit(surface_to_draw, (x + 600, y + 600))
 			case _:
 				self.surfaces[surface_target_name].blit(surface_to_draw, (x, y))

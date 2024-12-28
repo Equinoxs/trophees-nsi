@@ -21,7 +21,9 @@ def objective1():
 		TimeHandler().remove_chrono_tag('objective1')
 	return index
 
-mission_test = [objective1]
+mission_test = [
+    (objective1, 'get your y coordinate below 0 under 10 seconds!')
+]
 
 
 missions = {
