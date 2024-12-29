@@ -35,7 +35,21 @@
 				{ "width": 38, "time": 0.2 }
 			],
 			"height": 93
+		},
+		"running": {
+			"widths": [
+				{ "width": 61, "time": 0.2 },
+				{ "width": 68, "time": 0.2 },
+				{ "width": 60, "time": 0.2 },
+				{ "width": 65, "time": 0.2 },
+				{ "width": 65, "time": 0.2 },
+				{ "width": 76, "time": 0.2 },
+				{ "width": 55, "time": 0.2 },
+				{ "width": 65, "time": 0.2 }
+			],
+			"height": 85
 		}
+
 	},
 	"hitbox": [
 		[-20, 0], [20, 0]
