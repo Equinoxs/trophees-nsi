@@ -15,8 +15,8 @@
 			},
 			{
 				"type": "MiniMap",
-				"x": 50,
-				"y": -50,
+				"x": 1100,
+				"y": -620,
 				"height": 150
 			}
 		],
@@ -29,9 +29,9 @@
 				"type": "UIElement",
 				"color": [50, 50, 50],
 				"x": "center",
-				"y": "center",
+				"y": -300,
 				"width": 500,
-                "height": 400
+                "height": 300
 			},
 			{
 				"type": "Button",
