@@ -37,7 +37,7 @@
 					"type": "GroundSurface",
 					"name": "carpet_test",
 					"image_path": "carpet_1",
-					"boundaries": [[80, 300], [80, 100], [220, 100], [220, 300]]
+					"boundaries": [[140, 200], [140, 80], [220, 80], [220, 200]]
 				},
 				{
 					"type": "GroundSurface",
@@ -62,7 +62,7 @@
 					"type": "Wall",
 					"name": "wall_test",
 					"wall_type": "wall_1",
-					"boundaries": [[50, 50], [420, 400], [500, -500]],
+					"boundaries": [[250, 200], [250, 400], [50, 400], [50, 100], [250, 100]],
 					"z_index": 2
 				},
 				{
