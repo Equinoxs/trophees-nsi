@@ -14,7 +14,7 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 95
+			"height": 97
 		},
 		"walking_backward": {
 			"widths": [
@@ -24,28 +24,28 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 91
+			"height": 90
 		},
 		"walking": {
 			"widths": [
-				{ "width": 44, "time": 0.1 },
-				{ "width": 44, "time": 0.4 },
-				{ "width": 44, "time": 0.3 },
-				{ "width": 49, "time": 0.4 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 50, "time": 0.2 },
 				{ "width": 38, "time": 0.2 }
 			],
 			"height": 93
 		},
 		"running": {
 			"widths": [
-				{ "width": 61, "time": 0.2 },
+				{ "width": 71, "time": 0.2 },
+				{ "width": 79, "time": 0.2 },
 				{ "width": 68, "time": 0.2 },
-				{ "width": 60, "time": 0.2 },
-				{ "width": 65, "time": 0.2 },
-				{ "width": 65, "time": 0.2 },
-				{ "width": 76, "time": 0.2 },
-				{ "width": 55, "time": 0.2 },
-				{ "width": 65, "time": 0.2 }
+				{ "width": 68, "time": 0.2 },
+				{ "width": 68, "time": 0.2 },
+				{ "width": 80, "time": 0.2 },
+				{ "width": 69, "time": 0.2 },
+				{ "width": 67, "time": 0.2 }
 			],
 			"height": 85
 		}
