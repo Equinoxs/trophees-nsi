@@ -63,14 +63,14 @@ class WallSegment(RidgeObject):
 		top_image_perspective = pygame.transform.rotate(top_image, angle)
    
 		# Face avant (front)
-		front_image_perspective = pygame.Surface((0, 0), pygame.SRCALPHA)
+		front_image_perspective = pygame.Surface((0, front_width + self.wall_height), pygame.SRCALPHA)
 		if p1_to_p2.get_x() != 0:
 			front_image = self.fill_surface(self.original_front_image, front_width, self.wall_height)
 			front_image = pygame.transform.scale(front_image, (abs(p1_to_p2.get_x()), self.wall_height))
 			front_image_perspective = self.skew_image(front_image, 0, abs(p1_to_p2.get_y()) * direction)
 
 		# Face latérale (side)
-		side_image_perspective = pygame.Surface((0, 0))
+		side_image_perspective = pygame.Surface((0, self.wall_height - normal_vector.get_y()))
 		if p1_to_p2.get_y() != 0:
 			side_image = self.fill_surface(self.original_side_image, self.wall_width, self.wall_height)
 			side_scaled_width = int(abs(normal_vector.copy().normalize().get_x()) * self.wall_width)
