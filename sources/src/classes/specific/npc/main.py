@@ -107,7 +107,10 @@ class NPC(PillarObject):
 				self.turn_left()
 			elif self.speed_vector.get_x() > 0:
 				self.turn_right()
-			self.change_animation('walking')
+			if self.sprint:
+				self.change_animation('running')
+			else:
+				self.change_animation('walking')
 		else:  # Pas de mouvement ou vitesse négligeable
 			self.change_animation('inactive')
 			self.reset_animation_state()

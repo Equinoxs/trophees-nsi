@@ -59,7 +59,8 @@ class Camera:
 		MenuHandler().render()
 
 		for surface_name in self.surfaces.keys():
-			self.screen.blit(self.surfaces[surface_name], (0, 0))
+			self.screen.blit(self.surfaces['map'], (0, 0))
+			self.screen.blit(self.surfaces['menu'], (0, 0))
 
 	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map'):
 		self._create_surface(surface_target_name)

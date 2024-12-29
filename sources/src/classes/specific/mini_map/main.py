@@ -6,6 +6,7 @@ from src.classes import Button, GameLoop
 class MiniMap(Button):
 	def __init__(self, data):
 		data['action'] = 'open_map'
+		data['color'] = (0,) * 4
 		Button.__init__(self, data)
 
 	def update(self):

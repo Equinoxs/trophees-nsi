@@ -29,6 +29,7 @@ class Animatable:
 
 		previous_animation = self.animation_name
 		self.animation_name = animation_name
+		self.frame_index = 0
 
 		previous_sound = self.animations.get(previous_animation, {}).get('sound')
 		animation_sound = self.animations.get(animation_name, {}).get('sound')
