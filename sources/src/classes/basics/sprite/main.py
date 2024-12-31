@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Vector2, DataHandler
+from src.classes import Vector2, DataHandler, Camera
 
 
 class Sprite:
@@ -21,7 +21,6 @@ class Sprite:
 			self.image = pygame.image.load(png_path)
 			self.image_path = image_path
 			self.image_data = data  # les infos de l'image
-			self.go_to_frame(0, 'inactive')
 		else:
 			self.original_image = None
 			self.image = None
@@ -46,7 +45,7 @@ class Sprite:
 	def get_image_data(self):
 		return self.image_data
 
-	def go_to_frame(self, frame_index, animation_name, coeff=1):
+	def go_to_frame(self, frame_index, animation_name):
 		width, height = self.image.get_size()
 		if self.image_data['animations'] == {}:
 			return
@@ -62,14 +61,15 @@ class Sprite:
 		if len(self.image_data['animations'][animation_name]['widths']) == 0:
 			subsurface_width = width
 		else:
-			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]['width']) * coeff)
-
-		# Ajuster pour éviter les erreurs liées à des tailles impaires
-		subsurface_width -= subsurface_width % 2
-		subsurface_height -= subsurface_height % 2
+			subsurface_width = int((self.image_data['animations'][animation_name]['widths'][frame_index]['width']))
 
 		# Rogner l'image (subsurface)
-		self.image = self.original_image.subsurface((left, top, subsurface_width, subsurface_height))
+		self.image = self.original_image.subsurface((
+			Camera().get_zoom() * left,
+			Camera().get_zoom() * top,
+			Camera().get_zoom() * subsurface_width,
+			Camera().get_zoom() * subsurface_height
+		))
 
 		# Réappliquer les inversions d'axes
 		self.image = pygame.transform.flip(self.image, self.horizontal_flip, self.vertical_flip)
@@ -116,10 +116,27 @@ class Sprite:
 		return self.magnification_coeff
 
 	def set_magnification(self, magnification_coeff):
-		width, height = self.image.get_size()
 
-		# Redimensionner l'image (scale)
-		self.image = pygame.transform.scale(self.image, (width * magnification_coeff, height * magnification_coeff))
+		if self.original_image is not None:
+			original_width, original_height = self.original_image.get_size()
+			self.original_image = pygame.transform.scale(
+				self.original_image,
+				(
+					original_width / self.magnification_coeff * magnification_coeff,
+					original_height / self.magnification_coeff * magnification_coeff
+				)
+			)
+
+		if self.image is not None:
+			width, height = self.image.get_size()
+			self.image = pygame.transform.scale(
+				self.image,
+				(
+					width / self.magnification_coeff * magnification_coeff,
+					height / self.magnification_coeff * magnification_coeff
+				)
+			)
+
 		self.magnification_coeff = magnification_coeff
 
 	def rotate(self, angle):

@@ -66,7 +66,7 @@ class NPC(PillarObject):
 		else:
 			self.sprint = False
 
-		speed_px = self.speed * 100 * Camera().get_zoom()  # 1m = 100px lorsque camera.zoom = 1
+		speed_px = self.speed * 100  # 1m = 100px lorsque camera.zoom = 1
 		if self.sprint:
 			speed_px *= 1.5
 		self.speed_vector.set_norm(speed_px)
@@ -121,11 +121,11 @@ class NPC(PillarObject):
 	def move_npc_to_objective(self):
 		if self.objective is not None and self.must_move:
 			relative_objective = self.objective - self.position
-			if relative_objective.get_norm() <= 1:
+			if relative_objective.get_norm() <= 1 * Camera().get_zoom():
 				self.stop_moving()
 				return False
 
-			self.speed_vector.copy(relative_objective).set_norm(self.speed / 1.5 * 100 * Camera().get_zoom())
+			self.speed_vector.copy(relative_objective).set_norm(self.speed / 1.5 * 100)
 
 			if relative_objective.get_x() < 0:
 				self.turn_left()
@@ -206,6 +206,6 @@ class NPC(PillarObject):
 	def render(self):
 		width, height = self.image.get_size()
 		x, y = self.position.convert_to_tuple()
-		self.position.set_all(int(x) - width // 2, int(y) - height)
+		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
 		self.position.set_all(x, y)

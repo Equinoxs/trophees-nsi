@@ -19,9 +19,9 @@ class Camera:
 			self.frame = self.screen.get_rect()
 			self.camera = self.frame.copy()
 			self.player_pos = Player().get_focus().get_position()
-			self.zoom = 1
+			self.zoom = 1.4
 			elements = Player().get_map().get_elements()
-			self.surfaces = { 'mini_map': pygame.Surface((1200, 1200), pygame.SRCALPHA) }
+			self.surfaces = { 'mini_map': pygame.Surface((self.zoom * 1200, self.zoom * 1200), pygame.SRCALPHA) }
 			for element in elements:
 				element.set_magnification(element.get_magnification() * self.zoom)
 
@@ -47,7 +47,7 @@ class Camera:
 
 	def update(self):
 		_, height = Player().get_focus().get_image().get_size()
-		self.camera.center = (self.zoom * int(self.player_pos.get_x()), self.zoom * (int(self.player_pos.get_y()) - height / 2))
+		self.camera.center = (int(self.zoom * self.player_pos.get_x()), int(self.zoom * self.player_pos.get_y() - height / 2))
 		self.screen.fill((0,) * 3)  # Couleur de fond = noir
 
 		for surface_name in self.surfaces.keys():
@@ -62,7 +62,7 @@ class Camera:
 			self.screen.blit(self.surfaces['map'], (0, 0))
 			self.screen.blit(self.surfaces['menu'], (0, 0))
 
-	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map'):
+	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map', is_player_rendered: bool = False):
 		self._create_surface(surface_target_name)
 
 		if isinstance(position, Vector2):
@@ -74,7 +74,11 @@ class Camera:
 
 		match surface_target_name:
 			case 'map':
-				self.surfaces['map'].blit(surface_to_draw, (x * self.zoom - self.camera.x, y * self.zoom - self.camera.y))
-				self.surfaces['mini_map'].blit(surface_to_draw, (x + 600, y + 600))
+				if is_player_rendered:
+					width, height = surface_to_draw.get_size()
+					self.surfaces['map'].blit(surface_to_draw, ((SCREEN_WIDTH - width) // 2, (SCREEN_HEIGHT - height) // 2))
+				else:
+					self.surfaces['map'].blit(surface_to_draw, (x * self.zoom - self.camera.x, y * self.zoom - self.camera.y))
+				self.surfaces['mini_map'].blit(surface_to_draw, (int(self.zoom * (x + 600)), int(self.zoom * (y + 600))))
 			case _:
 				self.surfaces[surface_target_name].blit(surface_to_draw, (x, y))

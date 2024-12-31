@@ -41,7 +41,10 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		rendered = False
 		if self.position.x + width > camera_x or self.position.x < camera_x + screen_width:
 			if self.position.y + height > camera_y or self.position.y < camera_y + screen_height:
-				Camera().draw(self.image, self.position)
+				if hasattr(self, 'is_player'):
+					Camera().draw(self.image, self.position, is_player_rendered=self.is_player)
+				else:
+					Camera().draw(self.image, self.position)
 				rendered = True
 
 		return rendered
