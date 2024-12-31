@@ -46,7 +46,7 @@ class Sprite:
 		return self.image_data
 
 	def go_to_frame(self, frame_index, animation_name):
-		width, height = self.image.get_size()
+		width, _ = self.image.get_size()
 		if self.image_data['animations'] == {}:
 			return
 		left = sum(frame['width'] for frame in self.image_data['animations'][animation_name]['widths'][0:frame_index])

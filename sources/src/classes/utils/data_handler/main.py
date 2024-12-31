@@ -210,7 +210,7 @@ class DataHandler:
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 
-		return data['menus']
+		return data
 
 	def load_menus(self, force: bool = False):
 		if self.menus_data is None or force:

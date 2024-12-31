@@ -14,10 +14,10 @@ class MenuHandler:
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.menus = {}
-			self.load_menus()
 			self.current_menu = None
 			self.current_menu_name = None
-			self.set_current_menu('in_game')
+			self.load_menus()
+			self.set_current_menu(self.current_menu_name)
 			self.button_actions = ButtonActions()
 			self.message_displayed = None
 
@@ -28,11 +28,13 @@ class MenuHandler:
 		return self.menus[menu_name]
 
 	def load_menus(self):
-		menus = DataHandler().load_menus()
+		data = DataHandler().load_menus()
+		menus = data['menus']
+		if self.current_menu_name is None:
+			self.current_menu_name = data['initial_menu']
 
 		for name, data in menus.items():
 			self.menus[name] = Menu(data)
-			self.current_menu_name = name
 
 	def get_current_menu_name(self):
 		return self.current_menu_name
@@ -43,6 +45,7 @@ class MenuHandler:
 	def set_current_menu(self, menu_name: str):
 		if menu_name in self.menus:
 			self.current_menu = self.menus[menu_name]
+			self.current_menu_name = menu_name
 
 	def update(self):
 		if self.current_menu is not None:

@@ -25,10 +25,6 @@ class Wall:
 			self.data['name'] = self.name + '_' + str(i)
 			self.data['before_angle'] = before_angle
 			self.data['after_angle'] = after_angle
-			print('')
-			print(before_angle / math.pi * 180)
-			print(self.boundaries[i] - self.boundaries[i - 1])
-			print(after_angle / math.pi * 180)
 
 			segment = WallSegment(self.data)
 			self.segments.append(segment)

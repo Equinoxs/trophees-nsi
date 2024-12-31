@@ -1,4 +1,5 @@
 {
+	"initial_menu": "welcome",
 	"menus": {
 		"in_game": [
 			{
@@ -31,7 +32,7 @@
 				"x": "center",
 				"y": -300,
 				"width": 500,
-                "height": 300
+				"height": 300
 			},
 			{
 				"type": "Button",
@@ -87,10 +88,39 @@
 				"color": [100, 100, 100],
 				"text_color": [255, 255, 255],
 				"font_size": 36,
-                "x": 50,
-                "y": 40,
-                "width": "auto",
-                "height": "auto",
+				"x": 50,
+				"y": 40,
+				"width": "auto",
+				"height": "auto",
+				"action": "focus_on_game"
+			}
+		],
+		"welcome": [
+			{
+				"type": "UIElement",
+				"color": [228, 178, 65]
+			},
+			{
+				"type": "UIElement",
+				"color": [228, 178, 65],
+				"text_color": [255, 255, 255],
+				"label": "Trophées NSI",
+				"x": "center",
+				"y": 150,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 80
+			},
+			{
+				"type": "Button",
+				"label": "Play",
+				"color": [255, 255, 255],
+				"text_color": [0, 0, 0],
+				"font_size": 60,
+				"x": "center",
+				"y": -200,
+				"width": "auto",
+				"height": "auto",
 				"action": "focus_on_game"
 			}
 		]

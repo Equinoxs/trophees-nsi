@@ -41,6 +41,7 @@ class WallSegment(RidgeObject):
 		self.image_data['animations'] = {}
 		self.original_image = None
 		self.hitbox_closed = False
+		self.hitbox_action_radius = 20
 
 		super().__init__(data)
 

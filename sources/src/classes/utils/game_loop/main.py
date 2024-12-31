@@ -86,7 +86,6 @@ class GameLoop:
 
 	def unpause_game(self):
 		self.paused = False
-		self.menu_handler.set_current_menu('in_game')
 
 	def throw_event(self, event):
 		self.get_player().get_map().throw_event(event)
@@ -96,19 +95,23 @@ class GameLoop:
 		if self.control_handler.is_activated('quit'):
 			self.running = False
 
-		# Système de pause
-		if self.control_handler.is_activated('pause'):
-			if self.can_pause:
-				if self.paused:
-					self.unpause_game()
-					self.menu_handler.get_button_actions().do('focus_on_game')
-				else:
-					self.pause_game()
-					self.menu_handler.get_button_actions().do('pause_game')
-				self.can_pause = False
-			self.control_handler.finish_event('pause')
-		else:
-			self.can_pause = True
+		# Quelques fonctionnalités
+		if self.camera.get_is_map_rendered():
+			if self.control_handler.is_activated('pause'):
+				if self.can_pause:
+					if self.paused:
+						self.unpause_game()
+						self.menu_handler.get_button_actions().do('focus_on_game')
+					else:
+						self.pause_game()
+						self.menu_handler.get_button_actions().do('pause_game')
+					self.can_pause = False
+				self.control_handler.finish_event('pause')
+			else:
+				self.can_pause = True
+			if self.control_handler.is_activated('open_map'):
+				if self.menu_handler.get_current_menu_name() == 'in_game':
+					self.menu_handler.get_button_actions().do('open_map')
 
 		# Updates
 		self.time_handler.update()

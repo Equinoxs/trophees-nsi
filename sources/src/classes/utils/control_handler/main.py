@@ -21,6 +21,7 @@ class ControlHandler:
 			for action in self.keybinds:
 				self.events[action] = False
 			self.mouse_position = None
+			self.consumed_events = set()
 
 	def handle_events(self):
 		self.mouse_position = pygame.mouse.get_pos()
@@ -32,14 +33,14 @@ class ControlHandler:
 				case pygame.KEYDOWN | pygame.KEYUP:
 					for action in self.keybinds:
 						if self.keybinds[action] == event.key:
-							if event.type == pygame.KEYDOWN:
+							if event.type == pygame.KEYDOWN and action not in self.consumed_events:
 								self.activate_event(action)
-							else:
+							elif event.type == pygame.KEYUP:
 								self.finish_event(action)
+								self.consumed_events.discard(action)
+
 				case pygame.MOUSEBUTTONDOWN:
 					self.activate_event('clicked')
-					
-
 
 	def is_activated(self, event: str):
 		if self.events[event] and event in self.events:
@@ -58,3 +59,6 @@ class ControlHandler:
 
 	def finish_event(self, event: str):
 		self.events[event] = False
+
+	def consume_event(self, event_name: str):
+		self.consumed_events.add(event_name)
