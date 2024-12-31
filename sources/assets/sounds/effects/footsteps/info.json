@@ -6,6 +6,9 @@
 		"walking_concrete": {
 			"extension": "opus"
 		},
+		"walking_grass": {
+			"extension": "mp3"
+		},
 		"walking_gravel": {
 			"extension": "opus"
 		},
