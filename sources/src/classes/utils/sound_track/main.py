@@ -45,21 +45,8 @@ class SoundTrack:
 		return self.channel.set_volume(volume)
 
 	def set_pitch(self, sound_name: str):
-		original_sound = self.sounds[sound_name]
-		raw_data = pygame.sndarray.array(original_sound)
-		original_sample_rate = pygame.mixer.get_init()[0]
-		pitch = np.random.uniform(0.95, 1.05)
-
-		new_length = int(len(raw_data) / pitch)
-		new_data = np.interp(
-			np.linspace(0, len(raw_data), new_length),
-			np.arange(len(raw_data)),
-			raw_data[:, 0]
-		).astype(raw_data.dtype)
-
-		new_sound = pygame.sndarray.make_sound(new_data)
-		return new_sound
-
+		pass
+	
 	def get_busy(self):
 		return self.channel.get_busy()
 

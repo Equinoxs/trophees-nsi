@@ -109,10 +109,13 @@ class GameLoop:
 				self.control_handler.finish_event('pause')
 			else:
 				self.can_pause = True
-			if self.control_handler.is_activated('open_map'):
+			if self.control_handler.is_activated('open_and_close_map'):
 				if self.menu_handler.get_current_menu_name() == 'in_game':
 					self.menu_handler.get_button_actions().do('open_map')
-
+					pygame.time.delay(100)
+				elif self.menu_handler.get_current_menu_name() == 'map_opened':
+					self.menu_handler.get_button_actions().do('focus_on_game')
+					pygame.time.delay(100)
 		# Updates
 		self.time_handler.update()
 		self.menu_handler.update()

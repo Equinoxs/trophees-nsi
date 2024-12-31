@@ -138,6 +138,6 @@
 		"go_right": 100,
 		"go_left": 113,
 		"sprint": 1073742049,
-		"open_map": 109
+		"open_and_close_map": 109
 	}
 }
