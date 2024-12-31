@@ -13,7 +13,6 @@ from .utils.game_loop.main import GameLoop
 from .utils.log_handler.main import LogHandler
 from .utils.time_handler.main import TimeHandler
 from .basics.vector_2.main import Vector2
-from .basics.ui_element.main import UIElement
 from .utils.player.main import Player
 
 # MissionHandler importe Mission
@@ -30,7 +29,8 @@ from .utils.data_handler.main import DataHandler
 # ControlHandler importe DataHandler
 from .utils.control_handler.main import ControlHandler
 
-# MenuHandler importe DataHandler et Menu qui importe Button qui importe ButtonActions
+# MenuHandler importe DataHandler et Menu importe Button qui importe ButtonActions et UIElement
+from .basics.ui_element.main import UIElement
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
 
