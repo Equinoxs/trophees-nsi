@@ -14,6 +14,7 @@ class ButtonActions:
 		pass
 
 	def focus_on_game(self):
+		GameLoop().get_camera().map_rendered()
 		GameLoop().get_menu_handler().set_current_menu('in_game')
 		GameLoop().get_sound_mixer().unpause_music()
 		GameLoop().unpause_game()
@@ -30,6 +31,7 @@ class ButtonActions:
 		pass
 
 	def open_map(self):
+		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
 
 	def do(self, action_name):

@@ -17,7 +17,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "garden",
-					"image_path": "flower_grass",
+					"image_path": "grass",
 					"boundaries": [[-500, -500], [500, -500], [500, 500], [-500, 500]]
 				},
 				{
@@ -62,7 +62,7 @@
 					"type": "Wall",
 					"name": "wall_test",
 					"wall_type": "wall_1",
-					"boundaries": [[250, 600], [250, 400], [-150, 500], [50, 50], [250, 50]],
+					"boundaries": [[250, 200], [250, 400], [50, 400], [50, 50], [250, 50]],
 					"z_index": 2
 				},
 				{
@@ -137,6 +137,7 @@
 		"go_backward": 115,
 		"go_right": 100,
 		"go_left": 113,
-		"sprint": 1073742049
+		"sprint": 1073742049,
+		"open_map": 109
 	}
 }
