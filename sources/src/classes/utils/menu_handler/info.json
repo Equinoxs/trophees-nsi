@@ -56,7 +56,7 @@
 				"color": [153, 153, 153],
 				"text_color": [150, 0, 0],
 				"font_size": 36,
-				"action": "quit_game"
+				"action": "return_to_title"
 			},
 			{
 				"type": "Button",
@@ -87,10 +87,10 @@
 				"label": "Close",
 				"color": [100, 100, 100],
 				"text_color": [255, 255, 255],
-				"font_size": 36,
-				"x": 50,
+				"font_size": 50,
+				"x": 40,
 				"y": 40,
-				"width": "auto",
+				"width": 140,
 				"height": "auto",
 				"action": "focus_on_game"
 			}
@@ -98,11 +98,11 @@
 		"welcome": [
 			{
 				"type": "UIElement",
-				"color": [228, 178, 65]
+				"color": [71, 52, 14]
 			},
 			{
 				"type": "UIElement",
-				"color": [228, 178, 65],
+				"color": [71, 52, 14],
 				"text_color": [255, 255, 255],
 				"label": "Trophées NSI",
 				"x": "center",
@@ -114,14 +114,38 @@
 			{
 				"type": "Button",
 				"label": "Play",
-				"color": [255, 255, 255],
-				"text_color": [0, 0, 0],
-				"font_size": 60,
 				"x": "center",
-				"y": -200,
-				"width": "auto",
-				"height": "auto",
+				"y": 350,
+				"width": 200,
+				"height": 50,
+				"color": [125, 113, 89],
+				"text_color": [204, 174, 114],
+				"font_size": 50,
 				"action": "focus_on_game"
+			},
+			{
+				"type": "Button",
+				"label": "Quit",
+				"x": "center",
+				"y": 490,
+				"width": 200,
+				"height": 50,
+				"color": [125, 113, 89],
+				"text_color": [204, 174, 114],
+				"font_size": 50,
+				"action": "quit_game"
+			},
+			{
+				"type": "Button",
+				"label": "Settings",
+				"x": "center",
+				"y": 420,
+				"width": 200,
+				"height": 50,
+				"color": [125, 113, 89],
+				"text_color": [204, 174, 114],
+				"font_size": 50,
+				"action": "open_settings"
 			}
 		]
 	}

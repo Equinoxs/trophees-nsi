@@ -24,6 +24,11 @@ class ButtonActions:
 		GameLoop().get_menu_handler().set_current_menu('game_paused')
 		GameLoop().get_sound_mixer().pause_music()
 
+	def return_to_title(self):
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('welcome')
+		GameLoop().get_sound_mixer().pause_music()
+
 	def quit_game(self):
 		GameLoop().quit_game()
 
@@ -47,5 +52,7 @@ class ButtonActions:
 				self.open_settings()
 			case 'open_map':
 				self.open_map()
+			case 'return_to_title':
+				self.return_to_title()
 			case _:
 				LogHandler().add(f'Unknown button action: {action_name}')
