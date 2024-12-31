@@ -25,20 +25,22 @@ class ControlHandler:
 
 	def handle_events(self):
 		self.mouse_position = pygame.mouse.get_pos()
-		self.finish_event('clicked')
+		self.finish_event('clicked')  # Réinitialiser l'état de clic à chaque frame
+		
 		for event in pygame.event.get():
 			match event.type:
 				case pygame.QUIT:
 					self.events['quit'] = True
-				case pygame.KEYDOWN | pygame.KEYUP:
+				case pygame.KEYDOWN:
 					for action in self.keybinds:
 						if self.keybinds[action] == event.key:
-							if event.type == pygame.KEYDOWN and action not in self.consumed_events:
+							if action not in self.consumed_events:
 								self.activate_event(action)
-							elif event.type == pygame.KEYUP:
-								self.finish_event(action)
-								self.consumed_events.discard(action)
-
+				case pygame.KEYUP:
+					for action in self.keybinds:
+						if self.keybinds[action] == event.key:
+							self.finish_event(action)
+							self.consumed_events.discard(action)
 				case pygame.MOUSEBUTTONDOWN:
 					self.activate_event('clicked')
 
@@ -57,8 +59,9 @@ class ControlHandler:
 	def activate_event(self, event: str):
 		self.events[event] = True
 
-	def finish_event(self, event: str):
-		self.events[event] = False
+	def finish_event(self, event_name: str):
+		self.events[event_name] = False
 
 	def consume_event(self, event_name: str):
 		self.consumed_events.add(event_name)
+		self.finish_event(event_name)
