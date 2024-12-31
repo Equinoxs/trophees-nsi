@@ -6,7 +6,7 @@ class Map:
 	def __init__(self, map_name: str):
 		self.elements = []
 		self.load_elements_from(map_name)
-		SoundMixer().play_music('wstheme')
+		SoundMixer().play_music('On the Island - Godmode')
 
 	def sort_elements(self):
 		self.elements.sort(key=lambda x: (x.get_z_index(), x.get_position().get_y()))

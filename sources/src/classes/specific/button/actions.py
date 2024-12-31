@@ -35,6 +35,9 @@ class ButtonActions:
 	def open_settings(self):
 		pass
 
+	def open_credits(self):
+		pass
+
 	def open_map(self):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
