@@ -10,10 +10,10 @@ class MiniMap(Button):
 		Button.__init__(self, data)
 
 	def update(self):
-		super().update()
 		self.surface = GameLoop().get_camera().get_surface('mini_map')
 		self.surface = pygame.transform.scale(self.surface, (self.rect.height / self.surface.get_height() * self.surface.get_width(), self.rect.height))
 		self.update_rect()
+		super().update()
 
 	def render(self):
 		GameLoop().get_camera().draw(self.surface, self.position, 'menu')

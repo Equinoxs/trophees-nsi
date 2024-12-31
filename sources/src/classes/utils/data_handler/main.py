@@ -146,6 +146,10 @@ class DataHandler:
 
 		return data, front_path, side_path, top_path
 
+	def load_ui_elements_image(self, image_name: str):
+		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', 'ui_element', image_name + '.png')
+		return png_path
+
 
 
 

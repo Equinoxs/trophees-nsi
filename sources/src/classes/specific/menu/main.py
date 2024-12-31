@@ -1,3 +1,5 @@
+import pygame
+
 from src.classes import UIElement, Button, MiniMap
 
 
@@ -25,8 +27,14 @@ class Menu:
 			self.add_element(ui_element_data)
 
 	def update(self):
+		cursor_pointer = False
 		for ui_element in self.ui_elements:
-			ui_element.update()
+			if ui_element.update():
+				cursor_pointer = True
+		if cursor_pointer:
+			pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+		else:
+			pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
 
 	def render(self):
 		for element in self.ui_elements:

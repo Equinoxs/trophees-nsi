@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import GameLoop, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT
+from src.classes import GameLoop, Vector2, DataHandler, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class UIElement:
@@ -9,8 +9,21 @@ class UIElement:
 		self.border_radius = data.get('border_radius', 0)
 		self.label = data.get('label', '')
 		self.position = Vector2(data.get('x', 0), data.get('y', 0))
-		self.color = tuple(data.get('color', (255,) * 4))
+		self.color = tuple(data.get('color', (0,) * 4))
 		self.text_color = tuple(data.get('text_color', (0, 0, 0)))
+
+		# Les images
+		self.image_path = data.get('image', None)
+		self.original_image = None
+		self.image = None
+		self.image_height = data.get('image_height', None)
+		if self.image_path is not None:
+			self.original_image = pygame.image.load(DataHandler().load_ui_elements_image(self.image_path))
+			self.image = pygame.transform.scale(self.original_image, (self.image_height / self.original_image.get_height() * self.original_image.get_width(), self.image_height))
+
+		# Les bordures
+		self.border_length = data.get('border_length', 0)
+		self.border_color = tuple(data.get('border_color', (0,) * 3))
 
 		width = data.get('width', SCREEN_WIDTH)
 		height = data.get('height', SCREEN_HEIGHT)
@@ -19,9 +32,9 @@ class UIElement:
   
 		# --- Compréhension des dimensions de l'élément ---
 		if width == 'auto' :
-			width = self._text_surface.get_width() + 10  # 10px de margin horizontal
+			width = self._text_surface.get_width() + 10  # 10px de padding horizontal
 		if height == 'auto' :
-			height = self._text_surface.get_height() + 10  # 10px de margin vertical
+			height = self._text_surface.get_height() + 10  # 10px de padding vertical
 
 		self.surface = pygame.Surface((width, height), pygame.SRCALPHA)
 		self.surface.fill(self.color)
@@ -41,6 +54,7 @@ class UIElement:
 		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
 
 	def update_rect(self):
+		# Mise à jour du rect basé sur la position et la surface
 		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
 
 	def get_rect(self):
@@ -51,4 +65,8 @@ class UIElement:
 
 	def render(self):
 		pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.color, self.rect, border_radius=self.border_radius)
+		if self.border_length > 0:
+			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
 		GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, 'menu')
+		if self.image is not None:
+			GameLoop().get_camera().draw(self.image, self.position, 'menu')

@@ -1,3 +1,5 @@
+import pygame
+
 from src.classes import UIElement, ButtonActions, ControlHandler
 
 
@@ -10,3 +12,7 @@ class Button(UIElement):
 		super().update()
 		if ControlHandler().is_clicked(self):
 			ButtonActions().do(self.action_name)
+		if self.rect.collidepoint(pygame.mouse.get_pos()):
+			return True
+		else:
+			return False
