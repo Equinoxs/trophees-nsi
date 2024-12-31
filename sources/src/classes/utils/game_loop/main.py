@@ -29,7 +29,6 @@ class GameLoop:
 
 			self.running = True
 			self.paused = False
-			self.can_pause = True
 
 			self.screen = screen
 
@@ -98,24 +97,18 @@ class GameLoop:
 		# Quelques fonctionnalités
 		if self.camera.get_is_map_rendered():
 			if self.control_handler.is_activated('pause'):
-				if self.can_pause:
-					if self.paused:
-						self.unpause_game()
-						self.menu_handler.get_button_actions().do('focus_on_game')
-					else:
-						self.pause_game()
-						self.menu_handler.get_button_actions().do('pause_game')
-					self.can_pause = False
-				self.control_handler.finish_event('pause')
-			else:
-				self.can_pause = True
-			if self.control_handler.is_activated('open_and_close_map'):
+				if self.menu_handler.get_current_menu_name() == 'in_game':
+					self.menu_handler.get_button_actions().do('pause_game')
+				elif self.menu_handler.get_current_menu_name() == 'game_paused':
+					self.menu_handler.get_button_actions().do('focus_on_game')
+				self.control_handler.consume_event('pause')
+			if self.control_handler.is_activated('toggle_map'):
 				if self.menu_handler.get_current_menu_name() == 'in_game':
 					self.menu_handler.get_button_actions().do('open_map')
-					pygame.time.delay(100)
 				elif self.menu_handler.get_current_menu_name() == 'map_opened':
 					self.menu_handler.get_button_actions().do('focus_on_game')
-					pygame.time.delay(100)
+				self.control_handler.consume_event('toggle_map')
+
 		# Updates
 		self.time_handler.update()
 		self.menu_handler.update()
