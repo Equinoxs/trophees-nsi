@@ -89,6 +89,11 @@ class GroundSurface(MapElement):
 
 		return inside
 
+	def set_magnification(self, magnification_coeff):
+		super().set_magnification(magnification_coeff)
+		width, height = self.access_overlay.get_size()
+		self.access_overlay = pygame.transform.scale(self.access_overlay, (int(width * magnification_coeff), int(height * magnification_coeff)))
+
 	def update(self):
 		if Player().get_level() < self.required_level:
 			self.does_player_see = False

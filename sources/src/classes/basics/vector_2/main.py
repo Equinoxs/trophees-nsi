@@ -62,7 +62,7 @@ class Vector2:
 		if self_dot_self != 0:
 			t = self.scalar_product(vector2) / self.scalar_product(self)
 			orthogonal_projected = self * t
-			return orthogonal_projected
+			return orthogonal_projected  # projeté orthogonal de vector2 sur self
 		else:
 			return Vector2(0, 0)
 
@@ -70,11 +70,37 @@ class Vector2:
 		return (self.x, self.y)
 
 	def angle_to(self, vector):
+		norm_self = self.get_norm()
+		norm_vector = vector.get_norm()
+
+		if norm_self == 0 or norm_vector == 0:
+			return 0
+		
 		scalar_product = self.scalar_product(vector)
-		cos_theta = scalar_product / (self.get_norm() * vector.get_norm())
+		cos_theta = scalar_product / (norm_self * norm_vector)
 		cos_theta = max(-1, min(1, cos_theta))
-		angle = math.acos(cos_theta)
-		return angle  # en radians
+		
+		return math.acos(cos_theta)
+
+	def angle(self):
+		norm = self.get_norm()
+		if norm == 0:
+			return 0
+		angle = math.acos(self.x / norm)
+		if math.sin(self.y / norm) < 0:
+			angle *= -1
+		return angle
+
+	def signed_angle_to(self, vector):
+		signed_angle = vector.angle() - self.angle()
+
+		# Pour obtenir la mesure principale de l'angle
+		if signed_angle > math.pi:
+			signed_angle -= 2 * math.pi
+		elif signed_angle < -math.pi:
+			signed_angle += 2 * math.pi
+
+		return signed_angle
 
 	def __add__(self, other):
 		if isinstance(other, Vector2):

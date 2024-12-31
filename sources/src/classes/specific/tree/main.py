@@ -1,4 +1,4 @@
-from src.classes import PillarObject, Vector2
+from src.classes import PillarObject, Vector2, Camera
 
 
 class Tree(PillarObject):
@@ -17,6 +17,6 @@ class Tree(PillarObject):
 	def render(self):
 		width, height = self.image.get_size()
 		x, y = self.position.convert_to_tuple()
-		self.position.set_all(int(x) - width // 2, int(y) - height)
+		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
 		self.position.set_all(x, y)
