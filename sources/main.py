@@ -8,11 +8,11 @@ def main() -> int:
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED, vsync=1)
 
 	# Initialisation des singletons
+	data_handler = DataHandler()
+	saved_data = data_handler.load_save()
 	sound_mixer = SoundMixer()
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()
-	data_handler = DataHandler()
-	saved_data = data_handler.load_save()
 	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'])
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
