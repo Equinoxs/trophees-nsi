@@ -20,6 +20,7 @@ class SoundMixer(object):
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []
+			self.added_sfx = {}
 
 	def add_sound_track(self, sound_track):
 		self.sound_tracks.append(sound_track)
@@ -34,7 +35,8 @@ class SoundMixer(object):
 				sound_track.pause()
 			elif sound_track.get_paused():
 				sound_track.unpause()
-			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) is 0: continue
+			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) == 0:
+				continue
 			sound_track.set_volume(1/(4*pi*((sound_track.distance_to(player_position)/500)**2)))  # à vérifier...
 
 	def find_channel(self):

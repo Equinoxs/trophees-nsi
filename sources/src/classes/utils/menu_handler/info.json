@@ -1,19 +1,39 @@
 {
 	"initial_menu": "welcome",
+
+	"classes": {
+		"interactive_button": {
+			"border_radius": 4,
+			"border_length": 2,
+			"border_color": [46, 34, 9],
+			"color": [125, 113, 89],
+			"text_color": [204, 174, 114]
+		},
+		"welcome_button": {
+			"class": "interactive_button",
+			"x": "center",
+			"width": 400,
+			"height": 50,
+			"font_size": 50
+		},
+		"pause_button": {
+			"class": "interactive_button",
+			"x": "center",
+			"width": 200,
+			"height": 50,
+			"font_size": 36
+		}
+	},
 	"menus": {
 		"in_game": [
 			{
 				"type": "Button",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
 				"label": "I I",
+				"class": "interactive_button",
 				"x": 20,
 				"y": 15,
 				"width": 50,
 				"height": "auto",
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
 				"font_size": 60,
 				"action": "pause_game"
 			},
@@ -43,46 +63,22 @@
 			{
 				"type": "Button",
 				"label": "Unpause",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
+				"class": "pause_button",
 				"y": 250,
-				"width": 200,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 36,
 				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Return to title",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
+				"class": "pause_button",
 				"y": 390,
-				"width": 200,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 36,
 				"action": "return_to_title"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
+				"class": "pause_button",
 				"y": 320,
-				"width": 200,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 36,
 				"action": "open_settings"
 			}
 		],
@@ -131,62 +127,30 @@
 			},
 			{
 				"type": "Button",
+				"class": "welcome_button",
 				"label": "Play",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
 				"y": 300,
-				"width": 400,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 50,
 				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
+				"class": "welcome_button",
 				"y": 380,
-				"width": 400,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 50,
 				"action": "open_settings"
 			},
 			{
 				"type": "Button",
 				"label": "Credits",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
 				"y": 460,
-				"width": 400,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 50,
+				"class": "welcome_button",
 				"action": "open_credits"
 			},
 			{
 				"type": "Button",
 				"label": "Quit",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
-				"x": "center",
+				"class": "welcome_button",
 				"y": 540,
-				"width": 400,
-				"height": 50,
-				"color": [125, 113, 89],
-				"text_color": [204, 174, 114],
-				"font_size": 50,
 				"action": "quit_game"
 			}
 		]
