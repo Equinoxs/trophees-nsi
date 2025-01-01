@@ -72,7 +72,8 @@
 				"label": "Return to title",
 				"class": "pause_button",
 				"y": 390,
-				"action": "return_to_title"
+				"action": "return_to_title",
+				"color": [61, 53, 39]
 			},
 			{
 				"type": "Button",
@@ -99,7 +100,7 @@
 				"border_radius": 4,
 				"border_length": 2,
 				"border_color": [46, 34, 9],
-				"color": [125, 113, 89],
+				"color": [61, 53, 39],
 				"text_color": [204, 174, 114],
 				"font_size": 50,
 				"x": 50,
@@ -151,7 +152,8 @@
 				"label": "Quit",
 				"class": "welcome_button",
 				"y": 540,
-				"action": "quit_game"
+				"action": "quit_game",
+				"color": [61, 53, 39]
 			}
 		]
 	}

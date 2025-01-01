@@ -1,0 +1,57 @@
+{
+	"animations": {
+		"inactive": {
+			"widths":[
+				{ "width": 44, "time": 1000 }
+			],
+			"height": 94
+		},
+		"walking_forward": {
+			"widths": [
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 }
+			],
+			"height": 96
+		},
+		"walking_backward": {
+			"widths": [
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 },
+				{ "width": 43, "time": 0.2 }
+			],
+			"height": 90
+		},
+		"walking": {
+			"widths": [
+				{ "width": 45, "time": 0.3 },
+				{ "width": 45, "time": 0.2 },
+				{ "width": 44, "time": 0.2 },
+				{ "width": 50, "time": 0.3 },
+				{ "width": 38, "time": 0.2 }
+			],
+			"height": 93
+		},
+		"running": {
+			"widths": [
+				{ "width": 72, "time": 0.2 },
+				{ "width": 78, "time": 0.2 },
+				{ "width": 68, "time": 0.2 },
+				{ "width": 68, "time": 0.2 },
+				{ "width": 68, "time": 0.2 },
+				{ "width": 80, "time": 0.2 },
+				{ "width": 69, "time": 0.2 },
+				{ "width": 67, "time": 0.2 }
+			],
+			"height": 85
+		}
+
+	},
+	"hitbox": [
+		[-20, 0], [20, 0]
+	]
+}
