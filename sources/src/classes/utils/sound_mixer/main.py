@@ -1,5 +1,7 @@
 from math import pi
 from pygame import mixer
+
+
 from src.classes import DataHandler, LogHandler, Player, GameLoop
 
 
@@ -21,6 +23,10 @@ class SoundMixer(object):
 			self.channels = []
 			self.musics_historic = []
 			self.added_sfx = {}
+			added_sfx_paths = DataHandler().get_sound_track_data('added_sfx')[1]
+			for name, path in added_sfx_paths.items():
+				self.added_sfx[name] = mixer.Sound(path)
+			self.sfx_channel = self.find_channel()
 
 	def add_sound_track(self, sound_track):
 		self.sound_tracks.append(sound_track)
@@ -78,3 +84,6 @@ class SoundMixer(object):
 	def play_music_prev(self):
 		if len(self.musics_historic) >= 2:
 			self.play_music(self.musics_historic[-2])
+
+	def play_sfx(self, sfx_name, play_amount = 0):
+		self.sfx_channel.play(self.added_sfx[sfx_name], play_amount)

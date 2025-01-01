@@ -63,8 +63,8 @@ from .basics.map_object.main import MapObject
 
 # Objets enfants de MapObject :
 from .basics.pillar_object.main import PillarObject
-from .basics.ridge_object.main import RidgeObject
 from .basics.base_object.main import BaseObject
+from .basics.ridge_object.main import RidgeObject
 from .specific.npc.main import NPC
 from .specific.tree.main import Tree
 from .specific.wall_segment.main import WallSegment

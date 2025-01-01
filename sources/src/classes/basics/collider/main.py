@@ -9,14 +9,19 @@ class Collider:
 		if not hasattr(self, 'hitbox_action_radius'):
 			self.hitbox_action_radius = 5
 
+	def get_hitbox(self):
+		return self.hitbox
+
+	def get_hitbox_action_radius(self):
+		return self.hitbox_action_radius
+
 	# Collision entre un point et une hitbox segmentée
-	def closest_vector_to(self, position: Vector2):
-		if len(self.hitbox) == 0 or self == Player().get_focus():
+	def closest_vector_to(self, point: Vector2):
+		if len(self.hitbox) == 0:
 			return Vector2(10, 10)  # Pas de hitbox, pas de collision
 
 		closest_distance = float('inf')
 		closest_vector = None
-		point = Player().get_focus().get_position()
 
 		if self.hitbox_closed:
 			iterators = range(len(self.hitbox))
@@ -25,8 +30,8 @@ class Collider:
 
 		for i in iterators:
 			# Points du segment
-			A = DataHandler().list_to_vector2(self.hitbox[i]) + position
-			B = DataHandler().list_to_vector2(self.hitbox[i - 1]) + position
+			A = DataHandler().list_to_vector2(self.hitbox[i]) + self.position
+			B = DataHandler().list_to_vector2(self.hitbox[i - 1]) + self.position
 			AB = B - A
 			AP = point - A
 
@@ -55,7 +60,7 @@ class Collider:
 		# Si la hitbox est un seul point (pas de segment)
 		if len(self.hitbox) == 1:
 			point_in_hitbox = DataHandler().list_to_vector2(self.hitbox[0])
-			distance_vector = point - (point_in_hitbox + position)
+			distance_vector = point - (point_in_hitbox + self.position)
 			distance = distance_vector.get_norm()
 			if distance < closest_distance:
 				closest_distance = distance

@@ -1,15 +1,22 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, NPC, GroundSurface, Wall, Tree
+from src.classes import DataHandler, GameLoop, SoundMixer, MapObject, NPC, GroundSurface, Wall, Tree
 
 
 class Map:
-
 	def __init__(self, map_name: str):
 		self.elements = []
 		self.load_elements_from(map_name)
 		SoundMixer().play_music('On the Island - Godmode')
 
 	def sort_elements(self):
-		self.elements.sort(key=lambda x: (x.get_z_index(), x.get_position().get_y()))
+		sorted = False
+		while not sorted:
+			sorted = True
+			for i in range(len(self.elements) - 1):
+				if not isinstance(self.elements[i], GroundSurface):
+					if self.elements[i].goes_on_top_of(self.elements[i + 1]):
+						self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
+						sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
+
 
 	def search_by_name(self, npc_name: str):
 		for el in self.elements:
