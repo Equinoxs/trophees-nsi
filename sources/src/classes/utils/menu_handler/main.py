@@ -14,6 +14,7 @@ class MenuHandler:
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.menus = {}
+			self.classes = {}
 			self.current_menu = None
 			self.current_menu_name = None
 			self.load_menus()
@@ -27,9 +28,16 @@ class MenuHandler:
 	def get_menu(self, menu_name):
 		return self.menus[menu_name]
 
+	def get_class(self, class_name):
+		if class_name in set(self.classes.keys()):
+			return self.classes[class_name]
+		else:
+			return {}
+
 	def load_menus(self):
 		data = DataHandler().load_menus()
 		menus = data['menus']
+		self.classes = data['classes']
 		if self.current_menu_name is None:
 			self.current_menu_name = data['initial_menu']
 

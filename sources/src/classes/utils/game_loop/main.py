@@ -15,7 +15,7 @@ class GameLoop:
 		screen = None,
 		control_handler = None,
 		time_handler = None,
-		save_handler = None,
+		data_handler = None,
 		player = None,
 		sound_mixer = None,
 		camera = None,
@@ -34,8 +34,8 @@ class GameLoop:
 
 			# singletons
 			self.time_handler = time_handler
-			self.save_handler = save_handler
-			self.saved_data = self.save_handler.load_save()
+			self.data_handler = data_handler
+			self.saved_data = self.data_handler.load_save()
 			self.player = player
 			self.camera = camera
 			self.control_handler = control_handler
@@ -70,6 +70,9 @@ class GameLoop:
 
 	def get_menu_handler(self):
 		return self.menu_handler
+
+	def get_data_handler(self):
+		return self.data_handler
 
 	def get_log_handler(self):
 		return self.log_handler

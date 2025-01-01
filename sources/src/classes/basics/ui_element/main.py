@@ -5,6 +5,15 @@ from src.classes import GameLoop, Vector2, DataHandler, SCREEN_WIDTH, SCREEN_HEI
 
 class UIElement:
 	def __init__(self, data):
+		classes_data = DataHandler().load_menus()['classes']
+		while 'class' in set(data.keys()):  # Pour que les classes puissent utiliser des classes
+			class_names = data.pop('class')
+			class_names = class_names.split(' ')
+			class_names.reverse()
+			for class_name in class_names:  # Pour pouvoir utiliser plusieurs classes en meme temps séparés d'un espace
+				class_properties = classes_data.get(class_name, {})
+				data = {**class_properties, **data}
+
 		# Données de bases
 		self.border_radius = data.get('border_radius', 0)
 		self.label = data.get('label', '')

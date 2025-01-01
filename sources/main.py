@@ -11,8 +11,8 @@ def main() -> int:
 	sound_mixer = SoundMixer()
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()
-	save_handler = DataHandler()
-	saved_data = save_handler.load_save()
+	data_handler = DataHandler()
+	saved_data = data_handler.load_save()
 	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'])
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
@@ -23,7 +23,7 @@ def main() -> int:
 		screen,
 		control_handler,
 		time_handler,
-		save_handler,
+		data_handler,
 		player,
 		sound_mixer,
 		camera,
