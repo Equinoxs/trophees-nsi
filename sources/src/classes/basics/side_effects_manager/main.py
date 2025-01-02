@@ -11,10 +11,10 @@ class SideEffectsManager:
 		return self.side_effects_data[key]
 
 	def add_side_effect(self, side_effect_name: str):
-		self.side_effects.append(DataHandler().get_interaction(side_effect_name))
+		self.side_effects.append(DataHandler().get_side_effect(side_effect_name))
 
 	def remove_side_effect(self, side_effect_name: str):
-		side_effect = DataHandler().get_interaction(side_effect_name)
+		side_effect = DataHandler().get_side_effect(side_effect_name)
 		self.side_effects.remove(side_effect)
 
 	def apply_side_effects(self):
