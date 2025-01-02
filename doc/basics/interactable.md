@@ -1,8 +1,12 @@
-# `Interactable` - gestion des interactions des `Sprite` avec le joueur
+# `Interactable` - gestion des interactions avec le joueur
 ## Description
-Cette classe permet à un `Sprite` d'exécuter une action lorsque le `Player` interagit avec lui par l'appui de la touche associée.
+Cette classe est nécessaire aux classes enfant pour avoir une interaction avec le `Player`.
 
-Ces fonctions sont stockées dans le fichier `data_functions`, et celle associée au `Sprite` est récupérée à l'initialisation.
+En fournissant une méthode unique à appeler lors de l'interaction, elle exécute une action spécifique à la classe enfant.
+
+Les fonctions exécutées lors des interactions sont stockées dans le dictionnaire `interactions` dans le fichier `data_functions`,
+et celle associée à la classe enfant est assignée à l'initialisation en fonction des données du fichier JSON.
+
 ## Attribut
 - `interaction` : *`function`* \
   Fonction à exécuter lors de l'interaction.
