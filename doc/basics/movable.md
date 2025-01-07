@@ -15,11 +15,11 @@ elle permet un déplacement linéaire et lisse.
   Initialise le vecteur de vitesse à un vecteur nul.
 
 - `apply_force(force)` &rarr; `None` \
-  Applique une force sur `speed_vector`. \
+  Applique une force sur `speed_vector`, ce qui a pour effet de provoquer une accélération sur un modèle quadratique. \
   Paramètre :
   * `force` : *`Vector2`*
 
 - `move(sprite_position)` &rarr; `None` \
-  Met à jour `sprite_position` en fonction de `speed_vector`. \
+  Applique `speed_vector` sur `sprite_position` en le multipliant par `dt` (&Delta;t) pour respecter la vitesse. \
   Paramètres :
   * `sprite_position` : *`Vector2`*

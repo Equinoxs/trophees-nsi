@@ -22,13 +22,13 @@ et un nom associé à l'instance.
   Initialise les classes parentes et les attributs
   en fonction de `data`, fourni par `DataHandler` en fonction du fichier JSON. \
   Paramètre :
-  - `data` : *`dict`*
+  * `data` : *`dict`*
 
 - `set_z_index_prev()` &rarr; `None` \
   Associe la valeur du précédent `z_index` à l'attribut `z_index`.
 
 - `catch_event(event)` &rarr; `None` \
-  Méthode présente à des fins de compatibilité pour les classes enfant. \
+  Méthode permettant l'utilisation de mécanismes à interruptions. \
   Paramètre :
   * `event` : *`object`*
 
