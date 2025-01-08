@@ -1,8 +1,8 @@
-from src.classes import DataHandler
+from src.classes import SideEffects
 
 class SideEffectsManager:
 	def __init__(self, side_effects):
-		self.side_effects = side_effects
+		self.side_effects = set(side_effects)
 		self.side_effects_data = {}
 
 	def side_effect_data(self, key: str, val = None):
@@ -11,12 +11,11 @@ class SideEffectsManager:
 		return self.side_effects_data[key]
 
 	def add_side_effect(self, side_effect_name: str):
-		self.side_effects.append(DataHandler().get_side_effect(side_effect_name))
+		self.side_effects.add(side_effect_name)
 
 	def remove_side_effect(self, side_effect_name: str):
-		side_effect = DataHandler().get_side_effect(side_effect_name)
-		self.side_effects.remove(side_effect)
+		self.side_effects.discard(side_effect_name)
 
 	def apply_side_effects(self):
-		for side_effect in self.side_effects:
-			side_effect(self)
+		for side_effect_name in self.side_effects:
+			SideEffects().do(side_effect_name, self)

@@ -1,4 +1,4 @@
-from src.classes import GameLoop
+from src.classes import GameLoop, Missions
 
 
 class Mission:
@@ -6,8 +6,8 @@ class Mission:
 		self.name = name
 		self.description = mission_data['description']
 		self.required_level = mission_data['required_level']
-		self.rewards = mission_data['rewards']  # TODO: implémenter des récompenses plus complexes une fois que l'inventaire sera fait
-		self.objectives = mission_data['objectives']
+		self.rewards = mission_data['rewards']
+		self.objectives_len = mission_data.get('objectives_len', 1)
 		self.objective_index = 0
 		self.indicator = 0
 		self.displayed_description = None
@@ -19,7 +19,7 @@ class Mission:
 		return self.description
 
 	def get_objective_description(self):
-		return self.objectives[self.objective_index][1]
+		return Missions().get_description(self.name, self.objective_index)
 
 	def get_required_level(self):
 		return self.required_level
@@ -38,6 +38,9 @@ class Mission:
 			'y': 20,
 			'width': 'auto',
 			'height': 'auto',
+			'border_radius': 20,
+			'border_length': 1,
+			'border_color': (255,) * 3,
 			'text_color': (255,) * 3,
 			'color': (0, 0, 0, 80)
 		}
@@ -50,13 +53,13 @@ class Mission:
 
 	def update(self):
 		if self.indicator == 0:
-			self.indicator = self.objectives[self.objective_index][0]()
+			self.indicator = Missions().do(self.name, self.objective_index)
 			self.display_objective_description()
 		elif self.indicator == 1:
 			self.objective_index += 1
 			self.display_objective_description()
 			self.inidcator = 0
-			if self.objective_index == len(self.objectives):
+			if self.objective_index == self.objectives_len:
 				self.delete_objective_description()
 				return 1  # mission_réussie
 		elif self.indicator == -1:

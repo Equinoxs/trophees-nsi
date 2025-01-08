@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player
+from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents
 
 
 class NPC(PillarObject):
@@ -149,10 +149,10 @@ class NPC(PillarObject):
 					index_in_timeline = index - 1
 					break
 
-		if index_in_timeline is None or not callable(self.pattern_timeline[index_in_timeline]):
+		if index_in_timeline is None or type(self.pattern_timeline[index_in_timeline]) == Vector2:
 			return False
 
-		do_again = self.pattern_timeline[index_in_timeline](self, TimeHandler().add_chrono_tag(self.name))
+		do_again = PatternEvents().do(self.pattern_timeline[index_in_timeline], self, TimeHandler().add_chrono_tag(self.name))
 		if do_again is False:
 			TimeHandler().remove_chrono_tag(self.name)
 

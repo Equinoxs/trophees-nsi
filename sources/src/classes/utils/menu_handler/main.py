@@ -1,4 +1,4 @@
-from src.classes import Menu, DataHandler, ButtonActions, SCREEN_WIDTH
+from src.classes import Menu, DataHandler, ButtonActions
 
 
 class MenuHandler:
@@ -15,6 +15,7 @@ class MenuHandler:
 			self._initialized = True
 			self.menus = {}
 			self.classes = {}
+			self.markers = {}
 			self.current_menu = None
 			self.current_menu_name = None
 			self.load_menus()
@@ -43,6 +44,13 @@ class MenuHandler:
 
 		for name, data in menus.items():
 			self.menus[name] = Menu(data)
+
+	def add_marker(self, marker_data: dict):
+		marker_data['type'] = 'Marker'
+		return self.menus['in_game'].add_element(marker_data)
+
+	def remove_marker(self, marker_ref):
+		self.menus['in_game'].delete_element(marker_ref)
 
 	def get_current_menu_name(self):
 		return self.current_menu_name

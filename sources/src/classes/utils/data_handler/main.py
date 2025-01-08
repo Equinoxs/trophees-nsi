@@ -1,8 +1,7 @@
 import json
 import os
 
-from src.classes import Vector2, MissionHandler, TimeHandler, Player, LogHandler, SAVE
-from src.classes import interactions, pattern_events, side_effects, missions
+from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE
 
 
 class DataHandler:
@@ -44,7 +43,7 @@ class DataHandler:
 			'position': [0, 0],
 			'authorized_sound_tracks': [],
 			'z_index': 0,
-			'interaction': 'default',
+			'interaction': None,
 			'pattern_timeline': [],
 			'pattern_type': 'loop',
 			'level': 1,
@@ -74,9 +73,8 @@ class DataHandler:
 
 				# Post-processing
 				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
-				data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'], self.get_pattern_event)
-				data['maps'][map]['elements'][element_index]['interaction'] = self.get_interaction(data['maps'][map]['elements'][element_index]['interaction'])
-				data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'], self.get_side_effect)
+				data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'])
+				data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'])
 				data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
 		return data
 
@@ -197,9 +195,7 @@ class DataHandler:
 	def get_missions_data(self):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'mission_handler', 'missions.json')
 		with open(json_path, 'r') as file:
-			data = json.load(file)
-		for mission in data['missions']:
-			data['missions'][mission]['objectives'] = missions[mission]
+			data = json.load(file) 
 		return data['missions']
 
 	def load_missions(self, force: bool = False):
@@ -223,29 +219,6 @@ class DataHandler:
 
 
 
-	def get_interaction(self, interaction_name: str = None):
-		if len(interaction_name) > 6 and interaction_name[:6] == 'start_' and interaction_name[6:] in missions:
-			def start_new_mission(self):
-				MissionHandler().start_mission(interaction_name[6:])
-			return start_new_mission
-		if interaction_name == '' or interaction_name is None or interaction_name not in interactions:
-			return None
-		return interactions.get(interaction_name)
-
-	def get_side_effect(self, side_effect_name: str = None):
-		if side_effect_name == '' or side_effect_name is None or side_effect_name not in side_effects:
-			def default(self):
-				return
-			return default
-		return side_effects.get(side_effect_name)
-
-	def get_pattern_event(self, pattern_event_name: str = None):
-		if pattern_event_name == '' or pattern_event_name is None or pattern_event_name not in pattern_events:
-			def default(self, delta_time):
-				pass
-			return default
-		return pattern_events.get(pattern_event_name)
-
 	def list_to_vector2(self, list2: list):
 		if type(list2) == list and len(list2) == 2:
 			return Vector2(list2[0], list2[1])
@@ -254,15 +227,13 @@ class DataHandler:
 		else:
 			raise AttributeError
 
-	def list_transform(self, list2: list, collecting_method = None):
+	def list_transform(self, list2: list):
 		new_list = []
 		for el in list2:
 			if type(el) == list:
 				new_list.append(Vector2(el[0], el[1]))
-			elif type(el) == str and collecting_method is not None:
-				new_list.append(collecting_method(el))
 			else:
-				raise ValueError
+				new_list.append(el)
 		return new_list
 
 

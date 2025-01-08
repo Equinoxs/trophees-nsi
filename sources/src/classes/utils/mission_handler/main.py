@@ -36,10 +36,11 @@ class MissionHandler:
 			'type': 'UIElement',
 			'x': -20,
 			'y': 15,
-			'color': (0,) * 3,
+			'color': (0, 0, 0, 200),
 			'text_color': (255,) * 3,
 			'width': 'auto',
 			'height': 'auto',
+			'border_radius': 20,
 			'label': 'mission started : ' + self.current_mission.get_description()
 		}
 
