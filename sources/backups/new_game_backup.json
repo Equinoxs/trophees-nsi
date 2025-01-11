@@ -69,7 +69,7 @@
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
-					"position": [0, 0],
+					"position": [-200, -50],
 					"image_path": "nathan",
 					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
