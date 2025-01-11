@@ -12,7 +12,7 @@ elle permet un déplacement linéaire et lisse.
 
 ## Méthodes
 - `__init__` &rarr; `None` \
-  Initialise le vecteur de vitesse à un vecteur nul.
+  Initialise le vecteur de vitesse au vecteur nul.
 
 - `apply_force(force)` &rarr; `None` \
   Applique une force sur `speed_vector`, ce qui a pour effet de provoquer une accélération sur un modèle quadratique. \

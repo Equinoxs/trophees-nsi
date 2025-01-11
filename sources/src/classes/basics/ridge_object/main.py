@@ -1,5 +1,4 @@
-from src.classes import MapObject
-
+from src.classes import MapObject, Vector2
 
 class RidgeObject(MapObject):
 	def __init__(self, data):
@@ -18,9 +17,32 @@ class RidgeObject(MapObject):
 				return self.closest_vector_to(map_object.get_hitbox()[0]).get_y() < 0
 			case 'ridge':
 				ridge_hitbox = map_object.get_hitbox()
-				min_x = min(self.hitbox[0].get_x(), self.hitbox[1].get_x())
-				max_x = max(self.hitbox[0].get_x(), self.hitbox[1].get_x())
-				if min_x <= ridge_hitbox[0].get_x() <= max_x and min_x <= ridge_hitbox[1].get_x() <= max_x:
-					return self.closest_vector_to((ridge_hitbox[0] + ridge_hitbox[1]) * 0.5).get_y() < 0
+				closest_vector = self.closest_vector_to_segment(ridge_hitbox[0] + map_object.get_position(), ridge_hitbox[1] + map_object.get_position())
+				if closest_vector.get_y() != 0:
+					return closest_vector.get_y() < 0
 				else:
-					return False
+					return closest_vector.get_x() < 0
+
+	def closest_vector_to_segment(self, vector1: Vector2, vector2: Vector2) -> Vector2:
+		# 4 possibilités pour ce vecteur. Une pour chaque coin car le vecteur recherché
+		# est part ou arrive depuis ou vers un des quatres extremités : on choisira le plus court
+		vector3, vector4 = tuple(self.get_hitbox())
+		self_segment = vector4 - vector3
+		vector3 += self.position
+		vector4 += self.position
+		vector3 += self_segment.copy().normalize()
+		vector4 -= self_segment.copy().normalize()
+  
+		other_segment = vector2 - vector1
+		vector1 += other_segment.copy().normalize()
+		vector2 -= other_segment.copy().normalize()
+
+		possibilities = []
+
+		possibilities.append(-vector1.closest_vector_to_segment(vector3, vector4))
+		possibilities.append(-vector2.closest_vector_to_segment(vector3, vector4))
+		possibilities.append(vector3.closest_vector_to_segment(vector1, vector2))
+		possibilities.append(vector4.closest_vector_to_segment(vector1, vector2))
+
+		possibilities.sort(key=lambda v: v.get_squared_norm())
+		return possibilities[0]
