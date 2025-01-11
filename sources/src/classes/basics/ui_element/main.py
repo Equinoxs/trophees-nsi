@@ -65,6 +65,7 @@ class UIElement:
 	def update_rect(self):
 		# Mise à jour du rect basé sur la position et la surface
 		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
+		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
 
 	def get_rect(self):
 		return self.rect
@@ -73,6 +74,7 @@ class UIElement:
 		pass
 
 	def render(self):
+		self.update_rect()
 		pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.color, self.rect, border_radius=self.border_radius)
 		if self.border_length > 0:
 			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)

@@ -59,3 +59,6 @@ class SoundMaker:
 			self.all_sound_tracks[sound_track].stop()
 			self.all_sound_tracks[sound_track].release_channel()
 			del self.all_sound_tracks[sound_track]
+
+	def update(self):
+		pass

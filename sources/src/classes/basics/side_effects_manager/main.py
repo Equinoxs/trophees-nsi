@@ -19,3 +19,6 @@ class SideEffectsManager:
 	def apply_side_effects(self):
 		for side_effect_name in self.side_effects:
 			SideEffects().do(side_effect_name, self)
+
+	def update(self):
+		self.apply_side_effects()

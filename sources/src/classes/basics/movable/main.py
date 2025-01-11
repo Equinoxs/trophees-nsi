@@ -17,3 +17,6 @@ class Movable:
 			self.speed_vector.get_x() * TimeHandler().get_delta_time(),
 			self.speed_vector.get_y() * TimeHandler().get_delta_time()
 		))
+
+	def update(self):
+		self.move(self.position)

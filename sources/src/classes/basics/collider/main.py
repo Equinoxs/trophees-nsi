@@ -1,4 +1,4 @@
-from src.classes import Vector2, DataHandler, Player
+from src.classes import Vector2, DataHandler, Player, Camera
 
 
 class Collider:
@@ -38,4 +38,12 @@ class Collider:
 				closest_squared_distance = possible_closest_squared_distance
 				closest_vector = possible_closest_vector
 
+		return closest_vector
+
+	def update(self) -> Vector2:
+		closest_vector = self.closest_vector_to(Player().get_focus().get_position())
+
+		if self != Player().get_focus() and closest_vector.get_norm() < self.hitbox_action_radius * Camera().get_zoom():
+			object_s_reaction = closest_vector.copy().set_norm(closest_vector.orthogonal_projection(Player().get_focus().get_speed_vector() + self.speed_vector).get_norm())
+			Player().get_focus().get_speed_vector().add(object_s_reaction)
 		return closest_vector

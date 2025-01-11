@@ -47,7 +47,8 @@ class MenuHandler:
 
 	def add_marker(self, marker_data: dict):
 		marker_data['type'] = 'Marker'
-		return self.menus['in_game'].add_element(marker_data)
+		element = self.menus['in_game'].add_element(marker_data)
+		return element
 
 	def remove_marker(self, marker_ref):
 		self.menus['in_game'].delete_element(marker_ref)

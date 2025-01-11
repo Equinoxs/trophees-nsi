@@ -145,3 +145,24 @@ class Sprite:
 
 	def move_to(self, position: Vector2):
 		self.position.copy(position)
+
+	def update(self):
+		self.go_to_frame(self.frame_index, self.animation_name)
+
+	def render(self):
+		screen_width = Camera().get_frame().x
+		screen_height = Camera().get_frame().y
+		camera_x = Camera().get_camera().x
+		camera_y = Camera().get_camera().y
+		width, height = self.image.get_size()
+
+		rendered = False
+		if self.position.x + width > camera_x or self.position.x < camera_x + screen_width:
+			if self.position.y + height > camera_y or self.position.y < camera_y + screen_height:
+				if hasattr(self, 'is_player'):
+					Camera().draw(self.image, self.position, is_player_rendered=self.is_player)
+				else:
+					Camera().draw(self.image, self.position)
+				rendered = True
+
+		return rendered

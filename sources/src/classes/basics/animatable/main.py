@@ -77,3 +77,6 @@ class Animatable:
 					self.frame_index = len(scheme) - 1
 					self.running = False
 					break
+
+	def update(self):
+		self.update_index_animation()

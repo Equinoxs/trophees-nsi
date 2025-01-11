@@ -65,3 +65,9 @@ class ControlHandler:
 	def consume_event(self, event_name: str):
 		self.consumed_events.add(event_name)
 		self.finish_event(event_name)
+
+	def get_key_letter(self, event_name: str):
+		if event_name in self.keybinds:
+			return pygame.key.name(self.keybinds[event_name])
+		else:
+			raise KeyError
