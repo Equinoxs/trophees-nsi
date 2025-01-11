@@ -67,7 +67,7 @@ class Camera:
 			element.render()
 		LogHandler().render()
 		MenuHandler().render()
-
+		assert False
 		for surface_name in self.surfaces.keys():
 			if self.is_map_rendered:
 				self.screen.blit(self.surfaces['map'], (0, 0))
