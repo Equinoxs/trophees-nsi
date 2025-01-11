@@ -14,6 +14,7 @@ class MenuHandler:
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.menus = {}
+			self.menus_historics = []
 			self.classes = {}
 			self.markers = {}
 			self.current_menu = None
@@ -41,7 +42,7 @@ class MenuHandler:
 		self.classes = data['classes']
 		if self.current_menu_name is None:
 			self.current_menu_name = data['initial_menu']
-
+		self.menus_historics.append(self.current_menu_name)
 		for name, data in menus.items():
 			self.menus[name] = Menu(data)
 
@@ -61,8 +62,21 @@ class MenuHandler:
 
 	def set_current_menu(self, menu_name: str):
 		if menu_name in self.menus:
+			if self.current_menu_name:
+				self.menus_historics.append(self.current_menu_name)
 			self.current_menu = self.menus[menu_name]
 			self.current_menu_name = menu_name
+	
+	def get_last_menu(self):
+		if self.menus_historics:
+			return self.menus_historics[-1]
+		return None
+	
+	def set_last_menu(self):
+		last_menu = self.get_last_menu()
+		if last_menu and last_menu in self.menus:
+			self.current_menu = self.menus[last_menu]
+			self.current_menu_name = last_menu
 
 	def update(self):
 		if self.current_menu is not None:

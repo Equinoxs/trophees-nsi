@@ -104,6 +104,10 @@ class GameLoop:
 					self.menu_handler.get_button_actions().do('pause_game')
 				elif self.menu_handler.get_current_menu_name() == 'game_paused':
 					self.menu_handler.get_button_actions().do('focus_on_game')
+				elif self.menu_handler.get_current_menu_name() == 'map_opened':
+					self.menu_handler.get_button_actions().do('focus_on_game')
+				elif self.menu_handler.get_current_menu_name() == 'settings':
+					self.menu_handler.get_button_actions().do('focus_on_game')
 				self.control_handler.consume_event('pause')
 			if self.control_handler.is_activated('toggle_map'):
 				if self.menu_handler.get_current_menu_name() == 'in_game':
@@ -111,6 +115,10 @@ class GameLoop:
 				elif self.menu_handler.get_current_menu_name() == 'map_opened':
 					self.menu_handler.get_button_actions().do('focus_on_game')
 				self.control_handler.consume_event('toggle_map')
+
+		if self.control_handler.is_activated('enter') and self.menu_handler.get_current_menu_name() == 'welcome':
+			self.menu_handler.get_button_actions().do('focus_on_game')
+				
 
 		# Updates
 		self.time_handler.update()

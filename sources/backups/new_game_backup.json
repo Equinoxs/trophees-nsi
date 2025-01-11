@@ -163,7 +163,7 @@
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
-					"position": [-200, -50],
+					"position": [835, 2561],
 					"image_path": "nathan",
 					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
@@ -173,7 +173,7 @@
 					"name": "house_proprietary",
 					"pattern_timeline": [[150, 175], [395, 175], [395, -5], [-220, -5], [-220, -80], "npc_event_test"],
 					"pattern_type": "back_and_forth",
-					"position": [50, 40],
+					"position": [835, 2661],
 					"image_path": "albert",
 					"z_index": 2,
 					"interaction": "house_proprietary_start_mission_test",
@@ -232,6 +232,7 @@
 		"go_right": 100,
 		"go_left": 113,
 		"sprint": 1073742049,
-		"toggle_map": 109
+		"toggle_map": 109,
+		"enter": 13
 	}
 }

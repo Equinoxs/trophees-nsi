@@ -110,6 +110,38 @@
 				"action": "focus_on_game"
 			}
 		],
+		"settings": [
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99]
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [0, 0, 0],
+				"label": "Settings",
+				"x": "center",
+				"y": 40,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 100
+			},
+			{
+				"type": "Button",
+				"label": "Close",
+				"border_radius": 4,
+				"border_length": 2,
+				"border_color": [46, 34, 9],
+				"color": [61, 53, 39],
+				"text_color": [204, 174, 114],
+				"font_size": 50,
+				"x": 50,
+				"y": 40,
+				"width": 140,
+				"height": "auto",
+				"action": "return_to_last_menu"
+			}
+		],
 		"welcome": [
 			{
 				"type": "UIElement",
@@ -126,6 +158,7 @@
 				"height": "auto",
 				"font_size": 100
 			},
+			
 			{
 				"type": "Button",
 				"class": "welcome_button",
