@@ -14,12 +14,19 @@ Notre jeu se découpe en trois catégories de classes, les unes interagissant av
 
 ## Documentation des classes
 - Classes de base (dossier `src/classes/basics`)
-    * [`Animatable`](basics/animatable.md)
-    * [`Collider`](basics/collider.md)
-    * [`Interactable`](basics/interactable.md)
-    * [`MapElement`](basics/map_element.md)
-    * [`Movable`](basics/movable.md)
-    * [`SideEffectManager`](basics/side_effects_manager.md)
-    * [`SoundMaker`](basics/sound_maker.md)
-    * [`Sprite`](basics/sprite.md)
-    * [`Vector2`](basics/vector_2.md)
+    * [`Animatable`](basics/animatable.md) - gestion de l'animation
+    * [`BaseObject`](basics/base_object.md) - objet de base
+    * [`Collider`](basics/collider.md) - gestion des collisions
+    * [`Interactable`](basics/interactable.md) - gestion des interactions avec le joueur
+    * [`MapElement`](basics/map_element.md) - éléments visuels de la `Map`
+    * [`MapObject`](basics/map_object.md) - éléments "vivants" du jeu
+    * [`Mission`](basics/mission.md) - **gestion** des missions
+    * [`Missions`](basics/missions.md) - **stockage** des missions
+    * [`Movable`](basics/movable.md) - gestion du déplacement
+    * [`PillarObject`](basics/pillar_object.md) - pilier
+    * [`RidgeObject`](basics/ridge_object.md) - arête de mur
+    * [`SideEffectManager`](basics/side_effects_manager.md) - gestion des effets de bord
+    * [`SoundMaker`](basics/sound_maker.md) - gestion du son
+    * [`Sprite`](basics/sprite.md) - éléments visuels du jeu
+    * [`UIElement`](basics/ui_element.md) - éléments de l'interface graphique
+    * [`Vector2`](basics/vector_2.md) - représentation des vecteurs et points en 2D

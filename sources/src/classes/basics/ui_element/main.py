@@ -38,11 +38,11 @@ class UIElement:
 		height = data.get('height', SCREEN_HEIGHT)
 		self.font = pygame.font.Font(None, data.get('font_size', 24))
 		self._text_surface = self.font.render(self.label, True, self.text_color)
-  
+
 		# --- Compréhension des dimensions de l'élément ---
-		if width == 'auto' :
+		if width == 'auto':
 			width = self._text_surface.get_width() + 10  # 10px de padding horizontal
-		if height == 'auto' :
+		if height == 'auto':
 			height = self._text_surface.get_height() + 10  # 10px de padding vertical
 
 		self.surface = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -53,12 +53,12 @@ class UIElement:
 			self.position.set_x((SCREEN_WIDTH - self.surface.get_width()) // 2)
 		if self.position.get_x() < 0:
 			self.position.set_x(SCREEN_WIDTH + self.position.get_x() - self.surface.get_width())
-   
+
 		if self.position.get_y() == 'center':
 			self.position.set_y((SCREEN_HEIGHT - self.surface.get_height()) // 2)
 		if self.position.get_y() < 0:
 			self.position.set_y(SCREEN_HEIGHT + self.position.get_y() - self.surface.get_height())
-   
+
 		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
 		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
 

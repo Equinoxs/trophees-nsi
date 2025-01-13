@@ -58,7 +58,7 @@ class Mission:
 		elif self.indicator == 1:
 			self.objective_index += 1
 			self.display_objective_description()
-			self.inidcator = 0
+			self.indicator = 0
 			if self.objective_index == self.objectives_len:
 				self.delete_objective_description()
 				return 1  # mission_réussie

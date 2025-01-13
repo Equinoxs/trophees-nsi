@@ -8,12 +8,12 @@ Elle sert de classe de test.
 - `object_type` : *`str`* **get**
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise `object_type`. \
+  Initialise `object_type` et `MapObject` avec `data`. \
   Paramètre : 
   * `data` : *`dict`* \
     Données d'initialisation.
 
 - `goes_on_top_of(map_object)` &rarr; `bool` \
-  Indique si cet élément se place au-dessus de `map_object`. \
-  Paramètres :
+  Indique si cet objet se place au-dessus de `map_object`. \
+  Paramètre :
   * `map_object` : *`MapObject`*

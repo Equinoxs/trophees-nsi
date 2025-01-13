@@ -1,5 +1,6 @@
 from src.classes import MapObject, Vector2
 
+
 class RidgeObject(MapObject):
 	def __init__(self, data):
 		self.object_type = 'ridge'
@@ -24,15 +25,15 @@ class RidgeObject(MapObject):
 					return closest_vector.get_x() < 0
 
 	def closest_vector_to_segment(self, vector1: Vector2, vector2: Vector2) -> Vector2:
-		# 4 possibilités pour ce vecteur. Une pour chaque coin car le vecteur recherché
-		# est part ou arrive depuis ou vers un des quatres extremités : on choisira le plus court
+		# 4 possibilités pour ce vecteur. Une pour chaque coin, car le vecteur recherché
+		# part ou arrive depuis ou vers une des quatre extrémités : on choisira le plus court
 		vector3, vector4 = tuple(self.get_hitbox())
 		self_segment = vector4 - vector3
 		vector3 += self.position
 		vector4 += self.position
 		vector3 += self_segment.copy().normalize()
 		vector4 -= self_segment.copy().normalize()
-  
+
 		other_segment = vector2 - vector1
 		vector1 += other_segment.copy().normalize()
 		vector2 -= other_segment.copy().normalize()

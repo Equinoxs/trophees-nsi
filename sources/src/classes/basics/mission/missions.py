@@ -13,31 +13,32 @@ class Missions:
 	def __init__(self):
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
-			self.list_missions = set()
+			self.missions_set = set()
 
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
 				'mission_test_0': 'get your y coordinate below 0 under 10 seconds!'
 			}
-			self.update_list_missions()
+			self.update_missions_set()
 
-	def get_set_missions(self):
-		return self.list_missions
+	def get_missions_set(self):
+		return self.missions_set
 
-	def update_list_missions(self):
-		self.list_missions = set()
+	def update_missions_set(self):
+		self.missions_set = set()
 		for objectives in self.objective_descriptions:
 			mission_name = '_'.join(objectives.split('_')[:-1])
-			if mission_name not in self.list_missions:
-				self.list_missions.add(mission_name)
+			if mission_name not in self.missions_set:
+				self.missions_set.add(mission_name)
 
 	def is_mission(self, mission_name):
-		return mission_name in self.list_missions
+		return mission_name in self.missions_set
 
 	def get_description(self, mission_name: str, index: int):
 		return self.objective_descriptions.get(f'{mission_name}_{index}', 'Mysterious objective...')
 
-	def mission_test_0(_):
+	@staticmethod
+	def mission_test_0():
 		time = TimeHandler().add_chrono_tag('mission_test_0')
 		index = 0
 		if time == 0:
@@ -60,7 +61,6 @@ class Missions:
 		match index:
 			case 0:
 				return self.mission_test_0()
-		
 
 	def do(self, mission_name: str, index: int):
 		match mission_name:
