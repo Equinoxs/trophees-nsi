@@ -52,22 +52,22 @@ class Vector2:
 	def scalar_product(self, vector_2):
 		return self.x * vector_2.get_x() + self.y * vector_2.get_y()
 
-	def distance_to(self, vector2):
-		return ((self.x - vector2.get_x()) ** 2 + (self.y - vector2.get_y()) ** 2) ** (1/2)
+	def distance_to(self, vector_2):
+		return ((self.x - vector_2.get_x()) ** 2 + (self.y - vector_2.get_y()) ** 2) ** (1/2)
 
-	def add(self, vector2):
-		self.x += vector2.get_x()
-		self.y += vector2.get_y()
+	def add(self, vector_2):
+		self.x += vector_2.get_x()
+		self.y += vector_2.get_y()
 		return self
 
-	def orthogonal_projection(self, vector2, return_t: bool = False):
+	def orthogonal_projection(self, vector_2, return_t: bool = False):
 		squared_norm = self.get_squared_norm()
 		if squared_norm != 0:
-			t = self.scalar_product(vector2) / squared_norm
+			t = self.scalar_product(vector_2) / squared_norm
 		else:
 			t = 0
 
-		orthogonal_projected = self * t  # projeté orthogonal de vector2 sur self
+		orthogonal_projected = self * t  # projeté orthogonal de vector_2 sur self
 
 		if return_t:
 			return orthogonal_projected, t
@@ -110,13 +110,13 @@ class Vector2:
 
 		return signed_angle
 
-	def closest_vector_to_segment(self, vector1, vector2):
+	def closest_vector_to_segment(self, vector1, vector_2):
 		closest_vector = None
 
-		if vector1 == vector2:
+		if vector1 == vector_2:
 			return vector1 - self
 
-		segment = vector2 - vector1
+		segment = vector_2 - vector1
 		relative_self = self - vector1
 
 		# Projection de relative_self sur segment
@@ -127,7 +127,7 @@ class Vector2:
 		if t < 0:
 			closest_vector = -relative_self
 		elif t > 1:
-			closest_vector = vector2 - self
+			closest_vector = vector_2 - self
 		else:
 			closest_vector = projection - relative_self
 
