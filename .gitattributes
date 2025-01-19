@@ -1,0 +1,10 @@
+# Force LF pour tous les fichiers texte
+* text eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp3 binary
+*.pdf binary
+*.md binary
+*.opus binary
+*.odt binary
