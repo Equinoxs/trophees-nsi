@@ -22,6 +22,14 @@
 			"width": 200,
 			"height": 50,
 			"font_size": 36
+		},
+		"fps": {
+			"x": 10,
+			"y": -10,
+			"width": "auto",
+			"height": "auto",
+			"text_color": [255, 255, 255],
+			"text_align": "left"
 		}
 	},
 	"menus": {
@@ -39,9 +47,13 @@
 			},
 			{
 				"type": "MiniMap",
-				"x": 1100,
-				"y": -620,
+				"x": 1000,
+				"y": 30,
 				"height": 150
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		],
 		"game_paused": [
@@ -81,6 +93,10 @@
 				"class": "pause_button",
 				"y": 320,
 				"action": "open_settings"
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		],
 		"map_opened": [
@@ -92,22 +108,24 @@
 				"type": "MiniMap",
 				"x": 270,
 				"y": "center",
-				"height": 700
+				"height": 700,
+				"surface_to_watch": "full_map"
 			},
 			{
 				"type": "Button",
+				"class": "interactive_button",
 				"label": "Close",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
 				"color": [61, 53, 39],
-				"text_color": [204, 174, 114],
 				"font_size": 50,
 				"x": 50,
 				"y": 40,
 				"width": 140,
 				"height": "auto",
 				"action": "focus_on_game"
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		],
 		"settings": [
@@ -128,18 +146,19 @@
 			},
 			{
 				"type": "Button",
+				"class": "interactive_button",
 				"label": "Close",
-				"border_radius": 4,
-				"border_length": 2,
-				"border_color": [46, 34, 9],
 				"color": [61, 53, 39],
-				"text_color": [204, 174, 114],
 				"font_size": 50,
 				"x": 50,
 				"y": 40,
 				"width": 140,
 				"height": "auto",
 				"action": "return_to_last_menu"
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		],
 		"welcome": [
@@ -187,6 +206,10 @@
 				"y": 540,
 				"action": "quit_game",
 				"color": [61, 53, 39]
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		]
 	}

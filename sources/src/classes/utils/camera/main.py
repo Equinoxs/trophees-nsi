@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Player, MenuHandler, LogHandler, GameLoop, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT
+from src.classes import Player, MenuHandler, LogHandler, DataHandler, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Camera:
@@ -13,22 +13,36 @@ class Camera:
 		return cls._instance
 
 	def __init__(self, screen = None):
-		if not hasattr(self, "_initialized"):
+		if not hasattr(self, '_initialized'):
 			self._initialized = True
+
 			self.screen = screen
 			self.frame = self.screen.get_rect()
 			self.camera = self.frame.copy()
+
 			self.player_pos = Player().get_focus().get_position()
-			self.zoom = 1.4
-			elements = Player().get_map().get_elements()
+			self.zoom = 1.2
+			self.map_overflow_factor = 1.5
+
 			self.is_map_rendered = False
-			self.surfaces = { 'mini_map': pygame.Surface((self.zoom * 1200, self.zoom * 1200), pygame.SRCALPHA) }
+			self.is_full_map_rendered = False
+
+			self.surfaces = {}
+			self.initialize_surfaces()
+
+			elements = Player().get_map().get_elements()
 			for element in elements:
 				element.set_magnification(element.get_magnification() * self.zoom)
 
-	def _create_surface(self, surface_name):
-		if surface_name not in set(self.surfaces.keys()):
-			self.surfaces[surface_name] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
+	def initialize_surfaces(self):
+			backup = DataHandler().load_save()
+			current_map_name = Player().get_map_name()
+			top_left_corner = backup['maps'][current_map_name]['top_left_corner']
+			bottom_right_corner = backup['maps'][current_map_name]['bottom_right_corner']
+			self.surfaces['full_map'] = pygame.Surface((self.zoom * (bottom_right_corner[0] - top_left_corner[0]), self.zoom * (bottom_right_corner[1] - top_left_corner[1])), pygame.SRCALPHA)
+   
+			self.surfaces['map'] = pygame.Surface((int(SCREEN_WIDTH * self.map_overflow_factor), int(SCREEN_HEIGHT * self.map_overflow_factor)), pygame.SCALED | pygame.SRCALPHA)
+			self.surfaces['menu'] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
 
 	def get_zoom(self):
 		return self.zoom
@@ -42,11 +56,16 @@ class Camera:
 	def map_not_rendered(self):
 		self.is_map_rendered = False
 
+	def full_map_rendered(self):
+		self.is_full_map_rendered = True
+
+	def full_map_not_rendered(self):
+		self.is_full_map_rendered = False
+
 	def get_screen(self):
 		return self.screen
 
-	def get_surface(self, surface_name: str)->pygame.Surface:
-		self._create_surface(surface_name)
+	def get_surface(self, surface_name: str) -> pygame.Surface:
 		return self.surfaces[surface_name]
 
 	def get_frame(self):
@@ -69,12 +88,10 @@ class Camera:
 		MenuHandler().render()
 		for surface_name in self.surfaces.keys():
 			if self.is_map_rendered:
-				self.screen.blit(self.surfaces['map'], (0, 0))
+				self.screen.blit(self.surfaces['map'], (-SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2, -SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2))
 			self.screen.blit(self.surfaces['menu'], (0, 0))
 
 	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map', is_player_rendered: bool = False):
-		self._create_surface(surface_target_name)
-
 		if isinstance(position, Vector2):
 			x, y = position.convert_to_tuple()
 		elif type(position) == tuple:
@@ -87,9 +104,14 @@ class Camera:
 				if self.is_map_rendered:
 					if is_player_rendered:
 						width, height = surface_to_draw.get_size()
-						self.surfaces['map'].blit(surface_to_draw, ((SCREEN_WIDTH - width) // 2, (SCREEN_HEIGHT - height) // 2))
+						self.surfaces['map'].blit(surface_to_draw, ((self.surfaces['map'].get_width() - width) // 2, (self.surfaces['map'].get_height() - height) // 2))
 					else:
-						self.surfaces['map'].blit(surface_to_draw, (x * self.zoom - self.camera.x, y * self.zoom - self.camera.y))
-					self.surfaces['mini_map'].blit(surface_to_draw, (int(self.zoom * (x + 600)), int(self.zoom * (y + 600))))
+						self.surfaces['map'].blit(surface_to_draw, (
+							int(x * self.zoom - self.camera.x + SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2),
+							int(y * self.zoom - self.camera.y + SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2)
+        				))
+				if self.is_full_map_rendered:
+					top_left_corner = DataHandler().load_save()['maps'][Player().get_map_name()]['top_left_corner']
+					self.surfaces['full_map'].blit(surface_to_draw, (int(self.zoom * (x - top_left_corner[0])), int(self.zoom * (y - top_left_corner[1]))))
 			case _:
 				self.surfaces[surface_target_name].blit(surface_to_draw, (x, y))

@@ -8,9 +8,10 @@ class MiniMap(Button):
 		data['action'] = 'open_map'
 		data['color'] = (0,) * 4
 		Button.__init__(self, data)
+		self.surface_to_watch = data.get('surface_to_watch', 'map')
 
 	def update(self):
-		self.surface = GameLoop().get_camera().get_surface('mini_map')
+		self.surface = GameLoop().get_camera().get_surface(self.surface_to_watch)
 		self.surface = pygame.transform.scale(self.surface, (self.rect.height / self.surface.get_height() * self.surface.get_width(), self.rect.height))
 		self.update_rect()
 		super().update()

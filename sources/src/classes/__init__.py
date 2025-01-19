@@ -29,6 +29,7 @@ from .utils.control_handler.main import ControlHandler
 # MenuHandler importe DataHandler et Menu importe Button qui importe ButtonActions et UIElement
 from .basics.ui_element.main import UIElement
 from .specific.marker.main import Marker
+from .specific.fps_helper.main import FPSHelper
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
 

@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import UIElement, Button, MiniMap, Marker
+from src.classes import UIElement, Button, MiniMap, Marker, FPSHelper
 
 
 class Menu:
@@ -18,6 +18,8 @@ class Menu:
 				element = MiniMap(element_data)
 			case 'Marker':
 				element = Marker(element_data)
+			case 'FPSHelper':
+				element = FPSHelper(element_data)
 		self.ui_elements.append(element)
 		return element
 

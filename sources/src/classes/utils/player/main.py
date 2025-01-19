@@ -7,9 +7,10 @@ class Player:
 			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self, map = None, data_player: dict = None):
+	def __init__(self, map = None, data_player: dict = None, map_name: str = None):
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
+			self.map_name = map_name
 			self.map = map
 			self.accomplished_missions = data_player['accomplished_missions']
 			self.focus = self.map.search_by_name(data_player['current_npc_name'])
@@ -20,7 +21,11 @@ class Player:
 	def get_map(self):
 		return self.map
 
+	def get_map_name(self):
+		return self.map_name
+
 	def change_map(self, map_name: str):
+		self.map_name = map_name
 		self.focus = self.map.remove(self.focus)
 		self.map.load_elements_from(map_name)
 		self.map.add(self.focus)

@@ -1,4 +1,4 @@
-from src.classes import Menu, DataHandler, ButtonActions
+from src.classes import Menu, DataHandler, GameLoop, ButtonActions
 
 
 class MenuHandler:
@@ -61,6 +61,11 @@ class MenuHandler:
 		return self.current_menu
 
 	def set_current_menu(self, menu_name: str):
+		if menu_name == 'map_opened':
+			GameLoop().get_camera().full_map_rendered()
+		elif self.current_menu_name == 'map_opened' and menu_name != 'map_opened':
+			GameLoop().get_camera().full_map_not_rendered()
+
 		if menu_name in self.menus:
 			if self.current_menu_name:
 				self.menus_historics.append(self.current_menu_name)

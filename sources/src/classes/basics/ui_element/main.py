@@ -17,8 +17,11 @@ class UIElement:
 		# Données de bases
 		self.border_radius = data.get('border_radius', 0)
 		self.label = data.get('label', '')
+		self.text_align = data.get('text_align', 'center')
 		self.position = Vector2(data.get('x', 0), data.get('y', 0))
-		self.color = tuple(data.get('color', (0,) * 4))
+		self.color = data.get('color', 'transparent')
+		if type(self.color) == list:
+			self.color = tuple(self.color)
 		self.text_color = tuple(data.get('text_color', (0, 0, 0)))
 
 		# Les images
@@ -34,19 +37,24 @@ class UIElement:
 		self.border_length = data.get('border_length', 0)
 		self.border_color = tuple(data.get('border_color', (0,) * 3))
 
-		width = data.get('width', SCREEN_WIDTH)
-		height = data.get('height', SCREEN_HEIGHT)
+		self.surface_width = data.get('width', SCREEN_WIDTH)
+		self.surface_height = data.get('height', SCREEN_HEIGHT)
 		self.font = pygame.font.Font(None, data.get('font_size', 24))
 		self._text_surface = self.font.render(self.label, True, self.text_color)
 
 		# --- Compréhension des dimensions de l'élément ---
-		if width == 'auto':
+		if self.surface_width == 'auto':
 			width = self._text_surface.get_width() + 10  # 10px de padding horizontal
-		if height == 'auto':
+		else:
+			width = self.surface_width
+		if self.surface_height == 'auto':
 			height = self._text_surface.get_height() + 10  # 10px de padding vertical
+		else:
+			height = self.surface_height
 
 		self.surface = pygame.Surface((width, height), pygame.SRCALPHA)
-		self.surface.fill(self.color)
+		if type(self.color) == tuple:
+			self.surface.fill(self.color)
 
 		# --- Compréhension des positions de l'élément ---
 		if self.position.get_x() == 'center':
@@ -63,9 +71,33 @@ class UIElement:
 		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
 
 	def update_rect(self):
-		# Mise à jour du rect basé sur la position et la surface
-		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
-		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
+		pos_x = self.position.get_x()
+		pos_y = self.position.get_y()
+
+		if pos_x == 'center':
+			pos_x = (SCREEN_WIDTH - self.surface.get_width()) // 2
+		if pos_x < 0:
+			pos_x = SCREEN_WIDTH + pos_x - self.surface.get_width()
+
+		if pos_y == 'center':
+			pos_y = (SCREEN_HEIGHT - self.surface.get_height()) // 2
+		if pos_y < 0:
+			pos_y = SCREEN_HEIGHT + pos_y - self.surface.get_height()
+   
+		self.rect = pygame.Rect(pos_x, pos_y, self.surface.get_width(), self.surface.get_height())
+		match self.text_align:
+			case 'center':
+				self._text_rect = self._text_surface.get_rect(center=self.rect.center)
+			case 'left':
+				self._text_rect = self._text_surface.get_rect(topleft=self.rect.topleft)
+			case 'right':
+				self._text_rect = self._text_surface.get_rect(topright=self.rect.topright)
+			case _:
+				raise ValueError('Invalid text_align value')
+
+	def set_label(self, new_label: str):
+		self.label = str(new_label)
+		self._text_surface = self.font.render(self.label, True, self.text_color)
 
 	def get_rect(self):
 		return self.rect
@@ -75,9 +107,15 @@ class UIElement:
 
 	def render(self):
 		self.update_rect()
-		pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.color, self.rect, border_radius=self.border_radius)
+
+		if self.color != 'transparent':
+			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.color, self.rect, border_radius=self.border_radius)
+
 		if self.border_length > 0:
 			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
-		GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, 'menu')
+
+		if self.label != '':
+			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, 'menu')
+
 		if self.image is not None:
 			GameLoop().get_camera().draw(self.image, self.position, 'menu')

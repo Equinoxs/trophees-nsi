@@ -5,7 +5,7 @@ from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map,
 
 def main() -> int:
 	pygame.init()
-	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED, vsync=1)
+	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 
 	# Initialisation des singletons
 	data_handler = DataHandler()
@@ -13,7 +13,7 @@ def main() -> int:
 	sound_mixer = SoundMixer()
 	control_handler = ControlHandler()
 	time_handler = TimeHandler()
-	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'])
+	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'], saved_data['player']['current_map_name'])
 	camera = Camera(screen)
 	mission_handler = MissionHandler(DataHandler().load_missions())
 	menu_handler = MenuHandler()

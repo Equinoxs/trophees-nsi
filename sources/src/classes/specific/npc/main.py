@@ -121,7 +121,7 @@ class NPC(PillarObject):
 	def move_npc_to_objective(self):
 		if self.objective is not None and self.must_move:
 			relative_objective = self.objective - self.position
-			if relative_objective.get_norm() <= 1 * Camera().get_zoom():
+			if relative_objective.get_norm() <= 5 * Camera().get_zoom():
 				self.stop_moving()
 				return False
 
