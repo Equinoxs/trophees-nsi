@@ -5,13 +5,20 @@ from src.classes import MapElement, Vector2, Player, Camera
 
 class GroundSurface(MapElement):
 	def __init__(self, data):
-		self.image_type = 'ground_surface'
+		if not hasattr(self, 'image_type'):
+			self.image_type = 'ground_surface'
 		super().__init__(data)
+
 		self.boundaries: list[Vector2] = data['boundaries']
-		self.pattern_image = self.image.copy()
 		self.required_level = data['required_level']
 		self.does_player_see = False
 		self.ground_type = self.image_data['type']
+  
+		if len(self.boundaries) <= 2:
+			self.access_overlay = None
+			return
+
+		self.pattern_image = self.image.copy()
 
 		# Calcul de la largeur et de la hauteur maximales
 		max_width, max_height = 0, 0
@@ -91,8 +98,9 @@ class GroundSurface(MapElement):
 
 	def set_magnification(self, magnification_coeff):
 		super().set_magnification(magnification_coeff)
-		width, height = self.access_overlay.get_size()
-		self.access_overlay = pygame.transform.scale(self.access_overlay, (int(width * magnification_coeff), int(height * magnification_coeff)))
+		if self.access_overlay is not None:
+			width, height = self.access_overlay.get_size()
+			self.access_overlay = pygame.transform.scale(self.access_overlay, (int(width * magnification_coeff), int(height * magnification_coeff)))
 
 	def update(self):
 		if Player().get_level() < self.required_level:
@@ -102,5 +110,5 @@ class GroundSurface(MapElement):
 
 	def render(self):
 		rendered = super().render()
-		if not self.does_player_see and rendered:
+		if not self.does_player_see and rendered and self.access_overlay is not None:
 			Camera().draw(self.access_overlay, self.position)

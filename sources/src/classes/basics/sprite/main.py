@@ -21,11 +21,14 @@ class Sprite:
 			self.image = pygame.image.load(png_path)
 			self.image_path = image_path
 			self.image_data = data  # les infos de l'image
+			if 'height' in self.image_data:
+				self.image = pygame.transform.scale(self.image, (int(self.image_data['height'] / self.image.get_height() * self.image.get_width()), self.image_data['height']))
 		else:
 			self.original_image = None
 			self.image = None
 			self.image_path = ''
 			self.image_data = {}
+			self.image_data['animations'] = {}
 
 
 	def switch_horizontal_flip(self):
@@ -46,6 +49,9 @@ class Sprite:
 		return self.image_data
 
 	def go_to_frame(self, frame_index, animation_name):
+		if self.image is None:
+			return
+
 		width, _ = self.image.get_size()
 		if self.image_data['animations'] == {}:
 			return
@@ -116,6 +122,8 @@ class Sprite:
 		return self.magnification_coeff
 
 	def set_magnification(self, magnification_coeff):
+		if self.image is None:
+			return
 
 		if self.original_image is not None:
 			original_width, original_height = self.original_image.get_size()
@@ -140,6 +148,8 @@ class Sprite:
 		self.magnification_coeff = magnification_coeff
 
 	def rotate(self, angle):
+		if self.image is None:
+			return
 		# Rotation de l'image
 		self.image = pygame.transform.rotate(self.image, angle)
 
@@ -150,6 +160,8 @@ class Sprite:
 		self.go_to_frame(self.frame_index, self.animation_name)
 
 	def render(self):
+		if self.image is None:
+			return
 		screen_width = Camera().get_frame().x
 		screen_height = Camera().get_frame().y
 		camera_x = Camera().get_camera().x

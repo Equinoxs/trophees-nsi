@@ -5,6 +5,48 @@
 		"accomplished_missions": []
 	},
 	"maps": {
+		"test": {
+			"top_left_corner": [-30, -30],
+			"bottom_right_corner": [530, 530],
+			"elements": [
+				{
+					"type": "MapElement",
+					"position": [0, 0],
+					"image_path": "test_element",
+					"z_index": 0,
+					"name": "test_element"
+				},
+				{
+					"type": "MapObject",
+					"position": [50, 50],
+					"image_path": "test_object",
+					"z_index": 1,
+					"interaction": "test",
+					"name": "test_object"
+				},
+				{
+					"type": "NPC",
+					"pattern_timeline": [],
+					"position": [0, 0],
+					"image_path": "nathan",
+					"z_index": 2,
+					"interaction": "default",
+					"authorized_sound_tracks": ["footsteps"],
+					"name": "nathan"
+				},
+				{
+					"type": "NPC",
+					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [500, 250], [300, -20]],
+					"position": [50, 40],
+					"image_path": "nathan",
+					"z_index": 2,
+					"interaction": "start_mission_test",
+					"authorized_sound_tracks": ["footsteps"],
+					"name": "alan",
+					"side_effects": ["npc_side_effect_test"]
+				}
+			]
+		},
 		"test_2": {
 			"top_left_corner": [-600, -600],
 			"bottom_right_corner": [600, 600],
@@ -66,15 +108,6 @@
 					"wall_type": "wall_1",
 					"boundaries": [[250, 200], [300, 450], [50, 400], [-200, 100], [-100, 10], [50, 50], [250, 50]],
 					"z_index": 2
-				},
-				{
-					"type": "NPC",
-					"name": "nathan",
-					"level": 2,
-					"position": [-200, -50],
-					"image_path": "nathan",
-					"z_index": 2,
-					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",
@@ -158,8 +191,18 @@
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
-					"position": [0, 0],
+					"position": [1050, 1250],
 					"image_path": "nathan",
+					"z_index": 2,
+					"authorized_sound_tracks": ["footsteps", "voices"]
+				},
+				{
+					"type": "NPC",
+					"name": "alberto",
+					"level": 2,
+					"position": [0, 0],
+					"image_path": "albert",
+					"interaction": "switch_with_test_2",
 					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
@@ -174,48 +217,35 @@
 					"interaction": "house_proprietary_start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"]
+				},
+				{
+					"type": "Building",
+					"name": "building_1",
+					"image_path": "building_1",
+					"position": [900, 1000]
 				}
 			]
 		},
-		"test": {
-			"top_left_corner": [-30, -30],
-			"bottom_right_corner": [530, 530],
+		"building_1": {
+			"top_left_corner": [0, 0],
+			"bottom_right_corner": [550, 550],
 			"elements": [
 				{
-					"type": "MapElement",
-					"position": [0, 0],
-					"image_path": "test_element",
-					"z_index": 0,
-					"name": "test_element"
+					"type": "Interior",
+					"name": "interior_1",
+					"image_path": "interior_1",
+					"position": [0, 0]
 				},
 				{
-					"type": "MapObject",
-					"position": [50, 50],
-					"image_path": "test_object",
-					"z_index": 1,
-					"interaction": "test",
-					"name": "test_object"
+					"type": "Door",
+					"name": "front_door_interior_1",
+					"position": [440, 500],
+					"interaction": "switch_door_building_1"
 				},
 				{
-					"type": "NPC",
-					"pattern_timeline": [],
-					"position": [0, 0],
-					"image_path": "nathan",
-					"z_index": 2,
-					"interaction": "default",
-					"authorized_sound_tracks": ["footsteps"],
-					"name": "nathan"
-				},
-				{
-					"type": "NPC",
-					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [500, 250], [300, -20]],
-					"position": [50, 40],
-					"image_path": "nathan",
-					"z_index": 2,
-					"interaction": "start_mission_test",
-					"authorized_sound_tracks": ["footsteps"],
-					"name": "alan",
-					"side_effects": ["npc_side_effect_test"]
+					"type": "Wall",
+					"boundaries": [[0, 500], [0, 150], [600, 150], [600, 500], [0, 500]],
+					"wall_width": 0
 				}
 			]
 		}

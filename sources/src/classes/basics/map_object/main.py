@@ -2,7 +2,7 @@ from src.classes import MapElement, Collider, Interactable, Movable, SideEffects
 
 
 class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager):
-	def __init__(self, data):
+	def __init__(self, data: dict):
 		MapElement.__init__(self, data)
 		Interactable.__init__(self, data['interaction'])
 		if hasattr(self, 'hitbox'):
@@ -10,7 +10,7 @@ class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager)
 		else:
 			Collider.__init__(self, self.image_data.get('hitbox', []))
 		Movable.__init__(self)
-		SideEffectsManager.__init__(self, data['side_effects'])
+		SideEffectsManager.__init__(self, data.get('side_effects', []))
 
 	def update(self):
 		# Mise à jour de l'élément de la carte

@@ -1,3 +1,6 @@
+from src.classes import GameLoop, Vector2
+
+
 class Player:
 	_instance = None
 
@@ -25,10 +28,14 @@ class Player:
 		return self.map_name
 
 	def change_map(self, map_name: str):
+		GameLoop().get_menu_handler().set_current_menu('loading')
 		self.map_name = map_name
 		self.focus = self.map.remove(self.focus)
+		GameLoop().get_sound_mixer().free_all_channels()
 		self.map.load_elements_from(map_name)
 		self.map.add(self.focus)
+		GameLoop().get_camera().initialize()
+		GameLoop().get_menu_handler().set_current_menu('in_game')
 
 	def get_focus(self):
 		return self.focus
@@ -53,6 +60,14 @@ class Player:
 		self.focus.set_is_player(True)
 		if self.focus is None:
 			raise ValueError(f'NPC {npc_name} not found in map {self.map.map_name}')
+
+	def teleport_to(self, point: Vector2 | str):
+		if isinstance(point, Vector2):
+			self.focus.get_position().copy(point)
+		elif type(point) == str:
+			searched_object = self.map.search_by_name(point)
+			if searched_object is not None:
+				self.focus.get_position().copy(searched_object.get_position().copy())
 
 	def update(self):
 		self.map.update()

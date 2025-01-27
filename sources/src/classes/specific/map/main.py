@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, MapObject, NPC, GroundSurface, Wall, Tree
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior
 
 
 class Map:
@@ -18,10 +18,10 @@ class Map:
 						sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
 
 
-	def search_by_name(self, npc_name: str):
-		for el in self.elements:
-			if isinstance(el, NPC) and el.name == npc_name:
-				return el
+	def search_by_name(self, object_name: str):
+		for element in self.elements:
+			if element.get_name() == object_name:
+				return element
 		return None
 
 	def add(self, element):
@@ -55,6 +55,15 @@ class Map:
 
 				case "Tree":
 					self.elements.append(Tree(element))
+
+				case "Door":
+					self.elements.append(Door(element))
+
+				case "Building":
+					self.elements.append(Building(element, self.add))
+
+				case "Interior":
+					self.elements.append(Interior(element))
 
 				case _:
 					raise NotImplementedError

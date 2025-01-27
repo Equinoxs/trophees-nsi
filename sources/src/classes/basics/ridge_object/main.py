@@ -18,6 +18,8 @@ class RidgeObject(MapObject):
 				return self.closest_vector_to(map_object.get_hitbox()[0]).get_y() < 0
 			case 'ridge':
 				ridge_hitbox = map_object.get_hitbox()
+				if len(ridge_hitbox) == 0:
+					return map_object.get_position().get_y() - self.position.get_y() < 0
 				closest_vector = self.closest_vector_to_segment(ridge_hitbox[0] + map_object.get_position(), ridge_hitbox[1] + map_object.get_position())
 				if closest_vector.get_y() != 0:
 					return closest_vector.get_y() < 0

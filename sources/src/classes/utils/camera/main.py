@@ -20,19 +20,22 @@ class Camera:
 			self.frame = self.screen.get_rect()
 			self.camera = self.frame.copy()
 
-			self.player_pos = Player().get_focus().get_position()
 			self.zoom = 1.2
 			self.map_overflow_factor = 1.5
 
 			self.is_map_rendered = False
 			self.is_full_map_rendered = False
 
-			self.surfaces = {}
-			self.initialize_surfaces()
+			self.initialize()
 
-			elements = Player().get_map().get_elements()
-			for element in elements:
-				element.set_magnification(element.get_magnification() * self.zoom)
+	def initialize(self):
+		self.player_pos = Player().get_focus().get_position()
+		self.surfaces = {}
+		self.initialize_surfaces()
+
+		elements = Player().get_map().get_elements()
+		for element in elements:
+			element.set_magnification(self.zoom)
 
 	def initialize_surfaces(self):
 			backup = DataHandler().load_save()
@@ -109,7 +112,7 @@ class Camera:
 						self.surfaces['map'].blit(surface_to_draw, (
 							int(x * self.zoom - self.camera.x + SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2),
 							int(y * self.zoom - self.camera.y + SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2)
-        				))
+						))
 				if self.is_full_map_rendered:
 					top_left_corner = DataHandler().load_save()['maps'][Player().get_map_name()]['top_left_corner']
 					self.surfaces['full_map'].blit(surface_to_draw, (int(self.zoom * (x - top_left_corner[0])), int(self.zoom * (y - top_left_corner[1]))))

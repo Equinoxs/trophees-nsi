@@ -34,7 +34,8 @@ class WallSegment(RidgeObject):
 		self.before_angle_vector = None
 		self.after_angle_vector = None
 
-		self.calculate_wall_image()
+		if self.wall_width > 0:
+			self.calculate_wall_image()
 
 		data['position'] = self.position
 		self.image_data['hitbox'] = [vector - self.position for vector in self.boundaries]
@@ -88,6 +89,9 @@ class WallSegment(RidgeObject):
 		p2 = self.boundaries[1]
 		self.p1_to_p2 = p2 - p1
 		self.front_width = int(self.p1_to_p2.get_norm())
+
+		if self.front_width == 0:
+			return
 
 		if self.p1_to_p2.get_x() * self.p1_to_p2.get_y() < 0:
 			self.direction = -1  # coins haut-droit et bas-gauche

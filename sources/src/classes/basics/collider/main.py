@@ -25,6 +25,9 @@ class Collider:
 		else:
 			iterators = range(1, len(self.hitbox))
 
+		if len(self.hitbox) == 0:
+			return point - self.position
+
 		if len(self.hitbox) == 1:
 			return point - (DataHandler().list_to_vector2(self.hitbox[0]) + self.position)
 
@@ -32,7 +35,7 @@ class Collider:
 			A = DataHandler().list_to_vector2(self.hitbox[i]) + self.position
 			B = DataHandler().list_to_vector2(self.hitbox[i - 1]) + self.position
 			possible_closest_vector = -point.closest_vector_to_segment(A, B)
-   
+
 			possible_closest_squared_distance = possible_closest_vector.get_squared_norm()
 			if possible_closest_squared_distance < closest_squared_distance:
 				closest_squared_distance = possible_closest_squared_distance

@@ -211,6 +211,20 @@
 				"type": "FPSHelper",
 				"class": "fps"
 			}
+		],
+		"loading": [
+			{
+				"type": "UIElement",
+				"color": [0, 0, 0]
+			},
+			{
+				"type": "UIElement",
+				"label": "Loading...",
+				"x": "center",
+				"y": "center",
+				"font_size": 50,
+				"text_color": [255, 255, 255]
+			}
 		]
 	}
 }

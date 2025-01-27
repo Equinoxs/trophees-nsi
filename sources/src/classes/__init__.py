@@ -70,6 +70,9 @@ from .specific.npc.pattern_events import PatternEvents
 from .specific.npc.main import NPC
 from .specific.tree.main import Tree
 from .specific.wall_segment.main import WallSegment
+from .specific.door.main import Door
+from .specific.building.main import Building
+from .specific.interior.main import Interior
 
 # Wall importe WallSegment
 from .specific.wall.main import Wall

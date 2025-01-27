@@ -62,6 +62,9 @@ class SoundMixer(object):
 	def release_channel(self, channel):
 		self.channels = [c if c is not channel else None for c in self.channels]
 
+	def free_all_channels(self):
+		self.channels = []
+
 	def get_index_of_channel(self, channel):
 		return self.channels.index(channel)
 
