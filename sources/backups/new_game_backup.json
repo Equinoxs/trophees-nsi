@@ -131,7 +131,8 @@
 					"type": "GroundSurface",
 					"name": "background",
 					"image_path": "grass",
-					"z_index": -1, "boundaries": [[-2000, -2000], [2000, -2000], [2000, 2000], [-2000, 2000]]
+					"z_index": -1,
+					"boundaries": [[-100, -100], [2200, -100], [2200, 2200], [-100, 2200]]
 				},
 				{
 					"type": "GroundSurface",
@@ -191,7 +192,7 @@
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
-					"position": [1050, 1250],
+					"position": [1100, 1350],
 					"image_path": "nathan",
 					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
@@ -223,6 +224,12 @@
 					"name": "building_1",
 					"image_path": "building_1",
 					"position": [900, 1000]
+				},
+				{
+					"type": "Building",
+					"name": "building_2",
+					"image_path": "building_2",
+					"position": [1000, 680]
 				}
 			]
 		},
@@ -244,10 +251,15 @@
 				},
 				{
 					"type": "Wall",
-					"boundaries": [[0, 500], [0, 150], [600, 150], [600, 500], [0, 500]],
+					"boundaries": [[0, 500], [0, 120], [600, 120], [600, 500], [0, 500]],
 					"wall_width": 0
 				}
 			]
+		},
+		"builiding_2": {
+			"top_left_corner": [0, 0],
+			"bottom_right_corner": [550, 550],
+			"elements": []
 		}
 	},
 	"keybinds": {

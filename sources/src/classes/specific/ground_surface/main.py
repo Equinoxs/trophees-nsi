@@ -22,14 +22,14 @@ class GroundSurface(MapElement):
 
 		# Calcul de la largeur et de la hauteur maximales
 		max_width, max_height = 0, 0
-		relative_position = Vector2(0, 0)
+		relative_position = Vector2(float('inf'), float('inf'))
 		for vector in self.boundaries:
 			max_width = max(max_width, vector.get_x())
 			relative_position.set_x(min(relative_position.get_x(), vector.get_x()))
 			max_height = max(max_height, vector.get_y())
 			relative_position.set_y(min(relative_position.get_y(), vector.get_y()))
 		self.position.add(relative_position)
-		self.positive_boundaries = [vector.copy().add(relative_position * -1) for vector in self.boundaries]
+		self.positive_boundaries = [vector.copy().add(-relative_position) for vector in self.boundaries]
 		max_width -= relative_position.get_x()
 		max_height -= relative_position.get_y()
 

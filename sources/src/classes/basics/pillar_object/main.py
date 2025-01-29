@@ -15,6 +15,6 @@ class PillarObject(MapObject):
 			case 'pillar':
 				return self.position.y > map_object.get_position().get_y()
 			case 'base':
-				return self.position.y > map_object.get_position().get_y()
+				return map_object.closest_vector_to(self.get_position()).get_y() > 0
 			case 'ridge':
 				return map_object.closest_vector_to(self.position).get_y() > 0

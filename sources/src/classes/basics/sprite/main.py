@@ -5,7 +5,7 @@ from src.classes import Vector2, DataHandler, Camera
 
 class Sprite:
 	def __init__(self, position: Vector2, image_path: str):
-		self.position = position
+		self.position = position.copy()
 		self.vertical_flip = False
 		self.horizontal_flip = False
 		self.magnification_coeff = 1  # image x fois plus grande

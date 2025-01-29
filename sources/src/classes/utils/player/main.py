@@ -33,6 +33,9 @@ class Player:
 		self.focus = self.map.remove(self.focus)
 		GameLoop().get_sound_mixer().free_all_channels()
 		self.map.load_elements_from(map_name)
+		potential_player = self.map.search_by_name(self.focus.get_name())
+		if potential_player is not None:
+			self.map.remove(potential_player)
 		self.map.add(self.focus)
 		GameLoop().get_camera().initialize()
 		GameLoop().get_menu_handler().set_current_menu('in_game')

@@ -38,7 +38,7 @@ class WallSegment(RidgeObject):
 			self.calculate_wall_image()
 
 		data['position'] = self.position
-		self.image_data['hitbox'] = [vector - self.position for vector in self.boundaries]
+		self.hitbox = [vector - self.position for vector in self.boundaries]
 		self.image_data['animations'] = {}
 		self.original_image = None
 		self.hitbox_closed = False
