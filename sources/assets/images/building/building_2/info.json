@@ -1,10 +1,10 @@
 {
-	"height": 200,
+	"height": 250,
 	"hitbox": [[0, 40], [100, 40], [100, 100], [0, 100]],
 	"hitbox_action_radius": 20,
 	"door": {
 		"name": "building_2_door",
-		"interaction": "switch_door_building_1",
-		"position": [25, 100]
+		"interaction": "switch_door_building_2",
+		"position": [30, 100]
 	}
 }

@@ -16,11 +16,45 @@ class WallSegment(RidgeObject):
 		self.before_angle = data['before_angle']
 		self.after_angle = data['after_angle']
 
-		image_data, front_path, side_path, top_path = DataHandler().load_wall_images(self.wall_type)
-		self.original_front_image = pygame.image.load(front_path)
-		self.original_side_image = pygame.image.load(side_path)
-		self.original_top_image = pygame.image.load(top_path)
+		image_data, front_data, side_data, top_data = DataHandler().load_wall_images(self.wall_type)
+		self.original_front_image = pygame.image.load(front_data['path']).convert_alpha()
+
+		if side_data:
+			self.original_side_image = pygame.image.load(side_data['path']).convert_alpha()
+		else:
+			self.original_side_image = pygame.Surface((10, 10), pygame.SRCALPHA)
+			self.original_side_image.fill((0,) * 4)
+
+		if top_data:
+			self.original_top_image = pygame.image.load(top_data['path'])
+		else:
+			self.original_top_image = pygame.Surface((10, 10), pygame.SRCALPHA)
+			self.original_top_image.fill((0,) * 4)
+
 		self.image_data = image_data
+
+		if front_data['height'] is not None:
+			self.original_front_image = pygame.transform.scale(self.original_front_image, (
+				int(front_data['height'] / self.original_front_image.get_height() * self.original_front_image.get_width()),
+				front_data['height']
+			))
+		if side_data and side_data['height'] is not None:
+			self.original_side_image = pygame.transform.scale(self.original_side_image, (
+				int(side_data['height'] / self.original_side_image.get_height() * self.original_side_image.get_width()),
+				side_data['height']
+			))
+		if top_data and top_data['height'] is not None:
+			self.original_top_image = pygame.transform.scale(self.original_top_image, (
+				int(top_data['height'] / self.original_top_image.get_height() * self.original_top_image.get_width()),
+				top_data['height']
+			))
+
+		if self.wall_height is None:
+			self.wall_height = image_data['height']
+		if not side_data:
+			self.wall_width = 1
+		elif self.wall_width is None:
+			self.wall_width = image_data['width']
 
 		self.front_image_perspective = None
 		self.side_image_perspective = None
@@ -47,14 +81,14 @@ class WallSegment(RidgeObject):
 		super().__init__(data)
 
 	def calculate_front_image_perspective(self):
-		self.front_image_perspective = pygame.Surface((0, self.front_width + self.wall_height + abs(self.p1_to_p2.orthogonal_projection(self.after_angle_vector).get_y()) + abs(self.p1_to_p2.orthogonal_projection(self.before_angle_vector).get_y())), pygame.SRCALPHA)
+		self.front_image_perspective = pygame.Surface((0, self.front_width + self.wall_height + abs(self.p1_to_p2.orthogonal_projection(self.after_angle_vector).get_y()) + abs(self.p1_to_p2.orthogonal_projection(self.before_angle_vector).get_y())), pygame.SRCALPHA).convert_alpha()
 		if self.p1_to_p2.get_x() != 0:
 			front_image = self.fill_surface(self.original_front_image, self.front_width, self.wall_height)
 			front_image = pygame.transform.scale(front_image, (abs(self.p1_to_p2.get_x()), self.wall_height))
 			self.front_image_perspective = self.skew_image(front_image, 0, abs(self.p1_to_p2.get_y()) * self.direction)
 
 	def calculate_side_image_perspective(self):
-		self.side_image_perspective = pygame.Surface((0, self.wall_height - 2 * self.normal_vector.get_y()))
+		self.side_image_perspective = pygame.Surface((0, self.wall_height - 2 * self.normal_vector.get_y())).convert_alpha()
 		if self.p1_to_p2.get_y() != 0:
 			side_image = self.fill_surface(self.original_side_image, self.wall_width, self.wall_height)
 			side_scaled_width = int(abs(self.normal_vector.copy().normalize().get_x()) * self.wall_width)

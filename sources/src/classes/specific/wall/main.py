@@ -1,5 +1,3 @@
-import math
-
 from src.classes import WallSegment
 
 

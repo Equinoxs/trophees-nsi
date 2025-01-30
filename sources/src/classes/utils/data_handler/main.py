@@ -50,9 +50,9 @@ class DataHandler:
 			'side_effects': [],
 			'boundaries': [],
 			'required_level': 0,
-			'wall_type': 'wall_1',
-			'wall_height': 80,
-			'wall_width': 10
+			'wall_type': 'gray_brick',
+			'wall_height': None,
+			'wall_width': None
 		}
 
 		try:
@@ -138,11 +138,26 @@ class DataHandler:
 		with open(json_path, 'r') as file:
 			data = json.load(file)
 
-		front_path = os.path.join(os.path.dirname(json_path), data['images']['front'] + '.png')
-		side_path = os.path.join(os.path.dirname(json_path), data['images']['side'] + '.png')
-		top_path = os.path.join(os.path.dirname(json_path), data['images']['top'] + '.png')
+		if type(data['images']['front']) == str:
+			front_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['front'] + '.png'), 'height': None }
+		else:
+			front_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['front']['path'] + '.png'), 'height': data['images']['front']['height'] }
 
-		return data, front_path, side_path, top_path
+		if 'side' not in data['images']:
+			side_data = {}
+		elif type(data['images']['side']) == str:
+			side_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['side'] + '.png'), 'height': None }
+		else:
+			side_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['side']['path'] + '.png'), 'height': data['images']['side']['height'] }
+
+		if 'top' not in data['images']:
+			top_data = {}
+		elif type(data['images']['top']) == str:
+			top_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['top'] + '.png'), 'height': None }
+		else:
+			top_data = { 'path': os.path.join(os.path.dirname(json_path), data['images']['top']['path'] + '.png'), 'height': data['images']['top']['height'] }
+
+		return data, front_data, side_data, top_data
 
 	def load_ui_elements_image(self, image_name: str):
 		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', 'ui_element', image_name + '.png')

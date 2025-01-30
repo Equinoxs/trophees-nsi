@@ -11,7 +11,7 @@ class Tree(PillarObject):
 		data['interaction'] = get_hit
 		data['authorized_sound_tracks'] = ['backgrounds', 'hits']
 		self.hitbox = [Vector2(0, 0)]
-		self.hitbox_action_radius = 20  # hitbox plus grosse
+		self.hitbox_action_radius = 30  # hitbox plus grosse
 		super().__init__(data)
 
 	def render(self):

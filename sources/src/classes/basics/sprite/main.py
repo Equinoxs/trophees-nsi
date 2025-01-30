@@ -9,6 +9,7 @@ class Sprite:
 		self.vertical_flip = False
 		self.horizontal_flip = False
 		self.magnification_coeff = 1  # image x fois plus grande
+		self.rendered = True
 
 		if not hasattr(self, 'image_type'):
 			self.image_type = ''
@@ -17,8 +18,8 @@ class Sprite:
 			return
 		elif image_path is not None:
 			data, png_path = DataHandler().load_image(image_path, self.image_type)
-			self.original_image = pygame.image.load(png_path)
-			self.image = pygame.image.load(png_path)
+			self.original_image = pygame.image.load(png_path).convert_alpha()
+			self.image = self.original_image.copy()
 			self.image_path = image_path
 			self.image_data = data  # les infos de l'image
 			if 'height' in self.image_data:
@@ -168,13 +169,11 @@ class Sprite:
 		camera_y = Camera().get_camera().y
 		width, height = self.image.get_size()
 
-		rendered = False
+		self.rendered = False
 		if self.position.x + width > camera_x or self.position.x < camera_x + screen_width:
 			if self.position.y + height > camera_y or self.position.y < camera_y + screen_height:
 				if hasattr(self, 'is_player'):
 					Camera().draw(self.image, self.position, is_player_rendered=self.is_player)
 				else:
 					Camera().draw(self.image, self.position)
-				rendered = True
-
-		return rendered
+				self.rendered = True

@@ -3,8 +3,8 @@
 	"hitbox": [[5, 35], [95, 35], [100, 100], [0, 100]],
 	"hitbox_action_radius": 20,
 	"door": {
-		"name": "hut_6_door",
-		"interaction": "switch_door_hut_6",
+		"name": "hut_8_door",
+		"interaction": "switch_door_hut_8",
 		"position": [50, 100]
 	}
 }

@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior, MapObject
 
 
 class Map:
@@ -12,10 +12,13 @@ class Map:
 		while not sorted:
 			sorted = True
 			for i in range(len(self.elements) - 1):
-				if not isinstance(self.elements[i], GroundSurface):
-					if self.elements[i].goes_on_top_of(self.elements[i + 1]):
-						self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
-						sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
+				if not isinstance(self.elements[i], MapObject):
+					continue
+				if not self.elements[i].get_has_moved() and not self.elements[i + 1].get_has_moved():
+					continue
+				if self.elements[i].goes_on_top_of(self.elements[i + 1]):
+					self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
+					sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
 
 
 	def search_by_name(self, object_name: str):
@@ -67,6 +70,7 @@ class Map:
 
 				case _:
 					raise NotImplementedError
+		self.sort_elements()
 
 	def update(self):
 		if not GameLoop().is_game_paused():

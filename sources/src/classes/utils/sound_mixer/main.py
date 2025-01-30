@@ -1,7 +1,6 @@
 from math import pi
 from pygame import mixer
 
-
 from src.classes import DataHandler, LogHandler, Player, GameLoop
 
 
@@ -18,7 +17,7 @@ class SoundMixer(object):
 		if not hasattr(self, "_initialized"):
 			self._initialized = True
 			mixer.init()
-			mixer.set_num_channels(16)
+			mixer.set_num_channels(128)
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []
@@ -43,7 +42,7 @@ class SoundMixer(object):
 				sound_track.unpause()
 			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) == 0:
 				continue
-			sound_track.set_volume(1/(4*pi*((sound_track.distance_to(player_position)/500)**2)))  # à vérifier...
+			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)))  # à vérifier...
 
 	def find_channel(self):
 		# renvoyer une channel libérée
@@ -66,7 +65,9 @@ class SoundMixer(object):
 		self.channels = []
 
 	def get_index_of_channel(self, channel):
-		return self.channels.index(channel)
+		if channel in self.channels:
+			return self.channels.index(channel)
+		return -1
 
 	def generate_debug_data(self):
 		return ['==== Channels info ===='] + ([sound_track.get_debug_string() for sound_track in self.sound_tracks if sound_track.get_debug_string() is not None] if len(self.sound_tracks) > 0 else ['No channel'])

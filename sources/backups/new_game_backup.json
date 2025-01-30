@@ -13,14 +13,12 @@
 					"type": "MapElement",
 					"position": [0, 0],
 					"image_path": "test_element",
-					"z_index": 0,
 					"name": "test_element"
 				},
 				{
 					"type": "MapObject",
 					"position": [50, 50],
 					"image_path": "test_object",
-					"z_index": 1,
 					"interaction": "test",
 					"name": "test_object"
 				},
@@ -29,7 +27,6 @@
 					"pattern_timeline": [],
 					"position": [0, 0],
 					"image_path": "nathan",
-					"z_index": 2,
 					"interaction": "default",
 					"authorized_sound_tracks": ["footsteps"],
 					"name": "nathan"
@@ -39,7 +36,6 @@
 					"pattern_timeline": [[0, -20], [0, 250], "npc_event_test", [500, 250], [300, -20]],
 					"position": [50, 40],
 					"image_path": "nathan",
-					"z_index": 2,
 					"interaction": "start_mission_test",
 					"authorized_sound_tracks": ["footsteps"],
 					"name": "alan",
@@ -55,13 +51,12 @@
 					"type": "GroundSurface",
 					"name": "background",
 					"image_path": "dirt",
-					"z_index": -1,
 					"boundaries": [[-3000, -3000], [3000, -3000], [3000, 3000], [-3000, 3000]]
 				},
 				{
 					"type": "GroundSurface",
 					"name": "garden",
-					"image_path": "grass",
+					"image_path": "grass_1",
 					"boundaries": [[-500, -500], [500, -500], [500, 500], [-500, 500]]
 				},
 				{
@@ -98,16 +93,14 @@
 				{
 					"type": "Tree",
 					"name": "first_tree",
-					"image_path": "classic",
-					"position": [-50, -100],
-					"z_index": 2
+					"image_path": "oak",
+					"position": [-50, -100]
 				},
 				{
 					"type": "Wall",
 					"name": "wall_test",
-					"wall_type": "wall_1",
-					"boundaries": [[250, 200], [300, 450], [50, 400], [-200, 100], [-100, 10], [50, 50], [250, 50]],
-					"z_index": 2
+					"wall_type": "gray_brick",
+					"boundaries": [[250, 200], [300, 450], [50, 400], [-200, 100], [-100, 10], [50, 50], [250, 50]]
 				},
 				{
 					"type": "NPC",
@@ -116,7 +109,6 @@
 					"pattern_type": "back_and_forth",
 					"position": [50, 40],
 					"image_path": "albert",
-					"z_index": 2,
 					"interaction": "house_proprietary_start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"]
@@ -130,8 +122,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "background",
-					"image_path": "grass",
-					"z_index": -1,
+					"image_path": "grass_1",
 					"boundaries": [[-100, -100], [2200, -100], [2200, 2200], [-100, 2200]]
 				},
 				{
@@ -142,44 +133,44 @@
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "grass_lake",
+					"image_path": "grass_1",
 					"boundaries": [[668, 1978], [668, 1618], [668, 1610], [672, 1613], [680, 1618], [689, 1628], [707, 1638], [724, 1648], [741, 1656], [760, 1663], [779, 1672], [802, 1678], [821, 1682], [841, 1687], [864, 1690], [884, 1694], [904, 1696], [921, 1700], [939, 1700], [956, 1700], [973, 1700], [1236, 1700], [1255, 1698], [1272, 1693], [1289, 1687], [1304, 1681], [1315, 1676], [1327, 1670], [1338, 1666], [1350, 1656], [1362, 1647], [1375, 1638], [1387, 1627], [1395, 1616], [1404, 1604], [1410, 1594], [1418, 1581], [1424, 1567], [1429, 1555], [1435, 1541], [1440, 1529], [1444, 1516], [1449, 1504], [1452, 1489], [1452, 1358], [1668, 1358], [1690, 1360], [1706, 1366], [1722, 1374], [1740, 1382], [1756, 1392], [1769, 1399], [1784, 1406], [1798, 1412], [1813, 1421], [1827, 1429], [1838, 1438], [1850, 1446], [1860, 1454], [1867, 1464], [1874, 1475], [1880, 1487], [1884, 1500], [1888, 1514], [1888, 1528], [1888, 1850], [1884, 1866], [1878, 1880], [1872, 1894], [1863, 1908], [1855, 1921], [1848, 1932], [1838, 1947], [1826, 1960], [1813, 1969], [1796, 1974], [668, 1978]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "center_grass",
+					"image_path": "grass_1",
 					"boundaries": [[542, 756], [572, 746], [1514, 756], [1526, 760], [1533, 770], [1538, 776], [1544, 786], [1547, 799], [1547, 1246], [1542, 1261], [1534, 1273], [1522, 1284], [1506, 1287], [838, 1287], [810, 1287], [787, 1292], [759, 1298], [734, 1310], [712, 1322], [689, 1336], [672, 1352], [656, 1369], [644, 1388], [635, 1409], [627, 1436], [624, 1460], [553, 1460], [553, 1433], [548, 1409], [541, 1388], [524, 1369], [506, 1356], [490, 1346], [490, 828], [499, 801], [516, 776], [542, 756]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "square_3",
+					"image_path": "grass_1",
 					"boundaries": [[501, 2068], [482, 2068], [464, 2057], [456, 2038], [451, 2016], [451, 1993], [451, 1939], [600, 1939], [600, 1993], [593, 2007], [586, 2024], [573, 2034], [559, 2046], [545, 2057], [525, 2062], [501, 2068]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "square_2",
+					"image_path": "grass_1",
 					"boundaries": [[451, 1890], [600, 1890], [600, 1760], [451, 1760], [451, 1890]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "square_1",
+					"image_path": "grass_1",
 					"boundaries": [[600, 1712], [451, 1712], [451, 1573], [456, 1573], [472, 1573], [496, 1564], [518, 1550], [534, 1530], [600, 1530], [600, 1712]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "circle_grass",
+					"image_path": "grass_1",
 					"boundaries": [[396, 1404], [418, 1399], [438, 1396], [455, 1399], [470, 1413], [480, 1424], [486, 1441], [490, 1458], [486, 1475], [480, 1489], [470, 1504], [458, 1513], [438, 1519], [420, 1519], [402, 1513], [390, 1504], [379, 1489], [373, 1472], [373, 1452], [375, 1433], [384, 1420], [396, 1404]]
 				},
 				{
 					"type": "GroundSurface",
-					"name": "grass1",
-					"image_path": "grass",
+					"name": "edge_square",
+					"image_path": "grass_1",
 					"boundaries": [[77, 1110], [68, 1098], [68, 808], [68, 793], [68, 776], [68, 762], [71, 748], [79, 740], [99, 737], [328, 737], [358, 766], [372, 782], [387, 799], [395, 822], [395, 1064], [395, 1079], [390, 1098], [380, 1110], [370, 1118], [110, 1118], [93, 1118], [77, 1110]]
 				},
 				{
@@ -189,12 +180,23 @@
 					"boundaries": [[808, 1366], [791, 1366], [775, 1375], [745, 1383], [721, 1400], [704, 1421], [694, 1446], [694, 1482], [694, 1516], [700, 1541], [728, 1568], [752, 1586], [786, 1600], [815, 1610], [845, 1618], [876, 1621], [908, 1627], [940, 1633], [1201, 1633], [1240, 1627], [1274, 1618], [1304, 1606], [1327, 1584], [1352, 1551], [1370, 1514], [1378, 1486], [1378, 1450], [1370, 1416], [1360, 1393], [1342, 1375], [1327, 1366], [880, 1366], [845, 1366], [808, 1366]]
 				},
 				{
+					"type": "Wall",
+					"name": "border_invisible_wall",
+					"boundaries": [[-100, -100], [2200, -100], [2200, 2200], [-100, 2200], [-100, -100]],
+					"wall_width": 0
+				},
+				{
+					"type": "Wall",
+					"name": "lake_fence",
+                    "wall_type": "fence",
+					"boundaries": [[808, 1366], [791, 1366], [775, 1375], [745, 1383], [721, 1400], [704, 1421], [694, 1446], [694, 1482], [694, 1516], [700, 1541], [728, 1568], [752, 1586], [786, 1600], [815, 1610], [845, 1618], [876, 1621], [908, 1627], [940, 1633], [1201, 1633], [1240, 1627], [1274, 1618], [1304, 1606], [1327, 1584], [1352, 1551], [1370, 1514], [1378, 1486], [1378, 1450], [1370, 1416], [1360, 1393], [1342, 1375], [1327, 1366], [880, 1366], [845, 1366], [808, 1366]]
+				},
+				{
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
 					"position": [1100, 1350],
 					"image_path": "nathan",
-					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
@@ -204,7 +206,6 @@
 					"position": [0, 0],
 					"image_path": "albert",
 					"interaction": "switch_with_test_2",
-					"z_index": 2,
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
@@ -214,10 +215,57 @@
 					"pattern_type": "back_and_forth",
 					"position": [0, 0],
 					"image_path": "albert",
-					"z_index": 2,
 					"interaction": "house_proprietary_start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"]
+				},
+				{
+					"type": "Tree",
+					"name": "center_tree_1",
+					"image_path": "oak",
+					"position": [850, 880]
+				},
+				{
+					"type": "Tree",
+					"name": "center_tree_2",
+					"image_path": "walnut",
+					"position": [560, 1310]
+				},
+				{
+					"type": "Tree",
+					"name": "edge_tree_1",
+					"image_path": "oak",
+					"position": [30, 1350]
+				},
+				{
+					"type": "Tree",
+					"name": "castle_tree",
+					"image_path": "walnut",
+					"position": [320, 1730]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_tree_1",
+					"image_path": "oak",
+					"position": [790, 1780]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_tree_2",
+					"image_path": "walnut",
+					"position": [1300, 1920]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_tree_3",
+					"image_path": "walnut",
+					"position": [1810, 1580]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_tree_4",
+					"image_path": "oak",
+					"position": [1570, 1450]
 				},
 				{
 					"type": "Building",
@@ -230,6 +278,30 @@
 					"name": "building_2",
 					"image_path": "building_2",
 					"position": [1000, 680]
+				},
+				{
+					"type": "Building",
+					"name": "hut_6",
+					"image_path": "hut_6",
+					"position": [600, 175]
+				},
+				{
+					"type": "Building",
+					"name": "hut_8",
+					"image_path": "hut_8",
+					"position": [950, 175]
+				},
+				{
+					"type": "Building",
+					"name": "little_house",
+					"image_path": "little_house",
+					"position": [80, 760]
+				},
+				{
+					"type": "Building",
+					"name": "cabin",
+					"image_path": "cabin",
+					"position": [600, 900]
 				}
 			]
 		},
@@ -251,15 +323,35 @@
 				},
 				{
 					"type": "Wall",
-					"boundaries": [[0, 500], [0, 120], [600, 120], [600, 500], [0, 500]],
-					"wall_width": 0
+					"boundaries": [[0, 405], [0, 120], [600, 120], [600, 405], [500, 405], [500, 500], [390, 500], [390, 405], [0, 405]],
+					"wall_width": 0,
+					"hitbox_action_radius": 20
 				}
 			]
 		},
-		"builiding_2": {
+		"building_2": {
 			"top_left_corner": [0, 0],
-			"bottom_right_corner": [550, 550],
-			"elements": []
+			"bottom_right_corner": [100, 100],
+			"elements": [
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [0, 0],
+					"interaction": "switch_door_building_2"
+				}
+			]
+		},
+		"little_house": {
+			"top_left_corner": [0, 0],
+			"bottom_right_corner": [100, 100],
+			"elements": [
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [0, 0],
+					"interaction": "switch_door_little_house"
+				}
+			]
 		}
 	},
 	"keybinds": {

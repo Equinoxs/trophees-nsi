@@ -1,1 +1,10 @@
-{}
+{
+	"height": 300,
+	"hitbox": [[0, 40], [100, 40], [100, 100], [0, 100]],
+	"hitbox_action_radius": 20,
+	"door": {
+		"name": "little_house_door",
+		"interaction": "switch_door_little_house",
+		"position": [30, 100]
+	}
+}
