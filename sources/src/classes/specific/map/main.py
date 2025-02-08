@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior, MapObject
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior, MapObject, Furniture, NaturalObject, Table
 
 
 class Map:
@@ -67,6 +67,15 @@ class Map:
 
 				case "Interior":
 					self.elements.append(Interior(element))
+
+				case "Furniture":
+					self.elements.append(Furniture(element))
+
+				case "Table":
+					self.elements.append(Table(element))
+
+				case "NaturalObject":
+					self.elements.append(NaturalObject(element))
 
 				case _:
 					raise NotImplementedError

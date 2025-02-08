@@ -73,6 +73,9 @@ from .specific.wall_segment.main import WallSegment
 from .specific.door.main import Door
 from .specific.building.main import Building
 from .specific.interior.main import Interior
+from .specific.furniture.main import Furniture
+from .specific.table.main import Table
+from .specific.natural_object.main import NaturalObject
 
 # Wall importe WallSegment
 from .specific.wall.main import Wall

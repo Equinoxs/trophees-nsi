@@ -1,3 +1,5 @@
+import pygame
+
 from src.classes import Menu, DataHandler, GameLoop, ButtonActions
 
 
@@ -60,7 +62,7 @@ class MenuHandler:
 	def get_current_menu(self):
 		return self.current_menu
 
-	def set_current_menu(self, menu_name: str):
+	def set_current_menu(self, menu_name: str, force_render: bool = False):
 		if menu_name == 'map_opened':
 			GameLoop().get_camera().full_map_rendered()
 		elif self.current_menu_name == 'map_opened' and menu_name != 'map_opened':
@@ -71,6 +73,10 @@ class MenuHandler:
 				self.menus_historics.append(self.current_menu_name)
 			self.current_menu = self.menus[menu_name]
 			self.current_menu_name = menu_name
+
+		if force_render:
+			self.render()
+			pygame.display.flip()
 	
 	def get_last_menu(self):
 		if self.menus_historics:

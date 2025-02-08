@@ -1,4 +1,4 @@
-from src.classes import PillarObject, Vector2, Camera
+from src.classes import PillarObject, Vector2, Camera, Player
 
 
 class Tree(PillarObject):
@@ -6,10 +6,10 @@ class Tree(PillarObject):
 		self.image_type = 'tree'
 
 		def get_hit(self):
-			self.play_sound('hit')
+			vector = Player().get_focus().get_position() - self.position
+			Player().get_focus().get_position().add(vector.set_norm(30 * Camera().get_zoom()))
 
 		data['interaction'] = get_hit
-		data['authorized_sound_tracks'] = ['backgrounds', 'hits']
 		self.hitbox = [Vector2(0, 0)]
 		self.hitbox_action_radius = 30  # hitbox plus grosse
 		super().__init__(data)

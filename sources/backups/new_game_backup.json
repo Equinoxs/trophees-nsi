@@ -203,10 +203,12 @@
 					"type": "NPC",
 					"name": "alberto",
 					"level": 2,
-					"position": [0, 0],
+					"position": [550, 2160],
 					"image_path": "albert",
 					"interaction": "switch_with_test_2",
-					"authorized_sound_tracks": ["footsteps", "voices"]
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"pattern_timeline": [[550, 2160], "npc_event_test", [590, 2160], "npc_event_test"],
+					"pattern_type": "loop"
 				},
 				{
 					"type": "NPC",
@@ -352,6 +354,18 @@
 					"interaction": "switch_door_little_house"
 				}
 			]
+		},
+		"hut_6_inside": {
+			"top_left_corner": [0, 0],
+            "bottom_right_corner": [100, 100],
+            "elements": [
+                {
+                    "type": "Door",
+                    "name": "exit",
+                    "position": [0, 0],
+                    "interaction": "switch_door_hut_6_inside"
+                }
+            ]
 		}
 	},
 	"keybinds": {

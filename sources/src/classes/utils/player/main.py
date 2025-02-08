@@ -28,7 +28,7 @@ class Player:
 		return self.map_name
 
 	def change_map(self, map_name: str):
-		GameLoop().get_menu_handler().set_current_menu('loading')
+		GameLoop().get_menu_handler().set_current_menu('loading', True)
 		self.map_name = map_name
 		self.focus = self.map.remove(self.focus)
 		GameLoop().get_sound_mixer().free_all_channels()
