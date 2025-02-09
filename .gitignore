@@ -16,4 +16,4 @@ venv/
 
 # Autres fichiers
 *.orig
-.DS_Store
+*.DS_Store

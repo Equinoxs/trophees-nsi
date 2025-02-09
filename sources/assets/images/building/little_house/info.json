@@ -5,6 +5,6 @@
 	"door": {
 		"name": "little_house_door",
 		"interaction": "switch_door_little_house",
-		"position": [30, 100]
+		"position": [30, 101]
 	}
 }

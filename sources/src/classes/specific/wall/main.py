@@ -1,4 +1,4 @@
-from src.classes import WallSegment
+from src.classes import WallSegment, Vector2
 
 
 class Wall:
@@ -10,20 +10,35 @@ class Wall:
 		self.initialize_segments(map)
 
 	def initialize_segments(self, map):
-		for i in range(1, len(self.boundaries)):
-			self.data['segment'] = self.boundaries[i - 1 : i + 1]
+		i = 0
+		prev_segment = []
+		while i + 1 < len(self.boundaries):
+			segment = []
+			segment.append(self.boundaries[i])
+			i += 1
+			while not isinstance(self.boundaries[i], Vector2):
+				segment.append(self.boundaries[i])
+				i += 1
+			segment.append(self.boundaries[i])
+
+			self.data['segment'] = segment
 
 			before_angle = 0
-			if i > 1:
-				before_angle = (self.boundaries[i] - self.boundaries[i - 1]).signed_angle_to(self.boundaries[i - 1] - self.boundaries[i - 2])
+			if len(prev_segment) > 0:
+				before_angle = (segment[-1] - segment[0]).signed_angle_to(prev_segment[-1] - prev_segment[0])
 			after_angle = 0
 			if i + 1 < len(self.boundaries):
-				after_angle = (self.boundaries[i] - self.boundaries[i - 1]).signed_angle_to(self.boundaries[i + 1] - self.boundaries[i])
+				j = i
+				while not isinstance(self.boundaries[j], Vector2):
+					j += 1
+				after_angle = (segment[-1] - segment[0]).signed_angle_to(self.boundaries[j] - segment[-1])
 
-			self.data['name'] = self.name + '_' + str(i)
 			self.data['before_angle'] = before_angle
 			self.data['after_angle'] = after_angle
 
-			segment = WallSegment(self.data)
-			self.segments.append(segment)
-			map.add(segment)
+			self.data['name'] = self.name + '_' + str(i)
+
+			prev_segment = segment[:]
+			wall_segment = WallSegment(self.data)
+			self.segments.append(wall_segment)
+			map.add(wall_segment)

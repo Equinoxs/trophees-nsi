@@ -188,14 +188,14 @@
 				{
 					"type": "Wall",
 					"name": "lake_fence",
-                    "wall_type": "fence",
+					"wall_type": "fence",
 					"boundaries": [[808, 1366], [791, 1366], [775, 1375], [745, 1383], [721, 1400], [704, 1421], [690, 1446], [694, 1482], [694, 1516], [700, 1541], [728, 1568], [752, 1586], [786, 1600], [815, 1610], [845, 1618], [876, 1621], [908, 1627], [940, 1633], [1201, 1633], [1240, 1627], [1274, 1618], [1304, 1606], [1327, 1584], [1352, 1551], [1370, 1514], [1378, 1486], [1378, 1450], [1370, 1416], [1360, 1393], [1342, 1375], [1327, 1366], [880, 1366], [845, 1366], [808, 1366]]
 				},
 				{
 					"type": "NPC",
 					"name": "nathan",
 					"level": 2,
-					"position": [1100, 1350],
+					"position": [980, 1325],
 					"image_path": "nathan",
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
@@ -320,7 +320,7 @@
 				{
 					"type": "Door",
 					"name": "front_door_interior_1",
-					"position": [440, 500],
+					"position": [440, 490],
 					"interaction": "switch_door_building_1"
 				},
 				{
@@ -328,6 +328,12 @@
 					"boundaries": [[0, 405], [0, 120], [600, 120], [600, 405], [500, 405], [500, 500], [390, 500], [390, 405], [0, 405]],
 					"wall_width": 0,
 					"hitbox_action_radius": 20
+				},
+				{
+					"type": "Furniture",
+					"name": "box",
+					"image_path": "random_box",
+					"position": [40, 150]
 				}
 			]
 		},
@@ -355,17 +361,113 @@
 				}
 			]
 		},
-		"hut_6_inside": {
-			"top_left_corner": [0, 0],
-            "bottom_right_corner": [100, 100],
-            "elements": [
-                {
-                    "type": "Door",
-                    "name": "exit",
-                    "position": [0, 0],
-                    "interaction": "switch_door_hut_6_inside"
-                }
-            ]
+		"hut_6": {
+			"top_left_corner": [-50, -120],
+			"bottom_right_corner": [620, 870],
+			"elements": [
+				{
+					"type": "GroundSurface",
+					"name": "floor",
+					"image_path": "wooden_floor_4",
+					"boundaries": [[0, 0], [600, 0], [600, 800], [350, 800], [350, 850], [250, 850], [250, 800], [0, 800]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall",
+					"boundaries": [[600, 800], [350, 800], [350, 850], [250, 850], [250, 800], [0, 800]],
+					"wall_width": 0
+				},
+				{
+					"type": "Wall",
+					"name": "side_wall",
+					"boundaries": [[0, 800], [0, 0], { "sticker": "window", "x_offset": 130 }, { "sticker": "thinking_board", "x_offset": 230 }, { "sticker": "wanted_poster", "x_offset": 340 }, { "sticker": "window", "x_offset": -130 }, [600, 0], [600, 800]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_1",
+					"boundaries": [[0, 266], { "sticker": "blackboard_papers", "x_offset": 40 }, { "sticker": "wanted_poster", "x_offset": 150 }, { "sticker": "notes", "x_offset": -30, "y_offset": -20 }, [250, 266], [250, 430]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_2",
+					"boundaries": [[0, 533], { "sticker": "gccs_poster", "x_offset": 70, "y_offset": -30 }, { "sticker": "blackboard_riemann", "x_offset": 120 }, [250, 533], [250, 720]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_3",
+					"boundaries": [[600, 266], { "sticker": "blackboard", "x_offset": "middle" }, [350, 266], [350, 430]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_4",
+					"boundaries": [[600, 533], { "sticker": "blackboard_papers", "x_offset": 120 }, { "sticker": "notes", "height": 20, "x_offset": 80, "y_offset": -30 }, { "sticker": "notes", "x_offset": 50 }, [350, 533], [350, 720]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [300, 840],
+					"interaction": "switch_door_hut_6"
+				}
+			]
+		},
+		"hut_8": {
+			"top_left_corner": [-50, -120],
+			"bottom_right_corner": [620, 870],
+			"elements": [
+				{
+					"type": "GroundSurface",
+					"name": "floor",
+					"image_path": "wooden_floor_4",
+					"boundaries": [[0, 0], [600, 0], [600, 800], [350, 800], [350, 850], [250, 850], [250, 800], [0, 800]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall",
+					"boundaries": [[600, 800], [350, 800], [350, 850], [250, 850], [250, 800], [0, 800]],
+					"wall_width": 0
+				},
+				{
+					"type": "Wall",
+					"name": "side_wall",
+					"boundaries": [[0, 800], [0, 0], { "sticker": "window", "x_offset": 130 }, { "sticker": "thinking_board", "x_offset": 230 }, { "sticker": "wanted_poster", "x_offset": 340 }, { "sticker": "window", "x_offset": -130 }, [600, 0], [600, 800]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_1",
+					"boundaries": [[0, 266], { "sticker": "blackboard_papers", "x_offset": 40 }, { "sticker": "wanted_poster", "x_offset": 150 }, { "sticker": "notes", "x_offset": -30, "y_offset": -20 }, [250, 266], [250, 430]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_2",
+					"boundaries": [[0, 533], { "sticker": "gccs_poster", "x_offset": 70, "y_offset": -30 }, { "sticker": "blackboard_riemann", "x_offset": 120 }, [250, 533], [250, 720]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_3",
+					"boundaries": [[600, 266], { "sticker": "blackboard", "x_offset": "middle" }, [350, 266], [350, 430]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Wall",
+					"name": "partition_4",
+					"boundaries": [[600, 533], { "sticker": "blackboard_papers", "x_offset": 120 }, { "sticker": "notes", "height": 20, "x_offset": 80, "y_offset": -30 }, { "sticker": "notes", "x_offset": 50 }, [350, 533], [350, 720]],
+					"wall_type": "yellow"
+				},
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [300, 840],
+					"interaction": "switch_door_hut_8"
+				}
+			]
 		}
 	},
 	"keybinds": {

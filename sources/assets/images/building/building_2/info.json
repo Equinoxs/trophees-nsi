@@ -5,6 +5,6 @@
 	"door": {
 		"name": "building_2_door",
 		"interaction": "switch_door_building_2",
-		"position": [30, 100]
+		"position": [30, 101]
 	}
 }

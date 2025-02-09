@@ -133,6 +133,11 @@ class Vector2:
 
 		return closest_vector
 
+	def int(self):
+		self.x = int(self.x)
+		self.y = int(self.y)
+		return self
+
 	def __add__(self, other):
 		if isinstance(other, Vector2):
 			return Vector2(self.x + other.get_x(), self.y + other.get_y())

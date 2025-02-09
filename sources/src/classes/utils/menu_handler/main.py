@@ -75,14 +75,16 @@ class MenuHandler:
 			self.current_menu_name = menu_name
 
 		if force_render:
+			self.update()
 			self.render()
+			GameLoop().get_camera().get_screen().blit(GameLoop().get_camera().get_surface('menu'), (0, 0))
 			pygame.display.flip()
 	
 	def get_last_menu(self):
 		if self.menus_historics:
 			return self.menus_historics[-1]
 		return None
-	
+
 	def set_last_menu(self):
 		last_menu = self.get_last_menu()
 		if last_menu and last_menu in self.menus:

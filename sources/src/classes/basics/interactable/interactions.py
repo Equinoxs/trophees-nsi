@@ -52,6 +52,22 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('little_house_door')
 
+	def switch_door_hut_6(_, host):
+		if Player().get_map_name() == 'bletchley_park':
+			Player().change_map('hut_6')
+			Player().teleport_to('exit')
+		elif Player().get_map_name() == 'hut_6':
+			Player().change_map('bletchley_park')
+			Player().teleport_to('hut_6_door')
+
+	def switch_door_hut_8(_, host):
+		if Player().get_map_name() == 'bletchley_park':
+			Player().change_map('hut_8')
+			Player().teleport_to('exit')
+		elif Player().get_map_name() == 'hut_8':
+			Player().change_map('bletchley_park')
+			Player().teleport_to('hut_8_door')
+
 
 	def do(self, interaction_name: str, host):
 		LogHandler().add(f'interaction {interaction_name} activated')
@@ -68,5 +84,9 @@ class Interactions:
 				self.switch_door_building_2(host)
 			case 'switch_door_little_house':
 				self.switch_door_little_house(host)
+			case 'switch_door_hut_6':
+				self.switch_door_hut_6(host)
+			case 'switch_door_hut_8':
+				self.switch_door_hut_8(host)
 			case _:
 				LogHandler().add(f'Unknown interaction: {interaction_name}')

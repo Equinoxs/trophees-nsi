@@ -12,7 +12,8 @@ class WallSegment(RidgeObject):
 		self.wall_type = data['wall_type']
 		self.wall_height = data['wall_height']
 		self.wall_width = data['wall_width']
-		self.boundaries = data['segment']
+		self.boundaries = [data['segment'][0], data['segment'][-1]]
+		self.stickers = data['segment'][1:-1]
 		self.before_angle = data['before_angle']
 		self.after_angle = data['after_angle']
 
@@ -76,7 +77,7 @@ class WallSegment(RidgeObject):
 		self.image_data['animations'] = {}
 		self.original_image = None
 		self.hitbox_closed = False
-		self.hitbox_action_radius = 20
+		self.hitbox_action_radius = data.get('hitbox_action_radius', 20)
 
 		super().__init__(data)
 
@@ -86,6 +87,33 @@ class WallSegment(RidgeObject):
 			front_image = self.fill_surface(self.original_front_image, self.front_width, self.wall_height)
 			front_image = pygame.transform.scale(front_image, (abs(self.p1_to_p2.get_x()), self.wall_height))
 			self.front_image_perspective = self.skew_image(front_image, 0, abs(self.p1_to_p2.get_y()) * self.direction)
+
+			if self.p1_to_p2.get_x() < 0:
+				sense = -1
+			else:
+				sense = 1
+   
+			for sticker in self.stickers:
+				sticker_data, sticker_image = DataHandler().load_sticker_data(sticker['sticker'], sticker.get('height', None))
+				sticker_vector = self.p1_to_p2.copy().set_norm(sticker_image.get_width())
+				sticker_image = pygame.transform.scale(sticker_image, (abs(sticker_vector.get_x()), sticker_image.get_height()))
+				sticker_image = self.skew_image(sticker_image, 0, abs(sticker_vector.get_y()) * self.direction)
+
+				x_offset = sticker.get('x_offset', 0)
+				if x_offset == 'middle':
+					x_offset = (self.front_width - sticker_image.get_width()) / 2
+				if x_offset < 0:
+					x_offset = self.front_width - sticker_image.get_width() + x_offset
+
+				y_offset = sticker.get('y_offset', sticker_data.get('top', 0))
+				if y_offset == 'middle':
+					y_offset = (self.wall_height - sticker_image.get_height()) / 2
+				if y_offset < 0:
+					y_offset = self.wall_height - sticker_image.get_height() + y_offset
+
+				offset_vector = self.p1_to_p2.copy().set_norm(x_offset) + Vector2(0, y_offset)
+				offset_vector.set_x(offset_vector.get_x() * sense)
+				self.front_image_perspective.blit(sticker_image, (offset_vector).int().convert_to_tuple())
 
 	def calculate_side_image_perspective(self):
 		self.side_image_perspective = pygame.Surface((0, self.wall_height - 2 * self.normal_vector.get_y())).convert_alpha()

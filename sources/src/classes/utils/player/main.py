@@ -39,6 +39,7 @@ class Player:
 		self.map.add(self.focus)
 		GameLoop().get_camera().initialize()
 		GameLoop().get_menu_handler().set_current_menu('in_game')
+		self.focus.get_speed_vector().set_all(0, 0)
 
 	def get_focus(self):
 		return self.focus

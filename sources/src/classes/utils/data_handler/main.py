@@ -1,5 +1,6 @@
 import json
 import os
+import pygame
 
 from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE
 
@@ -24,6 +25,7 @@ class DataHandler:
 			)
 			self.images_data = {}
 			self.sounds_data = {}
+			self.stickers_data = {}
 			self.missions_data = None
 			self.menus_data = None
 			self.current_save_chrono_tag = None
@@ -162,6 +164,27 @@ class DataHandler:
 	def load_ui_elements_image(self, image_name: str):
 		png_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images', 'ui_element', image_name + '.png')
 		return png_path
+
+	def get_sticker_data(self, sticker_name: str):
+		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'assets', 'images','wall_sticker', sticker_name, 'info.json')
+		with open(json_path, 'r') as file:
+			data = json.load(file)
+
+		png_path = os.path.join(os.path.dirname(json_path), 'image.png')
+		return data, png_path
+
+	def load_sticker_data(self, sticker_name: str, height: int = None, force: bool = False):
+		if sticker_name not in self.stickers_data or force:
+			self.stickers_data[sticker_name] = self.get_sticker_data(sticker_name)
+		data, png_path = self.stickers_data[sticker_name]
+		return data, self.get_image_surface(png_path, height if height is not None else data.get('height', None))
+
+	def get_image_surface(self, image_path: str, target_height: int = None):
+		image = pygame.image.load(image_path).convert_alpha()
+		if target_height is not None:
+			width, height = image.get_size()
+			image = pygame.transform.scale(image, (width * target_height / height, target_height))
+		return image
 
 
 
