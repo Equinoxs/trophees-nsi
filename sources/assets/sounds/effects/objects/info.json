@@ -5,6 +5,9 @@
 		},
 		"typewriter": {
 			"extension": "mp3"
+		},
+		"open_door": {
+			"extension": "mp3"
 		}
 	}
 }

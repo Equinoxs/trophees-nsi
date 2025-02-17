@@ -118,8 +118,6 @@ class GameLoop:
 
 		if self.control_handler.is_activated('enter') and self.menu_handler.get_current_menu_name() == 'welcome':
 			self.menu_handler.get_button_actions().do('focus_on_game')
-		if self.control_handler.is_activated('pause') and self.menu_handler.get_current_menu_name() == 'settings':
-			self.menu_handler.get_button_actions().do('return_to_last_menu')
 
 		# Updates
 		self.time_handler.update()

@@ -32,6 +32,7 @@ from .specific.marker.main import Marker
 from .specific.fps_helper.main import FPSHelper
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
+from .specific.text_input.main import TextInput
 
 # Objets enfant de Button
 from .specific.mini_map.main import MiniMap

@@ -41,7 +41,9 @@ class ButtonActions:
 		GameLoop().get_menu_handler().set_last_menu()
 
 	def open_credits(self):
-		pass
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('credits')
+		GameLoop().get_sound_mixer().pause_music()
 
 	def open_map(self):
 		GameLoop().pause_game()
@@ -58,6 +60,8 @@ class ButtonActions:
 				self.quit_game()
 			case 'open_settings':
 				self.open_settings()
+			case 'open_credits':
+				self.open_credits()
 			case 'return_to_last_menu':
 				self.return_to_last_menu()
 			case 'open_map':

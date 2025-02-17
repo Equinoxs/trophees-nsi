@@ -5,6 +5,9 @@
 		},
 		"hit": {
 			"extension": "mp3"
+		},
+		"punch_tree": {
+			"extension": "mp3"
 		}
 	}
 }

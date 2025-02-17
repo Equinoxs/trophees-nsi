@@ -157,8 +157,233 @@
 				"action": "return_to_last_menu"
 			},
 			{
-				"type": "FPSHelper",
-				"class": "fps"
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [0, 0, 0],
+				"label": "Key Bindings",
+				"x": 70,
+				"y": 130,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 70
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Move Forward",
+				"x": 40,
+				"y": 230,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Move Forward",
+				"x": 240,
+				"y": 220,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "z"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Move Backward",
+				"x": 40,
+				"y": 290,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Move Backward",
+				"x": 240,
+				"y": 280,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "s"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Move Right",
+				"x": 40,
+				"y": 350,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Move Right",
+				"x": 240,
+				"y": 340,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "d"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Move Left",
+				"x": 40,
+				"y": 410,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Move Left",
+				"x": 240,
+				"y": 400,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "q"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Sprint",
+				"x": 40,
+				"y": 470,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Sprint",
+				"x": 240,
+				"y": 460,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "left shift"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Interact",
+				"x": 40,
+				"y": 530,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Interact",
+				"x": 240,
+				"y": 520,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "e"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Open map",
+				"x": 40,
+				"y": 590,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Open map",
+				"x": 240,
+				"y": 580,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "m"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Pause",
+				"x": 40,
+				"y": 650,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Pause",
+				"x": 240,
+				"y": 640,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "escape"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Enter",
+				"x": 40,
+				"y": 710,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "TextInput",
+				"label": "Pause",
+				"x": 240,
+				"y": 700,
+				"width": 200,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "Enter"
+			}
+		],
+			"credits": [
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14]
+			},
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14],
+				"text_color": [255, 255, 255],
+				"label": "Settings",
+				"x": "center",
+				"y": 40,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 100
+			},
+			{
+				"type": "Button",
+				"class": "interactive_button",
+				"label": "Close",
+				"color": [61, 53, 39],
+				"font_size": 50,
+				"x": 50,
+				"y": 40,
+				"width": 140,
+				"height": "auto",
+				"action": "return_to_title"
 			}
 		],
 		"welcome": [
