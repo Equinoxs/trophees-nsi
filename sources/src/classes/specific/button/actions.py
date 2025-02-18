@@ -48,6 +48,8 @@ class ButtonActions:
 	def open_map(self):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
+	def toggle_fullscreen(self):
+		GameLoop().toggle_fullscreen()
 
 	def do(self, action_name):
 		LogHandler().add(f'Button action {action_name} activated')
@@ -68,5 +70,7 @@ class ButtonActions:
 				self.open_map()
 			case 'return_to_title':
 				self.return_to_title()
+			case 'toggle_fullscreen':
+				self.toggle_fullscreen()
 			case _:
 				LogHandler().add(f'Unknown button action: {action_name}')

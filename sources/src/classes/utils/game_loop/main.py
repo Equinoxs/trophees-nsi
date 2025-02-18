@@ -91,6 +91,9 @@ class GameLoop:
 
 	def throw_event(self, event):
 		self.get_player().get_map().throw_event(event)
+	
+	def toggle_fullscreen(self):
+		pass
 
 	def update(self):
 		self.control_handler.handle_events()

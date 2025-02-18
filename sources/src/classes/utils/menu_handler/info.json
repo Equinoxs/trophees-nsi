@@ -136,10 +136,10 @@
 			{
 				"type": "UIElement",
 				"color": [99, 99, 99],
-				"text_color": [0, 0, 0],
+				"text_color": [255, 255, 255],
 				"label": "Settings",
 				"x": "center",
-				"y": 40,
+				"y": 20,
 				"width": "auto",
 				"height": "auto",
 				"font_size": 100
@@ -170,6 +170,28 @@
 			{
 				"type": "UIElement",
 				"color": [99, 99, 99],
+				"text_color": [0, 0, 0],
+				"label": "Sound settings",
+				"x": 680,
+				"y": 130,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 70
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [0, 0, 0],
+				"label": "Visual settings",
+				"x": 680,
+				"y": 400,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 70
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
 				"text_color": [204, 174, 114],
 				"label": "Move Forward",
 				"x": 40,
@@ -181,7 +203,7 @@
 			{
 				"type": "TextInput",
 				"label": "Move Forward",
-				"x": 240,
+				"x": 260,
 				"y": 220,
 				"width": 200,
 				"height": 50,
@@ -202,7 +224,7 @@
 			{
 				"type": "TextInput",
 				"label": "Move Backward",
-				"x": 240,
+				"x": 260,
 				"y": 280,
 				"width": 200,
 				"height": 50,
@@ -223,7 +245,7 @@
 			{
 				"type": "TextInput",
 				"label": "Move Right",
-				"x": 240,
+				"x": 260,
 				"y": 340,
 				"width": 200,
 				"height": 50,
@@ -244,7 +266,7 @@
 			{
 				"type": "TextInput",
 				"label": "Move Left",
-				"x": 240,
+				"x": 260,
 				"y": 400,
 				"width": 200,
 				"height": 50,
@@ -265,7 +287,7 @@
 			{
 				"type": "TextInput",
 				"label": "Sprint",
-				"x": 240,
+				"x": 260,
 				"y": 460,
 				"width": 200,
 				"height": 50,
@@ -286,7 +308,7 @@
 			{
 				"type": "TextInput",
 				"label": "Interact",
-				"x": 240,
+				"x": 260,
 				"y": 520,
 				"width": 200,
 				"height": 50,
@@ -307,7 +329,7 @@
 			{
 				"type": "TextInput",
 				"label": "Open map",
-				"x": 240,
+				"x": 260,
 				"y": 580,
 				"width": 200,
 				"height": 50,
@@ -328,7 +350,7 @@
 			{
 				"type": "TextInput",
 				"label": "Pause",
-				"x": 240,
+				"x": 260,
 				"y": 640,
 				"width": 200,
 				"height": 50,
@@ -349,12 +371,82 @@
 			{
 				"type": "TextInput",
 				"label": "Pause",
-				"x": 240,
+				"x": 260,
 				"y": 700,
 				"width": 200,
 				"height": 50,
 				"font_size": 36,
 				"default_text": "Enter"
+			},
+			{
+				"type": "Slider",
+				"label": "Music Volume",
+				"x": 800,
+				"y": 237,
+				"width": 300,
+				"height": 20,
+				"min_value": 0,
+				"max_value": 100,
+				"default_value": 50,
+				"slider_width": 15,
+				"track_color": [150, 150, 150],
+				"slider_color": [61, 53, 39],
+				"border_radius": 3,
+				"border_color": [0, 0, 0],
+				"action": "set_music_volume"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Music volume",
+				"x": 580,
+				"y": 230,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "Slider",
+				"label": "Sound Volume",
+				"x": 800,
+				"y": 297,
+				"width": 300,
+				"height": 20,
+				"min_value": 0,
+				"max_value": 100,
+				"default_value": 50,
+				"slider_width": 15,
+				"track_color": [150, 150, 150],
+				"slider_color": [61, 53, 39],
+				"border_radius": 3,
+				"border_color": [0, 0, 0],
+				"action": "set_sound_volume"
+			},
+			{
+				"type": "UIElement",
+				"color": [99, 99, 99],
+				"text_color": [204, 174, 114],
+				"label": "Sound volume",
+				"x": 580,
+				"y": 290,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 36
+			},
+			{
+				"type": "Button",
+				"label": "Toggle fullscreen",
+				"color": [150, 150, 150],
+				"border_color": [0, 0, 0],
+				"border_length": 2,
+				"border_radius": 4,
+				"font_size": 50,
+				"x": 670,
+				"y": 500,
+				"width": 400,
+				"height": "auto",
+				"action": "toggle_fullscreen"
 			}
 		],
 			"credits": [
@@ -366,7 +458,7 @@
 				"type": "UIElement",
 				"color": [71, 52, 14],
 				"text_color": [255, 255, 255],
-				"label": "Settings",
+				"label": "Credits",
 				"x": "center",
 				"y": 40,
 				"width": "auto",

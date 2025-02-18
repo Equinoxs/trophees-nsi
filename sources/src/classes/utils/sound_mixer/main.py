@@ -21,6 +21,7 @@ class SoundMixer(object):
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []
+			self.music_coefficient = 1.0
 			self.added_sfx = {}
 			added_sfx_paths = DataHandler().get_sound_track_data('added_sfx')[1]
 			for name, path in added_sfx_paths.items():
@@ -82,7 +83,7 @@ class SoundMixer(object):
 	def play_music(self, music_name):
 		self.musics_historic.append(music_name)
 		mixer.music.load(DataHandler().load_music(music_name)[1])
-		mixer.music.set_volume(0.25)
+		mixer.music.set_volume(self.music_coefficient)
 		mixer.music.play()
 
 	def play_music_prev(self):
@@ -91,3 +92,10 @@ class SoundMixer(object):
 
 	def play_sfx(self, sfx_name, play_amount = 0):
 		self.sfx_channel.play(self.added_sfx[sfx_name], play_amount)
+
+	def set_music_coefficient(self, coefficient):
+		self.music_coefficient = max(0.0, min(coefficient, 1.0))
+		mixer.music.set_volume(self.music_coefficient)
+
+	def set_sound_coefficient(self, coefficient):
+		pass

@@ -33,6 +33,9 @@ from .specific.fps_helper.main import FPSHelper
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
 from .specific.text_input.main import TextInput
+from .utils.sound_mixer.main import SoundMixer
+from .specific.slider.actions import SliderActions
+from .specific.slider.main import Slider
 
 # Objets enfant de Button
 from .specific.mini_map.main import MiniMap
@@ -41,7 +44,6 @@ from .specific.menu.main import Menu
 from .utils.menu_handler.main import MenuHandler
 
 # Camera importe Player et SoundMixer
-from .utils.sound_mixer.main import SoundMixer
 from .utils.camera.main import Camera
 
 # SoundMaker importe SoundTrack qui importe SoundMixer
