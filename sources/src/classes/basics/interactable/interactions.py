@@ -17,11 +17,6 @@ class Interactions:
 		GameLoop().get_player().get_focus().get_position().set_all(-20, -20)
 		GameLoop().get_player().get_focus().play_sound('meow')
 
-	def start_mission_test(_, host):
-		if 'mission_test' not in Player().get_accomplished_missions():
-			host.play_sound('voice')
-			MissionHandler().start_mission('mission_test')
-
 	def switch_with_test_2(_, host):
 		if Player().get_map_name() == 'bletchley_park':
 			Player().change_map('test_2')
@@ -74,8 +69,6 @@ class Interactions:
 		match interaction_name:
 			case 'test':
 				self.test(host)
-			case 'house_proprietary_start_mission_test':
-				self.start_mission_test(host)
 			case 'switch_with_test_2':
 				self.switch_with_test_2(host)
 			case 'switch_door_building_1':

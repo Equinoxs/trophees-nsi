@@ -54,7 +54,8 @@ class DataHandler:
 			'required_level': 0,
 			'wall_type': 'gray_brick',
 			'wall_height': None,
-			'wall_width': None
+			'wall_width': None,
+			'mission': None
 		}
 
 		try:

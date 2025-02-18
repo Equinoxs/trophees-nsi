@@ -2,8 +2,10 @@ from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Came
 
 
 class NPC(PillarObject):
-	def __init__(self, data):
+	def __init__(self, data: dict):
 		self.image_type = 'npc'
+		self.mission_marker_x_offset = -20
+		self.mission_marker_y_offset = -150
 		super().__init__(data)
 		self.initial_position = Vector2(data['position'].get_x(), data['position'].get_y())
 

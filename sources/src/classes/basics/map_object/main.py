@@ -4,7 +4,7 @@ from src.classes import MapElement, Collider, Interactable, Movable, SideEffects
 class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager):
 	def __init__(self, data: dict):
 		MapElement.__init__(self, data)
-		Interactable.__init__(self, data['interaction'])
+		Interactable.__init__(self, data['interaction'], data.get('mission', None))
 		if hasattr(self, 'hitbox'):
 			Collider.__init__(self, self.hitbox)
 		else:

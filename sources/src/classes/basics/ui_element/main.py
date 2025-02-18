@@ -83,8 +83,15 @@ class UIElement:
 			pos_y = (SCREEN_HEIGHT - self.surface.get_height()) // 2
 		if pos_y < 0:
 			pos_y = SCREEN_HEIGHT + pos_y - self.surface.get_height()
-   
-		self.rect = pygame.Rect(pos_x, pos_y, self.surface.get_width(), self.surface.get_height())
+
+		if self.image is not None:
+			width = max(self.surface.get_width(), self.image.get_width())
+			height = max(self.surface.get_height(), self.image.get_height())
+		else:
+			width = self.surface.get_width()
+			height = self.surface.get_height()
+
+		self.rect = pygame.Rect(pos_x, pos_y, width, height)
 		match self.text_align:
 			case 'center':
 				self._text_rect = self._text_surface.get_rect(center=self.rect.center)
@@ -102,20 +109,26 @@ class UIElement:
 	def get_rect(self):
 		return self.rect
 
+	def get_image(self):
+		return self.image
+
+	def get_position(self):
+		return self.position
+
 	def update(self):
 		pass
 
-	def render(self):
+	def render(self, surface = 'menu'):
 		self.update_rect()
 
 		if self.color != 'transparent':
-			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.color, self.rect, border_radius=self.border_radius)
+			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.color, self.rect, border_radius=self.border_radius)
 
 		if self.border_length > 0:
-			pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
+			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
 
 		if self.label != '':
-			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, 'menu')
+			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, surface)
 
 		if self.image is not None:
-			GameLoop().get_camera().draw(self.image, self.position, 'menu')
+			GameLoop().get_camera().draw(self.image, self.position, surface)

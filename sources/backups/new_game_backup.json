@@ -217,7 +217,7 @@
 					"pattern_type": "back_and_forth",
 					"position": [0, 0],
 					"image_path": "albert",
-					"interaction": "house_proprietary_start_mission_test",
+					"mission": "mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"]
 				},
@@ -261,7 +261,8 @@
 					"type": "Tree",
 					"name": "lake_tree_3",
 					"image_path": "walnut",
-					"position": [1810, 1580]
+					"position": [1810, 1580],
+					"mission": "mission_test"
 				},
 				{
 					"type": "Tree",

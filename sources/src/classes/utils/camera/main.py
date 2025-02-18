@@ -61,6 +61,9 @@ class Camera:
 	def map_not_rendered(self):
 		self.is_map_rendered = False
 
+	def get_is_full_map_rendered(self):
+		return self.is_full_map_rendered
+
 	def full_map_rendered(self):
 		self.is_full_map_rendered = True
 

@@ -19,6 +19,9 @@ class MissionHandler:
 			self.current_mission = None
 			self.mission_description_displayed = None
 
+	def mission_ongoing(self):
+		return self.current_mission is not None
+
 	def initialize_missions(self):
 		for name, data in self.missions_data.items():
 			self.missions[name] = Mission(data, name)

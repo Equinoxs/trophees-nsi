@@ -18,7 +18,7 @@ class MenuHandler:
 			self.menus = {}
 			self.menus_historics = []
 			self.classes = {}
-			self.markers = {}
+			self.markers = []
 			self.current_menu = None
 			self.current_menu_name = None
 			self.load_menus()
@@ -51,10 +51,12 @@ class MenuHandler:
 	def add_marker(self, marker_data: dict):
 		marker_data['type'] = 'Marker'
 		element = self.menus['in_game'].add_element(marker_data)
+		self.markers.append(element)
 		return element
 
 	def remove_marker(self, marker_ref):
 		self.menus['in_game'].delete_element(marker_ref)
+		del self.markers[self.markers.index(marker_ref)]
 
 	def get_current_menu_name(self):
 		return self.current_menu_name
@@ -98,3 +100,12 @@ class MenuHandler:
 	def render(self):
 		if self.current_menu is not None:
 			self.current_menu.render()
+
+		# Gérer l'affichage des markers spéciaux sur la grande map
+		if self.current_menu_name == 'map_opened':
+			for marker in self.markers:
+				if marker.get_special() and marker.get_image() is not None:
+					x, y =  marker.get_position().convert_to_tuple()
+					marker.get_position().set_all(x + marker.x_offset, y + marker.y_offset)
+					GameLoop().get_camera().draw(marker.get_image(), marker.get_position(), 'map')
+					marker.get_position().set_all(x, y)

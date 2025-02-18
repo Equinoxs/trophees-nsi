@@ -1,12 +1,44 @@
-from src.classes import ControlHandler, Interactions, Vector2, Player, MenuHandler, Missions
+from src.classes import ControlHandler, Interactions, Vector2, Player, MenuHandler, Missions, MissionHandler
 
 class Interactable:
-	def __init__(self, interaction: str):
+	def __init__(self, interaction: str, mission: str):
 		self.interaction = interaction
 		self.interaction_marker = None
 		self.interaction_available = True
 		if self.interaction is None:
 			self.interaction_available = False
+
+		self.mission = None
+		self.mission_marker = None
+
+		if not hasattr(self, 'mission_marker_x_offset'):
+			self.mission_marker_x_offset = 0
+		if not hasattr(self, 'mission_marker_y_offset'):
+			self.mission_marker_y_offset = 0
+
+		self.set_mission(mission)
+
+	def get_mission(self):
+		return self.mission
+
+	def set_mission(self, mission: str):
+		if not Missions().is_mission(mission):
+			return
+
+		self.mission = mission
+
+		mission_marker_data = {
+			'image': 'mission_indicator',
+			'image_height': 50,
+			'position': self.get_position(),
+			'width': 'auto',
+			'height': 'auto',
+			'x_offset': self.mission_marker_x_offset,
+			'y_offset': self.mission_marker_y_offset,
+			'special': True
+		}
+
+		self.mission_marker = MenuHandler().add_marker(mission_marker_data)
 
 	def is_interaction_available(self):
 		return self.interaction_available
@@ -17,24 +49,37 @@ class Interactable:
 			MenuHandler().remove_marker(self.interaction_marker)
 			self.interaction_marker = None
 
-	def handle_interaction(self, closest_vector):
-		if self.is_interaction_available() and ControlHandler().is_activated('interacted') and closest_vector.get_norm() <= 50:
-			if type(self.interaction) == str and 'start_' in self.interaction and Missions().is_mission(self.interaction.split('start_')[-1]):
+	def handle_interaction(self, closest_vector: Vector2) -> bool:
+		if (self.is_interaction_available() or Missions().is_mission(self.mission)) and ControlHandler().is_activated('interacted') and closest_vector.get_norm() <= 50:
+
+			if Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing():
 				self.set_interaction_available(False)
+				MissionHandler().start_mission(self.mission)
+				return True
 
 			if callable(self.interaction):
 				self.interaction(self)
 			elif type(self.interaction) == str:
 				Interactions().do(self.interaction, self)
 			else:
-				return
+				return False
 			ControlHandler().consume_event('interacted')
+			return True
 
 	def update(self, closest_vector: Vector2):
 		self.handle_interaction(closest_vector)
 
+		if self.mission_marker is not None and (self.mission in Player().get_accomplished_missions() or MissionHandler().mission_ongoing()):
+			MenuHandler().remove_marker(self.mission_marker)
+			self.mission_marker = None
+
+		if self.mission is not None and self.mission in Player().get_accomplished_missions():
+			self.mission = None
+		if self.mission_marker is None and Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing() and self.mission not in Player().get_accomplished_missions():
+			self.set_mission(self.mission)
+
 		if closest_vector.get_norm() <= 50:
-			if self.interaction_marker is None and self.is_interaction_available():
+			if self.interaction_marker is None and (self.is_interaction_available() or (Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing())):
 				data = {
 					'label': ControlHandler().get_key_letter('interacted'),
 					'color': (20, 20, 20, 200),
