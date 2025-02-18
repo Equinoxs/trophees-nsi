@@ -1,5 +1,5 @@
 import pygame
-
+import os
 from src.classes import GameLoop, DEBUG, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
@@ -17,7 +17,10 @@ class LogHandler:
 			self._initialized = True
 			self.log = []
 			self.length = 10
-
+			self.font_path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'assets', 'fonts', 'default.ttf'
+			)
 	def add(self, *args):
 		log = ''
 		for idx, arg in enumerate(args):
@@ -39,13 +42,14 @@ class LogHandler:
 			return
 
 		# Texte DEBUG
-		font = pygame.font.Font('assets/fonts/default.ttf', 50)
+
+		font = pygame.font.Font(self.font_path, 50)
 		text_surface = font.render('DEBUG', True, (255, 0, 0))
 		text_width, _ = text_surface.get_size()
 		GameLoop().get_camera().draw(text_surface, (SCREEN_WIDTH - text_width, 0), 'debug_info')
 
 		# Infos Channels
-		font = pygame.font.Font('assets/fonts/default.ttf', 15)
+		font = pygame.font.Font(self.font_path, 15)
 		for idx, text in enumerate(GameLoop().get_sound_mixer().generate_debug_data()):
 			GameLoop().get_camera().draw(font.render(text, True, (255, 0, 0)), (0, 15*idx), 'debug_info')
 

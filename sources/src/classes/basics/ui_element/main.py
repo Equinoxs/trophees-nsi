@@ -1,5 +1,5 @@
 import pygame
-
+import os
 from src.classes import GameLoop, Vector2, DataHandler, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
@@ -39,7 +39,11 @@ class UIElement:
 
 		self.surface_width = data.get('width', SCREEN_WIDTH)
 		self.surface_height = data.get('height', SCREEN_HEIGHT)
-		self.font = pygame.font.Font('assets/fonts/default.ttf', data.get('font_size', 24))
+		self.font_path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'assets', 'fonts', 'default.ttf'
+			)
+		self.font = pygame.font.Font(self.font_path, data.get('font_size', 24))
 		self.calculate_text_surface()
 
 		# --- Compréhension des dimensions de l'élément ---
