@@ -7,9 +7,8 @@ class FPSHelper(UIElement):
 
 	def update(self):
 		if TimeHandler().get_delta_time() == 0:
-			fps = 60
-		else:
-			fps = int(100 / TimeHandler().get_delta_time()) / 100
+			return
+		fps = int(100 / TimeHandler().get_delta_time()) / 100
 		self.set_label(str(fps) + ' fps')
 
 	def render(self):

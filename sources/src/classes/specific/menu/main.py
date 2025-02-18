@@ -1,7 +1,7 @@
 import pygame
 
 from src.classes import UIElement, Button, MiniMap, Marker, FPSHelper, TextInput, Slider
-
+from src import classes
 
 class Menu:
 	def __init__(self, menu_data):
@@ -9,21 +9,11 @@ class Menu:
 		self.load_ui_elements(menu_data)
 
 	def add_element(self, element_data: dict):
-		match element_data['type']:
-			case 'UIElement':
-				element = UIElement(element_data)
-			case 'Button':
-				element = Button(element_data)
-			case 'MiniMap':
-				element = MiniMap(element_data)
-			case 'Marker':
-				element = Marker(element_data)
-			case 'FPSHelper':
-				element = FPSHelper(element_data)
-			case 'TextInput':
-				element = TextInput(element_data)
-			case 'Slider':
-				element = Slider(element_data)
+		element_class = getattr(classes, element_data['type'], None)
+		if element_class is None:
+			return
+		element = element_class(element_data)
+
 		self.ui_elements.append(element)
 		return element
 

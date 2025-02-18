@@ -45,32 +45,19 @@ class ButtonActions:
 		GameLoop().get_menu_handler().set_current_menu('credits')
 		GameLoop().get_sound_mixer().pause_music()
 
-	def open_map(self):
-		GameLoop().pause_game()
-		GameLoop().get_menu_handler().set_current_menu('map_opened')
 	def toggle_fullscreen(self):
 		GameLoop().toggle_fullscreen()
 
+	def open_map(self):
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('map_opened')
+
+	def open_dialog(self):
+		GameLoop().get_menu_handler().set_current_menu('dialog_opened')
+
 	def do(self, action_name):
 		LogHandler().add(f'Button action {action_name} activated')
-		match action_name:
-			case 'focus_on_game':
-				self.focus_on_game()
-			case 'pause_game':
-				self.pause_game()
-			case 'quit_game':
-				self.quit_game()
-			case 'open_settings':
-				self.open_settings()
-			case 'open_credits':
-				self.open_credits()
-			case 'return_to_last_menu':
-				self.return_to_last_menu()
-			case 'open_map':
-				self.open_map()
-			case 'return_to_title':
-				self.return_to_title()
-			case 'toggle_fullscreen':
-				self.toggle_fullscreen()
-			case _:
-				LogHandler().add(f'Unknown button action: {action_name}')
+		action_method = getattr(self, action_name, None)
+		if action_method is None:
+			return LogHandler().add(f'Unknown button action: {action_name}')
+		action_method()

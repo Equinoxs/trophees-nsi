@@ -30,20 +30,44 @@
 			"height": "auto",
 			"text_color": [255, 255, 255],
 			"text_align": "left"
+		},
+		"default_dialog": {
+			"border_radius": 5,
+			"border_length": 5,
+			"border_color": [47, 32, 26],
+			"color": [249, 219, 157],
+			"text_color": [47, 32, 26],
+			"text_margin": 20,
+			"x": 30,
+			"y": 400,
+			"width": 1220,
+			"height": 370,
+			"font_size": 40
 		}
 	},
 	"menus": {
 		"in_game": [
 			{
 				"type": "Button",
-				"label": "I I",
+				"label": "| |",
 				"class": "interactive_button",
 				"x": 20,
 				"y": 15,
-				"width": 50,
+				"width": "auto",
 				"height": "auto",
 				"font_size": 60,
 				"action": "pause_game"
+			},
+			{
+				"type": "Button",
+				"label": "Open dialog",
+				"class": "interactive_button",
+				"x": 200,
+				"y": 15,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 30,
+				"action": "open_dialog"
 			},
 			{
 				"type": "MiniMap",
@@ -54,6 +78,23 @@
 			{
 				"type": "FPSHelper",
 				"class": "fps"
+			}
+		],
+		"dialog_opened": [
+			{
+				"type": "MiniMap",
+				"x": 1000,
+				"y": 30,
+				"height": 150
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
+			},
+			{
+				"type": "Dialog",
+				"class": "default_dialog",
+				"messages": ["Hello1 Hello1 Hello1 Hello1 Hello1", "Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2", "Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3"]
 			}
 		],
 		"game_paused": [

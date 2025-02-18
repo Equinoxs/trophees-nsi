@@ -94,12 +94,11 @@ class Camera:
 			element.render()
 		LogHandler().render()
 		MenuHandler().render()
-		for surface_name in self.surfaces.keys():
-			if self.is_map_rendered:
-				self.screen.blit(self.surfaces['map'], (-SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2, -SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2))
-			if DEBUG:
-				self.screen.blit(self.surfaces['debug_info'], (0, 0))
-			self.screen.blit(self.surfaces['menu'], (0, 0))
+		if self.is_map_rendered:
+			self.screen.blit(self.surfaces['map'], (-SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2, -SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2))
+		if DEBUG:
+			self.screen.blit(self.surfaces['debug_info'], (0, 0))
+		self.screen.blit(self.surfaces['menu'], (0, 0))
 
 	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map', is_player_rendered: bool = False):
 		if isinstance(position, Vector2):

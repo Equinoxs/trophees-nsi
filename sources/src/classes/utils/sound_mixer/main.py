@@ -84,7 +84,7 @@ class SoundMixer(object):
 		self.musics_historic.append(music_name)
 		mixer.music.load(DataHandler().load_music(music_name)[1])
 		mixer.music.set_volume(self.music_coefficient)
-		mixer.music.play()
+		mixer.music.play(-1)
 
 	def play_music_prev(self):
 		if len(self.musics_historic) >= 2:

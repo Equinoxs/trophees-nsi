@@ -39,13 +39,13 @@ class LogHandler:
 			return
 
 		# Texte DEBUG
-		font = pygame.font.Font(pygame.font.get_default_font(), 50)
+		font = pygame.font.Font('assets/fonts/default.ttf', 50)
 		text_surface = font.render('DEBUG', True, (255, 0, 0))
 		text_width, _ = text_surface.get_size()
 		GameLoop().get_camera().draw(text_surface, (SCREEN_WIDTH - text_width, 0), 'debug_info')
 
 		# Infos Channels
-		font = pygame.font.Font(pygame.font.get_default_font(), 15)
+		font = pygame.font.Font('assets/fonts/default.ttf', 15)
 		for idx, text in enumerate(GameLoop().get_sound_mixer().generate_debug_data()):
 			GameLoop().get_camera().draw(font.render(text, True, (255, 0, 0)), (0, 15*idx), 'debug_info')
 

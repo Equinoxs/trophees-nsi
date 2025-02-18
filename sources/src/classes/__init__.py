@@ -42,6 +42,7 @@ from .specific.mini_map.main import MiniMap
 
 from .specific.menu.main import Menu
 from .utils.menu_handler.main import MenuHandler
+from .specific.dialog.main import Dialog
 
 # Camera importe Player et SoundMixer
 from .utils.camera.main import Camera

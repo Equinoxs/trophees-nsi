@@ -39,8 +39,8 @@ class UIElement:
 
 		self.surface_width = data.get('width', SCREEN_WIDTH)
 		self.surface_height = data.get('height', SCREEN_HEIGHT)
-		self.font = pygame.font.Font(None, data.get('font_size', 24))
-		self._text_surface = self.font.render(self.label, True, self.text_color)
+		self.font = pygame.font.Font('assets/fonts/default.ttf', data.get('font_size', 24))
+		self.calculate_text_surface()
 
 		# --- Compréhension des dimensions de l'élément ---
 		if self.surface_width == 'auto':
@@ -68,7 +68,7 @@ class UIElement:
 			self.position.set_y(SCREEN_HEIGHT + self.position.get_y() - self.surface.get_height())
 
 		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
-		self._text_rect = self._text_surface.get_rect(center=self.rect.center)
+		self.calculate_text_rect()
 
 	def update_rect(self):
 		pos_x = self.position.get_x()
@@ -92,19 +92,11 @@ class UIElement:
 			height = self.surface.get_height()
 
 		self.rect = pygame.Rect(pos_x, pos_y, width, height)
-		match self.text_align:
-			case 'center':
-				self._text_rect = self._text_surface.get_rect(center=self.rect.center)
-			case 'left':
-				self._text_rect = self._text_surface.get_rect(topleft=self.rect.topleft)
-			case 'right':
-				self._text_rect = self._text_surface.get_rect(topright=self.rect.topright)
-			case _:
-				raise ValueError('Invalid text_align value')
+		self.calculate_text_rect()
 
 	def set_label(self, new_label: str):
 		self.label = str(new_label)
-		self._text_surface = self.font.render(self.label, True, self.text_color)
+		self.calculate_text_surface()
 
 	def get_rect(self):
 		return self.rect
@@ -127,8 +119,25 @@ class UIElement:
 		if self.border_length > 0:
 			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
 
-		if self.label != '':
-			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, surface)
+		self.render_text()
 
 		if self.image is not None:
 			GameLoop().get_camera().draw(self.image, self.position, surface)
+
+	def render_text(self, surface = 'menu'):
+		if self.label != '':
+			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, surface)
+
+	def calculate_text_surface(self):
+		self._text_surface = self.font.render(self.label, True, self.text_color)
+
+	def calculate_text_rect(self):
+		match self.text_align:
+			case 'center':
+				self._text_rect = self._text_surface.get_rect(center=self.rect.center)
+			case 'left':
+				self._text_rect = self._text_surface.get_rect(topleft=self.rect.topleft)
+			case 'right':
+				self._text_rect = self._text_surface.get_rect(topright=self.rect.topright)
+			case _:
+				raise ValueError('Invalid text_align value')

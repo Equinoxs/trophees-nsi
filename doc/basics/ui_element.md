@@ -1,6 +1,6 @@
 # `UIElement` - éléments de l'interface graphique
 ## Description
-Cette classe est nécessaire pour pouvoir créer des éléments visuels (texte, bouton, image, rectangle,...) et les afficher à l'écran.
+Cette classe est nécessaire pour pouvoir créer des éléments visuels (texte, bouton, image, rectangle, ...) et les afficher à l'écran.
 
 Elle permet d'automatiser leur création en utilisant les données renseignées dans le fichier `info.json` de `menu_handler` pour en faire un élément visible à l'écran.
 
