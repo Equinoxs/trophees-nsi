@@ -108,7 +108,7 @@ class DataHandler:
 
 	def must_save(self):
 		if self.last_save_player_position is None:
-			self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())  # faire une copie de l'objet pour éviter d'accéder à la même instance
+			self.last_save_player_position = Player().get_focus().get_position().copy()  # faire une copie de l'objet pour éviter d'accéder à la même instance
 		return Player().get_focus().get_position().distance_to(self.last_save_player_position) > 100 or TimeHandler().add_chrono_tag('last_save') > 300  # 5 minutes
 
 

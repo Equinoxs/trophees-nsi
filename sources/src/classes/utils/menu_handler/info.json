@@ -59,17 +59,6 @@
 				"action": "pause_game"
 			},
 			{
-				"type": "Button",
-				"label": "Open dialog",
-				"class": "interactive_button",
-				"x": 200,
-				"y": 15,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 30,
-				"action": "open_dialog"
-			},
-			{
 				"type": "MiniMap",
 				"x": 1000,
 				"y": 30,
@@ -78,23 +67,6 @@
 			{
 				"type": "FPSHelper",
 				"class": "fps"
-			}
-		],
-		"dialog_opened": [
-			{
-				"type": "MiniMap",
-				"x": 1000,
-				"y": 30,
-				"height": 150
-			},
-			{
-				"type": "FPSHelper",
-				"class": "fps"
-			},
-			{
-				"type": "Dialog",
-				"class": "default_dialog",
-				"messages": ["Hello1 Hello1 Hello1 Hello1 Hello1", "Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2 Hello2", "Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3 Hello3"]
 			}
 		],
 		"game_paused": [

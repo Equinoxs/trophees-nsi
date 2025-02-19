@@ -19,6 +19,7 @@ class MenuHandler:
 			self.menus_historics = []
 			self.classes = {}
 			self.markers = []
+			self.dialogs = {}
 			self.current_menu = None
 			self.current_menu_name = None
 			self.load_menus()
@@ -57,6 +58,19 @@ class MenuHandler:
 	def remove_marker(self, marker_ref):
 		self.menus['in_game'].delete_element(marker_ref)
 		del self.markers[self.markers.index(marker_ref)]
+
+	def add_dialog(self, dialog_name: str, dialog_data: dict):
+		dialog_data['type'] = 'Dialog'
+		dialog_data['title'] = dialog_name
+		dialog_data['class'] = 'default_dialog'
+		self.dialogs[dialog_name] = self.menus['in_game'].add_element(dialog_data)
+
+	def remove_dialog(self, dialog_name: str):
+		self.menus['in_game'].delete_element(self.dialogs[dialog_name])
+		del self.dialogs[dialog_name]
+
+	def is_dialog(self, dialog_name: str):
+		return dialog_name in self.dialogs
 
 	def get_current_menu_name(self):
 		return self.current_menu_name

@@ -99,3 +99,5 @@ class Interactable:
 	def __del__(self):
 		if hasattr(self, 'interaction_marker') and self.interaction_marker is not None:
 			MenuHandler().remove_marker(self.interaction_marker)
+		if self.mission_marker is not None:
+			MenuHandler().remove_marker(self.mission_marker)

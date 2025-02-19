@@ -38,7 +38,7 @@ class MissionHandler:
 		description_data = {
 			'type': 'UIElement',
 			'x': -20,
-			'y': 15,
+			'y': -15,
 			'color': (0, 0, 0, 200),
 			'text_color': (255,) * 3,
 			'width': 'auto',

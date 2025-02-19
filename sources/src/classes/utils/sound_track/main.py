@@ -1,6 +1,6 @@
 import pygame
-import numpy as np
-from src.classes import Vector2, SoundMixer, TimeHandler
+
+from src.classes import Vector2, SoundMixer
 
 class SoundTrack:
 	def __init__(self, position: Vector2, sound_paths: list[str]):
@@ -44,9 +44,6 @@ class SoundTrack:
 	def set_volume(self, volume: float):
 		return self.channel.set_volume(volume)
 
-	def set_pitch(self, sound_name: str):
-		pass
-	
 	def get_busy(self):
 		return self.channel.get_busy()
 

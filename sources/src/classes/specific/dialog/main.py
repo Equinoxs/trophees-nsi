@@ -1,6 +1,6 @@
-from src.classes import UIElement, GameLoop, TimeHandler, DataHandler, ControlHandler
 import pygame
-from src.classes.utils.menu_handler.main import MenuHandler
+
+from src.classes import UIElement, GameLoop, TimeHandler, DataHandler, ControlHandler, MenuHandler
 
 
 class Dialog(UIElement):
@@ -8,13 +8,14 @@ class Dialog(UIElement):
 		UIElement.__init__(self, data)
 		self._text_surfaces = {}
 		self.messages = data.get('messages', [])
+		self.title = data['title']
+
 		self.message_id = -1
 		self.next_message()
+
 		self.text_margin = data.get('text_margin', 20)
 		self.arrow_image = pygame.image.load(DataHandler().load_ui_elements_image('arrow'))
 		self.wrapped_text_finish = False
-
-
 
 	def wrap_text(self, use_chrono_tag = False):
 		y = self.rect.top + self.text_margin
@@ -59,14 +60,14 @@ class Dialog(UIElement):
 			arrow_position = list(self.rect.bottomright)
 			arrow_position[0] = arrow_position[0] - self.arrow_image.get_rect().width - self.text_margin
 			arrow_position[1] = arrow_position[1] - self.arrow_image.get_rect().height - self.text_margin - (abs((TimeHandler().add_chrono_tag('dialog_text_wrap') % 1) - 0.5) * 10)
+
 			GameLoop().get_camera().draw(self.arrow_image, tuple(arrow_position), 'menu')
 			if ControlHandler().is_activated('down_arrow'):
 				if self.message_id == len(self.messages) - 1:
 					self.message_id = -1
 					self.next_message()
-					return MenuHandler().set_current_menu('in_game')
+					return MenuHandler().remove_dialog(self.title)
 				self.next_message()
-
 
 		for y, line in self._text_surfaces.items():
 			GameLoop().get_camera().draw(line, (self.rect.topleft[0] + self.text_margin, y), 'menu')

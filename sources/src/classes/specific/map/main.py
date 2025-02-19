@@ -88,7 +88,7 @@ class Map:
 			self.sort_elements()
 
 	def which_surface(self, position):
-		for i in range(len(self.elements) - 1, 0, -1):
+		for i in range(len(self.elements) - 1, -1, -1):
 			if isinstance(self.elements[i], GroundSurface) and self.elements[i].point_in_boundaries(position):
 				return self.elements[i].get_ground_type()
 		return None

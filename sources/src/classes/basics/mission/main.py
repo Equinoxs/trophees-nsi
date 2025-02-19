@@ -7,7 +7,7 @@ class Mission:
 		self.description = mission_data['description']
 		self.required_level = mission_data['required_level']
 		self.rewards = mission_data['rewards']
-		self.objectives_len = mission_data.get('objectives_len', 1)
+		self.objectives_len = Missions().get_objectives_len(name)
 		self.objective_index = 0
 		self.indicator = 0
 		self.displayed_description = None
@@ -27,9 +27,9 @@ class Mission:
 	def get_rewards(self):
 		return self.rewards
 
-	def display_objective_description(self):
-		if self.displayed_description is not None:
-			return  # La description est déjà affichée
+	def display_objective_description(self, force: bool = False):
+		if self.displayed_description is not None or self.get_objective_description() is None and not force:
+			return  # La description est déjà affichée / il n'y en a pas
 
 		data = {
 			'type': 'UIElement',
@@ -55,15 +55,21 @@ class Mission:
 		if self.indicator == 0:
 			self.indicator = Missions().do(self.name, self.objective_index)
 			self.display_objective_description()
+
 		elif self.indicator == 1:
+			print('yo')
 			self.objective_index += 1
-			self.display_objective_description()
+			self.display_objective_description(True)
 			self.indicator = 0
+
 			if self.objective_index == self.objectives_len:
 				self.delete_objective_description()
 				return 1  # mission_réussie
+
 		elif self.indicator == -1:
 			self.indicator = 0
 			self.delete_objective_description()
+			self.objective_index = 0
 			return -1  # mission échouée
+
 		return 0  # en cours

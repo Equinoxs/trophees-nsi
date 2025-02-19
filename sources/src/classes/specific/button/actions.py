@@ -52,9 +52,6 @@ class ButtonActions:
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
 
-	def open_dialog(self):
-		GameLoop().get_menu_handler().set_current_menu('dialog_opened')
-
 	def do(self, action_name):
 		LogHandler().add(f'Button action {action_name} activated')
 		action_method = getattr(self, action_name, None)

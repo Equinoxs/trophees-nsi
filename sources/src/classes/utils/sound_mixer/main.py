@@ -22,6 +22,7 @@ class SoundMixer(object):
 			self.channels = []
 			self.musics_historic = []
 			self.music_coefficient = 1.0
+			self.sound_coefficient = 1.0
 			self.added_sfx = {}
 			added_sfx_paths = DataHandler().get_sound_track_data('added_sfx')[1]
 			for name, path in added_sfx_paths.items():
@@ -43,7 +44,7 @@ class SoundMixer(object):
 				sound_track.unpause()
 			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) == 0:
 				continue
-			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)))  # à vérifier...
+			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)) * self.sound_coefficient)  # à vérifier...
 
 	def find_channel(self):
 		# renvoyer une channel libérée
@@ -98,4 +99,4 @@ class SoundMixer(object):
 		mixer.music.set_volume(self.music_coefficient)
 
 	def set_sound_coefficient(self, coefficient):
-		pass
+		self.sound_coefficient = coefficient

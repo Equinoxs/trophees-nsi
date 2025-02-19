@@ -213,9 +213,9 @@
 				{
 					"type": "NPC",
 					"name": "house_proprietary",
-					"pattern_timeline": [[150, 175], [395, 175], [395, -5], [-220, -5], [-220, -80], "npc_event_test"],
+					"pattern_timeline": [[650, 1300], "npc_event_test", [700, 1110]],
 					"pattern_type": "back_and_forth",
-					"position": [0, 0],
+					"position": [670, 1200],
 					"image_path": "albert",
 					"mission": "mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
@@ -261,8 +261,7 @@
 					"type": "Tree",
 					"name": "lake_tree_3",
 					"image_path": "walnut",
-					"position": [1810, 1580],
-					"mission": "mission_test"
+					"position": [1810, 1580]
 				},
 				{
 					"type": "Tree",
