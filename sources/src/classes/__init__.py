@@ -33,6 +33,7 @@ from .specific.fps_helper.main import FPSHelper
 from .specific.button.actions import ButtonActions
 from .specific.button.main import Button
 from .specific.text_input.main import TextInput
+from .specific.keybind_input.main import KeybindInput
 from .utils.sound_mixer.main import SoundMixer
 from .specific.slider.actions import SliderActions
 from .specific.slider.main import Slider

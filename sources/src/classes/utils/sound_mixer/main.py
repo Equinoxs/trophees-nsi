@@ -44,7 +44,7 @@ class SoundMixer(object):
 				sound_track.unpause()
 			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) == 0:
 				continue
-			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)) * self.sound_coefficient)  # à vérifier...
+			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)) * self.sound_coefficient * sound_track.get_sound_coef())  # à vérifier...
 
 	def find_channel(self):
 		# renvoyer une channel libérée

@@ -1,4 +1,4 @@
-from src.classes import Mission, Player, LogHandler, GameLoop
+from src.classes import Mission, Player, LogHandler, GameLoop, TimeHandler
 
 
 class MissionHandler:
@@ -18,6 +18,7 @@ class MissionHandler:
 			self.initialize_missions()
 			self.current_mission = None
 			self.mission_description_displayed = None
+			self.mission_popup = None
 
 	def mission_ongoing(self):
 		return self.current_mission is not None
@@ -56,15 +57,41 @@ class MissionHandler:
 	def update(self):
 		if self.current_mission is not None:
 			indicator = self.current_mission.update()
+
 			if indicator == 1:
 				LogHandler().add(f'{Player().get_focus().get_name()} * accomplish mission {self.current_mission.get_name()}')
 				Player().add_accomplished_mission(self.current_mission)
 				self.delete_description_displayed()
 				self.current_mission = None  # La mission est terminée
+
+				if self.mission_popup is not None:
+					GameLoop().get_menu_handler().get_menu('in_game').remove_element(self.mission_popup)
+
+				data = {
+					'type': 'UIElement',
+					'class': 'mission_popup',
+					'label': 'MISSION PASSED'
+				}
+				self.mission_popup = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
+
 			elif indicator == -1:
 				LogHandler().add(f'{Player().get_focus().get_name()} * fail mission {self.current_mission.get_name()}')
 				self.current_mission = None  # La mission est échouée
 				self.delete_description_displayed()
+
+				if self.mission_popup is not None:
+					GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.mission_popup)
+
+				data = {
+					'type': 'UIElement',
+					'class': 'mission_popup',
+					'label': 'MISSION FAILED'
+				}
+				self.mission_popup = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
+
 			elif indicator == 0:
 				self.display_description_of_current_mission()
-				return  # la missions continue, le state n'a pas besoin d'être changé
+
+		if self.mission_popup is not None and TimeHandler().add_chrono_tag('mission_popup') >= 2:
+			GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.mission_popup)
+			self.mission_popup = None

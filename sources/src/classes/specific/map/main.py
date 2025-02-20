@@ -5,6 +5,18 @@ class Map:
 	def __init__(self, map_name: str):
 		self.elements = []
 		self.load_elements_from(map_name)
+
+		# Fusionner les images des GroundSurface pour éviter des blits lors des rendus en temps réel
+		for i in range(1, len(self.elements)):
+			if not isinstance(self.elements[i], GroundSurface):
+				break
+
+			self.elements[0].get_image().blit(
+    			self.elements[i].get_image(),
+    			(self.elements[i].get_position() - self.elements[0].get_position()).convert_to_tuple()
+    		)
+			self.elements[i].dont_render()
+
 		SoundMixer().play_music('On the Island - Godmode')
 
 	def sort_elements(self):

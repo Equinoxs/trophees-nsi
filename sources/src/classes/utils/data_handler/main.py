@@ -26,6 +26,7 @@ class DataHandler:
 			self.images_data = {}
 			self.sounds_data = {}
 			self.stickers_data = {}
+			self.fonts = {}
 			self.missions_data = None
 			self.menus_data = None
 			self.current_save_chrono_tag = None
@@ -208,7 +209,7 @@ class DataHandler:
 		for dir_name in os.listdir(path):
 			full_path = os.path.join(path, dir_name)
 			if os.path.isdir(full_path):
-				data[dir_name] = self.get_sound_track_data(dir_name)[1]
+				data[dir_name] = self.get_sound_track_data(dir_name)
 		return data
 
 
@@ -256,6 +257,19 @@ class DataHandler:
 			self.menus_data = self.get_menus_data()
 		return self.menus_data
 
+
+	def get_font_data(self, font_name: str, font_size: int):
+		font_path = os.path.join(
+			os.path.dirname(os.path.abspath(__file__)),
+			'..', '..', '..', '..', 'assets', 'fonts', font_name + '.ttf'
+		)
+		return pygame.font.Font(font_path, font_size)
+
+	def load_font(self, font_name: str, font_size: int, force: bool = False):
+		key = font_name + str(font_size)
+		if key not in self.fonts or force:
+			self.fonts[key] = self.get_font_data(font_name, font_size)
+		return self.fonts[key]
 
 
 	def list_to_vector2(self, list2: list):

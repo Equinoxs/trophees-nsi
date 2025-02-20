@@ -10,6 +10,7 @@ class Sprite:
 		self.horizontal_flip = False
 		self.magnification_coeff = 1  # image x fois plus grande
 		self.rendered = True
+		self.must_render = True
 
 		if not hasattr(self, 'image_type'):
 			self.image_type = ''
@@ -157,12 +158,19 @@ class Sprite:
 	def move_to(self, position: Vector2):
 		self.position.copy(position)
 
+	def dont_render(self):
+		self.must_render = False
+
+	def go_render(self):
+		self.must_render = True
+
 	def update(self):
 		self.go_to_frame(self.frame_index, self.animation_name)
 
 	def render(self):
-		if self.image is None:
+		if self.image is None or not self.must_render:
 			return
+
 		screen_width = Camera().get_frame().x
 		screen_height = Camera().get_frame().y
 		camera_x = Camera().get_camera().x

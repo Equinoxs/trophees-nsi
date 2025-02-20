@@ -3,7 +3,7 @@ import pygame
 from src.classes import Vector2, SoundMixer
 
 class SoundTrack:
-	def __init__(self, position: Vector2, sound_paths: list[str]):
+	def __init__(self, position: Vector2, data: dict, sound_paths: list[str]):
 		self.sounds = {}
 		self.current_sound_name = None
 		for sound_name, sound_path in sound_paths.items():
@@ -12,6 +12,7 @@ class SoundTrack:
 		self.channel = SoundMixer().find_channel()
 		self.paused = None
 		self.play_amount = None
+		self.data = data
 		SoundMixer().add_sound_track(self)
 
 	def contains(self, sound_name: str):
@@ -26,6 +27,12 @@ class SoundTrack:
 		if self.channel is None:
 			self.channel = SoundMixer().find_channel()
 		self.channel.play(self.sounds[sound_name], self.play_amount)
+
+	def get_sound_coef(self):
+		if self.current_sound_name is not None:
+			return self.data['sounds'][self.current_sound_name].get('sound_coef', 1)
+		else:
+			return 1
 
 	def stop(self):
 		if self.channel is not None and self.get_busy():

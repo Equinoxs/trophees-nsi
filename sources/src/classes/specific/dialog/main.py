@@ -62,7 +62,7 @@ class Dialog(UIElement):
 			arrow_position[1] = arrow_position[1] - self.arrow_image.get_rect().height - self.text_margin - (abs((TimeHandler().add_chrono_tag('dialog_text_wrap') % 1) - 0.5) * 10)
 
 			GameLoop().get_camera().draw(self.arrow_image, tuple(arrow_position), 'menu')
-			if ControlHandler().is_activated('down_arrow'):
+			if ControlHandler().is_activated('pass_message_dialog'):
 				if self.message_id == len(self.messages) - 1:
 					self.message_id = -1
 					self.next_message()

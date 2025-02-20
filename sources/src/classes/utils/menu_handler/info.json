@@ -19,8 +19,44 @@
 		"pause_button": {
 			"class": "interactive_button",
 			"x": "center",
+			"width": 250,
+			"height": 50,
+			"font_size": 36
+		},
+		"settings_title": {
+			"color": [99, 99, 99],
+			"text_color": [0, 0, 0],
+			"width": "auto",
+			"height": "auto",
+			"font_size": 70
+		},
+		"key_settings_label": {
+			"color": [99, 99, 99],
+			"text_color": [204, 174, 114],
+			"width": "auto",
+			"height": "auto",
+			"font_size": 36,
+			"x": 40
+		},
+		"key_settings_input": {
+			"x": 260,
 			"width": 200,
 			"height": 50,
+			"font_size": 36
+		},
+		"slider_settings": {
+			"x": 800,
+			"width": 300,
+			"height": 20,
+			"border_radius": 3,
+			"border_color": [0, 0, 0]
+		},
+		"volume_settings_label": {
+			"color": [99, 99, 99],
+			"text_color": [204, 174, 114],
+			"width": "auto",
+			"height": "auto",
+			"x": 580,
 			"font_size": 36
 		},
 		"fps": {
@@ -43,6 +79,13 @@
 			"width": 1220,
 			"height": 370,
 			"font_size": 40
+		},
+		"mission_popup": {
+			"y": "center",
+			"x": 0,
+			"height": "auto",
+			"color": [125, 113, 89],
+			"font_size": 50
 		}
 	},
 	"menus": {
@@ -171,281 +214,62 @@
 			},
 			{
 				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [0, 0, 0],
+				"class": "settings_title",
 				"label": "Key Bindings",
 				"x": 70,
-				"y": 130,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 70
+				"y": 130
 			},
 			{
 				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [0, 0, 0],
+				"class": "settings_title",
 				"label": "Sound settings",
 				"x": 680,
-				"y": 130,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 70
+				"y": 130
 			},
 			{
 				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [0, 0, 0],
+				"class": "settings_title",
 				"label": "Visual settings",
 				"x": 680,
-				"y": 400,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 70
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Move Forward",
-				"x": 40,
-				"y": 230,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Move Forward",
-				"x": 260,
-				"y": 220,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "z"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Move Backward",
-				"x": 40,
-				"y": 290,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Move Backward",
-				"x": 260,
-				"y": 280,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "s"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Move Right",
-				"x": 40,
-				"y": 350,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Move Right",
-				"x": 260,
-				"y": 340,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "d"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Move Left",
-				"x": 40,
-				"y": 410,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Move Left",
-				"x": 260,
-				"y": 400,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "q"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Sprint",
-				"x": 40,
-				"y": 470,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Sprint",
-				"x": 260,
-				"y": 460,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "left shift"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Interact",
-				"x": 40,
-				"y": 530,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Interact",
-				"x": 260,
-				"y": 520,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "e"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Open map",
-				"x": 40,
-				"y": 590,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Open map",
-				"x": 260,
-				"y": 580,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "m"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Pause",
-				"x": 40,
-				"y": 650,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Pause",
-				"x": 260,
-				"y": 640,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "escape"
-			},
-			{
-				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
-				"label": "Enter",
-				"x": 40,
-				"y": 710,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
-			},
-			{
-				"type": "TextInput",
-				"label": "Pause",
-				"x": 260,
-				"y": 700,
-				"width": 200,
-				"height": 50,
-				"font_size": 36,
-				"default_text": "Enter"
+				"y": 400
 			},
 			{
 				"type": "Slider",
-				"label": "Music Volume",
-				"x": 800,
-				"y": 237,
-				"width": 300,
-				"height": 20,
 				"min_value": 0,
 				"max_value": 100,
 				"default_value": 50,
 				"slider_width": 15,
 				"track_color": [150, 150, 150],
 				"slider_color": [61, 53, 39],
-				"border_radius": 3,
-				"border_color": [0, 0, 0],
+				"class": "slider_settings",
+				"label": "Music Volume",
+				"y": 237,
 				"action": "set_music_volume"
 			},
 			{
 				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
+				"class": "volume_settings_label",
 				"label": "Music volume",
-				"x": 580,
-				"y": 230,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
+				"y": 230
 			},
 			{
 				"type": "Slider",
-				"label": "Sound Volume",
-				"x": 800,
-				"y": 297,
-				"width": 300,
-				"height": 20,
 				"min_value": 0,
 				"max_value": 100,
 				"default_value": 50,
 				"slider_width": 15,
 				"track_color": [150, 150, 150],
 				"slider_color": [61, 53, 39],
-				"border_radius": 3,
-				"border_color": [0, 0, 0],
+				"class": "slider_settings",
+				"label": "Sound Volume",
+				"y": 297,
 				"action": "set_sound_volume"
 			},
 			{
 				"type": "UIElement",
-				"color": [99, 99, 99],
-				"text_color": [204, 174, 114],
+				"class": "volume_settings_label",
 				"label": "Sound volume",
-				"x": 580,
-				"y": 290,
-				"width": "auto",
-				"height": "auto",
-				"font_size": 36
+				"y": 290
 			},
 			{
 				"type": "Button",

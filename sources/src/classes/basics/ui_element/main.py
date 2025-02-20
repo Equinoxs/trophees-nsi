@@ -4,7 +4,7 @@ from src.classes import GameLoop, Vector2, DataHandler, SCREEN_WIDTH, SCREEN_HEI
 
 
 class UIElement:
-	def __init__(self, data):
+	def __init__(self, data: dict):
 		classes_data = DataHandler().load_menus()['classes']
 		while 'class' in set(data.keys()):  # Pour que les classes puissent utiliser des classes
 			class_names = data.pop('class')
@@ -37,16 +37,14 @@ class UIElement:
 		self.border_length = data.get('border_length', 0)
 		self.border_color = tuple(data.get('border_color', (0,) * 3))
 
-		self.surface_width = data.get('width', SCREEN_WIDTH)
-		self.surface_height = data.get('height', SCREEN_HEIGHT)
-		self.font_path = os.path.join(
-				os.path.dirname(os.path.abspath(__file__)),
-				'..', '..', '..', '..', 'assets', 'fonts', 'default.ttf'
-			)
-		self.font = pygame.font.Font(self.font_path, data.get('font_size', 24))
+		# Le texte
+		self.font = DataHandler().load_font(data.get('font_family', 'default'), data.get('font_size', 24))
 		self.calculate_text_surface()
 
 		# --- Compréhension des dimensions de l'élément ---
+		self.surface_width = data.get('width', SCREEN_WIDTH)
+		self.surface_height = data.get('height', SCREEN_HEIGHT)
+
 		if self.surface_width == 'auto':
 			width = self._text_surface.get_width() + 10  # 10px de padding horizontal
 		else:

@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import UIElement, Button, MiniMap, Marker, FPSHelper, TextInput, Slider
+from src.classes import UIElement
 from src import classes
 
 class Menu:

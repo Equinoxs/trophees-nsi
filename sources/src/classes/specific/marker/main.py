@@ -16,12 +16,32 @@ class Marker(UIElement):
 		x, y = self.position.convert_to_tuple()
 
 		if self.special:
-			camera_x = GameLoop().get_camera().get_camera().x
-			camera_y = GameLoop().get_camera().get_camera().y
 			zoom = GameLoop().get_camera().get_zoom()
 
-			new_x = max(0, min((SCREEN_WIDTH - self.rect.width) / zoom, x - camera_x / zoom + self.x_offset))
-			new_y = max(0, min((SCREEN_HEIGHT - self.rect.height) / zoom, y - camera_y / zoom + self.y_offset))
+			camera_x = GameLoop().get_camera().get_camera().x / zoom
+			camera_y = GameLoop().get_camera().get_camera().y / zoom
+			max_x = (SCREEN_WIDTH - self.rect.width) / zoom
+			max_y = (SCREEN_HEIGHT - self.rect.height) / zoom
+			rel_x = x - camera_x + self.x_offset
+			rel_y = y - camera_y + self.y_offset
+
+			new_x = max(0, min(max_x, rel_x))
+			new_y = max(0, min(max_y, rel_y))
+
+			if rel_x - SCREEN_WIDTH / 2 == 0:
+				rel_x += 1
+
+			a = (rel_y - SCREEN_HEIGHT / 2) / (rel_x - SCREEN_WIDTH / 2)
+			b = rel_y - a * rel_x
+
+			possible_new_y = a * rel_x + b
+			if possible_new_y >= max_y or possible_new_y < 0:
+				new_x = (new_y - b) / a
+			else:
+				new_y = possible_new_y
+
+			new_x = max(0, min(max_x, new_x))
+			new_y = max(0, min(max_y, new_y))
 
 			self.position.set_all(zoom * new_x, zoom * new_y)
 

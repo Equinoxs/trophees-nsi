@@ -7,7 +7,8 @@ class SoundMaker:
 		self.all_sound_tracks = {}
 		self.sound_tracks = {}
 		for sound_track_name in authorized_sound_tracks:
-			self.sound_tracks[sound_track_name] = SoundTrack(position, DataHandler().get_sound_track_data(sound_track_name)[1])
+			data, sound_paths = DataHandler().get_sound_track_data(sound_track_name)
+			self.sound_tracks[sound_track_name] = SoundTrack(position, data, sound_paths)
 
 	def play_sound(self, sound_name: str = None, loop: bool = False):
 		if sound_name is None:
@@ -50,9 +51,9 @@ class SoundMaker:
 		return sound_type in self.sound_tracks
 
 	def gimme_all_sound_tracks(self):
-		data = DataHandler().get_all_sound_tracks_data()
-		for name, sounds in data.items():
-			self.all_sound_tracks[name] = SoundTrack(self.position, sounds)
+		all_data = DataHandler().get_all_sound_tracks_data()
+		for name, data in all_data.items():
+			self.all_sound_tracks[name] = SoundTrack(self.position, data[0], data[1])
 
 	def dont_gimme_all_sound_tracks(self):
 		for sound_track in self.all_sound_tracks:
