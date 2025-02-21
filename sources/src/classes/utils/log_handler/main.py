@@ -19,7 +19,7 @@ class LogHandler:
 			self.length = 10
 			self.font_path = os.path.join(
 				os.path.dirname(os.path.abspath(__file__)),
-				'..', '..', '..', '..', 'assets', 'fonts', 'default.ttf'
+				'..', '..', '..', '..', 'assets', 'fonts', 'font6.ttf'
 			)
 	def add(self, *args):
 		log = ''

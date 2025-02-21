@@ -1,5 +1,6 @@
 import pygame
 
+from src.classes import  SCREEN_WIDTH, SCREEN_HEIGHT
 
 class GameLoop:
 	_instance = None
@@ -29,6 +30,7 @@ class GameLoop:
 
 			self.running = True
 			self.paused = False
+			self.fullscreen = False
 
 			self.screen = screen
 
@@ -93,7 +95,12 @@ class GameLoop:
 		self.get_player().get_map().throw_event(event)
 	
 	def toggle_fullscreen(self):
-		pass
+		if self.fullscreen == False:
+			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.NOFRAME | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			self.fullscreen = True
+		else:
+			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			self.fullscreen = False
 
 	def update(self):
 		self.control_handler.handle_events()

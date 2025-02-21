@@ -51,6 +51,8 @@ class ButtonActions:
 	def open_map(self):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
+	
+
 
 	def do(self, action_name):
 		LogHandler().add(f'Button action {action_name} activated')
