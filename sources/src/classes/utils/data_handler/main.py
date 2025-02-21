@@ -2,6 +2,7 @@ import json
 import os
 import pygame
 from time import time
+from copy import deepcopy
 
 from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE, GameLoop
 
@@ -93,11 +94,13 @@ class DataHandler:
 		return self.current_save
 
 
-	def save_data(self, data, name):
+	def save_data(self, original_data: dict, name):
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
 			'..', '..', '..', '..', 'backups', name + '.json'
 		)
+
+		data = deepcopy(original_data) # copie
 
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
@@ -115,7 +118,8 @@ class DataHandler:
 
 		data['last_save_time'] = time()
 		data['keybinds'] = GameLoop().get_control_handler().get_keybinds()
-
+		print(data)
+		print(original_data)
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4, cls=JSONEncoder)
 
