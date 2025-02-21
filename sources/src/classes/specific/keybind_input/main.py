@@ -9,5 +9,5 @@ class KeybindInput(TextInput):
 		self.max_event_key = 1
 
 	def done(self):
-		if len(self.text) > 0:
+		if len(self.event_keys) > 0:
 			ControlHandler().set_keybind(self.event_name, self.last_event_key)
