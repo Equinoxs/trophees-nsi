@@ -124,9 +124,9 @@
 				"border_length": 2,
 				"border_color": [46, 34, 9],
 				"x": "center",
-				"y": -300,
+				"y": -210,
 				"width": 500,
-				"height": 300
+				"height": 400
 			},
 			{
 				"type": "Button",
@@ -137,18 +137,25 @@
 			},
 			{
 				"type": "Button",
-				"label": "Return to title",
+				"label": "Save game",
 				"class": "pause_button",
-				"y": 390,
-				"action": "return_to_title",
-				"color": [61, 53, 39]
+				"y": 320,
+				"action": "open_saving"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
 				"class": "pause_button",
-				"y": 320,
+				"y": 390,
 				"action": "open_settings"
+			},
+			{
+				"type": "Button",
+				"label": "Return to title",
+				"class": "pause_button",
+				"y": 460,
+				"action": "return_to_title",
+				"color": [61, 53, 39]
 			},
 			{
 				"type": "FPSHelper",
@@ -315,6 +322,75 @@
 				"action": "return_to_title"
 			}
 		],
+		"loading_games": [
+		{
+			"type": "UIElement",
+			"color": [71, 52, 14]
+		},
+		{
+			"type": "UIElement",
+			"color": [71, 52, 14],
+			"text_color": [255, 255, 255],
+			"label": "Load game",
+			"x": "center",
+			"y": 40,
+			"width": "auto",
+			"height": "auto",
+			"font_size": 100
+		},
+		{
+			"type": "Button",
+			"class": "interactive_button",
+			"label": "Back",
+			"color": [61, 53, 39],
+			"font_size": 50,
+			"x": 50,
+			"y": 40,
+			"width": 140,
+			"height": "auto",
+			"action": "return_to_title"
+		}
+		],
+		"saving": [
+		{
+			"type": "UIElement",
+			"color": [0, 0, 0, 180]
+		},
+		{
+			"type": "UIElement",
+			"color": [71, 52, 14],
+			"border_radius": 6,
+			"border_length": 2,
+			"border_color": [46, 34, 9],
+			"x": "center",
+			"y": -160,
+			"width": 700,
+			"height": 500
+		},
+		{
+			"type": "UIElement",
+			"color": [71, 52, 14],
+			"text_color": [255, 255, 255],
+			"label": "Save game",
+			"x": "center",
+			"y": -570,
+			"width": "auto",
+			"height": "auto",
+			"font_size": 70
+		},
+		{
+			"type": "Button",
+			"class": "interactive_button",
+			"label": "Back",
+			"color": [61, 53, 39],
+			"font_size": 50,
+			"x": 50,
+			"y": 40,
+			"width": 140,
+			"height": "auto",
+			"action": "pause_game"
+		}
+		],
 		"welcome": [
 			{
 				"type": "UIElement",
@@ -335,21 +411,28 @@
 			{
 				"type": "Button",
 				"class": "welcome_button",
-				"label": "Play",
-				"y": 300,
+				"label": "Start new game",
+				"y": 280,
 				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
 				"class": "welcome_button",
-				"y": 380,
+				"y": 360,
 				"action": "open_settings"
 			},
 			{
 				"type": "Button",
+				"label": "Load game",
+				"class": "welcome_button",
+				"y": 440,
+				"action": "open_loading"
+			},
+			{
+				"type": "Button",
 				"label": "Credits",
-				"y": 460,
+				"y": 520,
 				"class": "welcome_button",
 				"action": "open_credits"
 			},
@@ -357,7 +440,7 @@
 				"type": "Button",
 				"label": "Quit",
 				"class": "welcome_button",
-				"y": 540,
+				"y": 600,
 				"action": "quit_game",
 				"color": [61, 53, 39]
 			},

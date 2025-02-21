@@ -30,8 +30,6 @@ class TextInput(UIElement):
 					# Correction des noms de touches spéciales
 					if event.key == pygame.K_BACKSPACE:
 						self.event_keys = self.event_keys[:-1]
-					if event.key == pygame.K_RETURN:
-						continue
 					else:
 						self.last_event_key = event.key
 						self.event_keys.append(self.last_event_key)

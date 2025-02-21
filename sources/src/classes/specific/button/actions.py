@@ -52,6 +52,15 @@ class ButtonActions:
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
 	
+	def open_saving(self):
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('saving')
+
+	def open_loading(self):
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('loading_games')
+
+
 
 
 	def do(self, action_name):
