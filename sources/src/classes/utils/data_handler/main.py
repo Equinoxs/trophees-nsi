@@ -1,13 +1,34 @@
 import json
 import os
 import pygame
+from pprint import pprint
+from time import time
 
-from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE
+from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE, GameLoop
 
 
 class DataHandler:
 	_instance = None
 	current_save = None
+	model = {
+		'type': 'required',
+		'image_path': None,
+		'name': 'anonymous',
+		'position': [0, 0],
+		'authorized_sound_tracks': [],
+		'z_index': 0,
+		'interaction': None,
+		'pattern_timeline': [],
+		'pattern_type': 'loop',
+		'level': 1,
+		'side_effects': [],
+		'boundaries': [],
+		'required_level': 0,
+		'wall_type': 'gray_brick',
+		'wall_height': None,
+		'wall_width': None,
+		'mission': None
+	}
 
 	# singleton
 	def __new__(cls, *args, **kwargs):
@@ -39,26 +60,6 @@ class DataHandler:
 			'..', '..', '..', '..', 'backups', 'automatic', 'main-save.json'
 		)
 
-		model = {
-			'type': 'required',
-			'image_path': None,
-			'name': 'anonymous',
-			'position': [0, 0],
-			'authorized_sound_tracks': [],
-			'z_index': 0,
-			'interaction': None,
-			'pattern_timeline': [],
-			'pattern_type': 'loop',
-			'level': 1,
-			'side_effects': [],
-			'boundaries': [],
-			'required_level': 0,
-			'wall_type': 'gray_brick',
-			'wall_height': None,
-			'wall_width': None,
-			'mission': None
-		}
-
 		try:
 			with open(path, 'r') as save:
 				data = json.load(save)
@@ -71,7 +72,7 @@ class DataHandler:
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
 				# Pour s'assurer que tous les objets aient leurs propriétés définies
-				for required_key, default_value in model.items():
+				for required_key, default_value in self.model.items():
 					if required_key not in data['maps'][map]['elements'][element_index]:
 						data['maps'][map]['elements'][element_index][required_key] = data['maps'][map]['elements'][element_index].get(required_key, default_value)
 
@@ -88,24 +89,55 @@ class DataHandler:
 		return self.current_save
 
 
-	def save_data(self, data, backup_path):
+	def save_data(self, data, name):
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups', backup_path, 'main-save.json'
+			'..', '..', '..', '..', 'backups', name + '.json'
 		)
+
+		for map in data['maps']:
+			for element_index in range(len(data['maps'][map]['elements'])):
+				# Pour ne pas sauvegarder de données inutiles
+				for required_key, default_value in self.model.items():
+					if required_key in data['maps'][map]['elements'][element_index] and data['maps'][map]['elements'][element_index][required_key] == default_value:
+						data['maps'][map]['elements'][element_index].pop(required_key)
+			if map == Player().get_map_name():
+				for element_index in range(len(data['maps'][map]['elements'])):
+					if data['maps'][map]['elements'][element_index]['type'] == 'NPC' and data['maps'][map]['elements'][element_index]['name'] == Player().get_focus().get_name():
+						data['maps'][map]['elements'][element_index]['position'] = (int(p) for p in Player().get_focus().get_position().convert_to_tuple())
 
 		TimeHandler().add_chrono_tag('last_save', reset=True)
 		self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())
 
+		data['last_save_time'] = time()
+		data['keybinds'] = GameLoop().get_control_handler().get_keybinds()
+
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4, cls=JSONEncoder)
 
-	def save(self, automatic = False):
+	def save(self, name = 'default'):
 		if not SAVE:
 			return  # ne pas faire de sauvegardes (debug)
+		pprint(self.current_save)
 		LogHandler().add("Automatic save done")
-		self.save_data(self.current_save, 'manual' if not automatic else 'automatic')
+		assert name != 'new_game_backup' # TODO: mettre un vrai système
+		self.save_data(self.current_save, name)
 
+	def get_save_files(self):
+		path = os.path.join(
+			os.path.dirname(os.path.abspath(__file__)),
+			'..', '..', '..', '..', 'backups'
+		)
+		save_files = []
+		for f in os.listdir(path):
+			if f.endswith('.json') and os.path.isfile(os.path.join(path, f)) and f != 'new_game_backup.json':
+				save_files.append(f)
+		return save_files
+
+	def save_name_valid(self, name):
+		forbidden_chars = '*|!:/\\?<>"'
+		forbidden_names = ['.', '..', 'CON', 'PRN', 'AUX', 'NUL'] + [f'LPT{x}' for x in range(1, 10)] + [f'COM{x}' for x in range(1, 10)]
+		return not any(c in name for c in forbidden_chars) and not any(n == name.upper() for n in forbidden_names)
 
 	def must_save(self):
 		if self.last_save_player_position is None:

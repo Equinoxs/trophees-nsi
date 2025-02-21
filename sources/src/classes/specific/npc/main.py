@@ -72,7 +72,7 @@ class NPC(PillarObject):
 		if self.sprint:
 			speed_px *= 1.5
 		self.speed_vector.set_norm(speed_px)
-		if DataHandler().must_save(): DataHandler().save(automatic=True)
+		if DataHandler().must_save(): DataHandler().save()
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective

@@ -1,5 +1,6 @@
 import pygame
 from src.classes import DataHandler, GameLoop
+from inspect import getmembers
 
 class ControlHandler:
 	_instance = None
@@ -26,6 +27,14 @@ class ControlHandler:
 		Convertit les valeurs stockées en constantes Pygame si nécessaire.
 		'''
 		return {action: getattr(pygame, key) if isinstance(key, str) else key for action, key in keybinds_data.items()}
+
+	def get_pygame_key_name(self, key):
+		pygame_vars = getmembers(pygame)
+		return [var_name for var_name, var_val in pygame_vars if var_val is key]
+
+	def get_keybinds(self):
+		return {action: self.get_pygame_key_name(key) if self.get_pygame_key_name(key) != [] else key for action, key in self.keybinds.items()}
+
 
 	def handle_events(self):
 		if not self.settings_initialized:
