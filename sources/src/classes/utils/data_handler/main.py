@@ -1,7 +1,6 @@
 import json
 import os
 import pygame
-from pprint import pprint
 from time import time
 
 from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE, GameLoop
@@ -54,21 +53,26 @@ class DataHandler:
 			self.last_save_player_position = None
 
 
-	def get_data_from_last_save(self):
-		path = os.path.join(
-			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups', 'automatic', 'main-save.json'
-		)
+	def get_data_from_last_save(self, name: str):
+		if name is not None:
 
-		try:
-			with open(path, 'r') as save:
-				data = json.load(save)
-				LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
-		except FileNotFoundError:
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', name + '.json'
+			)
+
+			try:
+				with open(path, 'r') as save:
+					data = json.load(save)
+					LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
+			except FileNotFoundError:
+				with open(self.default_save_path, 'r') as save:
+					data = json.load(save)
+					LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
+		else:
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
 				LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
-
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
 				# Pour s'assurer que tous les objets aient leurs propriétés définies
@@ -83,9 +87,9 @@ class DataHandler:
 				data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
 		return data
 
-	def load_save(self, force = False):
+	def load_save(self, name = 'default', force = False):
 		if self.current_save is None or force:
-			self.current_save = self.get_data_from_last_save()
+			self.current_save = self.get_data_from_last_save(name)
 		return self.current_save
 
 
@@ -104,7 +108,7 @@ class DataHandler:
 			if map == Player().get_map_name():
 				for element_index in range(len(data['maps'][map]['elements'])):
 					if data['maps'][map]['elements'][element_index]['type'] == 'NPC' and data['maps'][map]['elements'][element_index]['name'] == Player().get_focus().get_name():
-						data['maps'][map]['elements'][element_index]['position'] = (int(p) for p in Player().get_focus().get_position().convert_to_tuple())
+						data['maps'][map]['elements'][element_index]['position'] = [int(p) for p in Player().get_focus().get_position().convert_to_tuple()]
 
 		TimeHandler().add_chrono_tag('last_save', reset=True)
 		self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())
@@ -118,7 +122,6 @@ class DataHandler:
 	def save(self, name = 'default'):
 		if not SAVE:
 			return  # ne pas faire de sauvegardes (debug)
-		pprint(self.current_save)
 		LogHandler().add("Automatic save done")
 		assert name != 'new_game_backup' # TODO: mettre un vrai système
 		self.save_data(self.current_save, name)

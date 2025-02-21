@@ -30,10 +30,10 @@ class ControlHandler:
 
 	def get_pygame_key_name(self, key):
 		pygame_vars = getmembers(pygame)
-		return [var_name for var_name, var_val in pygame_vars if var_val is key]
+		return [var_name for var_name, var_val in pygame_vars if var_val is key if var_name.startswith('K_')]
 
 	def get_keybinds(self):
-		return {action: self.get_pygame_key_name(key) if self.get_pygame_key_name(key) != [] else key for action, key in self.keybinds.items()}
+		return {action: self.get_pygame_key_name(key)[0] if self.get_pygame_key_name(key) != [] else key for action, key in self.keybinds.items()}
 
 
 	def handle_events(self):
