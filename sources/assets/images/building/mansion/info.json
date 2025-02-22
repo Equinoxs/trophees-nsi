@@ -1,0 +1,10 @@
+{
+	"height": 550,
+	"hitbox": [[0, 50], [100, 50], [100, 98], [0, 98]],
+	"hitbox_action_radius": 20,
+	"door": {
+		"name": "mansion_door",
+		"interaction": "switch_door_mansion",
+		"position": [78, 99]
+	}
+}

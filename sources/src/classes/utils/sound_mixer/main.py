@@ -21,7 +21,7 @@ class SoundMixer(object):
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []
-			self.music_coefficient = 1.0
+			self.music_coefficient = 0.5
 			self.sound_coefficient = 1.0
 			self.added_sfx = {}
 			added_sfx_paths = DataHandler().get_sound_track_data('added_sfx')[1]
@@ -36,15 +36,21 @@ class SoundMixer(object):
 		self.sound_tracks.remove(sound_track)
 
 	def update(self):
-		player_position = Player().get_focus().get_position()
+		player_position = Player().get_focus().get_position().copy()
 		for sound_track in self.sound_tracks:
 			if GameLoop().is_game_paused():
 				sound_track.pause()
 			elif sound_track.get_paused():
 				sound_track.unpause()
-			if sound_track.get_position() == player_position or sound_track.distance_to(player_position) == 0:
-				continue
-			sound_track.set_volume(1 / (4 * pi * ((sound_track.distance_to(player_position) / 500) ** 2)) * self.sound_coefficient * sound_track.get_sound_coef())  # à vérifier...
+
+			distance = sound_track.distance_to(player_position)
+			if distance < 5:
+				distance = 5
+			volume = 1 / (4 * (distance * distance / 500))
+			if volume > 1:
+				volume = 1
+			new_volume = volume * self.sound_coefficient * sound_track.get_sound_coef()
+			sound_track.set_volume(new_volume)
 
 	def find_channel(self):
 		# renvoyer une channel libérée

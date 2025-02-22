@@ -116,14 +116,14 @@
 			]
 		},
 		"bletchley_park": {
-			"top_left_corner": [-100, -100],
-			"bottom_right_corner": [3000, 3000],
+			"top_left_corner": [-620, -100],
+			"bottom_right_corner": [2750, 2795],
 			"elements": [
 				{
 					"type": "GroundSurface",
 					"name": "background",
 					"image_path": "grass_1",
-					"boundaries": [[-100, -100], [3000, -100], [3000, 3000], [-100, 3000]]
+					"boundaries": [[-620, -100], [2750, -100], [2750, 2795], [-620, 2795]]
 				},
 				{
 					"type": "GroundSurface",
@@ -176,7 +176,7 @@
 				{
 					"type": "GroundSurface",
 					"name": "island_floor",
-					"image_path": "grass_1",
+					"image_path": "grass_3",
 					"boundaries": [[1265, 1919], [1242, 1883], [1232, 1834], [1240, 1789], [1281, 1744], [1340, 1742], [1371, 1768], [1382, 1842], [1366, 1899], [1341, 1930], [1304, 1923]]
 				},
 				{
@@ -188,8 +188,8 @@
 				{
 					"type": "GroundSurface",
 					"name": "parking_floor",
-					"image_path": "gravel",
-					"boundaries": [[2437, 2021], [2449, 1722], [2410, 1709], [2248, 1683], [2239, 1593], [2133, 1595], [2126, 1675], [2121, 1852], [2111, 2016], [2158, 2037], [2401, 2046]]
+					"image_path": "asphalte",
+					"boundaries": [[2449, 1684], [2249, 1680], [2248, 1595], [2143, 1592], [2144, 2030], [2444, 2030]]
 				},
 				{
 					"type": "GroundSurface",
@@ -200,7 +200,7 @@
 				{
 					"type": "Wall",
 					"name": "border_invisible_wall",
-					"boundaries": [[-100, -100], [3000, -100], [3000, 3000], [-100, 3000], [-100, -100]],
+					"boundaries": [[-620, -100], [2750, -100], [2750, 2795], [-620, 2795], [-620, -100]],
 					"wall_width": 0
 				},
 				{
@@ -221,12 +221,12 @@
 					"type": "NPC",
 					"name": "alberto",
 					"level": 2,
-					"position": [550, 2160],
+					"position": [740, 2760],
 					"image_path": "albert",
 					"interaction": "switch_with_test_2",
 					"authorized_sound_tracks": ["footsteps", "voices"],
-					"pattern_timeline": [[550, 2160], "npc_event_test", [590, 2160], "npc_event_test"],
-					"pattern_type": "loop"
+					"pattern_timeline": [[740, 2760], "npc_event_test", [740, 2790]],
+					"pattern_type": "back_and_forth"
 				},
 				{
 					"type": "NPC",
@@ -243,43 +243,43 @@
 					"type": "Tree",
 					"name": "center_tree_1",
 					"image_path": "oak",
-					"position": [850, 880]
+					"position": [1470, 1010]
 				},
 				{
 					"type": "Tree",
 					"name": "center_tree_2",
 					"image_path": "walnut",
-					"position": [560, 1310]
+					"position": [680, 1390]
 				},
 				{
 					"type": "Tree",
 					"name": "edge_tree_1",
 					"image_path": "oak",
-					"position": [30, 1350]
+					"position": [-200, 1320]
 				},
 				{
 					"type": "Tree",
 					"name": "castle_tree",
 					"image_path": "walnut",
-					"position": [320, 1730]
+					"position": [-390, 1450]
 				},
 				{
 					"type": "Tree",
-					"name": "lake_tree_1",
+					"name": "round_tree",
 					"image_path": "oak",
-					"position": [790, 1780]
+					"position": [750, 1750]
 				},
 				{
 					"type": "Tree",
-					"name": "lake_tree_2",
+					"name": "island_tree",
 					"image_path": "walnut",
-					"position": [1300, 1920]
+					"position": [1300, 1830]
 				},
 				{
 					"type": "Tree",
 					"name": "lake_tree_3",
 					"image_path": "walnut",
-					"position": [1810, 1580]
+					"position": [2200, 2440]
 				},
 				{
 					"type": "Tree",
@@ -291,37 +291,49 @@
 					"type": "Building",
 					"name": "building_1",
 					"image_path": "building_1",
-					"position": [900, 1000]
+					"position": [1050, 350]
 				},
 				{
 					"type": "Building",
 					"name": "building_2",
 					"image_path": "building_2",
-					"position": [1000, 680]
+					"position": [1600, 970]
 				},
 				{
 					"type": "Building",
 					"name": "hut_6",
 					"image_path": "hut_6",
-					"position": [600, 175]
+					"position": [900, 900]
 				},
 				{
 					"type": "Building",
 					"name": "hut_8",
 					"image_path": "hut_8",
-					"position": [950, 175]
+					"position": [1200, 1050]
 				},
 				{
 					"type": "Building",
 					"name": "little_house",
 					"image_path": "little_house",
-					"position": [80, 760]
+					"position": [1150, 2200]
 				},
 				{
 					"type": "Building",
 					"name": "cabin",
 					"image_path": "cabin",
-					"position": [600, 900]
+					"position": [960, 1320]
+				},
+				{
+					"type": "Building",
+					"name": "block_h",
+					"image_path": "block_h",
+					"position": [0, 850]
+				},
+				{
+					"type": "Building",
+					"name": "mansion",
+					"image_path": "mansion",
+					"position": [-580, 1600]
 				}
 			]
 		},
@@ -343,6 +355,7 @@
 				},
 				{
 					"type": "Wall",
+					"name": "invisible_wall",
 					"boundaries": [[0, 405], [0, 120], [600, 120], [600, 405], [500, 405], [500, 500], [390, 500], [390, 405], [0, 405]],
 					"wall_width": 0,
 					"hitbox_action_radius": 20
@@ -368,13 +381,25 @@
 			]
 		},
 		"little_house": {
-			"top_left_corner": [0, 0],
-			"bottom_right_corner": [100, 100],
+			"top_left_corner": [-10, -10],
+			"bottom_right_corner": [740, 560],
 			"elements": [
+				{
+					"type": "Interior",
+					"name": "little_house_inside",
+					"image_path": "little_house_inside",
+					"position": [0, 0]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall",
+					"boundaries": [[50, 520], [20, 100], [690, 100], [690, 520], [460, 520], [460, 550], [350, 550], [350, 520], [50, 520]],
+                    "wall_width": 0
+				},
 				{
 					"type": "Door",
 					"name": "exit",
-					"position": [0, 0],
+					"position": [410, 540],
 					"interaction": "switch_door_little_house"
 				}
 			]
@@ -484,6 +509,84 @@
 					"name": "exit",
 					"position": [300, 840],
 					"interaction": "switch_door_hut_8"
+				}
+			]
+		},
+		"block_h": {
+			"top_left_corner": [-20, -120],
+			"bottom_right_corner": [1120, 470],
+			"elements": [
+				{
+					"type": "GroundSurface",
+					"name": "floor",
+					"image_path": "wooden_floor_4",
+					"boundaries": [[0, 0], [1100, 0], [1100, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "block_h_borders",
+					"wall_type": "block_h",
+					"boundaries": [[0, 400], [0, 0], { "sticker": "block_h_window", "x_offset": 50 }, { "sticker": "block_h_window", "x_offset": 160 }, { "sticker": "block_h_window", "x_offset": 280 }, { "sticker": "block_h_window", "x_offset": 450 }, { "sticker": "block_h_window", "x_offset": 620 }, { "sticker": "block_h_window", "x_offset": 820 }, { "sticker": "block_h_window", "x_offset": 950 }, [1100, 0], [1100, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall",
+					"wall_width": 0,
+					"boundaries": [[1100, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "h_wall_1",
+					"wall_type": "block_h",
+					"boundaries": [[5, 300], [600, 300]]
+				},
+				{
+					"type": "Wall",
+					"name": "h_wall_2",
+					"wall_type": "block_h",
+					"boundaries": [[700, 300], [880, 300]]
+				},
+				{
+					"type": "Wall",
+					"name": "h_wall_3",
+					"wall_type": "block_h",
+					"boundaries": [[980, 300], [1100, 300]]
+				},
+				{
+					"type": "Wall",
+					"name": "v_wall_1",
+					"wall_type": "block_h",
+					"boundaries": [[410, 0], [410, 180]]
+				},
+				{
+					"type": "Wall",
+					"name": "v_wall_2",
+					"wall_type": "block_h",
+					"boundaries": [[780, 0], [780, 300]]
+				},
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [100, 440],
+					"interaction": "switch_door_block_h"
+				}
+			]
+		},
+		"mansion": {
+			"top_left_corner": [-20, -120],
+			"bottom_right_corner": [1120, 470],
+			"elements": [
+				{
+					"type": "GroundSurface",
+					"name": "floor",
+					"image_path": "tiling_2",
+					"boundaries": [[0, 0], [1100, 0], [1100, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+				},
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [100, 440],
+					"interaction": "switch_door_mansion"
 				}
 			]
 		}

@@ -3,8 +3,8 @@ from src.classes import Sprite, Animatable, SoundMaker
 
 class MapElement(Sprite, SoundMaker, Animatable):
 	def __init__(self, data: dict):
-		SoundMaker.__init__(self, data['position'], data.get('authorized_sound_tracks', []))
 		Sprite.__init__(self, data['position'], data.get('image_path', None))
+		SoundMaker.__init__(self, self.position, data.get('authorized_sound_tracks', []))
 		Animatable.__init__(self, data.get('image_path', None))
 		self.z_index = data.get('z_index', 1)  # Un z_index de 1 s'affichera au-dessus d'un z_index de 0
 		self.z_indexes_history = [self.z_index]

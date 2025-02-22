@@ -1,6 +1,6 @@
 # Constantes
 DEBUG = True
-SAVE = True
+SAVE = False
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 

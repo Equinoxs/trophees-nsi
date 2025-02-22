@@ -1,4 +1,4 @@
-from src.classes import GameLoop, Player, MissionHandler, LogHandler
+from src.classes import GameLoop, Player, Vector2, LogHandler
 
 
 class Interactions:
@@ -20,8 +20,10 @@ class Interactions:
 	def switch_with_test_2(_, host):
 		if Player().get_map_name() == 'bletchley_park':
 			Player().change_map('test_2')
+			Player().teleport_to(Vector2())
 		elif Player().get_map_name() == 'test_2':
 			Player().change_map('bletchley_park')
+			Player().teleport_to(Vector2())
 
 	def switch_door_building_1(_, host):
 		if Player().get_map_name() == 'bletchley_park':
@@ -63,23 +65,26 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('hut_8_door')
 
+	def switch_door_block_h(_, host):
+		if Player().get_map_name() == 'bletchley_park':
+			Player().change_map('block_h')
+			Player().teleport_to('exit')
+		elif Player().get_map_name() == 'block_h':
+			Player().change_map('bletchley_park')
+			Player().teleport_to('block_h_door')
+
+	def switch_door_mansion(_, host):
+		if Player().get_map_name() == 'bletchley_park':
+			Player().change_map('mansion')
+			Player().teleport_to('exit')
+		elif Player().get_map_name() == 'mansion':
+			Player().change_map('bletchley_park')
+			Player().teleport_to('mansion_door')
+
 
 	def do(self, interaction_name: str, host):
 		LogHandler().add(f'interaction {interaction_name} activated')
-		match interaction_name:
-			case 'test':
-				self.test(host)
-			case 'switch_with_test_2':
-				self.switch_with_test_2(host)
-			case 'switch_door_building_1':
-				self.switch_door_building_1(host)
-			case 'switch_door_building_2':
-				self.switch_door_building_2(host)
-			case 'switch_door_little_house':
-				self.switch_door_little_house(host)
-			case 'switch_door_hut_6':
-				self.switch_door_hut_6(host)
-			case 'switch_door_hut_8':
-				self.switch_door_hut_8(host)
-			case _:
-				LogHandler().add(f'Unknown interaction: {interaction_name}')
+		interaction_method = getattr(self, interaction_name, None)
+		if interaction_method is None:
+			return LogHandler().add(f'Unknown interaction: {interaction_name}')
+		interaction_method(host)

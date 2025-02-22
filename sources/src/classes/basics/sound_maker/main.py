@@ -1,8 +1,8 @@
-from src.classes import SoundTrack, DataHandler
+from src.classes import SoundTrack, DataHandler, Vector2
 
 
 class SoundMaker:
-	def __init__(self, position = None, authorized_sound_tracks = []):
+	def __init__(self, position: Vector2 = None, authorized_sound_tracks: list = []):
 		self.position = position  # défini dans les classes enfant
 		self.all_sound_tracks = {}
 		self.sound_tracks = {}
