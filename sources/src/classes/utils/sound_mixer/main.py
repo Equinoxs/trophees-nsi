@@ -21,7 +21,7 @@ class SoundMixer(object):
 			self.sound_tracks = []
 			self.channels = []
 			self.musics_historic = []
-			self.music_coefficient = 0.5
+			self.music_coefficient = 0.25
 			self.sound_coefficient = 1.0
 			self.added_sfx = {}
 			added_sfx_paths = DataHandler().get_sound_track_data('added_sfx')[1]

@@ -272,8 +272,14 @@
 				{
 					"type": "Tree",
 					"name": "island_tree",
-					"image_path": "walnut",
+					"image_path": "weeping_willow",
 					"position": [1300, 1830]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "island_bush",
+					"image_path": "basic_bush",
+					"position": [1230, 1800]
 				},
 				{
 					"type": "Tree",
@@ -286,6 +292,72 @@
 					"name": "lake_tree_4",
 					"image_path": "oak",
 					"position": [1570, 1450]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_cypress",
+					"image_path": "cypress",
+					"position": [1520, 1610]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_bush_1",
+					"image_path": "basic_bush",
+					"position": [1350, 1590]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_bush_2",
+					"image_path": "berry_bush",
+					"position": [1100, 1650]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_grass_1",
+					"image_path": "tall_grass",
+					"position": [1260, 1610]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_grass_2",
+					"image_path": "tall_grass",
+					"position": [1120, 1680]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_grass_3",
+					"image_path": "tall_grass",
+					"position": [1110, 1780]
+				},
+				{
+					"type": "Tree",
+					"name": "square_1_cypress",
+					"image_path": "oak_2",
+					"position": [840, 1980]
+				},
+				{
+					"type": "Tree",
+					"name": "square_2_cypress",
+					"image_path": "cypress",
+					"position": [940, 2150]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "square_2_bush",
+					"image_path": "berry_bush",
+					"position": [840, 2190]
+				},
+				{
+					"type": "Tree",
+					"name": "square_3_cypress",
+					"image_path": "cypress",
+					"position": [830, 2480]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "square_3_bush",
+					"image_path": "basic_bush",
+					"position": [860, 2370]
 				},
 				{
 					"type": "Building",

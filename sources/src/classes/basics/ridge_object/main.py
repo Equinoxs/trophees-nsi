@@ -15,7 +15,10 @@ class RidgeObject(MapObject):
 			case 'pillar':
 				return self.closest_vector_to(map_object.get_position()).get_y() < 0
 			case 'base':
-				return self.closest_vector_to(map_object.get_hitbox()[0]).get_y() < 0
+				if len(map_object.get_hitbox()) > 0:
+					return self.closest_vector_to(map_object.get_hitbox()[0]).get_y() < 0
+				else:
+					return map_object.get_position().get_y() - self.position.get_y() < 0
 			case 'ridge':
 				ridge_hitbox = map_object.get_hitbox()
 				if len(ridge_hitbox) == 0:
