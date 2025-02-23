@@ -1,0 +1,9 @@
+{
+	"height": 100,
+	"width": 10,
+	"images": {
+		"front": "front",
+		"side": "side",
+		"top": "top"
+	}
+}

@@ -90,8 +90,8 @@ class MenuHandler:
 			self.current_menu = self.menus[menu_name]
 			self.current_menu_name = menu_name
 
+		self.update()
 		if force_render:
-			self.update()
 			self.render()
 			GameLoop().get_camera().get_screen().blit(GameLoop().get_camera().get_surface('menu'), (0, 0))
 			pygame.display.flip()

@@ -1,4 +1,4 @@
-from src.classes import MapObject, Vector2
+from src.classes import MapObject
 
 
 class BaseObject(MapObject):
@@ -22,4 +22,3 @@ class BaseObject(MapObject):
 					return map_object.closest_vector_to(self.hitbox[0]).get_y() > 0
 				else:
 					return map_object.closest_vector_to(self.position).get_y() > 0
-

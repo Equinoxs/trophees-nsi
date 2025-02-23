@@ -33,6 +33,9 @@ class Sprite:
 			self.image_data['animations'] = {}
 
 
+	def get_must_render(self):
+		return self.must_render
+
 	def switch_horizontal_flip(self):
 		self.horizontal_flip = not self.horizontal_flip
 		self.image = pygame.transform.flip(self.image, True, self.vertical_flip)

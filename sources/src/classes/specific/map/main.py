@@ -22,12 +22,18 @@ class Map:
 	def sort_elements(self):
 		sorted = False
 		while not sorted:
+			began = False
 			sorted = True
 			for i in range(len(self.elements) - 1):
-				if not isinstance(self.elements[i], MapObject):
+				if not isinstance(self.elements[i], MapObject) or (not began and not self.elements[i].get_must_render()):
 					continue
+				else:
+					began = True
 				if not self.elements[i].get_has_moved() and not self.elements[i + 1].get_has_moved():
 					continue
+				if not self.elements[i].get_must_render():
+					element = self.elements.pop(i)
+					self.elements.insert(0, element)
 				if self.elements[i].goes_on_top_of(self.elements[i + 1]):
 					self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
 					sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée

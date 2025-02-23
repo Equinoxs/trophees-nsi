@@ -169,7 +169,7 @@
 			},
 			{
 				"type": "MiniMap",
-				"x": 270,
+				"x": "center",
 				"y": "center",
 				"height": 700,
 				"surface_to_watch": "full_map"

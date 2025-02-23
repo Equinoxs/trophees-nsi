@@ -8,15 +8,13 @@ class Interactable:
 		if self.interaction is None:
 			self.interaction_available = False
 
-		self.mission = None
+		self.mission = mission
 		self.mission_marker = None
 
 		if not hasattr(self, 'mission_marker_x_offset'):
 			self.mission_marker_x_offset = 0
 		if not hasattr(self, 'mission_marker_y_offset'):
 			self.mission_marker_y_offset = 0
-
-		self.set_mission(mission)
 
 	def get_mission(self):
 		return self.mission

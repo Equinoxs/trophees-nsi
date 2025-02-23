@@ -81,6 +81,9 @@ class WallSegment(RidgeObject):
 
 		super().__init__(data)
 
+		if self.wall_width == 0:
+			self.must_render = False
+
 	def calculate_front_image_perspective(self):
 		self.front_image_perspective = pygame.Surface((0, self.front_width + self.wall_height + abs(self.p1_to_p2.orthogonal_projection(self.after_angle_vector).get_y()) + abs(self.p1_to_p2.orthogonal_projection(self.before_angle_vector).get_y())), pygame.SRCALPHA).convert_alpha()
 		if self.p1_to_p2.get_x() != 0:

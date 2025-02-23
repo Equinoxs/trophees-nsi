@@ -241,6 +241,60 @@
 				},
 				{
 					"type": "Tree",
+					"name": "corner_tree_1",
+					"image_path": "walnut",
+					"position": [480, 620]
+				},
+				{
+					"type": "Tree",
+					"name": "corner_tree_2",
+					"image_path": "walnut",
+					"position": [-180, 500]
+				},
+				{
+					"type": "Tree",
+					"name": "corner_tree_3",
+					"image_path": "walnut",
+					"position": [50, 300]
+				},
+				{
+					"type": "Tree",
+					"name": "corner_tree_4",
+					"image_path": "oak",
+					"position": [460, 250]
+				},
+				{
+					"type": "Tree",
+					"name": "top_tree_1",
+					"image_path": "oak_2",
+					"position": [1150, 280]
+				},
+				{
+					"type": "Tree",
+					"name": "top_tree_2",
+					"image_path": "oak",
+					"position": [1760, 390]
+				},
+				{
+					"type": "Tree",
+					"name": "top_tree_3",
+					"image_path": "oak",
+					"position": [2360, 240]
+				},
+				{
+					"type": "Tree",
+					"name": "top_cypress",
+					"image_path": "cypress",
+					"position": [1950, 650]
+				},
+				{
+					"type": "Tree",
+					"name": "top_tree_4",
+					"image_path": "oak_2",
+					"position": [2540, 1150]
+				},
+				{
+					"type": "Tree",
 					"name": "center_tree_1",
 					"image_path": "oak",
 					"position": [1470, 1010]
@@ -248,6 +302,12 @@
 				{
 					"type": "Tree",
 					"name": "center_tree_2",
+					"image_path": "oak",
+					"position": [1570, 1450]
+				},
+				{
+					"type": "Tree",
+					"name": "block_h_tree",
 					"image_path": "walnut",
 					"position": [680, 1390]
 				},
@@ -259,15 +319,27 @@
 				},
 				{
 					"type": "Tree",
-					"name": "castle_tree",
+					"name": "edge_tree_2",
 					"image_path": "walnut",
 					"position": [-390, 1450]
+				},
+				{
+					"type": "Tree",
+					"name": "edge_tree_3",
+					"image_path": "oak_2",
+					"position": [70, 1550]
 				},
 				{
 					"type": "Tree",
 					"name": "round_tree",
 					"image_path": "oak",
 					"position": [750, 1750]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "parking_bush",
+					"image_path": "berry_bush",
+					"position": [2280, 1600]
 				},
 				{
 					"type": "Tree",
@@ -283,15 +355,21 @@
 				},
 				{
 					"type": "Tree",
-					"name": "lake_tree_3",
+					"name": "lake_tree_1",
 					"image_path": "walnut",
 					"position": [2200, 2440]
 				},
 				{
 					"type": "Tree",
-					"name": "lake_tree_4",
-					"image_path": "oak",
-					"position": [1570, 1450]
+					"name": "lake_cypress_1",
+					"image_path": "cypress",
+					"position": [1940, 2260]
+				},
+				{
+					"type": "Tree",
+					"name": "lake_cypress_2",
+					"image_path": "cypress",
+					"position": [1700, 2430]
 				},
 				{
 					"type": "Tree",
@@ -310,6 +388,12 @@
 					"name": "lake_bush_2",
 					"image_path": "berry_bush",
 					"position": [1100, 1650]
+				},
+				{
+					"type": "NaturalObject",
+					"name": "lake_bush_2",
+					"image_path": "basic_bush",
+					"position": [1570, 1580]
 				},
 				{
 					"type": "NaturalObject",
@@ -358,6 +442,42 @@
 					"name": "square_3_bush",
 					"image_path": "basic_bush",
 					"position": [860, 2370]
+				},
+				{
+					"type": "Tree",
+					"name": "bottom_tree_1",
+					"image_path": "oak",
+					"position": [1140, 2750]
+				},
+				{
+					"type": "Tree",
+					"name": "bottom_tree_2",
+					"image_path": "walnut",
+					"position": [1590, 2670]
+				},
+				{
+					"type": "Tree",
+					"name": "bottom_cypress",
+					"image_path": "cypress",
+					"position": [2070, 2750]
+				},
+				{
+					"type": "Tree",
+					"name": "castle_tree_1",
+					"image_path": "oak_2",
+					"position": [-310, 2600]
+				},
+				{
+					"type": "Tree",
+					"name": "castle_tree_2",
+					"image_path": "oak_2",
+					"position": [-40, 2400]
+				},
+				{
+					"type": "Tree",
+					"name": "castle_cypress",
+					"image_path": "cypress",
+					"position": [320, 2620]
 				},
 				{
 					"type": "Building",
@@ -436,7 +556,43 @@
 					"type": "Furniture",
 					"name": "box",
 					"image_path": "random_box",
-					"position": [40, 150]
+					"position": [10, 120]
+				},
+				{
+					"type": "Furniture",
+					"name": "library",
+					"image_path": "library",
+					"position": [450, -10]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_1",
+					"image_path": "bin",
+					"position": [550, 340]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_2",
+					"image_path": "bin",
+					"position": [90, 330]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair",
+					"image_path": "chair_dark_left",
+					"position": [220, 190]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair",
+					"image_path": "chair_dark_right",
+					"position": [130, 190]
+				},
+				{
+					"type": "Table",
+					"name": "table",
+					"image_path": "dark_horizontal_low",
+					"position": [120, 240]
 				}
 			]
 		},
@@ -445,9 +601,81 @@
 			"bottom_right_corner": [100, 100],
 			"elements": [
 				{
+					"type": "GroundSurface",
+					"name": "floor",
+					"image_path": "tiling_2",
+					"boundaries": [[0, 0], [800, 0], [800, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+				},
+				{
+					"type": "GroundSurface",
+					"name": "carpet",
+					"image_path": "carpet_3",
+					"boundaries": [[150, 140], [500, 140], [500, 350], [150, 350]]
+				},
+				{
+					"type": "Wall",
+					"name": "building_2_borders",
+					"wall_type": "brown",
+					"boundaries": [[0, 400], [0, 0], { "sticker": "notes", "x_offset": 90 }, { "sticker": "wanted_poster", "x_offset": 140 }, { "sticker": "window", "x_offset": 520 }, { "sticker": "door_wood", "x_offset": 610 }, [800, 0], [800, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall",
+					"wall_width": 0,
+					"boundaries": [[800, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_1",
+					"image_path": "bin",
+					"position": [20, 5]
+				},
+				{
+					"type": "Furniture",
+					"name": "library",
+					"image_path": "library",
+					"position": [290, -120]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_table_1",
+					"image_path": "chair_dark_left",
+					"position": [150, 70]
+				},
+				{
+					"type": "Table",
+					"name": "table_1",
+					"image_path": "dark_round_low",
+					"position": [120, 110]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_table_2",
+					"image_path": "chair_dark_left",
+					"position": [720, 150]
+				},
+				{
+					"type": "Table",
+					"name": "table_2",
+					"image_path": "dark_vertical_2",
+					"position": [580, 60]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_2",
+					"image_path": "bin",
+					"position": [610, 330]
+				},
+				{
+					"type": "Furniture",
+					"name": "box",
+					"image_path": "random_box",
+					"position": [660, 340]
+				},
+				{
 					"type": "Door",
 					"name": "exit",
-					"position": [0, 0],
+					"position": [100, 440],
 					"interaction": "switch_door_building_2"
 				}
 			]
@@ -466,7 +694,43 @@
 					"type": "Wall",
 					"name": "invisible_wall",
 					"boundaries": [[50, 520], [20, 100], [690, 100], [690, 520], [460, 520], [460, 550], [350, 550], [350, 520], [50, 520]],
-                    "wall_width": 0
+					"wall_width": 0
+				},
+				{
+					"type": "Furniture",
+					"name": "library",
+					"image_path": "library",
+					"position": [55, 230]
+				},
+				{
+					"type": "Furniture",
+					"name": "box",
+					"image_path": "random_box",
+					"position": [200, 90]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_table_1_1",
+					"image_path": "chair_light_left",
+					"position": [520, 160]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_table_1_2",
+					"image_path": "chair_light_right",
+					"position": [450, 170]
+				},
+				{
+					"type": "Table",
+					"name": "table_1",
+					"image_path": "light_round_high",
+					"position": [475, 190]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin",
+					"image_path": "bin",
+					"position": [620, 470]
 				},
 				{
 					"type": "Door",
@@ -646,18 +910,54 @@
 		},
 		"mansion": {
 			"top_left_corner": [-20, -120],
-			"bottom_right_corner": [1120, 470],
+			"bottom_right_corner": [1020, 920],
 			"elements": [
 				{
 					"type": "GroundSurface",
 					"name": "floor",
 					"image_path": "tiling_2",
-					"boundaries": [[0, 0], [1100, 0], [1100, 400], [150, 400], [150, 450], [50, 450], [50, 400], [0, 400]]
+					"boundaries": [[0, 0], [1000, 0], [1000, 400], [900, 400], [900, 450], [800, 450], [800, 400], [700, 400], [700, 900], [0, 900]]
+				},
+				{
+					"type": "Wall",
+					"name": "main_borders",
+					"wall_type": "brown_2",
+					"boundaries": [[0, 900], [0, 0], { "sticker": "door_wood", "x_offset" : 35 }, { "sticker": "wide_window", "x_offset" : 160 }, { "sticker": "wide_window", "x_offset" : 550 }, [1000, 0], [1000, 400], [900, 400], [900, 450]]
+				},
+				{
+					"type": "Wall",
+					"name": "h_wall_1",
+					"wall_type": "brown_2",
+					"boundaries": [[0, 400], [300, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "h_wall_2",
+					"wall_type": "brown_2",
+					"boundaries": [[400, 400], { "sticker": "gccs_poster", "x_offset" : 20 }, { "sticker": "blackboard_papers", "x_offset" : 130 }, [800, 400], [800, 450]]
+				},
+				{
+					"type": "Wall",
+					"name": "v_wall",
+					"wall_type": "brown_2",
+					"boundaries": [[500, 120], [500, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall_1",
+					"wall_width": 0,
+					"boundaries": [[0, 900], [700, 900], [700, 400]]
+				},
+				{
+					"type": "Wall",
+					"name": "invisible_wall_2",
+					"wall_width": 0,
+					"boundaries": [[800, 450], [900, 450]]
 				},
 				{
 					"type": "Door",
 					"name": "exit",
-					"position": [100, 440],
+					"position": [850, 440],
 					"interaction": "switch_door_mansion"
 				}
 			]

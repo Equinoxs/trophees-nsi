@@ -131,9 +131,9 @@ class GameLoop:
 
 		# Updates
 		self.time_handler.update()
-		self.menu_handler.update()
 		self.sound_mixer.update()
 		if not self.paused:
 			self.player.update()
 			self.mission_handler.update()
+		self.menu_handler.update()
 		self.camera.update()

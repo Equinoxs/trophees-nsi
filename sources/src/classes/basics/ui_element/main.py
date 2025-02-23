@@ -58,19 +58,8 @@ class UIElement:
 		if type(self.color) == tuple:
 			self.surface.fill(self.color)
 
-		# --- Compréhension des positions de l'élément ---
-		if self.position.get_x() == 'center':
-			self.position.set_x((SCREEN_WIDTH - self.surface.get_width()) // 2)
-		if self.position.get_x() < 0:
-			self.position.set_x(SCREEN_WIDTH + self.position.get_x() - self.surface.get_width())
-
-		if self.position.get_y() == 'center':
-			self.position.set_y((SCREEN_HEIGHT - self.surface.get_height()) // 2)
-		if self.position.get_y() < 0:
-			self.position.set_y(SCREEN_HEIGHT + self.position.get_y() - self.surface.get_height())
-
-		self.rect = pygame.Rect(self.position.get_x(), self.position.get_y(), self.surface.get_width(), self.surface.get_height())
-		self.calculate_text_rect()
+		self.rect = None
+		self.update_rect()
 
 	def update_rect(self):
 		pos_x = self.position.get_x()
@@ -110,9 +99,9 @@ class UIElement:
 		return self.position
 
 	def update(self):
-		pass
+		self.update_rect()
 
-	def render(self, surface = 'menu'):
+	def render(self, surface = 'menu', render_surface = False):
 		self.update_rect()
 
 		if self.color != 'transparent':
@@ -124,7 +113,10 @@ class UIElement:
 		self.render_text()
 
 		if self.image is not None:
-			GameLoop().get_camera().draw(self.image, self.position, surface)
+			GameLoop().get_camera().draw(self.image, (self.rect.x, self.rect.y), surface)
+
+		if render_surface:
+			GameLoop().get_camera().draw(self.surface, (self.rect.x, self.rect.y), surface)
 
 	def render_text(self, surface = 'menu'):
 		if self.label != '':

@@ -31,3 +31,6 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		SoundMaker.update(self)
 		Animatable.update(self)
 		Sprite.update(self)
+
+	def __del__(self):
+		SoundMaker.__del__(self)

@@ -1,1 +1,5 @@
-{}
+{
+	"height": 50,
+	"hitbox_action_radius": 20,
+	"hitbox": [[50, 80]]
+}

@@ -19,3 +19,7 @@ class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager)
 		closest_vector = Collider.update(self)
 		Interactable.update(self, closest_vector)
 		Movable.update(self)
+
+	def __del__(self):
+		MapElement.__del__(self)
+		Interactable.__del__(self)

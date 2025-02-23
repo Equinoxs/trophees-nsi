@@ -11,6 +11,7 @@ class Button(UIElement):
 	def update(self):
 		super().update()
 		if ControlHandler().is_clicked(self):
+			ControlHandler().consume_event('clicked')
 			ButtonActions().do(self.action_name)
 		if self.rect.collidepoint(pygame.mouse.get_pos()):
 			return True

@@ -63,3 +63,9 @@ class SoundMaker:
 
 	def update(self):
 		pass
+
+	def __del__(self):
+		for sound_track in self.sound_tracks.values():
+			sound_track.remove()
+		for sound_track in self.all_sound_tracks.values():
+			sound_track.remove()
