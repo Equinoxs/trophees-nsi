@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents
+from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents, InventoryItem
 
 
 class NPC(PillarObject):
@@ -28,6 +28,8 @@ class NPC(PillarObject):
 		self.delta_time_event = None
 		self.is_moving = False  # permet de SAVOIR si le NPC se dirige vers un objectif
 		self.must_move = True  # permet de CONTRÔLER si le NPC doit se diriger vers son objectif
+
+		self.inventory = data.get("inventory", [])
 
 	def get_level(self):
 		return self.level
@@ -211,3 +213,23 @@ class NPC(PillarObject):
 		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
 		self.position.set_all(x, y)
+
+	def add_item(self, item : InventoryItem):
+		self.inventory.append(item)
+		
+	def remove_item(self, item : InventoryItem):
+		if item in self.inventory:
+			self.inventory.remove(item)
+
+	def use_item(self, item_type: str):
+		for item in self.inventory:
+			if item.item_type == item_type and item.quantity > 0:
+				item.use()  #methode de InventoryItem
+				if item.quantity == 0:
+					self.remove_item(item)
+				return True
+		return False
+	
+	def display_inventory(self):
+		for item in self.inventory:
+			item.display_info()
