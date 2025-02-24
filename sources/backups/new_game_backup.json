@@ -922,7 +922,7 @@
 					"type": "Wall",
 					"name": "main_borders",
 					"wall_type": "brown_2",
-					"boundaries": [[0, 900], [0, 0], { "sticker": "door_wood", "x_offset" : 35 }, { "sticker": "wide_window", "x_offset" : 160 }, { "sticker": "wide_window", "x_offset" : 550 }, [1000, 0], [1000, 400], [900, 400], [900, 450]]
+					"boundaries": [[-1, 900], [0, 0], { "sticker": "door_wood", "x_offset" : 35 }, { "sticker": "wide_window", "x_offset" : 160 }, { "sticker": "wide_window", "x_offset" : 550 }, [1000, 0], [999, 400], [900, 400], [900, 450]]
 				},
 				{
 					"type": "Wall",
@@ -940,7 +940,7 @@
 					"type": "Wall",
 					"name": "v_wall",
 					"wall_type": "brown_2",
-					"boundaries": [[500, 120], [500, 400]]
+					"boundaries": [[501, 120], [500, 400]]
 				},
 				{
 					"type": "Wall",
@@ -955,6 +955,151 @@
 					"boundaries": [[800, 450], [900, 450]]
 				},
 				{
+					"type": "Table",
+					"name": "big_table",
+					"image_path": "dark_vertical_2",
+					"item_positions": [[30, 50]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "red_book",
+							"name": "mansion_big_table_book"
+						}
+					],
+					"position": [120, 15]
+				},
+				{
+					"type": "Table",
+					"name": "square_table",
+					"image_path": "dark_square",
+					"item_positions": [[20, 50], [70, 20]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "blue_book",
+							"name": "mansion_square_table_book_1"
+						},
+						{
+							"type": "InventoryItem",
+							"image_path": "green_book",
+							"name": "mansion_square_table_book_2"
+						}
+					],
+					"position": [540, 175]
+				},
+				{
+					"type": "Table",
+					"name": "table_1",
+					"image_path": "dark_vertical_1",
+					"position": [20, 450]
+				},
+				{
+					"type": "Table",
+					"name": "table_2",
+					"image_path": "dark_vertical_1",
+					"position": [200, 450]
+				},
+				{
+					"type": "Table",
+					"name": "table_3",
+					"image_path": "dark_vertical_1",
+					"item_positions": [[50, 30]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "letter",
+							"name": "mansion_table_3_letter"
+						}
+					],
+					"position": [420, 450]
+				},
+				{
+					"type": "Table",
+					"name": "table_4",
+					"image_path": "dark_vertical_1",
+					"position": [600, 450]
+				},
+				{
+					"type": "Table",
+					"name": "table_5",
+					"image_path": "dark_vertical_1",
+					"item_positions": [[50, 30]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "letter",
+							"name": "mansion_table_5_letter"
+						}
+					],
+					"position": [20, 680]
+				},
+				{
+					"type": "Table",
+					"name": "table_6",
+					"image_path": "dark_vertical_1",
+					"position": [200, 680]
+				},
+				{
+					"type": "Table",
+					"name": "table_7",
+					"image_path": "dark_vertical_1",
+					"position": [420, 680]
+				},
+				{
+					"type": "Table",
+					"name": "table_8",
+					"image_path": "dark_vertical_1",
+					"position": [600, 680]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_1",
+					"image_path": "chair_dark_left",
+					"position": [120, 460]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_2",
+					"image_path": "chair_dark_right",
+					"position": [140, 520]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_3",
+					"image_path": "chair_dark_left",
+					"position": [520, 460]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_4",
+					"image_path": "chair_dark_right",
+					"position": [540, 520]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_5",
+					"image_path": "chair_dark_left",
+					"position": [120, 690]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_6",
+					"image_path": "chair_dark_right",
+					"position": [140, 770]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_7",
+					"image_path": "chair_dark_left",
+					"position": [520, 690]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_8",
+					"image_path": "chair_dark_right",
+					"position": [540, 770]
+				},
+				{
 					"type": "Door",
 					"name": "exit",
 					"position": [850, 440],
@@ -966,6 +1111,7 @@
 	"keybinds": {
 		"pause": "K_ESCAPE",
 		"interacted": "K_e",
+		"pick_drop": "K_r",
 		"go_forward": "K_z",
 		"go_backward": "K_s",
 		"go_right": "K_d",

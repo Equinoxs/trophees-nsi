@@ -5,6 +5,7 @@ class Marker(UIElement):
 	def __init__(self, data: dict):
 		super().__init__(data)
 		self.position = data['position']
+		self.real_image = data.get('real_image', None)
 		self.x_offset = data.get('x_offset', 0)
 		self.y_offset = data.get('y_offset', 0)
 		self.special = data.get('special', False)
@@ -53,6 +54,9 @@ class Marker(UIElement):
 
 		self.update_rect()
 		super().render()
+
+		if self.real_image is not None:
+			GameLoop().get_camera().draw(self.real_image, self.position, 'menu')
 
 		self.position.set_all(x, y)
 

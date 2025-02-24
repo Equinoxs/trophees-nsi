@@ -72,7 +72,7 @@ from .basics.pillar_object.main import PillarObject
 from .basics.base_object.main import BaseObject
 from .basics.ridge_object.main import RidgeObject
 from .specific.npc.pattern_events import PatternEvents
-from .basics.inventory_item.main import InventoryItem
+from .specific.inventory_item.main import InventoryItem
 from .specific.npc.main import NPC
 from .specific.tree.main import Tree
 from .specific.wall_segment.main import WallSegment

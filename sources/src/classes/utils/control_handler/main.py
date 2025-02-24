@@ -96,6 +96,7 @@ class ControlHandler:
 		aliases = {
 			'pause': 'Pause',
 			'interacted': 'Interact',
+			'pick_drop': 'Pick/drop items',
 			'go_forward': 'Move Forward',
 			'go_backward': 'Move Backward',
 			'go_right': 'Move Right',

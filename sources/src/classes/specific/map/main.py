@@ -1,4 +1,5 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, GroundSurface, Wall, Tree, Door, Interior, MapObject, Furniture, NaturalObject, Table
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, Vector2, GroundSurface, Wall, MapObject, InventoryItem, Table
+from src import classes
 
 
 class Map:
@@ -14,9 +15,9 @@ class Map:
 				break
 
 			self.elements[0].get_image().blit(
-    			self.elements[i].get_image(),
-    			(self.elements[i].get_position() - self.elements[0].get_position()).convert_to_tuple()
-    		)
+				self.elements[i].get_image(),
+				(self.elements[i].get_position() - self.elements[0].get_position()).convert_to_tuple()
+			)
 			self.elements[i].dont_render()
 
 		SoundMixer().play_music('On the Island - Godmode')
@@ -65,49 +66,46 @@ class Map:
 			element.catch_event(event)
 
 	def load_elements_from(self, map_name):
+		self.name = map_name
 		self.elements = []
-		elements = DataHandler().load_save()['maps'][map_name]['elements']
+		elements = DataHandler().load_save()['maps'][self.name]['elements']
 		for element in elements:
-			match element['type']:
-				case 'NPC':
-					self.elements.append(NPC(element))
-
-				case 'GroundSurface':
-					self.elements.append(GroundSurface(element))
-
-				case 'Wall':
-					self.walls.append(Wall(element, self))  # Ce n'est pas un MapElement
-
-				case "Tree":
-					self.elements.append(Tree(element))
-
-				case "Door":
-					self.elements.append(Door(element))
-
-				case "Building":
-					self.elements.append(Building(element, self.add))
-
-				case "Interior":
-					self.elements.append(Interior(element))
-
-				case "Furniture":
-					self.elements.append(Furniture(element))
-
-				case "Table":
-					self.elements.append(Table(element))
-
-				case "NaturalObject":
-					self.elements.append(NaturalObject(element))
-
-				case _:
-					raise NotImplementedError
+			self.add_element(element)
 		self.sort_elements()
 
-	def update(self):
-		if not GameLoop().is_game_paused():
-			for element in self.elements:
-				element.update()
-			self.sort_elements()
+	def add_element(self, element_data: dict):
+		element = None
+		match element_data['type']:
+				case 'Wall':
+					wall = Wall(element_data, self)
+					self.walls.append(wall)  # Ce n'est pas un MapElement
+
+				case "Building":
+					element = Building(element_data, self.add)
+
+				case _:
+					element_class = getattr(classes, element_data['type'], None)
+					if element_class is None:
+						raise ValueError('Element type must be a valid class')
+					element = element_class(element_data)
+
+		if element is not None:
+			self.elements.append(element)
+		return element
+
+	def add_element_ref(self, element_ref, index = None):
+		if index is None:
+			self.elements.append(element_ref)
+		else:
+			self.elements.insert(index, element_ref)
+
+	def get_index_of(self, element_ref):
+		for idx, element in enumerate(self.elements):
+			if element == element_ref:
+				return idx
+
+	def remove_element(self, element_ref):
+		self.elements.remove(element_ref)
 
 	def which_surface(self, position):
 		for i in range(len(self.elements) - 1, -1, -1):
@@ -117,3 +115,40 @@ class Map:
 
 	def get_name(self):
 		return self.name
+
+	def find_closest_item(self, position: Vector2):
+		closest_item = None
+		closest_table = None
+		closest_distance = 50
+		for element in self.elements:
+			distance = element.get_position().distance_to(position)
+			if isinstance(element, InventoryItem) and distance <= closest_distance:
+				closest_distance = distance
+				closest_item = element
+				closest_table = None
+			elif isinstance(element, Table):
+				for item in element.get_items():
+					distance = element.get_item_position(item).distance_to(position)
+					if distance <= closest_distance:
+						closest_distance = distance
+						closest_table = element
+						closest_item = item
+		return closest_item, closest_table
+
+	def find_closest_item_place(self, position: Vector2):
+		closest_distance = 50
+		closest_item_place = None
+		for element in self.elements:
+			if isinstance(element, Table):
+				for idx, item_position in enumerate(element.get_item_positions()):
+					distance = (item_position + element.get_position()).distance_to(position)
+					if distance < closest_distance and not element.item_position_taken(idx):
+						closest_distance = distance
+						closest_item_place = { 'table': element, 'index_position': idx }
+		return closest_item_place
+
+	def update(self):
+		if not GameLoop().is_game_paused():
+			for element in self.elements:
+				element.update()
+			self.sort_elements()

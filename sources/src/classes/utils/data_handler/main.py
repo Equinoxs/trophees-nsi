@@ -76,16 +76,22 @@ class DataHandler:
 				LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
-				# Pour s'assurer que tous les objets aient leurs propriétés définies
-				for required_key, default_value in self.model.items():
-					if required_key not in data['maps'][map]['elements'][element_index]:
-						data['maps'][map]['elements'][element_index][required_key] = data['maps'][map]['elements'][element_index].get(required_key, default_value)
+				self.normalize_data(data['maps'][map]['elements'][element_index])
 
-				# Post-processing
-				data['maps'][map]['elements'][element_index]['position'] = self.list_to_vector2(data['maps'][map]['elements'][element_index]['position'])
-				data['maps'][map]['elements'][element_index]['pattern_timeline'] = self.list_transform(data['maps'][map]['elements'][element_index]['pattern_timeline'])
-				data['maps'][map]['elements'][element_index]['side_effects'] = self.list_transform(data['maps'][map]['elements'][element_index]['side_effects'])
-				data['maps'][map]['elements'][element_index]['boundaries'] = self.list_transform(data['maps'][map]['elements'][element_index]['boundaries'])
+		return data
+
+	def normalize_data(self, data: dict):
+		# Pour s'assurer que tous les objets aient leurs propriétés définies
+		for required_key, default_value in self.model.items():
+			if required_key not in data:
+				data[required_key] = data.get(required_key, default_value)
+
+		# Post-processing
+		data['position'] = self.list_to_vector2(data['position'])
+		data['pattern_timeline'] = self.list_transform(data['pattern_timeline'])
+		data['side_effects'] = self.list_transform(data['side_effects'])
+		data['boundaries'] = self.list_transform(data['boundaries'])
+
 		return data
 
 	def load_save(self, name = 'default', force = False):

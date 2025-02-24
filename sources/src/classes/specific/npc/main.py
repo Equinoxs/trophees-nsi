@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents, InventoryItem
+from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents, InventoryItem, MenuHandler
 
 
 class NPC(PillarObject):
@@ -29,7 +29,8 @@ class NPC(PillarObject):
 		self.is_moving = False  # permet de SAVOIR si le NPC se dirige vers un objectif
 		self.must_move = True  # permet de CONTRÔLER si le NPC doit se diriger vers son objectif
 
-		self.inventory = data.get("inventory", [])
+		self.inventory = data.get('inventory', None)
+		self.inventory_marker = None
 
 	def get_level(self):
 		return self.level
@@ -51,6 +52,9 @@ class NPC(PillarObject):
 			self.switch_horizontal_flip()
 
 	def update_player(self):
+
+		# Gérer les déplacements
+
 		if ControlHandler().is_activated('go_forward'):
 			self.speed_vector.set_y(-1)
 		elif ControlHandler().is_activated('go_backward'):
@@ -75,6 +79,11 @@ class NPC(PillarObject):
 			speed_px *= 1.5
 		self.speed_vector.set_norm(speed_px)
 		if DataHandler().must_save(): DataHandler().save()
+
+		# Gérer l'affichage de l'inventaire
+		if ControlHandler().is_activated('pick_drop'):
+			self.handle_inventory()
+			ControlHandler().consume_event('pick_drop')
 
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
@@ -190,6 +199,37 @@ class NPC(PillarObject):
 					self.resume_moving()
 		self.is_moving = self.move_npc_to_objective()
 
+	def get_inventory(self):
+		return self.inventory
+
+	def pick_item(self, item: InventoryItem):
+		self.inventory = item
+		item.remove_pickup_marker()
+		Player().get_map().remove_element(item)
+
+	def drop_inventory(self):
+		self.inventory.get_position().copy(self.position.copy())
+		Player().get_map().add_element_ref(self.inventory, Player().get_map().get_index_of(self))
+		self.inventory = None
+
+	def handle_inventory(self):
+		if self.inventory is None:
+			closest_item, table = Player().get_map().find_closest_item(self.position)
+			if closest_item is not None:
+				if table is not None:
+					table.release_item(closest_item)
+				self.pick_item(closest_item)
+		else:
+			closest_place = Player().get_map().find_closest_item_place(self.position)
+			if closest_place is not None:
+				self.give_inventory_to(closest_place['table'], closest_place['index_position'])
+			else:
+				self.drop_inventory()
+
+	def give_inventory_to(self, table, index_position):
+		table.take_item(self.inventory, index_position)
+		self.inventory = None
+
 	def update(self):
 		if self.speed_vector.get_norm() > 1:
 			surface_type = Player().get_map().which_surface(self.position)
@@ -199,6 +239,11 @@ class NPC(PillarObject):
 		elif self.walking_on is not None:
 			self.walking_on = None
 			self.set_animation_sound_name(self.walking_on)
+
+		
+		if type(self.inventory) == dict:
+			self.inventory = Player().get_map().add_element(DataHandler().normalize_data(self.inventory))
+			Player().get_map().remove_element(self.inventory)
 
 		super().update()
 		self.handle_animation()
@@ -212,24 +257,6 @@ class NPC(PillarObject):
 		x, y = self.position.convert_to_tuple()
 		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
+		if self.inventory is not None:
+			Camera().draw(self.inventory.get_image(), (x + self.image.get_width() // 2, y - (self.image.get_height() + self.inventory.get_image().get_height()) // 2), 'map')
 		self.position.set_all(x, y)
-
-	def add_item(self, item : InventoryItem):
-		self.inventory.append(item)
-		
-	def remove_item(self, item : InventoryItem):
-		if item in self.inventory:
-			self.inventory.remove(item)
-
-	def use_item(self, item_type: str):
-		for item in self.inventory:
-			if item.item_type == item_type and item.quantity > 0:
-				item.use()  #methode de InventoryItem
-				if item.quantity == 0:
-					self.remove_item(item)
-				return True
-		return False
-	
-	def display_inventory(self):
-		for item in self.inventory:
-			item.display_info()
