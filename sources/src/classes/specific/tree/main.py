@@ -20,3 +20,9 @@ class Tree(PillarObject):
 		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
 		self.position.set_all(x, y)
+
+	def get_data(self):
+		data = super().get_data()
+		if 'interaction' in data:
+			del data['interaction'] # pas besoin dans la sauvegarde
+		return data

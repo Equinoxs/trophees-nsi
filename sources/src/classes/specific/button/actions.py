@@ -1,5 +1,5 @@
-from src.classes import GameLoop, LogHandler
-
+from src.classes import GameLoop, LogHandler, DataHandler
+from inspect import signature
 
 class ButtonActions:
 	_instance = None
@@ -13,59 +13,71 @@ class ButtonActions:
 	def __init__(self):
 		pass
 
-	def focus_on_game(self):
+	def focus_on_game(self, _):
 		GameLoop().get_camera().map_rendered()
 		GameLoop().get_menu_handler().set_current_menu('in_game')
 		GameLoop().get_sound_mixer().unpause_music()
 		GameLoop().unpause_game()
 
-	def pause_game(self):
+	def pause_game(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('game_paused')
 		GameLoop().get_sound_mixer().pause_music()
 
-	def return_to_title(self):
+	def return_to_title(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('welcome')
 		GameLoop().get_sound_mixer().pause_music()
 
-	def open_settings(self):
+	def open_settings(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('settings')
 		GameLoop().get_sound_mixer().pause_music()
 
-	def quit_game(self):
+	def quit_game(self, _):
 		GameLoop().quit_game()
 
-	def return_to_last_menu(self):
+	def return_to_last_menu(self, _):
 		GameLoop().get_menu_handler().set_last_menu()
 
-	def open_credits(self):
+	def open_credits(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('credits')
 		GameLoop().get_sound_mixer().pause_music()
 
-	def toggle_fullscreen(self):
+	def toggle_fullscreen(self, _):
 		GameLoop().toggle_fullscreen()
 
-	def open_map(self):
+	def open_map(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
 	
-	def open_saving(self):
+	def open_saving(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('saving')
+		current_menu = GameLoop().get_menu_handler().get_current_menu()
+		for idx, save_file in enumerate(DataHandler().get_save_files(names=True)):
+			current_menu.add_element({
+				'type': 'Button',
+				'class': 'pause_button',
+				'label': save_file,
+				'y': 250 + 60 * idx,
+				'width': 'auto',
+				'x': 'center',
+				'action': 'save_game'
+			})
 
-	def open_loading(self):
+	def save_game(self, button):
+		LogHandler().add(f"Saved to file {button.label}")
+		DataHandler().save(button.label)
+
+	def open_loading(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('loading_games')
 
-
-
-
-	def do(self, action_name):
+	def do(self, action_name, button = None):
 		LogHandler().add(f'Button action {action_name} activated')
 		action_method = getattr(self, action_name, None)
 		if action_method is None:
 			return LogHandler().add(f'Unknown button action: {action_name}')
-		action_method()
+		return action_method(button)

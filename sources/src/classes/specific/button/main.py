@@ -12,7 +12,7 @@ class Button(UIElement):
 		super().update()
 		if ControlHandler().is_clicked(self):
 			ControlHandler().consume_event('clicked')
-			ButtonActions().do(self.action_name)
+			ButtonActions().do(self.action_name, self)
 		if self.rect.collidepoint(pygame.mouse.get_pos()):
 			return True
 		else:

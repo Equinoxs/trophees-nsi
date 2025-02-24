@@ -112,3 +112,9 @@ class GroundSurface(MapElement):
 		rendered = super().render()
 		if not self.does_player_see and rendered and self.access_overlay is not None:
 			Camera().draw(self.access_overlay, self.position)
+
+	def get_data(self):
+		data = super().get_data()
+		if 'position' in data:
+			del data['position'] # pas besoin dans la sauvegarde
+		return data

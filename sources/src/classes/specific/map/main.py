@@ -4,7 +4,9 @@ from src.classes import DataHandler, GameLoop, SoundMixer, Building, NPC, Ground
 class Map:
 	def __init__(self, map_name: str):
 		self.elements = []
+		self.walls = []
 		self.load_elements_from(map_name)
+		self.name = map_name
 
 		# Fusionner les images des GroundSurface pour éviter des blits lors des rendus en temps réel
 		for i in range(1, len(self.elements)):
@@ -53,9 +55,11 @@ class Map:
 			if element == element_to_remove:
 				return self.elements.pop(index)
 
-	def get_elements(self):
-		return self.elements
-
+	def get_elements(self, walls=False):
+		if walls:
+			return self.elements + self.walls
+		else:
+			return self.elements
 	def throw_event(self, event):
 		for element in self.elements:
 			element.catch_event(event)
@@ -72,7 +76,7 @@ class Map:
 					self.elements.append(GroundSurface(element))
 
 				case 'Wall':
-					Wall(element, self)  # Ce n'est pas un MapElement
+					self.walls.append(Wall(element, self))  # Ce n'est pas un MapElement
 
 				case "Tree":
 					self.elements.append(Tree(element))
@@ -110,3 +114,6 @@ class Map:
 			if isinstance(self.elements[i], GroundSurface) and self.elements[i].point_in_boundaries(position):
 				return self.elements[i].get_ground_type()
 		return None
+
+	def get_name(self):
+		return self.name

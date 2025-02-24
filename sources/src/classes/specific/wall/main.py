@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from src.classes import WallSegment, Vector2
 
 
@@ -5,6 +7,7 @@ class Wall:
 	def __init__(self, data, map):
 		self.segments = []
 		self.data = data
+		self.original_data = deepcopy(data)
 		self.name = self.data['name']
 		self.boundaries: list = self.data['boundaries']
 		self.initialize_segments(map)
@@ -42,3 +45,7 @@ class Wall:
 			wall_segment = WallSegment(self.data)
 			self.segments.append(wall_segment)
 			map.add(wall_segment)
+	def get_data(self):
+		if 'position' in self.original_data:
+			del self.original_data['position']
+		return self.original_data

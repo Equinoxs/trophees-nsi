@@ -216,3 +216,6 @@ class WallSegment(RidgeObject):
 		self.position.set_y(y - self.wall_height)
 		super().render()
 		self.position.set_y(y)
+
+	def get_data(self):
+		return

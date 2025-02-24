@@ -95,6 +95,7 @@ class DataHandler:
 
 
 	def save_data(self, original_data: dict, name):
+		self.update_current_save_map()
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
 			'..', '..', '..', '..', 'backups', name + '.json'
@@ -118,10 +119,15 @@ class DataHandler:
 
 		data['last_save_time'] = time()
 		data['keybinds'] = GameLoop().get_control_handler().get_keybinds()
-		print(data)
-		print(original_data)
 		with open(path, 'w') as file:
 			json.dump(data, file, indent=4, cls=JSONEncoder)
+
+	def update_current_save_map(self):
+		current_map_elements = []
+		for element in Player().get_map().get_elements(walls=True):
+			if element.get_data() is not None:
+				current_map_elements.append(element.get_data())
+		self.current_save['maps'][Player().get_map().get_name()]['elements'] = current_map_elements
 
 	def save(self, name = 'default'):
 		if not SAVE:
@@ -130,7 +136,7 @@ class DataHandler:
 		assert name != 'new_game_backup' # TODO: mettre un vrai système
 		self.save_data(self.current_save, name)
 
-	def get_save_files(self):
+	def get_save_files(self, names=False):
 		path = os.path.join(
 			os.path.dirname(os.path.abspath(__file__)),
 			'..', '..', '..', '..', 'backups'
@@ -138,7 +144,12 @@ class DataHandler:
 		save_files = []
 		for f in os.listdir(path):
 			if f.endswith('.json') and os.path.isfile(os.path.join(path, f)) and f != 'new_game_backup.json':
-				save_files.append(f)
+				if names:
+					save_files.append(f[:-5]) # .json
+				else:
+					save_files.append(f)
+		if names:
+			save_files.sort()
 		return save_files
 
 	def save_name_valid(self, name):

@@ -9,3 +9,6 @@ class Door(PillarObject):
 
 	def render(self):
 		return
+
+	def get_data(self):
+		return

@@ -9,6 +9,7 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		self.z_index = data.get('z_index', 1)  # Un z_index de 1 s'affichera au-dessus d'un z_index de 0
 		self.z_indexes_history = [self.z_index]
 		self.name = data['name']
+		self.data = data
 
 	def get_name(self):
 		return self.name
@@ -34,3 +35,11 @@ class MapElement(Sprite, SoundMaker, Animatable):
 
 	def __del__(self):
 		SoundMaker.__del__(self)
+
+	def get_data(self):
+		for key in self.data:
+			if getattr(self, key, None) is not None:
+				self.data[key] = getattr(self, key)
+			if isinstance(self.data[key], set):
+				self.data[key] = list(self.data[key])  # sets are not json serializable
+		return self.data
