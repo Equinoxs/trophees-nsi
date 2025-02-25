@@ -139,7 +139,7 @@ class DataHandler:
 
 		if name is None:
 			now = datetime.now()
-			date = now.strftime('%Y-%m-%d_%H:%M:%S')
+			date = now.strftime("%Y-%m-%d_%H-%M-%S")
 			path = os.path.join(
 				os.path.dirname(os.path.abspath(__file__)),
 				'..', '..', '..', '..', 'backups', 'automatic', date + '.json'
