@@ -78,6 +78,13 @@ class ButtonActions:
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('loading_games')
 		current_menu = GameLoop().get_menu_handler().get_current_menu()
+
+		elements = current_menu.get_elements()
+		while True:
+			if not hasattr(elements[-1], 'action_name') or elements[-1].get_action_name() != 'load_game':
+				break
+			current_menu.delete_element(elements[-1])
+
 		for idx, save_file in enumerate(DataHandler().get_save_files(names=True)):
 			current_menu.add_element({
 				'type': 'Button',

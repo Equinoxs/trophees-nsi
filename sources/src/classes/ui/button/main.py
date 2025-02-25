@@ -8,6 +8,9 @@ class Button(UIElement):
 		UIElement.__init__(self, data)
 		self.action_name = data['action']
 
+	def get_action_name(self):
+		return self.action_name
+
 	def update(self):
 		super().update()
 		if ControlHandler().is_clicked(self):

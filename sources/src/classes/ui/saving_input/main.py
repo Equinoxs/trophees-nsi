@@ -9,4 +9,4 @@ class SavingInput(TextInput):
 		SavingInput.active_input = self  # Définit ce champ comme actif
 
 	def done2(self):
-		ButtonActions().save_game()
+		ButtonActions().save_game(self)

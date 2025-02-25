@@ -8,6 +8,9 @@ class Menu:
 		self.ui_elements = []
 		self.load_ui_elements(menu_data)
 
+	def get_elements(self):
+		return self.ui_elements
+
 	def add_element(self, element_data: dict):
 		element_class = getattr(classes, element_data['type'], None)
 		if element_class is None:
