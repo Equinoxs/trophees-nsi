@@ -8,11 +8,6 @@ class Table(Furniture):
 		super().__init__(data)
 		self.item_positions = DataHandler().list_transform(data.get('item_positions', []))
 		self.items = deepcopy(data.get('items', []))
-		for i in range(len(self.items)):
-			if 'index_position' not in self.items[i]:
-				self.items[i]['index_position'] = i
-			self.items[i] = Player().get_map().add_element(DataHandler().normalize_data(self.items[i]))
-			Player().get_map().remove_element(self.items[i])
 
 	def take_item(self, item, index_position: int):
 		item.set_index_position(index_position)
@@ -40,18 +35,28 @@ class Table(Furniture):
 
 	def update(self):
 		super().update()
+		if len(self.items) > 0 and type(self.items[0]) == dict:
+			for i in range(len(self.items)):
+				if 'index_position' not in self.items[i]:
+					self.items[i]['index_position'] = i
+				self.items[i] = Player().get_map().add_element(DataHandler().normalize_data(self.items[i]))
+				Player().get_map().remove_element(self.items[i])
 		for item in self.items:
 			item.get_position().copy(self.get_item_position(item))
 			item.update()
 
 	def render(self):
 		super().render()
-		for item in self.items:
-			Camera().draw(item.get_image(), self.get_item_position(item) - Vector2(item.get_image().get_width() / 2 / Camera().get_zoom(), item.get_image().get_height() / 2 / Camera().get_zoom()), 'map')
+		if len(self.items) > 0 and type(self.items[0]) != dict:
+			for item in self.items:
+				Camera().draw(item.get_image(), self.get_item_position(item) - Vector2(item.get_image().get_width() / 2 / Camera().get_zoom(), item.get_image().get_height() / 2 / Camera().get_zoom()), 'map')
 
 	def get_data(self):
 		data = super().get_data()
 		data['items'] = []
 		for item in self.items:
-			data['item'].append(item.get_data())
+			if type(item) == dict:
+				data['items'].append(item)
+			else:
+				data['items'].append(item.get_data())
 		return data

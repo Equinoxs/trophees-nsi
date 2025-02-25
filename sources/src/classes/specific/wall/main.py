@@ -45,6 +45,7 @@ class Wall:
 			wall_segment = WallSegment(self.data)
 			self.segments.append(wall_segment)
 			map.add(wall_segment)
+
 	def get_data(self):
 		if 'position' in self.original_data:
 			del self.original_data['position']

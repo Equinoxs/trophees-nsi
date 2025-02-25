@@ -15,11 +15,9 @@ class Player:
 			self._initialized = True
 			self.map_name = map_name
 			self.map = map
-			self.accomplished_missions = data_player['accomplished_missions']
-			self.focus = self.map.search_by_name(data_player['current_npc_name'])
-			self.focus.set_is_player(True)
-			if self.focus is None:
-				raise ValueError(f'NPC {data_player["current_npc_name"]} not found in map {self.map.map_name}')
+			self.accomplished_missions = None
+			self.focus = None
+			self.load_new_data(data_player)
 
 	def get_map(self):
 		return self.map
@@ -30,6 +28,7 @@ class Player:
 	def change_map(self, map_name: str):
 		GameLoop().get_menu_handler().set_current_menu('loading', True)
 		self.map_name = map_name
+		GameLoop().get_data_handler().save()
 		self.focus = self.map.remove(self.focus)
 		GameLoop().get_sound_mixer().free_all_channels()
 		self.map.load_elements_from(map_name)
@@ -38,6 +37,7 @@ class Player:
 			self.map.remove(potential_player)
 		self.map.add(self.focus)
 		GameLoop().get_camera().initialize()
+		GameLoop().get_data_handler().save()
 		GameLoop().get_menu_handler().set_current_menu('in_game')
 		self.focus.get_speed_vector().set_all(0, 0)
 
@@ -75,3 +75,17 @@ class Player:
 
 	def update(self):
 		self.map.update()
+
+	def load_new_data(self, data: dict):
+		self.focus = self.map.search_by_name(data['current_npc_name'])
+		self.focus.set_is_player(True)
+		if self.focus is None:
+			raise ValueError(f'NPC {data["current_npc_name"]} not found in map {self.map.map_name}')
+		self.accomplished_missions = data['accomplished_missions']
+
+	def get_data(self):
+		data = {}
+		data['current_npc_name'] = self.focus.get_name()
+		data['current_map_name'] = self.map.get_name()
+		data['accomplished_missions'] = self.accomplished_missions
+		return data

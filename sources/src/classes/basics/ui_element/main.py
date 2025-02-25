@@ -85,6 +85,9 @@ class UIElement:
 		self.rect = pygame.Rect(pos_x, pos_y, width, height)
 		self.calculate_text_rect()
 
+	def get_label(self):
+		return self.label
+
 	def set_label(self, new_label: str):
 		self.label = str(new_label)
 		self.calculate_text_surface()

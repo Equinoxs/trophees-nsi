@@ -8,15 +8,14 @@ class ControlHandler:
 	# Singleton
 	def __new__(cls, *args, **kwargs):
 		if not isinstance(cls._instance, cls):
-			cls._instance = object.__new__(cls, *args, **kwargs)
+			cls._instance = object.__new__(cls)
 		return cls._instance
 
-	def __init__(self):
+	def __init__(self, saved_data = None):
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
-			save = DataHandler().load_save()
 			self.events = {'quit': False, 'clicked': False}
-			self.keybinds = self.load_keybinds(save['keybinds'])
+			self.keybinds = self.load_keybinds(saved_data['keybinds'])
 			self.mouse_position = None
 			self.pygame_events = []
 			self.consumed_events = set()
@@ -108,11 +107,12 @@ class ControlHandler:
 
 		i = 0
 		for event, alias in aliases.items():
+			y = 220 + i * 55
 			label_data = {
 				'type': 'UIElement',
 				'class': 'key_settings_label',
 				'label': alias,
-				'y': 230 + i * 60
+				'y': y
 			}
 
 			input_data = {
@@ -120,7 +120,7 @@ class ControlHandler:
 				'class': 'key_settings_input',
 				'event_name': event,
 				'default_text': pygame.key.name(self.keybinds[event]),
-				'y': 220 + i * 60
+				'y': y
 			}
 
 			i += 1

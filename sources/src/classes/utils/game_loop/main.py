@@ -96,10 +96,10 @@ class GameLoop:
 	
 	def toggle_fullscreen(self):
 		if self.fullscreen == False:
-			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = True
 		else:
-			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = False
 
 	def update(self):
@@ -137,3 +137,7 @@ class GameLoop:
 			self.mission_handler.update()
 		self.menu_handler.update()
 		self.camera.update()
+
+		# Gérer les sauvegardes automatiques
+		if self.data_handler.must_save():
+			self.data_handler.save()

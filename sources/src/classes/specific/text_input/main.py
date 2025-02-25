@@ -4,14 +4,14 @@ from src.classes import UIElement, GameLoop, ControlHandler
 class TextInput(UIElement):
 	def __init__(self, data):
 		super().__init__(data)
-		self.text = data.get("default_text", "")  # Texte par défaut
+		self.text = data.get('default_text', '')  # Texte par défaut
 		self.event_keys = []
 		self.last_event_key = None
 		self.event_name = data.get('event_name', '')
 		self.max_event_key = data.get('max_event_key', None)
 		self.set_label(self.text)
 		self.focus = False  # Si l'utilisateur édite le champ
-		self.replace = data.get('replace', 'True') == "True"
+		self.replace = data.get('replace', 'True') == 'True'
 		self.first_input = True
 
 		# Liste des touches spéciales à ignorer
@@ -30,6 +30,9 @@ class TextInput(UIElement):
 			pygame.K_KP_PERIOD, pygame.K_KP_DIVIDE, pygame.K_KP_MULTIPLY,
 			pygame.K_KP_MINUS, pygame.K_KP_PLUS, pygame.K_KP_ENTER, pygame.K_KP_EQUALS
 		]
+
+	def get_text(self):
+		return self.text
 
 	def done(self):
 		pass
@@ -98,5 +101,5 @@ class TextInput(UIElement):
 	def render(self):
 		# Dessine l'élément et met à jour sa bordure si actif
 		border_color = (255, 255, 255) if self.focus else (150, 150, 150)
-		pygame.draw.rect(GameLoop().get_camera().get_surface("menu"), border_color, self.rect, width=2)
+		pygame.draw.rect(GameLoop().get_camera().get_surface('menu'), border_color, self.rect, width=2)
 		super().render()

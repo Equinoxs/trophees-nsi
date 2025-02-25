@@ -12,7 +12,7 @@ def main() -> int:
 	data_handler = DataHandler()
 	saved_data = data_handler.load_save()
 	sound_mixer = SoundMixer()
-	control_handler = ControlHandler()
+	control_handler = ControlHandler(saved_data)
 	time_handler = TimeHandler()
 	player = Player(Map(saved_data['player']['current_map_name']), saved_data['player'], saved_data['player']['current_map_name'])
 	camera = Camera(screen)

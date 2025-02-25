@@ -18,66 +18,66 @@ class Interactions:
 		GameLoop().get_player().get_focus().play_sound('meow')
 
 	def switch_with_test_2(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('test_2')
 			Player().teleport_to(Vector2())
-		elif Player().get_map_name() == 'test_2':
+		elif Player().get_map().get_name() == 'test_2':
 			Player().change_map('bletchley_park')
 			Player().teleport_to(Vector2())
 
 	def switch_door_building_1(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('building_1')
 			Player().teleport_to('front_door_interior_1')
-		elif Player().get_map_name() == 'building_1':
+		elif Player().get_map().get_name() == 'building_1':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('building_1_door')
 
 	def switch_door_building_2(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('building_2')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'building_2':
+		elif Player().get_map().get_name() == 'building_2':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('building_2_door')
 
 	def switch_door_little_house(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('little_house')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'little_house':
+		elif Player().get_map().get_name() == 'little_house':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('little_house_door')
 
 	def switch_door_hut_6(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('hut_6')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'hut_6':
+		elif Player().get_map().get_name() == 'hut_6':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('hut_6_door')
 
 	def switch_door_hut_8(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('hut_8')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'hut_8':
+		elif Player().get_map().get_name() == 'hut_8':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('hut_8_door')
 
 	def switch_door_block_h(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('block_h')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'block_h':
+		elif Player().get_map().get_name() == 'block_h':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('block_h_door')
 
 	def switch_door_mansion(_, host):
-		if Player().get_map_name() == 'bletchley_park':
+		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('mansion')
 			Player().teleport_to('exit')
-		elif Player().get_map_name() == 'mansion':
+		elif Player().get_map().get_name() == 'mansion':
 			Player().change_map('bletchley_park')
 			Player().teleport_to('mansion_door')
 

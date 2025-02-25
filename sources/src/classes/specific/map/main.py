@@ -68,6 +68,7 @@ class Map:
 	def load_elements_from(self, map_name):
 		self.name = map_name
 		self.elements = []
+		self.walls = []
 		elements = DataHandler().load_save()['maps'][self.name]['elements']
 		for element in elements:
 			self.add_element(element)

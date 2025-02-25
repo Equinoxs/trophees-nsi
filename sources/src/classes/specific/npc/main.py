@@ -78,7 +78,6 @@ class NPC(PillarObject):
 		if self.sprint:
 			speed_px *= 1.5
 		self.speed_vector.set_norm(speed_px)
-		if DataHandler().must_save(): DataHandler().save()
 
 		# Gérer l'affichage de l'inventaire
 		if ControlHandler().is_activated('pick_drop'):
@@ -260,3 +259,9 @@ class NPC(PillarObject):
 		if self.inventory is not None:
 			Camera().draw(self.inventory.get_image(), (x + self.image.get_width() // 2, y - (self.image.get_height() + self.inventory.get_image().get_height()) // 2), 'map')
 		self.position.set_all(x, y)
+
+	def get_data(self):
+		data = super().get_data()
+		if self.inventory is not None:
+			data['inventory'] = self.inventory.get_data()
+		return data

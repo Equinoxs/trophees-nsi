@@ -218,4 +218,4 @@ class WallSegment(RidgeObject):
 		self.position.set_y(y)
 
 	def get_data(self):
-		return
+		return None

@@ -442,26 +442,33 @@
 				"class": "welcome_button",
 				"label": "Start new game",
 				"y": 280,
+				"action": "start_new_game"
+			},
+			{
+				"type": "Button",
+				"class": "welcome_button",
+				"label": "Continue",
+				"y": 360,
 				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
 				"class": "welcome_button",
-				"y": 360,
+				"y": 440,
 				"action": "open_settings"
 			},
 			{
 				"type": "Button",
 				"label": "Load game",
 				"class": "welcome_button",
-				"y": 440,
+				"y": 520,
 				"action": "open_loading"
 			},
 			{
 				"type": "Button",
 				"label": "Credits",
-				"y": 520,
+				"y": 600,
 				"class": "welcome_button",
 				"action": "open_credits"
 			},
@@ -469,7 +476,7 @@
 				"type": "Button",
 				"label": "Quit",
 				"class": "welcome_button",
-				"y": 600,
+				"y": 680,
 				"action": "quit_game",
 				"color": [61, 53, 39]
 			},

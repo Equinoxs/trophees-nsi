@@ -8,7 +8,7 @@ class Building(BaseObject):
 
 		self.hitbox = DataHandler().list_transform(self.image_data['hitbox'])
 		self.hitbox_action_radius = self.image_data.get('hitbox_action_radius', self.hitbox_action_radius)
-  
+
 		width, height = self.image.get_size()
 		for i in range(len(self.hitbox)):
 			self.hitbox[i].set_x(self.hitbox[i].get_x() * (width / 100))
@@ -26,4 +26,6 @@ class Building(BaseObject):
 			door_data['position'].set_y(door_data['position'].get_y() * (height / 100))
 
 			door_data['position'] += self.position
+			door = Door(door_data)
+			door.you_belong_to_building()
 			add_element(Door(door_data))

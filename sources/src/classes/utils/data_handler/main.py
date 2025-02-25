@@ -3,13 +3,14 @@ import os
 import pygame
 from time import time
 from copy import deepcopy
+from datetime import datetime
 
 from src.classes import Vector2, TimeHandler, Player, LogHandler, SAVE, GameLoop
 
 
 class DataHandler:
 	_instance = None
-	current_save = None
+
 	model = {
 		'type': 'required',
 		'image_path': None,
@@ -52,28 +53,49 @@ class DataHandler:
 			self.menus_data = None
 			self.current_save_chrono_tag = None
 			self.last_save_player_position = None
+			self.current_save = None
 
 
-	def get_data_from_last_save(self, name: str):
+	def is_valid_date(self, date: str, format_str: str = '%Y-%m-%d_%H:%M:%S'):
+		try:
+			datetime.strptime(date, format_str)
+			return True
+		except ValueError:
+			return False
+
+
+	def get_data_from_last_save(self, name: str = None, new_game: bool = False):
+		print('data from last save', name, new_game)
 		if name is not None:
-
 			path = os.path.join(
 				os.path.dirname(os.path.abspath(__file__)),
-				'..', '..', '..', '..', 'backups', name + '.json'
+				'..', '..', '..', '..', 'backups', 'manual', name + '.json'
 			)
+			with open(path, 'r') as save:
+				data = json.load(save)
+				LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
 
-			try:
-				with open(path, 'r') as save:
+		elif not new_game:
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'automatic'
+			)
+			automatic_saves = os.listdir(path)
+			automatic_saves = sorted([s for s in automatic_saves if self.is_valid_date(s[:-5])])
+
+			if len(automatic_saves) > 0:
+				print(automatic_saves)
+				with open(os.path.join(path, automatic_saves[-1]), 'r') as save:
 					data = json.load(save)
-					LogHandler().add('/'.join(path.split('/')[-2:]), 'loaded')
-			except FileNotFoundError:
-				with open(self.default_save_path, 'r') as save:
-					data = json.load(save)
-					LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
+					LogHandler().add(self.default_save_path.split('/')[-2:][0], 'loaded')
+			else:
+				return self.get_data_from_last_save(new_game=True)
+
 		else:
 			with open(self.default_save_path, 'r') as save:
 				data = json.load(save)
 				LogHandler().add(self.default_save_path.split('/')[-1:][0], 'loaded')
+
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
 				self.normalize_data(data['maps'][map]['elements'][element_index])
@@ -94,20 +116,48 @@ class DataHandler:
 
 		return data
 
-	def load_save(self, name = 'default', force = False):
-		if self.current_save is None or force:
+	def reload_game(self, reload):
+		if reload:
+			GameLoop().get_control_handler().load_keybinds(self.current_save['keybinds'])
+			GameLoop().get_sound_mixer().free_all_channels()
+			Player().get_map().load_elements_from(self.current_save['player']['current_map_name'])
+			Player().load_new_data(self.current_save['player'])
+			GameLoop().get_camera().initialize()
+
+	def load_save(self, name = None, new_game: bool = False, force = False, reload = False):
+		if new_game:
+			self.current_save = self.get_data_from_last_save(new_game=True)
+			self.reload_game(reload)
+		elif self.current_save is None or force:
 			self.current_save = self.get_data_from_last_save(name)
+			self.reload_game(reload)
 		return self.current_save
 
 
-	def save_data(self, original_data: dict, name):
+	def save_data(self, original_data: dict, name: str):
 		self.update_current_save_map()
-		path = os.path.join(
-			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups', name + '.json'
-		)
 
-		data = deepcopy(original_data) # copie
+		if name is None:
+			now = datetime.now()
+			date = now.strftime('%Y-%m-%d_%H:%M:%S')
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'automatic', date + '.json'
+			)
+			saves = sorted([s for s in os.listdir(os.path.dirname(path)) if self.is_valid_date(s[:-5])])
+			if len(saves) > 2:
+				for _ in range(len(saves) - 2):
+					os.remove(os.path.join(os.path.dirname(path), saves[0]))
+					saves.pop(0)
+		else:
+			if not self.save_name_valid(name):
+				return
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'manual', name + '.json'
+			)
+
+		data = deepcopy(original_data)
 
 		for map in data['maps']:
 			for element_index in range(len(data['maps'][map]['elements'])):
@@ -121,12 +171,13 @@ class DataHandler:
 						data['maps'][map]['elements'][element_index]['position'] = [int(p) for p in Player().get_focus().get_position().convert_to_tuple()]
 
 		TimeHandler().add_chrono_tag('last_save', reset=True)
-		self.last_save_player_position = Vector2(0, 0).copy(Player().get_focus().get_position())
+		self.last_save_player_position = Player().get_focus().get_position().copy()
 
 		data['last_save_time'] = time()
 		data['keybinds'] = GameLoop().get_control_handler().get_keybinds()
+		data['player'] = Player().get_data()
 		with open(path, 'w') as file:
-			json.dump(data, file, indent=4, cls=JSONEncoder)
+			json.dump(data, file, cls=JSONEncoder)
 
 	def update_current_save_map(self):
 		current_map_elements = []
@@ -135,27 +186,40 @@ class DataHandler:
 				current_map_elements.append(element.get_data())
 		self.current_save['maps'][Player().get_map().get_name()]['elements'] = current_map_elements
 
-	def save(self, name = 'default'):
+	def save(self, name: str = None):
 		if not SAVE:
 			return  # ne pas faire de sauvegardes (debug)
 		LogHandler().add("Automatic save done")
-		assert name != 'new_game_backup' # TODO: mettre un vrai système
 		self.save_data(self.current_save, name)
 
-	def get_save_files(self, names=False):
-		path = os.path.join(
-			os.path.dirname(os.path.abspath(__file__)),
-			'..', '..', '..', '..', 'backups'
-		)
+	def get_save_files(self, names=False, manual: bool = True, automatic: bool = False):
 		save_files = []
-		for f in os.listdir(path):
-			if f.endswith('.json') and os.path.isfile(os.path.join(path, f)) and f != 'new_game_backup.json':
-				if names:
-					save_files.append(f[:-5]) # .json
-				else:
-					save_files.append(f)
-		if names:
-			save_files.sort()
+		if manual:
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'manual'
+			)
+			for f in os.listdir(path):
+				if f.endswith('.json') and os.path.isfile(os.path.join(path, f)) and f != 'new_game_backup.json':
+					if names:
+						save_files.append(f[:-5]) # enlever le .json
+					else:
+						save_files.append(f)
+			if names:
+				save_files.sort()
+		if automatic:
+			path = os.path.join(
+				os.path.dirname(os.path.abspath(__file__)),
+				'..', '..', '..', '..', 'backups', 'automatic'
+			)
+			for f in os.listdir(path):
+				if f.endswith('.json') and os.path.isfile(os.path.join(path, f)) and f != 'new_game_backup.json':
+					if names:
+						save_files.append(f[:-5]) # enlever le .json
+					else:
+						save_files.append(f)
+			if names:
+				save_files.sort()
 		return save_files
 
 	def save_name_valid(self, name):
@@ -166,7 +230,8 @@ class DataHandler:
 	def must_save(self):
 		if self.last_save_player_position is None:
 			self.last_save_player_position = Player().get_focus().get_position().copy()  # faire une copie de l'objet pour éviter d'accéder à la même instance
-		return Player().get_focus().get_position().distance_to(self.last_save_player_position) > 100 or TimeHandler().add_chrono_tag('last_save') > 300  # 5 minutes
+		dt = TimeHandler().add_chrono_tag('last_save')
+		return (Player().get_focus().get_position().distance_to(self.last_save_player_position) > 100 and dt > 1) or dt > 300  # 5 minutes
 
 
 	def get_image_data(self, dir_name: str):
@@ -349,7 +414,8 @@ class DataHandler:
 class JSONEncoder(json.JSONEncoder):
 	def default(self, obj):
 		if isinstance(obj, Vector2):
-			return obj.convert_to_tuple()
+			x, y = obj.convert_to_tuple()
+			return (int(x), int(y))
 		if callable(obj):
 			return obj.__name__  # fonctions d'interaction
 		return super().default(obj)

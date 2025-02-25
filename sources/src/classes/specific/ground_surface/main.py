@@ -7,6 +7,7 @@ class GroundSurface(MapElement):
 	def __init__(self, data):
 		if not hasattr(self, 'image_type'):
 			self.image_type = 'ground_surface'
+		data['position'] = Vector2()
 		super().__init__(data)
 
 		self.boundaries: list[Vector2] = data['boundaries']

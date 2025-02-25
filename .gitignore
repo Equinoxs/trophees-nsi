@@ -14,6 +14,10 @@ venv/
 *.log
 *.tmp
 
+# Sauvegardes automatiques et manuelles
+sources/backups/automatic/*.json
+sources/backups/manual/*.json
+
 # Autres fichiers
 *.orig
 *.DS_Store

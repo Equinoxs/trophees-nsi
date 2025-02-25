@@ -1,5 +1,5 @@
 from src.classes import GameLoop, LogHandler, DataHandler
-from inspect import signature
+
 
 class ButtonActions:	
 	_instance = None
@@ -13,6 +13,11 @@ class ButtonActions:
 	def __init__(self):
 		pass
 
+	def start_new_game(self, _):
+		GameLoop().get_menu_handler().set_current_menu('loading', True)
+		DataHandler().load_save(new_game=True, reload=True)
+		self.focus_on_game(_)
+
 	def focus_on_game(self, _):
 		GameLoop().get_camera().map_rendered()
 		GameLoop().get_menu_handler().set_current_menu('in_game')
@@ -21,6 +26,7 @@ class ButtonActions:
 
 	def pause_game(self, _):
 		GameLoop().pause_game()
+		DataHandler().save()
 		GameLoop().get_menu_handler().set_current_menu('game_paused')
 		GameLoop().get_sound_mixer().pause_music()
 
@@ -51,10 +57,26 @@ class ButtonActions:
 	def open_map(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
-	
+
 	def open_saving(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('saving')
+
+	def save_game(self, _):
+		from src.classes import SavingInput
+		input_field = SavingInput.active_input
+		text = input_field.get_text()
+		LogHandler().add(f'Saved to file {text}')
+		DataHandler().save(text)
+
+	def load_game(self, button):
+		GameLoop().get_menu_handler().set_current_menu('loading', True)
+		DataHandler().load_save(name=button.get_label(), force=True, reload=True)
+		self.focus_on_game(button)
+
+	def open_loading(self, _):
+		GameLoop().pause_game()
+		GameLoop().get_menu_handler().set_current_menu('loading_games')
 		current_menu = GameLoop().get_menu_handler().get_current_menu()
 		for idx, save_file in enumerate(DataHandler().get_save_files(names=True)):
 			current_menu.add_element({
@@ -64,20 +86,8 @@ class ButtonActions:
 				'y': 250 + 60 * idx,
 				'width': 'auto',
 				'x': 'center',
-				'action': 'save_game'
+				'action': 'load_game'
 			})
-
-	def save_game(self, button=None):  # Accepte un argument facultatif
-		from src.classes.specific.saving_input.main import SavingInput
-		# Récupérer l'input actif
-		input_field = SavingInput.active_input
-		text = input_field.text
-		LogHandler().add(f"Saved to file {text}")
-		DataHandler().save(text)
-
-	def open_loading(self, _):
-		GameLoop().pause_game()
-		GameLoop().get_menu_handler().set_current_menu('loading_games')
 
 	def do(self, action_name, button = None):
 		LogHandler().add(f'Button action {action_name} activated')
