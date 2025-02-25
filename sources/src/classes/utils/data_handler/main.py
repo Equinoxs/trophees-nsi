@@ -56,7 +56,7 @@ class DataHandler:
 			self.current_save = None
 
 
-	def is_valid_date(self, date: str, format_str: str = '%Y-%m-%d_%H:%M:%S'):
+	def is_valid_date(self, date: str, format_str: str = "%Y-%m-%d_%H-%M-%S"):
 		try:
 			datetime.strptime(date, format_str)
 			return True
