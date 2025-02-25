@@ -92,7 +92,7 @@
 		"in_game": [
 			{
 				"type": "Button",
-				"label": "| |",
+				"label": "||",
 				"class": "interactive_button",
 				"x": 20,
 				"y": 15,
@@ -349,6 +349,10 @@
 			"width": 140,
 			"height": "auto",
 			"action": "return_to_title"
+		},
+		{
+			"type": "FPSHelper",
+			"class": "fps"
 		}
 		],
 		"saving": [
@@ -363,9 +367,9 @@
 			"border_length": 2,
 			"border_color": [46, 34, 9],
 			"x": "center",
-			"y": -160,
+			"y": "center",
 			"width": 700,
-			"height": 500
+			"height": 400
 		},
 		{
 			"type": "UIElement",
@@ -373,10 +377,31 @@
 			"text_color": [255, 255, 255],
 			"label": "Save game",
 			"x": "center",
-			"y": -570,
+			"y": -500,
 			"width": "auto",
 			"height": "auto",
 			"font_size": 70
+		},
+		{
+			"type": "SavingInput",
+			"x": "center",
+			"y": "center",
+			"width": 400,
+			"height": 50,
+			"font_size": 36,
+			"default_text": "Enter save name",
+			"event_name": "save_game",
+			"text_align": "mid_left",
+			"max_event_key": 20,
+			"replace": "False"
+		},
+		{
+			"type": "Button",
+			"label": "Save",
+			"class": "pause_button",
+			"x":"center",
+			"y": 500,
+			"action": "save_game"
 		},
 		{
 			"type": "Button",
@@ -389,6 +414,10 @@
 			"width": 140,
 			"height": "auto",
 			"action": "pause_game"
+		},
+		{
+			"type": "FPSHelper",
+			"class": "fps"
 		}
 		],
 		"welcome": [

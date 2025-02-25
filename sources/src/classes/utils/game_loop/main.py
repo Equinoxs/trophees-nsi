@@ -96,10 +96,10 @@ class GameLoop:
 	
 	def toggle_fullscreen(self):
 		if self.fullscreen == False:
-			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = True
 		else:
-			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = False
 
 	def update(self):
@@ -112,12 +112,12 @@ class GameLoop:
 			if self.control_handler.is_activated('pause'):
 				if self.menu_handler.get_current_menu_name() == 'in_game':
 					self.menu_handler.get_button_actions().do('pause_game')
+				elif self.menu_handler.get_current_menu_name() == 'saving':
+					self.menu_handler.get_button_actions().do('pause_game')
 				elif self.menu_handler.get_current_menu_name() == 'game_paused':
 					self.menu_handler.get_button_actions().do('focus_on_game')
 				elif self.menu_handler.get_current_menu_name() == 'map_opened':
 					self.menu_handler.get_button_actions().do('focus_on_game')
-				elif self.control_handler.is_activated('pause') and self.menu_handler.get_current_menu_name() == 'settings':
-					self.menu_handler.get_button_actions().do('return_to_last_menu')
 				self.control_handler.consume_event('pause')
 			if self.control_handler.is_activated('toggle_map'):
 				if self.menu_handler.get_current_menu_name() == 'in_game':

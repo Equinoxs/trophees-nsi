@@ -1,7 +1,7 @@
 from src.classes import GameLoop, LogHandler, DataHandler
 from inspect import signature
 
-class ButtonActions:
+class ButtonActions:	
 	_instance = None
 
 	# singleton
@@ -67,9 +67,13 @@ class ButtonActions:
 				'action': 'save_game'
 			})
 
-	def save_game(self, button):
-		LogHandler().add(f"Saved to file {button.label}")
-		DataHandler().save(button.label)
+	def save_game(self, button=None):  # Accepte un argument facultatif
+		from src.classes.specific.saving_input.main import SavingInput
+		# Récupérer l'input actif
+		input_field = SavingInput.active_input
+		text = input_field.text
+		LogHandler().add(f"Saved to file {text}")
+		DataHandler().save(text)
 
 	def open_loading(self, _):
 		GameLoop().pause_game()

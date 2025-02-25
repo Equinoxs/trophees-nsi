@@ -133,5 +133,7 @@ class UIElement:
 				self._text_rect = self._text_surface.get_rect(topleft=self.rect.topleft)
 			case 'right':
 				self._text_rect = self._text_surface.get_rect(topright=self.rect.topright)
+			case 'mid_left':
+				self._text_rect = self._text_surface.get_rect(midleft=(self.rect.centerx-180, self.rect.centery))
 			case _:
 				raise ValueError('Invalid text_align value')
