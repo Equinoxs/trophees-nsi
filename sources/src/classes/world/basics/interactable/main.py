@@ -19,6 +19,9 @@ class Interactable:
 	def get_mission(self):
 		return self.mission
 
+	def is_mission_available(self):
+		return Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing() and Player().get_focus().get_level() >= MissionHandler().get_mission(self.mission).get_required_level() and not self.mission in Player().get_accomplished_missions()
+
 	def set_mission(self, mission: str):
 		if not Missions().is_mission(mission):
 			return
@@ -67,13 +70,13 @@ class Interactable:
 	def update(self, closest_vector: Vector2):
 		self.handle_interaction(closest_vector)
 
-		if self.mission_marker is not None and (self.mission in Player().get_accomplished_missions() or MissionHandler().mission_ongoing()):
+		if self.mission_marker is not None and not self.is_mission_available():
 			MenuHandler().remove_marker(self.mission_marker)
 			self.mission_marker = None
 
 		if self.mission is not None and self.mission in Player().get_accomplished_missions():
 			self.mission = None
-		if self.mission_marker is None and Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing() and self.mission not in Player().get_accomplished_missions():
+		if self.mission_marker is None and self.is_mission_available():
 			self.set_mission(self.mission)
 
 		if closest_vector.get_norm() <= 50:

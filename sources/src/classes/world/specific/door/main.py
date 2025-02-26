@@ -1,4 +1,4 @@
-from src.classes import PillarObject
+from src.classes import PillarObject, Player
 
 
 class Door(PillarObject):
@@ -10,6 +10,13 @@ class Door(PillarObject):
 
 	def you_belong_to_building(self):
 		self.belongs_to_building = True
+
+	def update(self):
+		if self.is_interaction_available() and self.interaction_marker is not None and not Player().get_map().get_allow_map_change():
+			self.set_interaction_available(False)
+		elif not self.is_interaction_available() and self.interaction_marker is None and Player().get_map().get_allow_map_change():
+			self.set_interaction_available(True)
+		super().update()
 
 	def render(self):
 		return

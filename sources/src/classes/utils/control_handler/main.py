@@ -19,6 +19,7 @@ class ControlHandler:
 			self.mouse_position = None
 			self.pygame_events = []
 			self.consumed_events = set()
+			self.disabled_actions = set()
 			self.settings_initialized = False
 
 	def load_keybinds(self, keybinds_data):
@@ -33,6 +34,13 @@ class ControlHandler:
 
 	def get_keybinds(self):
 		return {action: self.get_pygame_key_name(key)[0] if self.get_pygame_key_name(key) != [] else key for action, key in self.keybinds.items()}
+
+	def disable_actions(self, actions: list[str]):
+		for key in actions:
+			self.disabled_actions.add(key)
+
+	def enable_all_actions(self):
+		self.disabled_actions = set()
 
 
 	def handle_events(self):
@@ -49,7 +57,7 @@ class ControlHandler:
 					self.events['quit'] = True
 				case pygame.KEYDOWN:
 					for action, key in self.keybinds.items():
-						if key == event.key and action not in self.consumed_events:
+						if key == event.key and action not in self.consumed_events and action not in self.disabled_actions:
 							self.activate_event(action)
 				case pygame.KEYUP:
 					for action, key in self.keybinds.items():

@@ -8,6 +8,7 @@ class Map:
 		self.walls = []
 		self.load_elements_from(map_name)
 		self.name = map_name
+		self.allow_map_change = True
 
 		# Fusionner les images des GroundSurface pour éviter des blits lors des rendus en temps réel
 		for i in range(1, len(self.elements)):
@@ -21,6 +22,12 @@ class Map:
 			self.elements[i].dont_render()
 
 		SoundMixer().play_music('On the Island - Godmode')
+
+	def get_allow_map_change(self):
+		return self.allow_map_change
+
+	def set_allow_map_change(self, new_val: bool):
+		self.allow_map_change = new_val
 
 	def sort_elements(self):
 		sorted = False

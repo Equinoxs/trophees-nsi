@@ -65,7 +65,6 @@ class DataHandler:
 
 
 	def get_data_from_last_save(self, name: str = None, new_game: bool = False):
-		print('data from last save', name, new_game)
 		if name is not None:
 			path = os.path.join(
 				os.path.dirname(os.path.abspath(__file__)),
@@ -84,7 +83,6 @@ class DataHandler:
 			automatic_saves = sorted([s for s in automatic_saves if self.is_valid_date(s[:-5])])
 
 			if len(automatic_saves) > 0:
-				print(automatic_saves)
 				with open(os.path.join(path, automatic_saves[-1]), 'r') as save:
 					data = json.load(save)
 					LogHandler().add(self.default_save_path.split('/')[-2:][0], 'loaded')

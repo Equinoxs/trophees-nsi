@@ -212,21 +212,17 @@
 				{
 					"type": "NPC",
 					"name": "nathan",
-					"level": 2,
-					"position": [980, 1325],
+					"position": [850, 2750],
 					"image_path": "nathan",
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",
-					"name": "alberto",
-					"level": 2,
-					"position": [740, 2760],
-					"image_path": "albert",
-					"interaction": "switch_with_test_2",
-					"authorized_sound_tracks": ["footsteps", "voices"],
-					"pattern_timeline": [[740, 2760], "npc_event_test", [740, 2790]],
-					"pattern_type": "back_and_forth"
+					"name": "alastair_denniston",
+					"position": [750, 2650],
+					"mission": "introduction_denniston",
+					"image_path": "denniston",
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",

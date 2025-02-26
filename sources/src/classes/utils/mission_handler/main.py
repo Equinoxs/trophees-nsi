@@ -1,6 +1,5 @@
 from src.classes import Mission, Player, LogHandler, GameLoop, TimeHandler
 
-
 class MissionHandler:
 	_instance = None
 
@@ -19,6 +18,9 @@ class MissionHandler:
 			self.current_mission = None
 			self.mission_description_displayed = None
 			self.mission_popup = None
+
+	def get_mission(self, mission_name: str) -> Mission | None:
+		return self.missions.get(mission_name, None)
 
 	def mission_ongoing(self):
 		return self.current_mission is not None
@@ -73,6 +75,8 @@ class MissionHandler:
 					'label': 'MISSION PASSED'
 				}
 				self.mission_popup = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
+				Player().get_map().set_allow_map_change(True)
+				GameLoop().get_control_handler().enable_all_actions()
 
 			elif indicator == -1:
 				LogHandler().add(f'{Player().get_focus().get_name()} * fail mission {self.current_mission.get_name()}')
