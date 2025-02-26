@@ -42,7 +42,6 @@ class ControlHandler:
 	def enable_all_actions(self):
 		self.disabled_actions = set()
 
-
 	def handle_events(self):
 		if not self.settings_initialized:
 			self.initialize_settings_inputs()
@@ -79,6 +78,32 @@ class ControlHandler:
 	def finish_event(self, event_name: str):
 		self.events[event_name] = False
 
+	def reset_keybinds(self):
+		from src.classes import Menu
+		default_keybinds = {
+			'pause': pygame.K_ESCAPE,
+			'interacted': pygame.K_e,
+			'pick_drop': pygame.K_r,
+			'go_forward': pygame.K_z,
+			'go_backward': pygame.K_s,
+			'go_right': pygame.K_d,
+			'go_left': pygame.K_q,
+			'sprint': pygame.K_LSHIFT,
+			'toggle_map': pygame.K_m,
+			'pass_message_dialog': pygame.K_DOWN
+		}
+
+		self.keybinds = default_keybinds
+		menu = GameLoop().get_menu_handler().get_menu('settings')
+
+		for event in default_keybinds.keys():
+			existing_elements = menu.get_elements(event)
+			for element in existing_elements:
+				menu.delete_element(element)
+
+		self.initialize_settings_inputs()
+
+
 	def consume_event(self, event_name: str):
 		self.consumed_events.add(event_name)
 		self.finish_event(event_name)
@@ -114,6 +139,8 @@ class ControlHandler:
 		}
 
 		i = 0
+		menu = GameLoop().get_menu_handler().get_menu('settings')
+
 		for event, alias in aliases.items():
 			y = 220 + i * 55
 			label_data = {
@@ -133,7 +160,8 @@ class ControlHandler:
 
 			i += 1
 
-			GameLoop().get_menu_handler().get_menu('settings').add_element(label_data)
-			GameLoop().get_menu_handler().get_menu('settings').add_element(input_data)
+			if not menu.get_elements(event):
+				GameLoop().get_menu_handler().get_menu('settings').add_element(label_data)
+				GameLoop().get_menu_handler().get_menu('settings').add_element(input_data)
 
-		self.settings_initialized = True
+			self.settings_initialized = True

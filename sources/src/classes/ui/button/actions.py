@@ -1,4 +1,4 @@
-from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler
+from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler
 
 
 class ButtonActions:	
@@ -96,6 +96,10 @@ class ButtonActions:
 				'x': 'center',
 				'action': 'load_game'
 			})
+
+	def reset_keybinds(self, _):
+		control_handler = ControlHandler()
+		ControlHandler.reset_keybinds(control_handler)
 
 	def do(self, action_name, button = None):
 		LogHandler().add(f'Button action {action_name} activated')

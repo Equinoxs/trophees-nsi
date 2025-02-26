@@ -234,13 +234,6 @@
 				"y": 130
 			},
 			{
-				"type": "UIElement",
-				"class": "settings_title",
-				"label": "Visual settings",
-				"x": 680,
-				"y": 400
-			},
-			{
 				"type": "Slider",
 				"min_value": 0,
 				"max_value": 100,
@@ -279,6 +272,13 @@
 				"y": 290
 			},
 			{
+				"type": "UIElement",
+				"class": "settings_title",
+				"label": "Other settings",
+				"x": 680,
+				"y": 400
+			},
+			{
 				"type": "Button",
 				"label": "Toggle fullscreen",
 				"color": [150, 150, 150],
@@ -291,6 +291,20 @@
 				"width": 400,
 				"height": "auto",
 				"action": "toggle_fullscreen"
+			},
+			{
+				"type": "Button",
+				"label": "Reset Keybinds",
+				"color": [150, 150, 150],
+				"border_color": [0, 0, 0],
+				"border_length": 2,
+				"border_radius": 4,
+				"font_size": 50,
+				"x": 670,
+				"y": 600,
+				"width": 400,
+				"height": "auto",
+				"action": "reset_keybinds"
 			}
 		],
 			"credits": [
@@ -455,14 +469,14 @@
 				"type": "Button",
 				"label": "Settings",
 				"class": "welcome_button",
-				"y": 440,
+				"y": 520,
 				"action": "open_settings"
 			},
 			{
 				"type": "Button",
 				"label": "Load game",
 				"class": "welcome_button",
-				"y": 520,
+				"y": 440,
 				"action": "open_loading"
 			},
 			{

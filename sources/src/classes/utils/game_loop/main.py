@@ -99,10 +99,10 @@ class GameLoop:
 	
 	def toggle_fullscreen(self):
 		if self.fullscreen == False:
-			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = True
 		else:
-			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.NOFRAME | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
+			pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)
 			self.fullscreen = False
 
 	def update(self):

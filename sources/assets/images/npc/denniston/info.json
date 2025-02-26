@@ -4,7 +4,7 @@
 			"widths":[
 				{ "width": 44, "time": 1000 }
 			],
-			"height": 94
+			"height": 96
 		},
 		"walking_forward": {
 			"widths": [
@@ -14,7 +14,7 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 96
+			"height": 94
 		},
 		"walking_backward": {
 			"widths": [
@@ -34,7 +34,7 @@
 				{ "width": 50, "time": 0.3 },
 				{ "width": 38, "time": 0.2 }
 			],
-			"height": 93
+			"height": 96
 		}
 	},
 	"hitbox": [

@@ -8,7 +8,9 @@ class Menu:
 		self.ui_elements = []
 		self.load_ui_elements(menu_data)
 
-	def get_elements(self):
+	def get_elements(self, event=None):
+		if event:
+			return [element for element in self.ui_elements if getattr(element, 'event_name', None) == event]
 		return self.ui_elements
 
 	def add_element(self, element_data: dict):
