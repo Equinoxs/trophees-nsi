@@ -111,7 +111,7 @@ class Missions:
 			index = -1  # mission échouée
 		else:
 			if Player().get_focus().get_position().get_y() <= 0:
-				Player().get_focus().play_sound('magical_hit')
+				Player().get_focus().play_sound('level_up')
 				index = 1  # objectif réussi
 			else:
 				index = 0  # objectif en cours
@@ -177,6 +177,8 @@ class Missions:
 				"Go! My men are waiting for you, and maybe I'll see you around."
 			]
 		}
+		Player().get_focus().play_sound('level_up')
+
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
 
 
