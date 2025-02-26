@@ -34,6 +34,10 @@ class Mission:
 	def get_rewards(self):
 		return self.rewards
 
+	def reset(self):
+		self.objective_index = 0
+		self.indicator = 0
+
 	def display_objective_description(self, force: bool = False):
 		if self.get_objective_description() is None:
 			self.delete_objective_description()

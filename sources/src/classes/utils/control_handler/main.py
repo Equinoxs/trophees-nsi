@@ -79,26 +79,11 @@ class ControlHandler:
 		self.events[event_name] = False
 
 	def reset_keybinds(self):
-		from src.classes import Menu
-		default_keybinds = {
-			'pause': pygame.K_ESCAPE,
-			'interacted': pygame.K_e,
-			'pick_drop': pygame.K_r,
-			'go_forward': pygame.K_z,
-			'go_backward': pygame.K_s,
-			'go_right': pygame.K_d,
-			'go_left': pygame.K_q,
-			'sprint': pygame.K_LSHIFT,
-			'toggle_map': pygame.K_m,
-			'pass_message_dialog': pygame.K_DOWN
-		}
-
-		self.keybinds = default_keybinds
 		menu = GameLoop().get_menu_handler().get_menu('settings')
+		self.keybinds = self.load_keybinds(DataHandler().load_save(new_game=True, reload=False)['keybinds'])
 
-		for event in default_keybinds.keys():
-			existing_elements = menu.get_elements(event)
-			for element in existing_elements:
+		for element in menu.get_elements():
+			if getattr(element, 'event_name', None) is not None:
 				menu.delete_element(element)
 
 		self.initialize_settings_inputs()

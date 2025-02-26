@@ -84,6 +84,7 @@ class MissionHandler:
 				Player().add_accomplished_mission(self.current_mission)
 				self.delete_description_displayed()
 				GameLoop().throw_event({ 'mission' : self.get_current_mission_name() })
+				self.current_mission.reset()
 				self.current_mission = None  # La mission est terminée
 
 				if self.mission_popup is not None:
