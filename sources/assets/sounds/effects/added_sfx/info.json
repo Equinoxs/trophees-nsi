@@ -14,6 +14,9 @@
 		},
 		"magical_hit": {
 			"extension": "mp3"
+		},
+		"level_up": {
+			"extension": "mp3"
 		}
 	}
 }

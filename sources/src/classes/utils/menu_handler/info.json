@@ -85,7 +85,10 @@
 			"x": 0,
 			"height": "auto",
 			"color": [125, 113, 89],
-			"font_size": 50
+			"font_size": 50,
+			"border_radius": 5,
+			"border_length": 5,
+			"border_color": [47, 32, 26]
 		}
 	},
 	"menus": {

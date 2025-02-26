@@ -348,13 +348,13 @@
 					"type": "Tree",
 					"name": "island_tree",
 					"image_path": "weeping_willow",
-					"position": [1300, 1830]
+					"position": [1300, 1840]
 				},
 				{
 					"type": "NaturalObject",
 					"name": "island_bush",
 					"image_path": "basic_bush",
-					"position": [1230, 1800]
+					"position": [1250, 1800]
 				},
 				{
 					"type": "Tree",
@@ -390,13 +390,13 @@
 					"type": "NaturalObject",
 					"name": "lake_bush_2",
 					"image_path": "berry_bush",
-					"position": [1100, 1650]
+					"position": [1100, 1590]
 				},
 				{
 					"type": "NaturalObject",
-					"name": "lake_bush_2",
+					"name": "lake_bush_3",
 					"image_path": "basic_bush",
-					"position": [1570, 1580]
+					"position": [1650, 1550]
 				},
 				{
 					"type": "NaturalObject",
