@@ -12,6 +12,10 @@ class MapObject(MapElement, Collider, Interactable, Movable, SideEffectsManager)
 		Movable.__init__(self)
 		SideEffectsManager.__init__(self, data.get('side_effects', []))
 
+	def catch_event(self, event):
+		super().catch_event(event)
+		Interactable.catch_event(self, event)
+
 	def update(self):
 		# Mise à jour de l'élément de la carte
 		MapElement.update(self)

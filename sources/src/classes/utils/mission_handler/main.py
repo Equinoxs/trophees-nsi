@@ -22,6 +22,12 @@ class MissionHandler:
 	def get_mission(self, mission_name: str) -> Mission | None:
 		return self.missions.get(mission_name, None)
 
+	def get_current_mission_name(self):
+		for name, mission in self.missions.items():
+			if mission == self.current_mission:
+				return name
+		return None
+
 	def mission_ongoing(self):
 		return self.current_mission is not None
 
@@ -77,6 +83,7 @@ class MissionHandler:
 				LogHandler().add(f'{Player().get_focus().get_name()} * accomplish mission {self.current_mission.get_name()}')
 				Player().add_accomplished_mission(self.current_mission)
 				self.delete_description_displayed()
+				GameLoop().throw_event({ 'mission' : self.get_current_mission_name() })
 				self.current_mission = None  # La mission est terminée
 
 				if self.mission_popup is not None:
@@ -120,4 +127,5 @@ class MissionHandler:
 
 		if self.mission_popup is not None and TimeHandler().add_chrono_tag('mission_popup') >= 2:
 			GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.mission_popup)
+			TimeHandler().remove_chrono_tag('mission_popup')
 			self.mission_popup = None

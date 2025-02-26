@@ -1,14 +1,15 @@
 {
 	"missions": {
+		"introduction_denniston": {
+			"description": "Introduction to Bletchley Park"
+		},
 		"mission_test": {
 			"required_level": 2,
-			"description": "The first Avenger: McGuire",
-			"rewards": 1
+			"description": "The first Avenger: McGuire"
 		},
-		"introduction_denniston": {
-			"required_level": 1,
-            "description": "Introduction to Bletchley Park",
-            "rewards": 1
+		"act2_upgrade": {
+			"required_level": 3,
+			"description": "Denniston Award"
 		}
 	}
 }

@@ -12,6 +12,9 @@ class Wall:
 		self.boundaries: list = self.data['boundaries']
 		self.initialize_segments(map)
 
+	def get_name(self):
+		return self.name
+
 	def initialize_segments(self, map):
 		i = 0
 		prev_segment = []

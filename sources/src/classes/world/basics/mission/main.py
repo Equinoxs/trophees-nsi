@@ -5,8 +5,8 @@ class Mission:
 	def __init__(self, mission_data: dict, name: str):
 		self.name = name
 		self.description = mission_data['description']
-		self.required_level = mission_data['required_level']
-		self.rewards = mission_data['rewards']
+		self.required_level = mission_data.get('required_level', 1)
+		self.rewards = mission_data.get('rewards', 1)
 		self.objectives_len = Missions().get_objectives_len(name)
 		self.objective_index = 0
 		self.indicator = 0
@@ -35,8 +35,12 @@ class Mission:
 		return self.rewards
 
 	def display_objective_description(self, force: bool = False):
-		if self.displayed_description is not None or self.get_objective_description() is None and not force:
-			return  # La description est déjà affichée / il n'y en a pas
+		if self.get_objective_description() is None:
+			self.delete_objective_description()
+			return
+
+		if self.displayed_description is not None and not force:
+			return  # La description est déjà affichée
 
 		data = {
 			'type': 'UIElement',
@@ -52,11 +56,13 @@ class Mission:
 			'color': (0, 0, 0, 80)
 		}
 
+		self.delete_objective_description()
 		self.displayed_description = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
 
 	def delete_objective_description(self):
-		GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.displayed_description)
-		self.displayed_description = None
+		if self.displayed_description is not None:
+			GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.displayed_description)
+			self.displayed_description = None
 
 	def update(self):
 		if self.indicator == 0:
@@ -65,7 +71,7 @@ class Mission:
 
 		elif self.indicator == 1:
 			self.objective_index += 1
-			self.display_objective_description(True)
+			self.display_objective_description(force=True)
 			self.indicator = 0
 
 			if self.objective_index == self.objectives_len:

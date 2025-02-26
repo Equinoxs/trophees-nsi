@@ -19,6 +19,9 @@ class Interactable:
 	def get_mission(self):
 		return self.mission
 
+	def set_mission_name(self, mission_name: str):
+		self.mission = mission_name
+
 	def is_mission_available(self):
 		return Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing() and Player().get_focus().get_level() >= MissionHandler().get_mission(self.mission).get_required_level() and not self.mission in Player().get_accomplished_missions()
 
@@ -66,6 +69,13 @@ class Interactable:
 				return False
 			ControlHandler().consume_event('interacted')
 			return True
+
+	def catch_event(self, event):
+		if type(event) == dict and 'mission' in event and event['mission'] == self.mission:
+			self.mission = None
+			if self.mission_marker is not None:
+				MenuHandler().remove_marker(self.mission_marker)
+				self.mission_marker = None
 
 	def update(self, closest_vector: Vector2):
 		self.handle_interaction(closest_vector)

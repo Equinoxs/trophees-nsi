@@ -64,6 +64,14 @@ class Map:
 	def add(self, element):
 		self.elements.append(element)
 
+	def remove_wall(self, wall_name: str):
+		for index, wall in enumerate(self.walls):
+			if wall.get_name() == wall_name:
+				self.walls.pop(index)
+		for i in range(len(self.elements) - 1, -1, -1):
+			if wall_name == self.elements[i].get_name()[:len(wall_name)]:
+				self.elements.pop(i)
+
 	def remove(self, element_to_remove):
 		for index, element in enumerate(self.elements):
 			if element == element_to_remove:

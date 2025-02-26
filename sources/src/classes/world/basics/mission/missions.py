@@ -20,7 +20,11 @@ class Missions:
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
 				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
-				'introduction_denniston_1': 'Follow Alastair Denniston'
+				'introduction_denniston_1': 'Follow Alastair Denniston',
+				'introduction_denniston_3': 'Follow Alastair Denniston',
+				'introduction_denniston_4': 'Follow Alastair Denniston',
+				'introduction_denniston_6': 'Follow Alastair Denniston',
+				'act2_upgrade_0': 'Listen to Denniston'
 			}
 
 			self.update_missions_set()
@@ -59,10 +63,13 @@ class Missions:
 		print(index)
 		return index
 
-	def use_create_dialog(self, dialog_name: str, dialog_data: dict):
+	def use_create_dialog(self, dialog_name: str, dialog_data: dict, immobilize_player: bool = False):
 		self.dialog_name = dialog_name
 		menu_handler = GameLoop().get_menu_handler()
 		self.dialog_box = self.objectives_store.get(dialog_name + '_created', False)
+
+		if immobilize_player:
+			GameLoop().get_control_handler().disable_actions(['go_forward', 'go_backward', 'go_left', 'go_right'])
 
 		if not menu_handler.is_dialog(dialog_name):
 			if not self.dialog_box:
@@ -71,10 +78,22 @@ class Missions:
 			else:
 				del self.objectives_store[dialog_name + '_created']
 				self.dialog_name = None
+				if immobilize_player:
+					GameLoop().get_control_handler().enable_all_actions()
 				return 1
 		return 0
 
+	def use_move_npc(self, npc_name: str, destination: Vector2):
+		npc = Player().get_map().search_by_name(npc_name)
+		npc.set_objective(destination)
+		if npc.move_npc_to_objective():
+			return 0
+		else:
+			return 1
 
+
+
+	# --- MISSION TEST ---
 
 	def mission_test_0(self):
 		dialog_data = {
@@ -103,9 +122,11 @@ class Missions:
 
 
 
+	# --- MISSION DÉCOUVERTE DE LA MAP AVEC DENNISTON ---
+
 	def introduction_denniston_0(self):
 		Player().get_map().set_allow_map_change(False)
-		GameLoop().get_control_handler().disable_actions(['go_forward', 'go_backward', 'go_left', 'go_right'])
+		Player().get_map().remove_wall('beginning_wall')
 		dialog_data = {
 			'messages': [
 				'Hello. Welcome to Bletchely Park',
@@ -115,28 +136,57 @@ class Missions:
 				'Congratulations, let me present you the Park.'
 			]
 		}
-		done = self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
-		if done == 1:
-			GameLoop().get_control_handler().enable_all_actions()
-			return 1
-		else:
-			return 0
-			
+		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data, immobilize_player=True)
 
 	def introduction_denniston_1(self):
-		alastair_denniston = Player().get_map().search_by_name('alastair_denniston')
-		alastair_denniston.set_objective(Vector2(1250, 2530))
-		if alastair_denniston.move_npc_to_objective():
-			return 0
-		else:
-			GameLoop().get_control_handler().enable_all_actions()
-			return 1
+		return self.use_move_npc('alastair_denniston', Vector2(1250, 2530))
 
 	def introduction_denniston_2(self):
 		dialog_data = {
 			'messages': [
 				'Do you see the house in front of us?',
 				"It is called the Little House, here you're gonna find some stuff that may be useful to you."
+			]
+		}
+		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+
+	def introduction_denniston_3(self):
+		return self.use_move_npc('alastair_denniston', Vector2(800, 2580))
+
+	def introduction_denniston_4(self):
+		return self.use_move_npc('alastair_denniston', Vector2(750, 2150))
+
+	def introduction_denniston_5(self):
+		dialog_data = {
+			'messages': [
+				'This big building to your left is the Mansion. One of the most important edifice here.',
+				'I hope you remembered the names of the places I introduced, you will need them in a few moments.'
+			]
+		}
+		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+
+	def introduction_denniston_6(self):
+		return self.use_move_npc('alastair_denniston', Vector2(950, 1360))
+
+	def introduction_denniston_7(self):
+		dialog_data = {
+			'messages': [
+				'There are the Huts, you can see the number 7 and the number 8 on these.',
+				'They will provide you some very important stuff you will need.',
+				'If you follow this way, you will find Building 1 and Building 2. I am sure you will enjoy this place!',
+				"Go! My men are waiting for you, and maybe I'll see you around."
+			]
+		}
+		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+
+
+
+	def act2_upgrade_0(self):
+		dialog_data = {
+			'messages': [
+				'You have been doing really well after hearing from my men.',
+				"That's why I give you the access to Hut 8.",
+				'You may take a tour in it, some people expect to see you there.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)

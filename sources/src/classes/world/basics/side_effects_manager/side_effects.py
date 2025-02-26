@@ -1,4 +1,4 @@
-from src.classes import GameLoop, TimeHandler, LogHandler
+from src.classes import GameLoop, TimeHandler, LogHandler, Player
 
 
 class SideEffects:
@@ -57,9 +57,13 @@ class SideEffects:
 				host.set_objective(None)
 
 
+	def handle_alastair_denniston(_, denniston):
+		if Player().get_level() == 3 and denniston.get_mission() is None:
+			denniston.set_mission_name('act2_upgrade')
+
+
 	def do(self, side_effect_name: str, host):
-		match side_effect_name:
-			case 'npc_side_effect_test':
-				self.npc_side_effect_test(host)
-			case 'visit_player':
-				self.visit_player(host)
+		side_effect_method = getattr(self, side_effect_name, None)
+		if side_effect_method is None:
+			return
+		side_effect_method(host)
