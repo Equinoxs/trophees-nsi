@@ -21,7 +21,8 @@ class Menu:
 		return element
 
 	def delete_element(self, element: UIElement):
-		del self.ui_elements[self.ui_elements.index(element)]
+		if element is not None and element in self.ui_elements:
+			del self.ui_elements[self.ui_elements.index(element)]
 
 	def load_ui_elements(self, ui_elements_data):
 		for ui_element_data in ui_elements_data:

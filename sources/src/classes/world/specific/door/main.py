@@ -12,9 +12,9 @@ class Door(PillarObject):
 		self.belongs_to_building = True
 
 	def update(self):
-		if self.is_interaction_available() and self.interaction_marker is not None and not Player().get_map().get_allow_map_change():
+		if self.is_interaction_available() and not Player().get_map().get_allow_map_change():
 			self.set_interaction_available(False)
-		elif not self.is_interaction_available() and self.interaction_marker is None and Player().get_map().get_allow_map_change():
+		elif not self.is_interaction_available() and Player().get_map().get_allow_map_change():
 			self.set_interaction_available(True)
 		super().update()
 

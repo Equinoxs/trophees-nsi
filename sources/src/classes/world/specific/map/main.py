@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, Building, Vector2, GroundSurface, Wall, MapObject, InventoryItem, Table
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, Vector2, GroundSurface, Wall, MapObject, InventoryItem, Table, Tree
 from src import classes
 
 
@@ -29,24 +29,30 @@ class Map:
 	def set_allow_map_change(self, new_val: bool):
 		self.allow_map_change = new_val
 
+	def sort_once(self):
+		began = False
+		sorted = True
+		for i in range(len(self.elements) - 1):
+			if not self.elements[i].get_must_render():
+				element = self.elements.pop(i)
+				self.elements.insert(0, element)
+			if not self.elements[-1].get_must_render():
+				element = self.elements.pop(-1)
+				self.elements.insert(0, element)
+			if not isinstance(self.elements[i], MapObject) or (not began and not self.elements[i].get_must_render()):
+				continue
+			else:
+				began = True
+			if self.elements[i].goes_on_top_of(self.elements[i + 1]):
+				self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
+				sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
+		return sorted
+
 	def sort_elements(self):
 		sorted = False
 		while not sorted:
-			began = False
-			sorted = True
-			for i in range(len(self.elements) - 1):
-				if not isinstance(self.elements[i], MapObject) or (not began and not self.elements[i].get_must_render()):
-					continue
-				else:
-					began = True
-				if not self.elements[i].get_has_moved() and not self.elements[i + 1].get_has_moved():
-					continue
-				if not self.elements[i].get_must_render():
-					element = self.elements.pop(i)
-					self.elements.insert(0, element)
-				if self.elements[i].goes_on_top_of(self.elements[i + 1]):
-					self.elements[i], self.elements[i + 1] = self.elements[i + 1], self.elements[i]
-					sorted = False  # Il y a eu un échange, donc la liste n'est pas encore triée
+			sorted = self.sort_once()
+		self.sort_once()
 
 
 	def search_by_name(self, object_name: str):

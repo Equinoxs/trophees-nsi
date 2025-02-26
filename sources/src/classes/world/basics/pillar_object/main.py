@@ -13,8 +13,12 @@ class PillarObject(MapObject):
 		object_type = map_object.get_object_type()
 		match object_type:
 			case 'pillar':
-				return self.position.y > map_object.get_position().get_y()
+				delta = map_object.get_position().get_y() - self.position.y
+				if delta != 0:
+					return delta < 0
+				else:
+					return map_object.get_position().get_x() - self.position.get_x() > 0
 			case 'base':
-				return map_object.closest_vector_to(self.get_position()).get_y() > 0
+				return not map_object.goes_on_top_of(self)
 			case 'ridge':
-				return map_object.closest_vector_to(self.position).get_y() > 0
+				return not map_object.goes_on_top_of(self)

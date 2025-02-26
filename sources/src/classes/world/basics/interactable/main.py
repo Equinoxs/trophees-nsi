@@ -46,7 +46,7 @@ class Interactable:
 
 	def set_interaction_available(self, available: bool):
 		self.interaction_available = available
-		if not available:
+		if not available and self.interaction_marker is not None:
 			MenuHandler().remove_marker(self.interaction_marker)
 			self.interaction_marker = None
 

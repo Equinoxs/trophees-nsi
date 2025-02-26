@@ -76,6 +76,9 @@ class GameLoop:
 	def get_data_handler(self):
 		return self.data_handler
 
+	def get_mission_handler(self):
+		return self.mission_handler
+
 	def get_log_handler(self):
 		return self.log_handler
 

@@ -49,12 +49,19 @@ class DataHandler:
 			self.sounds_data = {}
 			self.stickers_data = {}
 			self.fonts = {}
+			self.save_allowed = True
 			self.missions_data = None
 			self.menus_data = None
 			self.current_save_chrono_tag = None
 			self.last_save_player_position = None
 			self.current_save = None
 
+
+	def get_save_allowed(self):
+		return self.save_allowed
+
+	def set_save_allowed(self, new_val: bool):
+		self.save_allowed = new_val
 
 	def is_valid_date(self, date: str, format_str: str = "%Y-%m-%d_%H-%M-%S"):
 		try:
@@ -114,7 +121,7 @@ class DataHandler:
 
 		return data
 
-	def reload_game(self, reload):
+	def reload_game(self, reload: bool = True):
 		if reload:
 			GameLoop().get_control_handler().load_keybinds(self.current_save['keybinds'])
 			GameLoop().get_sound_mixer().free_all_channels()
@@ -184,8 +191,8 @@ class DataHandler:
 				current_map_elements.append(element.get_data())
 		self.current_save['maps'][Player().get_map().get_name()]['elements'] = current_map_elements
 
-	def save(self, name: str = None):
-		if not SAVE:
+	def save(self, name: str = None, force: bool = False):
+		if not SAVE or (not self.save_allowed and not force):
 			return  # ne pas faire de sauvegardes (debug)
 		LogHandler().add("Automatic save done")
 		self.save_data(self.current_save, name)

@@ -1,4 +1,4 @@
-from src.classes import GameLoop, LogHandler, DataHandler
+from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler
 
 
 class ButtonActions:	
@@ -32,6 +32,7 @@ class ButtonActions:
 
 	def return_to_title(self, _):
 		GameLoop().pause_game()
+		MissionHandler().abort_mission()
 		GameLoop().get_menu_handler().set_current_menu('welcome')
 		GameLoop().get_sound_mixer().pause_music()
 

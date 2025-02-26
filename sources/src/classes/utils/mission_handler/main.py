@@ -29,9 +29,22 @@ class MissionHandler:
 		for name, data in self.missions_data.items():
 			self.missions[name] = Mission(data, name)
 
+	def abort_mission(self):
+		if self.current_mission is not None:
+			self.current_mission.abort()
+			self.current_mission = None
+			self.delete_description_displayed()
+			Player().get_map().set_allow_map_change(True)
+			GameLoop().get_control_handler().enable_all_actions()
+			GameLoop().get_menu_handler().set_current_menu('loading', True)
+			GameLoop().get_data_handler().load_save(force=True, reload=True)
+			GameLoop().get_data_handler().set_save_allowed(True)
+			GameLoop().get_menu_handler().set_last_menu()
+
 	def start_mission(self, mission_name: str):
 		if mission_name in self.missions and self.current_mission is None and mission_name not in Player().get_accomplished_missions():
 			self.current_mission = self.missions[mission_name]
+			GameLoop().get_data_handler().set_save_allowed(False)
 			LogHandler().add(f'{Player().get_focus().get_name()} * start mission {self.current_mission.get_name()}')
 
 	def display_description_of_current_mission(self):
@@ -77,6 +90,8 @@ class MissionHandler:
 				self.mission_popup = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
 				Player().get_map().set_allow_map_change(True)
 				GameLoop().get_control_handler().enable_all_actions()
+				GameLoop().get_data_handler().set_save_allowed(True)
+				GameLoop().get_data_handler().save()
 
 			elif indicator == -1:
 				LogHandler().add(f'{Player().get_focus().get_name()} * fail mission {self.current_mission.get_name()}')
@@ -92,6 +107,13 @@ class MissionHandler:
 					'label': 'MISSION FAILED'
 				}
 				self.mission_popup = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
+				Player().get_map().set_allow_map_change(True)
+				GameLoop().get_control_handler().enable_all_actions()
+
+				GameLoop().get_menu_handler().set_current_menu('loading', True)
+				GameLoop().get_data_handler().reload()
+				GameLoop().get_data_handler().set_save_allowed(True)
+				GameLoop().get_menu_handler().set_current_menu('in_game')
 
 			elif indicator == 0:
 				self.display_description_of_current_mission()

@@ -593,8 +593,8 @@
 			]
 		},
 		"building_2": {
-			"top_left_corner": [0, 0],
-			"bottom_right_corner": [100, 100],
+			"top_left_corner": [-20, -140],
+			"bottom_right_corner": [850, 470],
 			"elements": [
 				{
 					"type": "GroundSurface",
@@ -660,13 +660,13 @@
 					"type": "Furniture",
 					"name": "bin_2",
 					"image_path": "bin",
-					"position": [610, 330]
+					"position": [610, 310]
 				},
 				{
 					"type": "Furniture",
 					"name": "box",
 					"image_path": "random_box",
-					"position": [660, 340]
+					"position": [660, 320]
 				},
 				{
 					"type": "Door",
@@ -918,7 +918,7 @@
 					"type": "Wall",
 					"name": "main_borders",
 					"wall_type": "brown_2",
-					"boundaries": [[-1, 900], [0, 0], { "sticker": "door_wood", "x_offset" : 35 }, { "sticker": "wide_window", "x_offset" : 160 }, { "sticker": "wide_window", "x_offset" : 550 }, [1000, 0], [999, 400], [900, 400], [900, 450]]
+					"boundaries": [[0, 900], [0, 0], { "sticker": "door_wood", "x_offset" : 35 }, { "sticker": "wide_window", "x_offset" : 160 }, { "sticker": "wide_window", "x_offset" : 550 }, [1000, 0], [1000, 400], [900, 400], [900, 450]]
 				},
 				{
 					"type": "Wall",

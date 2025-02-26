@@ -1,5 +1,5 @@
 {
 	"height": 60,
 	"hitbox_action_radius": 20,
-	"hitbox": [[25, 60], [75, 60]]
+	"hitbox": [[25, 90], [75, 90]]
 }

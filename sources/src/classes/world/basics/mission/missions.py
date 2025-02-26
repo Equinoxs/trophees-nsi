@@ -15,6 +15,7 @@ class Missions:
 			self._initialized = True
 			self.missions_set = set()
 			self.objectives_store = {}
+			self.dialog_name = None
 
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
@@ -23,6 +24,15 @@ class Missions:
 			}
 
 			self.update_missions_set()
+
+	def del_ui_elements(self):
+		if self.dialog_name is not None:
+			GameLoop().get_menu_handler().remove_dialog(self.dialog_name)
+		for possible_element in self.objectives_store.values():
+			GameLoop().get_menu_handler().get_menu('in_game').delete_element(possible_element)
+
+	def reset_store(self):
+		self.objectives_store = {}
 
 	def get_missions_set(self):
 		return self.missions_set
@@ -50,15 +60,17 @@ class Missions:
 		return index
 
 	def use_create_dialog(self, dialog_name: str, dialog_data: dict):
+		self.dialog_name = dialog_name
 		menu_handler = GameLoop().get_menu_handler()
-		dialog_created = self.objectives_store.get(dialog_name + '_created', False)
+		self.dialog_box = self.objectives_store.get(dialog_name + '_created', False)
 
 		if not menu_handler.is_dialog(dialog_name):
-			if not dialog_created:
+			if not self.dialog_box:
 				menu_handler.add_dialog(dialog_name, dialog_data)
 				self.objectives_store[dialog_name + '_created'] = True
 			else:
 				del self.objectives_store[dialog_name + '_created']
+				self.dialog_name = None
 				return 1
 		return 0
 

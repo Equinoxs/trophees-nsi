@@ -1,4 +1,4 @@
-from src.classes import MapObject
+from src.classes import MapObject, Vector2
 
 
 class BaseObject(MapObject):
@@ -13,12 +13,36 @@ class BaseObject(MapObject):
 		object_type = map_object.get_object_type()
 		match object_type:
 			case 'pillar':
-				return self.closest_vector_to(map_object.get_position()).get_y() < 0
-			case 'base':
-				# à faire en sorte que ça n'arrive jamais car ce n'est pas joli
-				return self.position.y > map_object.get_position().get_y()
-			case 'ridge':
-				if len(self.hitbox) > 0:
-					return map_object.closest_vector_to(self.hitbox[0]).get_y() > 0
+				closest_vector = self.closest_vector_to(map_object.get_position())
+				if abs(closest_vector.get_y()) > 1:
+					return closest_vector.get_y() < 0
 				else:
-					return map_object.closest_vector_to(self.position).get_y() > 0
+					return closest_vector.get_x() > 0
+			case 'base':
+				closest_vector = self.closest_vector_to_polygon(map_object)
+				if abs(closest_vector.get_y()) > 1:
+					return closest_vector.get_y() < 0
+				else:
+					return closest_vector.get_x() > 0
+			case 'ridge':
+				closest_vector = self.closest_vector_to_polygon(map_object)
+				if abs(closest_vector.get_y()) > 1:
+					return closest_vector.get_y() < 0
+				else:
+					return closest_vector.get_x() > 0
+
+	def closest_vector_to_polygon(self, map_object: MapObject):
+		if len(self.hitbox) == 0:
+			return -map_object.closest_vector_to(self.position)
+
+		possibilities = []
+		for i in range(len(self.hitbox)):
+			possibility = -map_object.closest_vector_to(self.hitbox[i] + self.position)
+			possibilities.append(possibility)
+
+		for i in range(len(map_object.get_hitbox())):
+			possibility = self.closest_vector_to(map_object.get_hitbox()[i] + map_object.get_position())
+			possibilities.append(possibility)
+
+		possibilities = sorted(possibilities, key=lambda p: p.get_squared_norm())
+		return possibilities[0]

@@ -12,6 +12,13 @@ class Mission:
 		self.indicator = 0
 		self.displayed_description = None
 
+	def abort(self):
+		self.objective_index = 0
+		self.indicator = 0
+		self.delete_objective_description()
+		Missions().del_ui_elements()
+		Missions().reset_store()
+
 	def get_name(self):
 		return self.name
 
@@ -57,7 +64,6 @@ class Mission:
 			self.display_objective_description()
 
 		elif self.indicator == 1:
-			print('yo')
 			self.objective_index += 1
 			self.display_objective_description(True)
 			self.indicator = 0
