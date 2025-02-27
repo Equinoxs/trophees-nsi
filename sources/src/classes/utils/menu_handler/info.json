@@ -14,6 +14,7 @@
 			"x": "center",
 			"width": 400,
 			"height": 50,
+			"font_family": "basic",
 			"font_size": 50
 		},
 		"pause_button": {
@@ -21,20 +22,24 @@
 			"x": "center",
 			"width": 250,
 			"height": 50,
-			"font_size": 36
+			"font_size": 36,
+			"font_family": "basic"
+
 		},
 		"settings_title": {
 			"color": [99, 99, 99],
 			"text_color": [0, 0, 0],
 			"width": "auto",
 			"height": "auto",
-			"font_size": 70
+			"font_family": "basic",
+			"font_size": 80
 		},
 		"key_settings_label": {
 			"color": [99, 99, 99],
 			"text_color": [204, 174, 114],
 			"width": "auto",
 			"height": "auto",
+			"font_family": "basic",
 			"font_size": 36,
 			"x": 40
 		},
@@ -42,10 +47,11 @@
 			"x": 260,
 			"width": 200,
 			"height": 50,
+			"font_family": "basic",
 			"font_size": 36
 		},
 		"slider_settings": {
-			"x": 800,
+			"x": 820,
 			"width": 300,
 			"height": 20,
 			"border_radius": 3,
@@ -56,7 +62,8 @@
 			"text_color": [204, 174, 114],
 			"width": "auto",
 			"height": "auto",
-			"x": 580,
+			"x": 600,
+			"font_family": "basic",
 			"font_size": 36
 		},
 		"fps": {
@@ -65,7 +72,9 @@
 			"width": "auto",
 			"height": "auto",
 			"text_color": [255, 255, 255],
-			"text_align": "left"
+			"text_align": "left",
+			"font_family": "basic"
+
 		},
 		"default_dialog": {
 			"border_radius": 5,
@@ -95,13 +104,14 @@
 		"in_game": [
 			{
 				"type": "Button",
-				"label": "||",
+				"label": "| |",
 				"class": "interactive_button",
 				"x": 20,
 				"y": 15,
 				"width": "auto",
 				"height": "auto",
 				"font_size": 60,
+				"font_family": "basic",
 				"action": "pause_game"
 			},
 			{
@@ -208,6 +218,7 @@
 				"y": 20,
 				"width": "auto",
 				"height": "auto",
+				"font_family": "arial",
 				"font_size": 100
 			},
 			{
@@ -233,8 +244,8 @@
 				"type": "UIElement",
 				"class": "settings_title",
 				"label": "Sound settings",
-				"x": 680,
-				"y": 130
+				"x": 660,
+				"y": 190
 			},
 			{
 				"type": "Slider",
@@ -246,14 +257,14 @@
 				"slider_color": [61, 53, 39],
 				"class": "slider_settings",
 				"label": "Music Volume",
-				"y": 237,
+				"y": 307,
 				"action": "set_music_volume"
 			},
 			{
 				"type": "UIElement",
 				"class": "volume_settings_label",
 				"label": "Music volume",
-				"y": 230
+				"y": 300
 			},
 			{
 				"type": "Slider",
@@ -265,21 +276,21 @@
 				"slider_color": [61, 53, 39],
 				"class": "slider_settings",
 				"label": "Sound Volume",
-				"y": 297,
+				"y": 367,
 				"action": "set_sound_volume"
 			},
 			{
 				"type": "UIElement",
 				"class": "volume_settings_label",
 				"label": "Sound volume",
-				"y": 290
+				"y": 360
 			},
 			{
 				"type": "UIElement",
 				"class": "settings_title",
 				"label": "Other settings",
-				"x": 680,
-				"y": 400
+				"x": 660,
+				"y": 460
 			},
 			{
 				"type": "Button",
@@ -290,10 +301,11 @@
 				"border_radius": 4,
 				"font_size": 50,
 				"x": 670,
-				"y": 500,
+				"y": 560,
 				"width": 400,
 				"height": "auto",
-				"action": "toggle_fullscreen"
+				"action": "toggle_fullscreen",
+				"font_family": "basic"
 			},
 			{
 				"type": "Button",
@@ -304,10 +316,28 @@
 				"border_radius": 4,
 				"font_size": 50,
 				"x": 670,
-				"y": 600,
+				"y": 620,
 				"width": 400,
 				"height": "auto",
-				"action": "reset_keybinds"
+				"action": "reset_keybinds",
+				"font_family": "basic"
+
+			},
+			{
+				"type": "Button",
+				"label": "Toggle FPS Counter",
+				"color": [150, 150, 150],
+				"border_color": [0, 0, 0],
+				"border_length": 2,
+				"border_radius": 4,
+				"font_size": 50,
+				"x": 670,
+				"y": 680,
+				"width": 400,
+				"height": "auto",
+				"action": "toggle_FPS",
+				"font_family": "basic"
+
 			}
 		],
 			"credits": [
@@ -451,6 +481,7 @@
 				"y": 110,
 				"width": "auto",
 				"height": "auto",
+				"font_family": "roboto",
 				"font_size": 100
 			},
 			

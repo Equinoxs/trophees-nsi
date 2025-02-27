@@ -42,7 +42,26 @@ class SideEffects:
 		out = host.side_effect_data('visit_player_out')
 		if distance < 80:
 			if out:
-				host.play_sound('okay')
+				host.play_sound('hey')
+			host.side_effect_data('visit_player_out', False)
+			TimeHandler().remove_chrono_tag('visit_player')
+			host.set_following_pattern(False)
+			host.set_objective(GameLoop().get_player().get_focus().get_position())
+			host.move_npc_to_objective()
+			if distance < 30:
+				host.stop_moving()
+		else:
+			if not out:
+				host.side_effect_data('visit_player_out', True)
+				host.set_following_pattern(True)
+				host.set_objective(None)
+
+	def visit_player2(_, host):
+		distance = host.get_position().distance_to(GameLoop().get_player().get_focus().get_position())
+		out = host.side_effect_data('visit_player_out')
+		if distance < 80:
+			if out:
+				host.play_sound('hello')
 			host.side_effect_data('visit_player_out', False)
 			TimeHandler().remove_chrono_tag('visit_player')
 			host.set_following_pattern(False)

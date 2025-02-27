@@ -1,4 +1,4 @@
-from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler
+from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler, FPSHelper, UIElement
 
 
 class ButtonActions:	
@@ -55,6 +55,9 @@ class ButtonActions:
 	def toggle_fullscreen(self, _):
 		GameLoop().toggle_fullscreen()
 
+	def toggle_FPS(self, _):
+		pass
+
 	def open_map(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
@@ -100,6 +103,7 @@ class ButtonActions:
 	def reset_keybinds(self, _):
 		control_handler = ControlHandler()
 		ControlHandler.reset_keybinds(control_handler)
+	
 
 	def do(self, action_name, button = None):
 		LogHandler().add(f'Button action {action_name} activated')

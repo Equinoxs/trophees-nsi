@@ -38,7 +38,10 @@ class UIElement:
 		self.border_color = tuple(data.get('border_color', (0,) * 3))
 
 		# Le texte
-		self.font = DataHandler().load_font(data.get('font_family', 'default'), data.get('font_size', 24))
+		if data.get('font_family') == 'basic':
+			self.font = pygame.font.Font(None, data.get('font_size', 35))
+		else:
+			self.font = DataHandler().load_font(data.get('font_family', 'default'), data.get('font_size', 24))
 		self.calculate_text_surface()
 
 		# --- Compréhension des dimensions de l'élément ---

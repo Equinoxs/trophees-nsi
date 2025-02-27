@@ -12,6 +12,12 @@
 		"scream": {
 			"extension": "mp3"
 		},
+		"hello": {
+			"extension": "mp3"
+		},
+		"hey": {
+			"extension": "mp3"
+		},
 		"voice": {
 			"extension": "mp3"
 		},

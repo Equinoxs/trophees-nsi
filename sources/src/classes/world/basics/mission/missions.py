@@ -112,7 +112,7 @@ class Missions:
 		time = TimeHandler().add_chrono_tag('mission_test_0')
 		index = 0
 		if time == 0:
-			GameLoop().get_sound_mixer().play_music('tryhard')  # l'objectif commence
+			GameLoop().get_sound_mixer().play_music('mission')  # l'objectif commence
 		if time > 10:
 			index = -1  # mission échouée
 		else:

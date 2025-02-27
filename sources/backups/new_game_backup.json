@@ -227,9 +227,10 @@
 					"name": "alastair_denniston",
 					"position": [750, 2650],
 					"mission": "introduction_denniston",
-					"side_effects": ["handle_alastair_denniston"],
+					"side_effects": ["handle_alastair_denniston", "visit_player2"],
 					"image_path": "denniston",
 					"authorized_sound_tracks": ["footsteps", "voices"]
+					
 				},
 				{
 					"type": "NPC",
@@ -560,7 +561,7 @@
 					"type": "Furniture",
 					"name": "box",
 					"image_path": "random_box",
-					"position": [10, 120]
+					"position": [25, 120]
 				},
 				{
 					"type": "Furniture",
@@ -572,13 +573,13 @@
 					"type": "Furniture",
 					"name": "bin_1",
 					"image_path": "bin",
-					"position": [550, 340]
+					"position": [535, 340]
 				},
 				{
 					"type": "Furniture",
 					"name": "bin_2",
 					"image_path": "bin",
-					"position": [90, 330]
+					"position": [60, 330]
 				},
 				{
 					"type": "Furniture",

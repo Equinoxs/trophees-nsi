@@ -132,7 +132,7 @@ class ControlHandler:
 				'type': 'UIElement',
 				'class': 'key_settings_label',
 				'label': alias,
-				'y': y
+				'y': y+7
 			}
 
 			input_data = {
