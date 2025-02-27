@@ -2,12 +2,13 @@ from src.classes import BaseObject, DataHandler, Door, Vector2
 
 
 class Building(BaseObject):
-	def __init__(self, data, add_element):
+	def __init__(self, data: dict, add_element):
 		self.image_type = 'building'
 		super().__init__(data)
 
 		self.hitbox = DataHandler().list_transform(self.image_data['hitbox'])
 		self.hitbox_action_radius = self.image_data.get('hitbox_action_radius', self.hitbox_action_radius)
+		self.required_level = data['required_level']
 
 		width, height = self.image.get_size()
 		for i in range(len(self.hitbox)):
@@ -17,6 +18,7 @@ class Building(BaseObject):
 		if 'door' in self.image_data:
 			door_data = self.image_data['door'].copy()
 			door_data['type'] = 'Door'
+			door_data['required_level'] = self.required_level
 
 			if 'door' not in door_data:
 				door_data['name'] = self.name + '_door'
@@ -29,3 +31,8 @@ class Building(BaseObject):
 			door = Door(door_data)
 			door.you_belong_to_building()
 			add_element(Door(door_data))
+
+	def get_data(self):
+		data = super().get_data()
+		data['required_level'] = self.required_level
+		return data

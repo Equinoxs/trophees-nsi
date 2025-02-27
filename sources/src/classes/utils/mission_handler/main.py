@@ -1,4 +1,4 @@
-from src.classes import Mission, Player, LogHandler, GameLoop, TimeHandler
+from src.classes import Mission, Player, LogHandler, GameLoop, TimeHandler, DEBUG
 
 class MissionHandler:
 	_instance = None
@@ -78,6 +78,9 @@ class MissionHandler:
 	def update(self):
 		if self.current_mission is not None:
 			indicator = self.current_mission.update()
+			if DEBUG and GameLoop().get_control_handler().is_activated('pass_mission'):
+				self.current_mission.abort()
+				indicator = 1
 
 			if indicator == 1:
 				LogHandler().add(f'{Player().get_focus().get_name()} * accomplish mission {self.current_mission.get_name()}')
@@ -100,8 +103,14 @@ class MissionHandler:
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_data_handler().set_save_allowed(True)
 				GameLoop().get_data_handler().save()
+				GameLoop().get_sound_mixer().play_sfx('level_up')
 
 			elif indicator == -1:
+				GameLoop().get_menu_handler().set_current_menu('loading', True)
+				GameLoop().get_data_handler().reload_game(True)
+				GameLoop().get_data_handler().set_save_allowed(True)
+				GameLoop().get_menu_handler().set_current_menu('in_game')
+				GameLoop().get_sound_mixer().play_sfx('game_over')
 				LogHandler().add(f'{Player().get_focus().get_name()} * fail mission {self.current_mission.get_name()}')
 				self.current_mission = None  # La mission est échouée
 				self.delete_description_displayed()
@@ -118,10 +127,6 @@ class MissionHandler:
 				Player().get_map().set_allow_map_change(True)
 				GameLoop().get_control_handler().enable_all_actions()
 
-				GameLoop().get_menu_handler().set_current_menu('loading', True)
-				GameLoop().get_data_handler().reload()
-				GameLoop().get_data_handler().set_save_allowed(True)
-				GameLoop().get_menu_handler().set_current_menu('in_game')
 
 			elif indicator == 0:
 				self.display_description_of_current_mission()

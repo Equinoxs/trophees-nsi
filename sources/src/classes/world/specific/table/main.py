@@ -27,6 +27,12 @@ class Table(Furniture):
 	def get_items(self):
 		return self.items
 
+	def get_item(self, item_name: str):
+		for item in self.items:
+			if item.get_name() == item_name:
+				return item
+		return None
+
 	def item_position_taken(self, index_position):
 		for item in self.items:
 			if item.get_index_position() == index_position:

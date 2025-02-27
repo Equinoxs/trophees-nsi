@@ -17,6 +17,9 @@
 		},
 		"level_up": {
 			"extension": "mp3"
+		},
+		"click": {
+			"extension": "mp3"
 		}
 	}
 }

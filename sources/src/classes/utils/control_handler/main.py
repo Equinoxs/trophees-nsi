@@ -15,7 +15,7 @@ class ControlHandler:
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.events = {'quit': False, 'clicked': False}
-			self.keybinds = self.load_keybinds(saved_data['keybinds'])
+			self.load_keybinds(saved_data['keybinds'])
 			self.mouse_position = None
 			self.pygame_events = []
 			self.consumed_events = set()
@@ -26,14 +26,14 @@ class ControlHandler:
 		'''
 		Convertit les valeurs stockées en constantes Pygame si nécessaire.
 		'''
-		return {action: getattr(pygame, key) if isinstance(key, str) else key for action, key in keybinds_data.items()}
+		self.keybinds = {action: getattr(pygame, key) if isinstance(key, str) else key for action, key in keybinds_data.items()}
 
 	def get_pygame_key_name(self, key):
 		pygame_vars = getmembers(pygame)
 		return [var_name for var_name, var_val in pygame_vars if var_val is key if var_name.startswith('K_')]
 
 	def get_keybinds(self):
-		return {action: self.get_pygame_key_name(key)[0] if self.get_pygame_key_name(key) != [] else key for action, key in self.keybinds.items()}
+		return self.keybinds
 
 	def disable_actions(self, actions: list[str]):
 		for key in actions:
@@ -80,7 +80,7 @@ class ControlHandler:
 
 	def reset_keybinds(self):
 		menu = GameLoop().get_menu_handler().get_menu('settings')
-		self.keybinds = self.load_keybinds(DataHandler().load_save(new_game=True, reload=False)['keybinds'])
+		self.load_keybinds(DataHandler().load_save(new_game=True, reload=False)['keybinds'])
 
 		for element in menu.get_elements():
 			if getattr(element, 'event_name', None) is not None:

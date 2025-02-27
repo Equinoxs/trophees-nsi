@@ -1,11 +1,16 @@
 {
 	"missions": {
+		"mission_test": {
+			"required_level": 2,
+			"description": "The first Avenger: McGuire",
+			"rewards": 0
+		},
 		"introduction_denniston": {
 			"description": "Introduction to Bletchley Park"
 		},
-		"mission_test": {
+		"first_job": {
 			"required_level": 2,
-			"description": "The first Avenger: McGuire"
+			"description": "The work begins in Bletchley Park"
 		},
 		"act2_upgrade": {
 			"required_level": 3,

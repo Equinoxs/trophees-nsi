@@ -24,7 +24,7 @@ class DataHandler:
 		'level': 1,
 		'side_effects': [],
 		'boundaries': [],
-		'required_level': 0,
+		'required_level': 1,
 		'wall_type': 'gray_brick',
 		'wall_height': None,
 		'wall_width': None,

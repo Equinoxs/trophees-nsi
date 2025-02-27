@@ -503,6 +503,7 @@
 				{
 					"type": "Building",
 					"name": "hut_8",
+					"required_level": 4,
 					"image_path": "hut_8",
 					"position": [1200, 1050]
 				},
@@ -661,6 +662,14 @@
 					"type": "Table",
 					"name": "table_2",
 					"image_path": "dark_vertical_2",
+					"item_positions": [[50, 30]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "mail",
+							"name": "building_2_table_2_mail"
+						}
+					],
 					"position": [580, 60]
 				},
 				{
@@ -788,6 +797,67 @@
 					"name": "partition_4",
 					"boundaries": [[600, 533], { "sticker": "blackboard_papers", "x_offset": 120 }, { "sticker": "notes", "height": 20, "x_offset": 80, "y_offset": -30 }, { "sticker": "notes", "x_offset": 50 }, [350, 533], [350, 720]],
 					"wall_type": "yellow"
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_1",
+					"image_path": "bin",
+					"position": [540, 20]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_2",
+					"image_path": "bin",
+					"position": [20, 740]
+				},
+				{
+					"type": "Furniture",
+					"name": "box",
+					"image_path": "random_box",
+					"position": [160, 280]
+				},
+				{
+					"type": "Table",
+					"name": "hut_6_table_1",
+					"image_path": "light_horizontal_wide",
+					"item_positions": [[20, 20], [30, 40], [25, 50], [50, 25]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"image_path": "mail",
+							"name": "building_6_random_mail_1"
+						},
+						{
+							"type": "InventoryItem",
+							"image_path": "mail",
+							"name": "building_6_random_mail_2"
+						},
+						{
+							"type": "InventoryItem",
+							"image_path": "mail",
+							"name": "building_6_random_mail_3"
+						}
+					],
+					"position": [320, 35]
+				},
+				{
+					"type": "Table",
+					"name": "table_2",
+					"image_path": "light_horizontal_2",
+					"position": [50, 60]
+				},
+				{
+					"type": "Table",
+					"name": "table_3",
+					"image_path": "light_horizontal_1",
+					"position": [410, 320]
+				},
+				{
+					"type": "NPC",
+					"name": "gordon_welchman",
+					"position": [230, 45],
+					"image_path": "turing",
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "Door",
@@ -1122,6 +1192,7 @@
 		"sprint": "K_LSHIFT",
 		"toggle_map": "K_m",
 		"pass_message_dialog": "K_DOWN",
-		"enter": "K_RETURN"
+		"enter": "K_RETURN",
+		"pass_mission": "K_a"
 	}
 }

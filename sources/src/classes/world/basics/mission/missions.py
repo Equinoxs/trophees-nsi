@@ -19,12 +19,19 @@ class Missions:
 
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
+
 				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
+
 				'introduction_denniston_1': 'Follow Alastair Denniston',
 				'introduction_denniston_3': 'Follow Alastair Denniston',
 				'introduction_denniston_4': 'Follow Alastair Denniston',
 				'introduction_denniston_6': 'Follow Alastair Denniston',
+
+				'first_job_1': 'Get the letter in Building 2',
+				'first_job_2': 'Deliver the letter in Hut 6',
+
 				'act2_upgrade_0': 'Listen to Denniston'
+
 			}
 
 			self.update_missions_set()
@@ -107,11 +114,9 @@ class Missions:
 		if time == 0:
 			GameLoop().get_sound_mixer().play_music('tryhard')  # l'objectif commence
 		if time > 10:
-			Player().get_focus().play_sound('game_over')
 			index = -1  # mission échouée
 		else:
 			if Player().get_focus().get_position().get_y() <= 0:
-				Player().get_focus().play_sound('level_up')
 				index = 1  # objectif réussi
 			else:
 				index = 0  # objectif en cours
@@ -148,7 +153,7 @@ class Missions:
 				"It is called the Little House, here you're gonna find some stuff that may be useful to you."
 			]
 		}
-		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+		return self.use_create_dialog('introduction_denniston_2_dialog', dialog_data)
 
 	def introduction_denniston_3(self):
 		return self.use_move_npc('alastair_denniston', Vector2(800, 2580))
@@ -163,7 +168,7 @@ class Missions:
 				'I hope you remembered the names of the places I introduced, you will need them in a few moments.'
 			]
 		}
-		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+		return self.use_create_dialog('introduction_denniston_5_dialog', dialog_data)
 
 	def introduction_denniston_6(self):
 		return self.use_move_npc('alastair_denniston', Vector2(950, 1360))
@@ -171,17 +176,46 @@ class Missions:
 	def introduction_denniston_7(self):
 		dialog_data = {
 			'messages': [
-				'There are the Huts, you can see the number 7 and the number 8 on these.',
+				'There are the Huts, you can see the number 6 and the number 8 on these.',
 				'They will provide you some very important stuff you will need.',
 				'If you follow this way, you will find Building 1 and Building 2. I am sure you will enjoy this place!',
 				"Go! My men are waiting for you, and maybe I'll see you around."
 			]
 		}
-		Player().get_focus().play_sound('level_up')
-
-		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
+		return self.use_create_dialog('introduction_denniston_7_dialog', dialog_data)
 
 
+
+	# --- PREMIÈRE MISSION ---
+
+	def first_job_0(self):
+		dialog_data = {
+			'messages': [
+				'So you\'re the new one, huh?',
+				'I saw you coming, you seem like a hard worker. And that\'s good, because I got a mission for you!',
+				'You need to get into Building 2, you will see a wide table with a letter in it, I need you to get it and bring it to Hut 6.',
+				'In Hut 6, you\'ll see a table at the far end with letters like the one you will pick on it, put the mail on this table and we\'ll get the rest.',
+				'Thank you very much!'
+			]
+		}
+		return self.use_create_dialog('first_job_0_dialog', dialog_data)
+
+	def first_job_1(self):
+		inventory = Player().get_focus().get_inventory()
+		if inventory is not None and inventory.get_name() == 'building_2_table_2_mail':
+			return 1
+		return 0
+
+	def first_job_2(self):
+		if Player().get_map().get_name() == 'hut_6':
+			item = Player().get_map().search_by_name('hut_6_table_1').get_item('building_2_table_2_mail')
+			if item is not None:
+				return 1
+		return 0
+
+
+
+	# --- DENNISTON MONTE EN GRADE LE JOUEUR ---
 
 	def act2_upgrade_0(self):
 		dialog_data = {
