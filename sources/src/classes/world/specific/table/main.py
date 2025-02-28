@@ -1,4 +1,4 @@
-from src.classes import DataHandler, Player, Camera, Furniture, Vector2
+from src.classes import DataHandler, Player, Camera, Furniture, Vector2, InventoryItem
 from copy import deepcopy
 
 
@@ -29,7 +29,7 @@ class Table(Furniture):
 
 	def get_item(self, item_name: str):
 		for item in self.items:
-			if item.get_name() == item_name:
+			if isinstance(item, InventoryItem) and item.get_name() == item_name:
 				return item
 		return None
 

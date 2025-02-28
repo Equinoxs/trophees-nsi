@@ -232,6 +232,18 @@
 					"image_path": "denniston",
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"sound": "hello"
+					
+				},
+				{
+					"type": "NPC",
+					"name": "center_npc",
+					"position": [1850, 1440],
+					"mission": "first_job",
+					"side_effects": ["handle_center_npc", "visit_player"],
+					"image_path": "turing",
+					"pattern_timeline": [[1850, 1300], "npc_event_test", [2050, 1300]],
+					"pattern_type": "back_and_forth",
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",
@@ -526,6 +538,7 @@
 					"type": "Building",
 					"name": "block_h",
 					"image_path": "block_h",
+					"required_level": 7,
 					"position": [0, 850]
 				},
 				{
@@ -537,8 +550,8 @@
 			]
 		},
 		"building_1": {
-			"top_left_corner": [0, 0],
-			"bottom_right_corner": [550, 550],
+			"top_left_corner": [-20, -140],
+			"bottom_right_corner": [520, 6200],
 			"elements": [
 				{
 					"type": "Interior",
@@ -600,6 +613,15 @@
 					"name": "table",
 					"image_path": "dark_horizontal_low",
 					"position": [120, 240]
+				},
+				{
+					"type": "NPC",
+					"name": "building_1_master",
+					"image_path": "nathan",
+					"position": [510, 150],
+					"pattern_timeline": [[510, 150], "npc_event_test",[290, 255]],
+					"pattern_type": "back_and_forth",
+					"mission": "building_1_presentation"
 				}
 			]
 		},
@@ -858,6 +880,7 @@
 				{
 					"type": "NPC",
 					"name": "gordon_welchman",
+					"mission": "gordon_welchman_presentation",
 					"position": [230, 45],
 					"image_path": "turing",
 					"authorized_sound_tracks": ["footsteps", "voices"]
@@ -1174,6 +1197,29 @@
 					"name": "chair_8",
 					"image_path": "chair_dark_right",
 					"position": [540, 770]
+				},
+				{
+					"type": "NPC",
+					"name": "mansion_npc_1",
+					"image_path": "albert",
+					"position": [50, 650],
+					"pattern_timeline": ["npc_event_test", [330, 650], [320, 870], [80, 860], "npc_event_test"],
+					"pattern_type": "back_and_forth"
+				},
+				{
+					"type": "NPC",
+					"name": "mansion_npc_2",
+					"image_path": "albert",
+					"position": [650, 650],
+					"pattern_timeline": [[650, 650], [385, 650], [340, 320], [50, 310]],
+					"pattern_type": "back_and_forth"
+				},
+				{
+					"type": "NPC",
+					"name": "mansion_master",
+					"image_path": "albert",
+					"mission": "mansion_presentation",
+					"position": [230, 42]
 				},
 				{
 					"type": "Door",

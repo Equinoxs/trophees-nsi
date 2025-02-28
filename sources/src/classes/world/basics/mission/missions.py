@@ -21,6 +21,12 @@ class Missions:
 			self.objective_descriptions = {
 
 				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
+    
+				'gordon_welchman_presentation_0': 'Listen to the stranger',
+    
+				'mansion_presentation_0': 'Listen to the stranger',
+    
+				'building_1_presentation_0': 'Listen to the stranger',
 
 				'introduction_denniston_1': 'Follow Alastair Denniston',
 				'introduction_denniston_3': 'Follow Alastair Denniston',
@@ -127,6 +133,51 @@ class Missions:
 
 
 
+	# --- PRÉSENTATION DE GORDON WELCHMAN ---
+
+	def gordon_welchman_presentation_0(self):
+		dialog_data = {
+			'messages': [
+				'Hello new one! I\'m glad to meet you.',
+				'My name is Gordon Welchman. I am the boss of this Hut.',
+				'Let me explain you what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans communicate via encrypted message, we have the but we don\'t know how to break them.',
+				'They use the Enigma machine to encrypt and decrypt their messages, by using a common cipher which changes every day, so we have to find a clever way to guess this cipher fast.',
+				'In conclusion, we try to manage to break the German Enigma machine cipher. If we do it, we would have very important pieces of information about the German organizations and plans.'
+			]
+		}
+		return self.use_create_dialog('gordon_welchman_presentation_0_dialog', dialog_data)
+
+
+
+	# --- PRÉSENTATION DU MANOIR ---
+
+	def mansion_presentation_0(self):
+		dialog_data = {
+			'messages': [
+				'Hey! I hope you enjoy this place.',
+				'Well, here is the Mansion, if you want some peace moments, go there, you have to read and to work!',
+				'You just need to know that this place is to get some rest, take a coffee or a cup of tea, and get unstressed, which is very important in jobs like the guys do.',
+				'Finally, I hope I\'ll see you around soon, goodbye my friend!'
+			]
+		}
+		return self.use_create_dialog('mansion_presentation_0_dialog', dialog_data)
+
+
+
+	# --- PRÉSENTATION DU BUILDING 1 ---
+
+	def building_1_presentation_0(self):
+		dialog_data = {
+			'messages': [
+				'Thank you for coming in Building 1!',
+				'A lot of work that we do here is focused on administrative stuff, it\'s not very important but let it be, somebody must do it huh!',
+				'You know, what do we do here, they keep saying it\'s important but I don\'t know if we will manage to do it...'
+			]
+		}
+		return self.use_create_dialog('building_1_presentation_0_dialog', dialog_data)
+
+
+
 	# --- MISSION DÉCOUVERTE DE LA MAP AVEC DENNISTON ---
 
 	def introduction_denniston_0(self):
@@ -136,7 +187,7 @@ class Missions:
 			'messages': [
 				'Hello. Welcome to Bletchely Park',
 				"I am Alastair Denniston, your commandant. By now, you're gonna do what I say.",
-				'At Bletchley Park, we fight for peace, against the german people. Before I tell you more, would you please sign a contract. In a few words, you will remain under the silence about what is going on here. Otherwise you would be considered as a traitor that MIB must deal with.',
+				'At Bletchley Park, we fight for peace, against the german people. Before I tell you more, would you please sign a contract. In a few words, you will remain under the silence about what is going on here. Otherwise you would be considered as a traitor that MI6 must deal with.',
 				'If you do consent, please continue. However, if you do not, please close that window, delete this game and never come back!',
 				'Congratulations, let me present you the Park.'
 			]

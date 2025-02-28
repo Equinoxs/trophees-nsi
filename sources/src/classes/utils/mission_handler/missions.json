@@ -5,6 +5,18 @@
 			"description": "The first Avenger: McGuire",
 			"rewards": 0
 		},
+		"gordon_welchman_presentation": {
+			"description": "The Hut 6 Stranger",
+			"rewards": 0
+		},
+		"mansion_presentation": {
+			"description": "The Mansion",
+			"rewards": 0
+		},
+		"building_1_presentation": {
+			"description": "The Building 1",
+			"rewards": 0
+		},
 		"introduction_denniston": {
 			"description": "Introduction to Bletchley Park"
 		},
