@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Menu, DataHandler, GameLoop, ButtonActions, FPSHelper
+from src.classes import Menu, DataHandler, GameLoop, ButtonActions
 
 
 class MenuHandler:

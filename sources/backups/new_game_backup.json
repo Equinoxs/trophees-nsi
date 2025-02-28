@@ -228,11 +228,9 @@
 					"name": "alastair_denniston",
 					"position": [750, 2650],
 					"mission": "introduction_denniston",
-					"side_effects": ["handle_alastair_denniston", "visit_player"],
+					"side_effects": ["handle_alastair_denniston"],
 					"image_path": "denniston",
-					"authorized_sound_tracks": ["footsteps", "voices"],
-					"sound": "hello"
-					
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "NPC",
