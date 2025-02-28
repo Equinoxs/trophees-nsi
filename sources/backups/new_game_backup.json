@@ -111,7 +111,8 @@
 					"image_path": "albert",
 					"interaction": "house_proprietary_start_mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
-					"side_effects": ["visit_player"]
+					"side_effects": ["visit_player"],
+					"sound": "hey"
 				}
 			]
 		},
@@ -227,10 +228,10 @@
 					"name": "alastair_denniston",
 					"position": [750, 2650],
 					"mission": "introduction_denniston",
-					"side_effects": ["handle_alastair_denniston", "visit_player2"],
+					"side_effects": ["handle_alastair_denniston", "visit_player"],
 					"image_path": "denniston",
-					"authorized_sound_tracks": ["footsteps", "voices"]
-					
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"sound": "hello"
 				},
 				{
 					"type": "NPC",
@@ -241,7 +242,8 @@
 					"image_path": "albert",
 					"mission": "mission_test",
 					"authorized_sound_tracks": ["footsteps", "voices"],
-					"side_effects": ["visit_player"]
+					"side_effects": ["visit_player"],
+					"sound": "hey"
 				},
 				{
 					"type": "Tree",

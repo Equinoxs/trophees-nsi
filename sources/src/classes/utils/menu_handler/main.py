@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import Menu, DataHandler, GameLoop, ButtonActions
+from src.classes import Menu, DataHandler, GameLoop, ButtonActions, FPSHelper
 
 
 class MenuHandler:
@@ -26,6 +26,7 @@ class MenuHandler:
 			self.set_current_menu(self.current_menu_name)
 			self.button_actions = ButtonActions()
 			self.message_displayed = None
+			self.fps_toggled = True
 
 	def get_button_actions(self):
 		return self.button_actions
@@ -78,6 +79,15 @@ class MenuHandler:
 	def get_current_menu(self):
 		return self.current_menu
 
+	def get_fps_toggled(self):
+		return self.fps_toggled
+	
+	def toggle_fps(self):
+		if self.fps_toggled:
+			self.fps_toggled = False
+		else:
+			self.fps_toggled = True
+
 	def set_current_menu(self, menu_name: str, force_render: bool = False):
 		if menu_name == 'map_opened':
 			GameLoop().get_camera().full_map_rendered()
@@ -106,6 +116,7 @@ class MenuHandler:
 		if last_menu and last_menu in self.menus:
 			self.current_menu = self.menus[last_menu]
 			self.current_menu_name = last_menu
+			
 
 	def update(self):
 		if self.current_menu is not None:

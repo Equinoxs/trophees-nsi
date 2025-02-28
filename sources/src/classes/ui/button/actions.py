@@ -56,7 +56,7 @@ class ButtonActions:
 		GameLoop().toggle_fullscreen()
 
 	def toggle_FPS(self, _):
-		pass
+		GameLoop().get_menu_handler().toggle_fps()
 
 	def open_map(self, _):
 		GameLoop().pause_game()
