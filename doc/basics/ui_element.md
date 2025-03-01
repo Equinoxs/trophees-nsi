@@ -5,21 +5,21 @@ Cette classe est nécessaire pour pouvoir créer des éléments visuels (texte, 
 Elle permet d'automatiser leur création en utilisant les données renseignées dans le fichier `info.json` de `menu_handler` pour en faire un élément visible à l'écran.
 
 >```json
->			{
->				"type": "Button",
->				"label": "Close",
->				"border_radius": 4,
->				"border_length": 2,
->				"border_color": [46, 34, 9],
->				"color": [61, 53, 39],
->				"text_color": [204, 174, 114],
->				"font_size": 50,
->				"x": 50,
->				"y": 40,
->				"width": 140,
->				"height": "auto",
->				"action": "focus_on_game"
->			}
+>{
+>	"type": "Button",
+>	"label": "Close",
+>	"border_radius": 4,
+>	"border_length": 2,
+>	"border_color": [46, 34, 9],
+>	"color": [61, 53, 39],
+>	"text_color": [204, 174, 114],
+>	"font_size": 50,
+>	"x": 50,
+>	"y": 40,
+>	"width": 140,
+>	"height": "auto",
+>	"action": "focus_on_game"
+>}
 >```
 > *Exemple de fichier `info.json`*
 
@@ -56,20 +56,31 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
   Rectangle de position du texte à l'intérieur de l'élément.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`  \
+- `__init__(data)` &rarr; `None` \
   Initialise les attributs d'un élément à partir des données JSON fournies.  \
   Paramètres :
-  - `data` : *`dict`*  \
+  * `data` : *`dict`* \
     Données pour configurer l'élément.
 
-- `update_rect()` &rarr; `None`  \
+- `update_rect()` &rarr; `None` \
   Met à jour les rectangles (`rect` et `_text_rect`) en fonction de la position et de la surface de l'élément.
 
-- `get_rect()` &rarr; `Rect`  \
+- `get_rect()` &rarr; `Rect` \
   Retourne le rectangle principal de l'élément.
 
-- `update()` &rarr; `None`  \
+- `update()` &rarr; `None` \
   Met à jour l'élément. Peut être surchargée dans des classes enfants.
 
-- `render()` &rarr; `None`  \
-  Affiche l'élément à l'écran en dessinant la surface, les bordures, le texte, et l'image (si applicable).
+- `render()` &rarr; `None` \
+  Affiche l'élément à l'écran en dessinant la surface, les bordures, le texte et l'image (si applicable).
+
+- `render_text(surface = 'menu')` &rarr; `None` \
+  Affiche le texte sur la surface `surface`.
+  Paramètres :
+  * `surface` : *`str`*
+
+- `calculate_text_surface()` &rarr; `None` \
+  Calcule la surface du texte de `label`.
+
+- `calculate_text_rect()` &rarr; `None` \
+  Calcule le rectangle du texte en fonction de son alignement.

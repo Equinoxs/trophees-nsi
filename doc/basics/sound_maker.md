@@ -25,6 +25,7 @@ Les sons sont rangés dans un dossier indiquant leur type, comme `footsteps` ou 
 >*Exemple de fichier `info.json`*
 
 ## Attributs
+- `position` : *`Vector2`*
 - `all_sound_tracks` : *`dict`* \
   Toutes les `SoundTrack` instanciées. Permet au `Player` de pouvoir jouer toutes les `SoundTrack`.
 - `sound_tracks` : *`dict`* \
@@ -86,3 +87,6 @@ Les sons sont rangés dans un dossier indiquant leur type, comme `footsteps` ou 
 
 - `dont_gimme_all_sound_tracks(sound_type)` &rarr; `None` \
   Arrête et efface toutes les `SoundTrack` instanciées stockées dans `all_sound_tracks`.
+
+- `update()` &rarr; None \
+  Méthode seulement présente pour assurer une compatibilité de code.

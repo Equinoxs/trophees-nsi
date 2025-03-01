@@ -73,7 +73,6 @@ class Missions:
 		while method is not None:
 			index += 1
 			method = getattr(self, mission_name + '_' + str(index), None)
-		print(index)
 		return index
 
 	def use_create_dialog(self, dialog_name: str, dialog_data: dict, immobilize_player: bool = False):

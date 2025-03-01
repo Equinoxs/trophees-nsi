@@ -9,7 +9,8 @@ elle permet un déplacement linéaire et lisse.
 
 ## Attribut
 - `speed_vector` : *`Vector2`* **get**
-
+- `has_moved` : *`bool`* **get** \
+  Indique si un mouvement a récemment été effectué.
 ## Méthodes
 - `__init__` &rarr; `None` \
   Initialise le vecteur de vitesse au vecteur nul.
@@ -23,3 +24,6 @@ elle permet un déplacement linéaire et lisse.
   Applique `speed_vector` sur `sprite_position` en le multipliant par `dt` (&Delta;t) pour respecter la vitesse. \
   Paramètres :
   * `sprite_position` : *`Vector2`*
+
+- `update()` &rarr; `None` \
+  Met à jour la position et `has_moved`.

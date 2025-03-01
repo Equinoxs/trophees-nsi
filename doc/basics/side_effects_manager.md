@@ -37,3 +37,6 @@ Le dictionnaire `side_effects_data` permet de renforcer le pouvoir des effets de
 
 - `apply_side_effects()` &rarr; `None` \
   Exécute toutes les fonctions de `side_effects`.
+
+- `update()` &rarr; `None` \
+  Alias de `apply_side_effects()`.

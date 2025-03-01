@@ -13,6 +13,8 @@ Elle implémente une liste de missions et d'objectifs avec leur description et l
 - `missions_set` : *`set`* **get**
 - `objective_descriptions` : *`dict`* \
   Description des objectifs sous la forme <nom_de_la_mission>_<indice_de_l'objectif>.
+- `objectives_store` : *`dict`* \
+  Stockage de la progression des objectifs.
 
 ## Méthodes
 - `__init__()` &rarr; `None`
@@ -31,6 +33,26 @@ Elle implémente une liste de missions et d'objectifs avec leur description et l
   * `index` : *`int`* \
     Indice de l'objectif.
 
+- `get_objectives_len(mission_name)` &rarr; `int` \
+  Renvoie le nombre d'objectifs dans une mission `mission_name`. \
+  Paramètres :
+  * `mission_name` : *`str`*
+
+- `use_create_dialog(dialog_name, dialog_data, immobilize_player)` &rarr; `int` \
+  Crée un dialogue `dialog_name` avec les textes de `dialog_data`, et immobilise le joueur 
+  si `immobilize_player` vaut `True`. Renvoie 1 si le dialogue est terminé et 0 sinon. \
+  Paramètres :
+  * `dialog_name` : *`str`*
+  * `dialog_data` : *`dict`*
+  * `immobilize_player` : *`bool`*
+
+- `use_move_npc(npc_name, destination)` &rarr; `int` \
+  Lance le déplacement d'un NPC `npc_name` vers `destination`. Renvoie 1 si le NPC a atteint sa destination
+  et 0 sinon. \
+  Paramètres :
+  * `npc_name` : *`str`*
+  * `destination` : *`Vector2`*
+
 - `do(mission_name, index)` &rarr; `int` \
   Exécute la méthode associée à l'objectif `index` d'une mission `mission_name` et renvoie le résultat de cet objectif. \
   Paramètres :
@@ -38,12 +60,7 @@ Elle implémente une liste de missions et d'objectifs avec leur description et l
   * `index` : *`int`* \
     Indice de l'objectif.
 
-> - `mission_XXXXX(index)` &rarr; `int` \
->   Exécute la méthode associée à l'objectif `index` de la mission XXXXX et renvoie le résultat de cet objectif. \
->   Paramètre :
->   * `index` : *`int`* \
->      Indice de l'objectif.
 > - `mission_XXXXX_n()` &rarr; `int` \
 >   Exécute la méthode associée à l'objectif n de la mission XXXXX et renvoie le résultat de cet objectif.
 > 
-> *Exemple de fonctions pour un objectif XXXXX.*
+> *Exemple de méthode pour un objectif XXXXX.*

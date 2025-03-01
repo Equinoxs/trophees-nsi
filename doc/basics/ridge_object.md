@@ -9,7 +9,7 @@ si elle doit se placer au-dessus ou au-dessous.
 Elle contient un attribut contenant son type pour permettre de calculer son placement en fonction du type
 de l'autre objet.
 
->![Animation](ridge_object_1.png) \
+>![RidgeObject](ridge_object_1.png) \
 > *Exemple **annoté** d'arête de mur.*
 ## Attribut
 - `object_type` : *`str`* = `'ridge'` **get**

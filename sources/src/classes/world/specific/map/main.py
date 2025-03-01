@@ -19,7 +19,7 @@ class Map:
 				self.elements[i].get_image(),
 				(self.elements[i].get_position() - self.elements[0].get_position()).convert_to_tuple()
 			)
-			self.elements[i].dont_render()
+			self.elements[i].set_must_render(False)
 
 		SoundMixer().play_music('On the Island - Godmode')
 

@@ -73,5 +73,7 @@ Les informations de l'animation sont présentes dans le fichier `info.json` asso
   Reprend l'animation précédemment arrêtée.
 - `reset_animation_state()` &rarr; `None` \
   Remet l'animation en cours à zéro.
-- `update_animation_index()` &rarr; `None` \
+- `update_index_animation()` &rarr; `None` \
   Méthode exécutée à chaque rafraîchissement du jeu, permet de mettre à jour l'état de l'animation.
+- `update()` &rarr; None \
+  Alias de `update_index_animation()`.

@@ -164,12 +164,6 @@ class Sprite:
 	def move_to(self, position: Vector2):
 		self.position.copy(position)
 
-	def dont_render(self):
-		self.must_render = False
-
-	def go_render(self):
-		self.must_render = True
-
 	def update(self):
 		self.go_to_frame(self.frame_index, self.animation_name)
 

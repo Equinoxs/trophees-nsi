@@ -24,6 +24,11 @@ Elle permet de charger une image en mémoire et de l'afficher à l'écran et en 
   Renversement vertical du `Sprite`.
 - `horizontal_flip`: *`bool`* \
   Renversement horizontal du `Sprite`, utilisé par exemple pour mettre en miroir le joueur lorsqu'il change de direction.
+- `rendered` : *`bool`* \
+  Indique si le `Sprite` a été rendu à l'écran au dernier rafraîchissement.
+- `must_render` : *`bool`* **get / set**\
+  Indique si le `Sprite` doit être rendu à l'écran au prochain rafraîchissement.
+
 
 ## Méthodes
 - `__init__(position, image_path)` &rarr; `None` \
@@ -81,3 +86,9 @@ Elle permet de charger une image en mémoire et de l'afficher à l'écran et en 
   Change la position. \
   Paramètre :
   * `position` : *`Vector2`*
+
+- `update()` &rarr; `None` \
+  Met à jour l'animation en cours.
+
+- `render` &rarr; `None` \
+  Méthode appelée par `Camera` pour effectuer le rendu. 

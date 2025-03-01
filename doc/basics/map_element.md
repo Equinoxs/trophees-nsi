@@ -16,6 +16,8 @@ et un nom associé à l'instance.
 - `z_indexes_history` : *`list[int]`* \
   Historique des valeurs de `z_index` de l'instance courante.
 - `name` : *`str`* **get**
+- `data` : *`dict`* **get** \
+  Données servant à la sauvegarde.
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \

@@ -129,7 +129,7 @@ class NPC(PillarObject):
 
 
 	# Cette méthode se charge de véhiculer les NPC à un point fixé (a.k.a. self.objective)
-	# Elle est appelé à chaque frame
+	# Elle est appelée à chaque frame
 	def move_npc_to_objective(self):
 		if self.objective is not None and self.must_move:
 			relative_objective = self.objective - self.position
