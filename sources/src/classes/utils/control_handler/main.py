@@ -39,6 +39,9 @@ class ControlHandler:
 		for key in actions:
 			self.disabled_actions.add(key)
 
+	def disable_all_actions(self):
+		self.disable_actions(self.keybinds.keys())
+
 	def enable_all_actions(self):
 		self.disabled_actions = set()
 

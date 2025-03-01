@@ -34,7 +34,8 @@ class Missions:
 				'introduction_denniston_6': 'Follow Alastair Denniston',
 
 				'first_job_1': 'Get the letter in Building 2',
-				'first_job_2': 'Deliver the letter in Hut 6',
+				'first_job_2': 'Decrypt the morse encrypted message',
+				'first_job_3': 'Deliver the letter in Hut 6',
 
 				'act2_upgrade_0': 'Listen to Denniston'
 
@@ -257,6 +258,46 @@ class Missions:
 		return 0
 
 	def first_job_2(self):
+		if GameLoop().get_menu_handler().get_current_menu_name() != 'mission':
+			GameLoop().get_control_handler().disable_all_actions()
+			GameLoop().get_mission_handler().get_current_mission().move_displayed_description('mission')
+			GameLoop().get_menu_handler().set_current_menu('mission')
+
+			paper_data = {
+				'type': 'UIElement',
+				'id': 'paper_bg',
+				'class': 'first_job_2_paper_bg'
+			}
+
+			encrypted_message_data = {
+				'type': 'UIElement',
+				'id': 'encrypted_message',
+				'class': 'first_job_2_encrypted_message',
+				'label': 'Encrypted Message: ..-. .- .-.. -.-. --- -. / ...-- / .--. --- ... .. - .. --- -. / . .- --. .-.. . / .-- . ... - .-.-.- / ...- --- .-. -... . .-. . .. - ..- -. --. / ..-. ..- .-. / -- .. ... ... .. --- -. / -.-. --- -... .-.'
+			}
+
+			morse_input_data = {
+				'type': 'TextInput',
+				'id': 'morse_input',
+				'class': 'first_job_2_morse_input'
+			}
+
+			GameLoop().get_menu_handler().get_current_menu().add_element(paper_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(morse_input_data)
+		else:
+			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('morse_input')
+			if input.get_text().upper() == 'FALCON 3 POSITION EAGLE WEST. VORBEREITUNG FUR MISSION COBR':
+				GameLoop().get_control_handler().enable_all_actions()
+				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('morse_input')
+				GameLoop().get_menu_handler().set_current_menu('in_game')
+				return 1
+		return 0
+
+	def first_job_3(self):
 		if Player().get_map().get_name() == 'hut_6':
 			item = Player().get_map().search_by_name('hut_6_table_1').get_item('building_2_table_2_mail')
 			if item is not None:

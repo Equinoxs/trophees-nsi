@@ -10,6 +10,7 @@ class Mission:
 		self.objectives_len = Missions().get_objectives_len(name)
 		self.objective_index = 0
 		self.indicator = 0
+		self.description_menu_name = None
 		self.displayed_description = None
 
 	def abort(self):
@@ -62,6 +63,12 @@ class Mission:
 
 		self.delete_objective_description()
 		self.displayed_description = GameLoop().get_menu_handler().get_menu('in_game').add_element(data)
+		self.description_menu_name = 'in_game'
+
+	def move_displayed_description(self, menu_name: str):
+		GameLoop().get_menu_handler().get_menu(self.description_menu_name).delete_element(self.displayed_description)
+		GameLoop().get_menu_handler().get_menu(menu_name).delete_element(self.displayed_description)
+		self.description_menu_name = menu_name
 
 	def delete_objective_description(self):
 		if self.displayed_description is not None:

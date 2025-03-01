@@ -19,6 +19,9 @@ class MissionHandler:
 			self.mission_description_displayed = None
 			self.mission_popup = None
 
+	def get_current_mission(self):
+		return self.current_mission
+
 	def get_mission(self, mission_name: str) -> Mission | None:
 		return self.missions.get(mission_name, None)
 

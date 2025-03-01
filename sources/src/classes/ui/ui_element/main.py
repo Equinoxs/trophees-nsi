@@ -12,10 +12,15 @@ class UIElement:
 			class_names.reverse()
 			for class_name in class_names:  # Pour pouvoir utiliser plusieurs classes en meme temps séparés d'un espace
 				class_properties = classes_data.get(class_name, {})
-				data = {**class_properties, **data}
+				copy = class_properties.copy()
+				copy.update(data)
+				data.clear()
+				data.update(copy)
 
 		# Données de bases
 		self.border_radius = data.get('border_radius', 0)
+		self.id = data.get('id', None)
+		self.return_line = data.get('return_line', False)
 		self.label = data.get('label', '')
 		self.text_align = data.get('text_align', 'center')
 		self.position = Vector2(data.get('x', 0), data.get('y', 0))
@@ -42,11 +47,11 @@ class UIElement:
 			self.font = pygame.font.Font(None, data.get('font_size', 35))
 		else:
 			self.font = DataHandler().load_font(data.get('font_family', 'default'), data.get('font_size', 24))
-		self.calculate_text_surface()
 
 		# --- Compréhension des dimensions de l'élément ---
 		self.surface_width = data.get('width', SCREEN_WIDTH)
 		self.surface_height = data.get('height', SCREEN_HEIGHT)
+		self.calculate_text_surface(self.surface_width)
 
 		if self.surface_width == 'auto':
 			width = self._text_surface.get_width() + 10  # 10px de padding horizontal
@@ -61,8 +66,26 @@ class UIElement:
 		if type(self.color) == tuple:
 			self.surface.fill(self.color)
 
-		self.rect = None
 		self.update_rect()
+
+	def get_id(self):
+		return self.id
+
+	def get_label(self):
+		return self.label
+
+	def set_label(self, new_label: str):
+		self.label = str(new_label)
+		self.calculate_text_surface(self.surface_width)
+
+	def get_rect(self):
+		return self.rect
+
+	def get_image(self):
+		return self.image
+
+	def get_position(self):
+		return self.position
 
 	def update_rect(self):
 		pos_x = self.position.get_x()
@@ -82,54 +105,55 @@ class UIElement:
 			width = max(self.surface.get_width(), self.image.get_width())
 			height = max(self.surface.get_height(), self.image.get_height())
 		else:
-			width = self.surface.get_width()
-			height = self.surface.get_height()
+			if self.surface_width == 'auto':
+				width = self._text_surface.get_width() + 10  # 10px de padding horizontal
+			else:
+				width = self.surface_width
+			if self.surface_height == 'auto':
+				height = self._text_surface.get_height() + 10  # 10px de padding vertical
+			else:
+				height = self.surface_height
 
 		self.rect = pygame.Rect(pos_x, pos_y, width, height)
 		self.calculate_text_rect()
 
-	def get_label(self):
-		return self.label
+	def calculate_text_surface(self, width: str):
+		if self.return_line:
+			if width == 'auto':
+				raise ValueError('Cannot set "width" prop to "auto" when setting "return_line" to true.')
 
-	def set_label(self, new_label: str):
-		self.label = str(new_label)
-		self.calculate_text_surface()
+			words = self.label.split()  # Découper en mots
+			lines = []
+			current_line = ""
 
-	def get_rect(self):
-		return self.rect
+			for word in words:
+				test_line = current_line + " " + word if current_line else word
+				test_surface = self.font.render(test_line, True, self.text_color)
 
-	def get_image(self):
-		return self.image
+				print(test_line, test_surface.get_width())
 
-	def get_position(self):
-		return self.position
+				if test_surface.get_width() > width:  # Dépassement de la ligne
+					lines.append(current_line)  # Valider la ligne actuelle
+					current_line = word  # Commencer une nouvelle ligne
+				else:
+					current_line = test_line  # Ajouter le mot
 
-	def update(self):
-		self.update_rect()
+			if current_line:  # Ajouter la dernière ligne
+				lines.append(current_line)
 
-	def render(self, surface = 'menu', render_surface = False):
-		self.update_rect()
+			# Créer une surface assez grande pour contenir tout le texte
+			line_height = self.font.get_height()
+			text_height = line_height * len(lines)
+			self._text_surface = pygame.Surface((width, text_height), pygame.SRCALPHA)
 
-		if self.color != 'transparent':
-			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.color, self.rect, border_radius=self.border_radius)
-
-		if self.border_length > 0:
-			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
-
-		self.render_text()
-
-		if self.image is not None:
-			GameLoop().get_camera().draw(self.image, (self.rect.x, self.rect.y), surface)
-
-		if render_surface:
-			GameLoop().get_camera().draw(self.surface, (self.rect.x, self.rect.y), surface)
-
-	def render_text(self, surface = 'menu'):
-		if self.label != '':
-			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, surface)
-
-	def calculate_text_surface(self):
-		self._text_surface = self.font.render(self.label, True, self.text_color)
+			# Remplir la surface avec les lignes de texte
+			y = 0
+			for line in lines:
+				text_surface = self.font.render(line, True, self.text_color)
+				self._text_surface.blit(text_surface, (0, y))  # Aligné à gauche
+				y += line_height  # Espacement entre les lignes
+		else:
+			self._text_surface = self.font.render(self.label, True, self.text_color)
 
 	def calculate_text_rect(self):
 		match self.text_align:
@@ -143,3 +167,27 @@ class UIElement:
 				self._text_rect = self._text_surface.get_rect(midleft=(self.rect.centerx-180, self.rect.centery))
 			case _:
 				raise ValueError('Invalid text_align value')
+
+	def render_text(self, surface = 'menu'):
+		if self.label != '':
+			GameLoop().get_camera().draw(self._text_surface, self._text_rect.topleft, surface)
+
+	def update(self):
+		self.update_rect()
+
+	def render(self, surface = 'menu', render_surface = False):
+		self.update_rect()
+
+		if self.color != 'transparent':
+			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.color, self.rect, border_radius=self.border_radius)
+
+		if self.border_length > 0:
+			pygame.draw.rect(GameLoop().get_camera().get_surface(surface), self.border_color, self.rect, width=self.border_length, border_radius=self.border_radius)
+
+		self.render_text(surface)
+
+		if self.image is not None:
+			GameLoop().get_camera().draw(self.image, (self.rect.x, self.rect.y), surface)
+
+		if render_surface:
+			GameLoop().get_camera().draw(self.surface, (self.rect.x, self.rect.y), surface)

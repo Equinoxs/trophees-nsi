@@ -13,6 +13,15 @@ class Menu:
 			return [element for element in self.ui_elements if getattr(element, 'event_name', None) == event]
 		return self.ui_elements
 
+	def get_element_by_id(self, id: str):
+		for element in self.ui_elements:
+			if element.get_id() == id:
+				return element
+		return None
+
+	def add_element_ref(self, element_ref):
+		self.ui_elements.append(element_ref)
+
 	def add_element(self, element_data: dict):
 		element_class = getattr(classes, element_data['type'], None)
 		if element_class is None:
@@ -21,6 +30,11 @@ class Menu:
 
 		self.ui_elements.append(element)
 		return element
+
+	def delete_element_by_id(self, id: str):
+		element = self.get_element_by_id(id)
+		if element is not None:
+			self.delete_element(element)
 
 	def delete_element(self, element: UIElement):
 		if element is not None and element in self.ui_elements:

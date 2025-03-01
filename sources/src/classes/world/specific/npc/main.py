@@ -256,7 +256,7 @@ class NPC(PillarObject):
 		x, y = self.position.convert_to_tuple()
 		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
 		super().render()
-		if self.inventory is not None:
+		if isinstance(self.inventory, InventoryItem):
 			Camera().draw(self.inventory.get_image(), (x + self.image.get_width() // 2, y - (self.image.get_height() + self.inventory.get_image().get_height()) // 2), 'map')
 		self.position.set_all(x, y)
 

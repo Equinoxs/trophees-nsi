@@ -72,6 +72,7 @@ class ButtonActions:
 		text = input_field.get_text()
 		LogHandler().add(f'Saved to file {text}')
 		DataHandler().save(text)
+		input_field.empty_text()
 
 	def load_game(self, button):
 		GameLoop().get_menu_handler().set_current_menu('loading', True)

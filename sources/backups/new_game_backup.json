@@ -1240,6 +1240,7 @@
 		"toggle_map": "K_m",
 		"pass_message_dialog": "K_DOWN",
 		"enter": "K_RETURN",
-		"pass_mission": "K_a"
+		"pass_mission": "K_a",
+		"skip_dialog": "K_TAB"
 	}
 }

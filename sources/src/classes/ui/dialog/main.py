@@ -45,10 +45,15 @@ class Dialog(UIElement):
 			text = text[i:]
 		return text
 
-	def render_text(self):
+	def render_text(self, surface_name: str = 'menu'):
 		if not self.chrono_tag_set:
 			TimeHandler().add_chrono_tag('dialog_text_wrap', True)
 			self.chrono_tag_set = True
+
+		if ControlHandler().is_activated('skip_dialog'):
+			self.message_id = -1
+			self.next_message()
+			return MenuHandler().remove_dialog(self.title)
 
 		if TimeHandler().add_chrono_tag('dialog_text_wrap') < self.text_display_duration:
 			self.wrap_text(True)
@@ -61,8 +66,8 @@ class Dialog(UIElement):
 			arrow_position[0] = arrow_position[0] - self.arrow_image.get_rect().width - self.text_margin
 			arrow_position[1] = arrow_position[1] - self.arrow_image.get_rect().height - self.text_margin - (abs((TimeHandler().add_chrono_tag('dialog_text_wrap') % 1) - 0.5) * 10)
 
-			GameLoop().get_camera().draw(self.arrow_image, tuple(arrow_position), 'menu')
-			if ControlHandler().is_activated('pass_message_dialog'):
+			GameLoop().get_camera().draw(self.arrow_image, tuple(arrow_position), surface_name)
+			if ControlHandler().is_activated('pass_message_dialog') or ControlHandler().is_activated('enter'):
 				if self.message_id == len(self.messages) - 1:
 					self.message_id = -1
 					self.next_message()
@@ -70,13 +75,13 @@ class Dialog(UIElement):
 				self.next_message()
 
 		for y, line in self._text_surfaces.items():
-			GameLoop().get_camera().draw(line, (self.rect.topleft[0] + self.text_margin, y), 'menu')
+			GameLoop().get_camera().draw(line, (self.rect.topleft[0] + self.text_margin, y), surface_name)
 
-	def calculate_text_surface(self):
-		return
+	def calculate_text_surface(self, width: str):
+		pass
 
 	def calculate_text_rect(self):
-		return
+		pass
 
 	def set_label(self, new_label: str):
 		super().set_label(new_label)

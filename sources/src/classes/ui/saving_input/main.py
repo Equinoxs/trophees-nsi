@@ -8,5 +8,5 @@ class SavingInput(TextInput):
 		super().__init__(data)
 		SavingInput.active_input = self  # Définit ce champ comme actif
 
-	def done2(self):
+	def done(self):
 		ButtonActions().save_game(self)

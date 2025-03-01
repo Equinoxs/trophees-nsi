@@ -48,7 +48,8 @@
 			"width": 200,
 			"height": 50,
 			"font_family": "basic",
-			"font_size": 36
+			"font_size": 36,
+			"border_length": 2
 		},
 		"slider_settings": {
 			"x": 820,
@@ -98,6 +99,47 @@
 			"border_radius": 5,
 			"border_length": 5,
 			"border_color": [47, 32, 26]
+		},
+		"close_button": {
+			"class": "interactive_button",
+			"label": "Close",
+			"color": [61, 53, 39],
+			"font_size": 50,
+			"x": 50,
+			"y": 40,
+			"width": 140,
+			"height": "auto",
+			"action": "focus_on_game"
+		},
+		"first_job_2_paper_bg": {
+			"x": "center",
+			"y": "center",
+			"width": 650,
+			"height": 750,
+			"color": [255, 255, 255]
+		},
+		"first_job_2_encrypted_message": {
+			"x": "center",
+			"y": 75,
+			"width": 550,
+			"return_line": true,
+			"height": "auto",
+			"text_align": "left",
+			"font_size": 40,
+			"font_family": "basic"
+		},
+		"first_job_2_morse_input": {
+			"type": "TextInput",
+			"underscore": true,
+			"x": "center",
+			"y": 300,
+			"width": 600,
+			"height": "auto",
+			"font_size": 36,
+			"default_text": "decrypted message...",
+			"text_align": "left",
+			"return_line": true,
+			"border_length": 2
 		}
 	},
 	"menus": {
@@ -189,14 +231,7 @@
 			},
 			{
 				"type": "Button",
-				"class": "interactive_button",
-				"label": "Close",
-				"color": [61, 53, 39],
-				"font_size": 50,
-				"x": 50,
-				"y": 40,
-				"width": 140,
-				"height": "auto",
+				"class": "close_button",
 				"action": "focus_on_game"
 			},
 			{
@@ -340,7 +375,7 @@
 
 			}
 		],
-			"credits": [
+		"credits": [
 			{
 				"type": "UIElement",
 				"color": [71, 52, 14]
@@ -370,102 +405,105 @@
 			}
 		],
 		"loading_games": [
-		{
-			"type": "UIElement",
-			"color": [71, 52, 14]
-		},
-		{
-			"type": "UIElement",
-			"color": [71, 52, 14],
-			"text_color": [255, 255, 255],
-			"label": "Load game",
-			"x": "center",
-			"y": 40,
-			"width": "auto",
-			"height": "auto",
-			"font_size": 100
-		},
-		{
-			"type": "Button",
-			"class": "interactive_button",
-			"label": "Back",
-			"color": [61, 53, 39],
-			"font_size": 50,
-			"x": 50,
-			"y": 40,
-			"width": 140,
-			"height": "auto",
-			"action": "return_to_title"
-		},
-		{
-			"type": "FPSHelper",
-			"class": "fps"
-		}
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14]
+			},
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14],
+				"text_color": [255, 255, 255],
+				"label": "Load game",
+				"x": "center",
+				"y": 40,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 100
+			},
+			{
+				"type": "Button",
+				"class": "interactive_button",
+				"label": "Back",
+				"color": [61, 53, 39],
+				"font_size": 50,
+				"x": 50,
+				"y": 40,
+				"width": 140,
+				"height": "auto",
+				"action": "return_to_title"
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
+			}
 		],
 		"saving": [
-		{
-			"type": "UIElement",
-			"color": [0, 0, 0, 180]
-		},
-		{
-			"type": "UIElement",
-			"color": [71, 52, 14],
-			"border_radius": 6,
-			"border_length": 2,
-			"border_color": [46, 34, 9],
-			"x": "center",
-			"y": "center",
-			"width": 700,
-			"height": 400
-		},
-		{
-			"type": "UIElement",
-			"color": [71, 52, 14],
-			"text_color": [255, 255, 255],
-			"label": "Save game",
-			"x": "center",
-			"y": -500,
-			"width": "auto",
-			"height": "auto",
-			"font_size": 70
-		},
-		{
-			"type": "SavingInput",
-			"x": "center",
-			"y": "center",
-			"width": 400,
-			"height": 50,
-			"font_size": 36,
-			"default_text": "Enter save name",
-			"event_name": "save_game",
-			"text_align": "mid_left",
-			"max_event_key": 20,
-			"replace": "False"
-		},
-		{
-			"type": "Button",
-			"label": "Save",
-			"class": "pause_button",
-			"x":"center",
-			"y": 500,
-			"action": "save_game"
-		},
-		{
-			"type": "Button",
-			"class": "interactive_button",
-			"label": "Back",
-			"color": [61, 53, 39],
-			"font_size": 50,
-			"x": 50,
-			"y": 40,
-			"width": 140,
-			"height": "auto",
-			"action": "pause_game"
-		},
-		{
-			"type": "FPSHelper",
-			"class": "fps"
-		}
+			{
+				"type": "UIElement",
+				"color": [0, 0, 0, 180]
+			},
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14],
+				"border_radius": 6,
+				"border_length": 2,
+				"border_color": [46, 34, 9],
+				"x": "center",
+				"y": "center",
+				"width": 700,
+				"height": 400
+			},
+			{
+				"type": "UIElement",
+				"color": [71, 52, 14],
+				"text_color": [255, 255, 255],
+				"label": "Save game",
+				"x": "center",
+				"y": -500,
+				"width": "auto",
+				"height": "auto",
+				"font_size": 70
+			},
+			{
+				"type": "SavingInput",
+				"underscore": true,
+				"text_color": [255, 255, 255],
+				"x": "center",
+				"y": "center",
+				"width": 400,
+				"height": 50,
+				"font_size": 36,
+				"default_text": "Enter save name",
+				"event_name": "save_game",
+				"text_align": "mid_left",
+				"replace": false,
+				"return_line": true,
+				"border_length": 2
+			},
+			{
+				"type": "Button",
+				"label": "Save",
+				"class": "pause_button",
+				"x":"center",
+				"y": 500,
+				"action": "save_game"
+			},
+			{
+				"type": "Button",
+				"class": "interactive_button",
+				"label": "Back",
+				"color": [61, 53, 39],
+				"font_size": 50,
+				"x": 50,
+				"y": 40,
+				"width": 140,
+				"height": "auto",
+				"action": "pause_game"
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
+			}
 		],
 		"welcome": [
 			{
@@ -545,6 +583,12 @@
 				"y": "center",
 				"font_size": 50,
 				"text_color": [255, 255, 255]
+			}
+		],
+		"mission": [
+			{
+				"type": "UIElement",
+				"color": [0, 0, 0, 180]
 			}
 		]
 	}
