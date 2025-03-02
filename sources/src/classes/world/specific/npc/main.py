@@ -84,6 +84,8 @@ class NPC(PillarObject):
 			self.handle_inventory()
 			ControlHandler().consume_event('pick_drop')
 
+				
+
 	def set_objective(self, new_objective = None):
 		self.objective = new_objective
 		if self.objective is None:

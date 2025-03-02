@@ -7,9 +7,13 @@ class InventoryItem(PillarObject):
 		super().__init__(data)
 		self.pickup_marker = None
 		self.index_position = data.get('index_position', None)
+		self.action = data.get('action', None)
 
 	def get_index_position(self):
 		return self.index_position
+	
+	def get_marker_action(self):
+		return self.action
 
 	def set_index_position(self, index_position):
 		self.index_position = index_position

@@ -27,6 +27,15 @@
 		"act2_upgrade": {
 			"required_level": 3,
 			"description": "Denniston Award"
+		},
+		"alan_turing_presentation": {
+			"required_level": 3,
+			"description": "Meet Alan Turing"
+		},
+		"hugh_alexander_presentation": {
+			"required_level": 5,
+			"description": "Meet Hugh Alexander",
+			"rewards": 0
 		}
 	}
 }

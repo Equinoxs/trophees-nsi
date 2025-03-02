@@ -942,6 +942,26 @@
 					"name": "exit",
 					"position": [300, 840],
 					"interaction": "switch_door_hut_8"
+				},
+				{
+					"type": "NPC",
+					"name": "alan_turing",
+					"position": [300, 96],
+					"mission": "alan_turing_presentation",
+					"image_path": "turing",
+					"pattern_timeline": [[303, 479], [303, 230], [303, 479],  "npc_event_test", [501, 467], [119, 483], [303, 479]],
+					"pattern_type": "loop",
+					"authorized_sound_tracks": ["footsteps", "voices"]
+				},
+				{
+					"type": "NPC",
+					"name": "hugh_alexander",
+					"position": [300, 96],
+					"mission": "hugh_alexander_presentation",
+					"image_path": "alexander",
+					"pattern_timeline": [[60, 154], [60, 56], "npc_event_test", [255, 82], [497, 72]],
+					"pattern_type": "back_and_forth",
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				}
 			]
 		},
@@ -1055,12 +1075,18 @@
 					"type": "Table",
 					"name": "big_table",
 					"image_path": "dark_vertical_2",
-					"item_positions": [[30, 50]],
+					"item_positions": [[30, 50], [120, 120]],
 					"items": [
 						{
 							"type": "InventoryItem",
 							"image_path": "red_book",
 							"name": "mansion_big_table_book"
+						},
+						{
+							"type": "InventoryItem",
+							"image_path": "letter",
+							"name": "mansion_big_table_letter",
+							"action":"crypted_message"
 						}
 					],
 					"position": [120, 15]

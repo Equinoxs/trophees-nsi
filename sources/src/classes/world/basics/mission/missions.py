@@ -23,7 +23,13 @@ class Missions:
 				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
     
 				'gordon_welchman_presentation_0': 'Listen to the stranger',
-    
+
+				'alan_turing_presentation_0': 'Listen to the stranger',
+				'alan_turing_presentation_1': 'Follow Alan Turing',
+    			'alan_turing_presentation_2': 'Follow Alan Turing',
+				
+				'hugh_alexander_presentation_0': 'Listen to the stranger',
+
 				'mansion_presentation_0': 'Listen to the stranger',
     
 				'building_1_presentation_0': 'Listen to the stranger',
@@ -118,7 +124,7 @@ class Missions:
 		time = TimeHandler().add_chrono_tag('mission_test_0')
 		index = 0
 		if time == 0:
-			GameLoop().get_sound_mixer().play_music('mission')  # l'objectif commence
+			GameLoop().get_sound_mixer().play_music('mission')
 		if time > 10:
 			index = -1  # mission échouée
 		else:
@@ -319,7 +325,39 @@ class Missions:
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
 
 
+	def alan_turing_presentation_0(self):
+		dialog_data = {
+			'messages': [
+				"Ah, you must be the new recruit. Welcome to Hut 8.",
+				"I’m Alan Turing. Our work here focuses on deciphering the German Navy's Enigma, which is even more complex than other versions.",
+				"To tackle this challenge, we've designed an electromechanical machine",
+				"the BOMBE.",
+				"It helps us quickly find the right settings to decode messages.",
+    			"Our goal is to break these codes as fast as possible. The sooner we succeed, the more valuable the information we uncover.",
+				"Now, come, I'll introduce you to the team. I think some of them have a mission for you..."
+			]
+		}
+		return self.use_create_dialog('alan_turing_presentation_0_dialog', dialog_data)
 
+	def alan_turing_presentation_1(self):
+		return self.use_move_npc('alan_turing', Vector2(303, 479))
+	
+	def alan_turing_presentation_2(self):
+		return self.use_move_npc('alan_turing', Vector2(303, 130))
+
+	def hugh_alexander_presentation_0(self):
+		dialog_data = {
+		'messages': [
+			"Ah, so you’re the new recruit Alan mentioned. Welcome to the team!",
+			"I’m Hugh Alexander, head of the Hut 8 cryptanalysis team. Here, we focus on breaking the Enigma messages from the German Navy.",
+			"The machine helps, but cracking the code still requires sharp thinking and careful analysis.",
+			"Let’s see what you’re capable of. We just intercepted a fresh batch of encrypted messages.",
+			"Your task is to go to the mansion, find the encrypted message, examine it and decode it",
+			"Once you found it, come back to me."
+			]
+		}
+		return self.use_create_dialog('hugh_alexander_presentation_0_dialog', dialog_data)
+	
 	def do(self, mission_name: str, index: int):
 		objective_method = getattr(self, mission_name + '_' + str(index), None)
 		return objective_method()
