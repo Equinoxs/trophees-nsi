@@ -23,7 +23,7 @@ class MenuHandler:
 			self.current_menu = None
 			self.current_menu_name = None
 			self.load_menus()
-			self.set_current_menu(self.current_menu_name)
+			self.set_current_menu(self.current_menu_name, update=False)
 			self.button_actions = ButtonActions()
 			self.message_displayed = None
 			self.fps_toggled = True
@@ -88,7 +88,7 @@ class MenuHandler:
 		else:
 			self.fps_toggled = True
 
-	def set_current_menu(self, menu_name: str, force_render: bool = False):
+	def set_current_menu(self, menu_name: str, force_render: bool = False, update: bool = True):
 		if menu_name == 'map_opened':
 			GameLoop().get_camera().full_map_rendered()
 		elif self.current_menu_name == 'map_opened' and menu_name != 'map_opened':
@@ -100,7 +100,8 @@ class MenuHandler:
 			self.current_menu = self.menus[menu_name]
 			self.current_menu_name = menu_name
 
-		self.update()
+		if update:
+			self.update()
 		if force_render:
 			self.render()
 			GameLoop().get_camera().get_screen().blit(GameLoop().get_camera().get_surface('menu'), (0, 0))

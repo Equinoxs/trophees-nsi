@@ -130,8 +130,6 @@ class UIElement:
 				test_line = current_line + " " + word if current_line else word
 				test_surface = self.font.render(test_line, True, self.text_color)
 
-				print(test_line, test_surface.get_width())
-
 				if test_surface.get_width() > width:  # Dépassement de la ligne
 					lines.append(current_line)  # Valider la ligne actuelle
 					current_line = word  # Commencer une nouvelle ligne

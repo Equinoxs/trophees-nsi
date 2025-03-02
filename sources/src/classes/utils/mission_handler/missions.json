@@ -1,7 +1,6 @@
 {
 	"missions": {
 		"mission_test": {
-			"required_level": 2,
 			"description": "The first Avenger: McGuire",
 			"rewards": 0
 		},
@@ -31,6 +30,10 @@
 		"alan_turing_presentation": {
 			"required_level": 3,
 			"description": "Meet Alan Turing"
+		},
+		"act2_decrypt": {
+			"required_level": 4,
+			"description": "Break the Code"
 		},
 		"hugh_alexander_presentation": {
 			"required_level": 5,

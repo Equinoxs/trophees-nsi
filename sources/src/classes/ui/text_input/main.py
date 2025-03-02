@@ -91,7 +91,6 @@ class TextInput(UIElement):
 						self.event_keys.append(self.last_event_key)
 						key_name = pygame.key.name(self.event_keys[-1])
 						self.text += key_name
-						print
 
 				elif event.type == pygame.TEXTINPUT and self.intercept == 'text':
 					self.text += event.text

@@ -46,8 +46,8 @@ class Menu:
 
 	def update(self):
 		cursor_pointer = False
-		for ui_element in self.ui_elements:
-			if ui_element.update():
+		for i in range(len(self.ui_elements) - 1, -1, -1):
+			if self.ui_elements[i].update():
 				cursor_pointer = True
 		if cursor_pointer:
 			pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)

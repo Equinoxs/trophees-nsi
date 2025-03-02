@@ -536,7 +536,7 @@
 					"type": "Building",
 					"name": "block_h",
 					"image_path": "block_h",
-					"required_level": 7,
+					"required_level": 5,
 					"position": [0, 850]
 				},
 				{
@@ -1016,6 +1016,60 @@
 					"name": "v_wall_2",
 					"wall_type": "block_h",
 					"boundaries": [[780, 0], [780, 300]]
+				},
+				{
+					"type": "Table",
+					"name": "table_1",
+					"image_path": "light_horizontal_wide",
+					"position": [60, 60]
+				},
+				{
+					"type": "Table",
+					"name": "table_2",
+					"image_path": "light_horizontal_1",
+					"position": [610, 20]
+				},
+				{
+					"type": "Table",
+					"name": "table_3",
+					"image_path": "light_horizontal_2",
+					"position": [450, 90]
+				},
+				{
+					"type": "Table",
+					"name": "colossus_table",
+					"image_path": "light_round_high",
+					"position": [805, -10]
+				},
+				{
+					"type": "Furniture",
+					"name": "colossus",
+					"image_path": "library",
+					"position": [900, -20]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_1",
+					"image_path": "bin",
+					"position": [15, -5]
+				},
+				{
+					"type": "Furniture",
+					"name": "bin_2",
+					"image_path": "bin",
+					"position": [15, 340]
+				},
+				{
+					"type": "Furniture",
+					"name": "box",
+					"image_path": "random_box",
+					"position": [1010, 340]
+				},
+				{
+					"type": "NPC",
+					"name": "tommy_flowers",
+					"image_path": "turing",
+					"position": [940, 150]
 				},
 				{
 					"type": "Door",

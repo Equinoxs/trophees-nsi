@@ -141,7 +141,7 @@ class Map:
 	def find_closest_item(self, position: Vector2):
 		closest_item = None
 		closest_table = None
-		closest_distance = 50
+		closest_distance = 100
 		for element in self.elements:
 			distance = element.get_position().distance_to(position)
 			if isinstance(element, InventoryItem) and distance <= closest_distance:
@@ -158,7 +158,7 @@ class Map:
 		return closest_item, closest_table
 
 	def find_closest_item_place(self, position: Vector2):
-		closest_distance = 50
+		closest_distance = 100
 		closest_item_place = None
 		for element in self.elements:
 			if isinstance(element, Table):
