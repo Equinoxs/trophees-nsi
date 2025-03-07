@@ -52,7 +52,7 @@ class ControlHandler:
 		self.mouse_position = pygame.mouse.get_pos()
 		self.finish_event('clicked')  # Réinitialiser l'état de clic à chaque frame
 		self.pygame_events = pygame.event.get()
-  
+
 		for event in self.pygame_events:
 			match event.type:
 				case pygame.QUIT:

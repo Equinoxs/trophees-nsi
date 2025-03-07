@@ -58,7 +58,7 @@ Les informations de l'animation sont présentes dans le fichier `info.json` asso
   * `image_path` : *`str`* \
     Chemin de l'image à charger.
 - `set_animation_sound_name(sound_name)` &rarr; `None` \
-  Change ou arrête **manuellement** le son de l'animation en cours.
+  Change ou arrête **manuellement** le son de l'animation en cours. \
   Paramètres :
   * `sound_name` : *`str`*
 - `change_animation(animation_name, force)` &rarr; `None` \

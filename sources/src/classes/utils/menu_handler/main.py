@@ -90,9 +90,9 @@ class MenuHandler:
 
 	def set_current_menu(self, menu_name: str, force_render: bool = False, update: bool = True):
 		if menu_name == 'map_opened':
-			GameLoop().get_camera().full_map_rendered()
+			GameLoop().get_camera().set_is_full_map_rendered(True)
 		elif self.current_menu_name == 'map_opened' and menu_name != 'map_opened':
-			GameLoop().get_camera().full_map_not_rendered()
+			GameLoop().get_camera().set_is_full_map_rendered(False)
 
 		if menu_name in self.menus:
 			if self.current_menu_name:

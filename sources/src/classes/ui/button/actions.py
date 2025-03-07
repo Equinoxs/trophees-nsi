@@ -19,7 +19,7 @@ class ButtonActions:
 		self.focus_on_game(_)
 
 	def focus_on_game(self, _):
-		GameLoop().get_camera().map_rendered()
+		GameLoop().get_camera().set_is_map_rendered(True)
 		GameLoop().get_menu_handler().set_current_menu('in_game')
 		GameLoop().get_sound_mixer().unpause_music()
 		GameLoop().unpause_game()

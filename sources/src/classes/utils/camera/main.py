@@ -38,16 +38,16 @@ class Camera:
 			element.set_magnification(self.zoom)
 
 	def initialize_surfaces(self):
-			backup = DataHandler().load_save()
-			current_map_name = Player().get_map_name()
-			top_left_corner = backup['maps'][current_map_name]['top_left_corner']
-			bottom_right_corner = backup['maps'][current_map_name]['bottom_right_corner']
-			self.surfaces['full_map'] = pygame.Surface((self.zoom * (bottom_right_corner[0] - top_left_corner[0]), self.zoom * (bottom_right_corner[1] - top_left_corner[1])), pygame.SRCALPHA)
-   
-			self.surfaces['map'] = pygame.Surface((int(SCREEN_WIDTH * self.map_overflow_factor), int(SCREEN_HEIGHT * self.map_overflow_factor)), pygame.SCALED | pygame.SRCALPHA)
-			self.surfaces['menu'] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
-			if DEBUG:
-				self.surfaces['debug_info'] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
+		backup = DataHandler().load_save()
+		current_map_name = Player().get_map_name()
+		top_left_corner = backup['maps'][current_map_name]['top_left_corner']
+		bottom_right_corner = backup['maps'][current_map_name]['bottom_right_corner']
+		self.surfaces['full_map'] = pygame.Surface((self.zoom * (bottom_right_corner[0] - top_left_corner[0]), self.zoom * (bottom_right_corner[1] - top_left_corner[1])), pygame.SRCALPHA)
+
+		self.surfaces['map'] = pygame.Surface((int(SCREEN_WIDTH * self.map_overflow_factor), int(SCREEN_HEIGHT * self.map_overflow_factor)), pygame.SCALED | pygame.SRCALPHA)
+		self.surfaces['menu'] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
+		if DEBUG:
+			self.surfaces['debug_info'] = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SRCALPHA)
 
 	def get_zoom(self):
 		return self.zoom
@@ -55,20 +55,14 @@ class Camera:
 	def get_is_map_rendered(self):
 		return self.is_map_rendered
 
-	def map_rendered(self):
-		self.is_map_rendered = True
-
-	def map_not_rendered(self):
-		self.is_map_rendered = False
+	def set_is_map_rendered(self, is_map_rendered):
+		self.is_map_rendered = is_map_rendered
 
 	def get_is_full_map_rendered(self):
 		return self.is_full_map_rendered
 
-	def full_map_rendered(self):
-		self.is_full_map_rendered = True
-
-	def full_map_not_rendered(self):
-		self.is_full_map_rendered = False
+	def set_is_full_map_rendered(self, is_full_map_rendered):
+		self.is_full_map_rendered = is_full_map_rendered
 
 	def get_screen(self):
 		return self.screen
