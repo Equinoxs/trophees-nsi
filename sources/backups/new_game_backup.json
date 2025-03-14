@@ -256,6 +256,16 @@
 					"sound": "hey"
 				},
 				{
+					"type": "NPC",
+					"name": "Jill",
+					"pattern_timeline": [[188, 430], "npc_event_test", [40, 713], [-355, 551]],
+					"pattern_type": "back_and_forth",
+					"position": [670, 1200],
+					"image_path": "jill",
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"side_effects": ["visit_player"]
+				},
+				{
 					"type": "Tree",
 					"name": "corner_tree_1",
 					"image_path": "walnut",
