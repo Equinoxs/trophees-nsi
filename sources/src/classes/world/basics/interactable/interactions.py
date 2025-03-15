@@ -25,6 +25,9 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to(Vector2())
 
+	def mission_interaction(_, host):
+		GameLoop().get_mission_handler().get_current_mission().get_missions().get_objectives_store()[host.get_name() + '_interacted'] = True
+
 	def switch_door_building_1(_, host):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('building_1')

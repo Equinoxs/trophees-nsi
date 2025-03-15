@@ -1,4 +1,6 @@
-from src.classes import GameLoop, TimeHandler, Player, Vector2
+import pygame
+
+from src.classes import GameLoop, TimeHandler, Player, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Missions:
@@ -21,17 +23,17 @@ class Missions:
 			self.objective_descriptions = {
 
 				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
-    
+		
 				'gordon_welchman_presentation_0': 'Listen to the stranger',
 
 				'alan_turing_presentation_0': 'Listen to the stranger',
 				'alan_turing_presentation_1': 'Follow Alan Turing',
-    			'alan_turing_presentation_2': 'Follow Alan Turing',
+				'alan_turing_presentation_2': 'Follow Alan Turing',
 				
 				'hugh_alexander_presentation_0': 'Listen to the stranger',
 
 				'mansion_presentation_0': 'Listen to the stranger',
-    
+		
 				'building_1_presentation_0': 'Listen to the stranger',
 
 				'introduction_denniston_1': 'Follow Alastair Denniston',
@@ -43,8 +45,15 @@ class Missions:
 				'first_job_2': 'Decrypt the morse encrypted message',
 				'first_job_3': 'Deliver the letter in Hut 6',
 
-				'act2_upgrade_0': 'Listen to Denniston'
+				'act2_upgrade_0': 'Listen to Denniston',
 
+				'bombes_manipulation_1': 'Interact with the Bombe',
+
+				'decrypt_enigma_1': 'Interact with Enigma',
+
+				'insert_colossus_1': 'Collect the punch card',
+				'insert_colossus_2': 'Interact with Colossus',
+				'insert_colossus_3': 'Insert the punch card into Colossus'
 			}
 
 			self.update_missions_set()
@@ -54,6 +63,9 @@ class Missions:
 			GameLoop().get_menu_handler().remove_dialog(self.dialog_name)
 		for possible_element in self.objectives_store.values():
 			GameLoop().get_menu_handler().get_menu('in_game').delete_element(possible_element)
+
+	def get_objectives_store(self):
+		return self.objectives_store
 
 	def reset_store(self):
 		self.objectives_store = {}
@@ -109,6 +121,25 @@ class Missions:
 			return 0
 		else:
 			return 1
+
+	def use_interaction(self, object_name: str):
+		object = Player().get_map().search_by_name(object_name)
+		if object is None:
+			return 0
+		if object.get_interaction() is None:
+			self.objectives_store[object_name + '_interacted'] = False
+			object.set_interaction('mission_interaction', force=True)
+		elif self.objectives_store[object_name + '_interacted']:
+			self.objectives_store[object_name + '_interacted'] = False
+			object.set_interaction(None)
+			return 1
+		return 0
+
+	def use_wait_for_item(self, item_name: str):
+		inventory = Player().get_focus().get_inventory()
+		if inventory is not None and inventory.get_name() == item_name:
+			return 1
+		return 0
 
 
 
@@ -258,10 +289,7 @@ class Missions:
 		return self.use_create_dialog('first_job_0_dialog', dialog_data)
 
 	def first_job_1(self):
-		inventory = Player().get_focus().get_inventory()
-		if inventory is not None and inventory.get_name() == 'building_2_table_2_mail':
-			return 1
-		return 0
+		return self.use_wait_for_item('building_2_table_2_mail')
 
 	def first_job_2(self):
 		if GameLoop().get_menu_handler().get_current_menu_name() != 'mission':
@@ -328,13 +356,13 @@ class Missions:
 	def alan_turing_presentation_0(self):
 		dialog_data = {
 			'messages': [
-				"Ah, you must be the new recruit. Welcome to Hut 8.",
-				"I’m Alan Turing. Our work here focuses on deciphering the German Navy's Enigma, which is even more complex than other versions.",
-				"To tackle this challenge, we've designed an electromechanical machine",
-				"the BOMBE.",
-				"It helps us quickly find the right settings to decode messages.",
-    			"Our goal is to break these codes as fast as possible. The sooner we succeed, the more valuable the information we uncover.",
-				"Now, come, I'll introduce you to the team. I think some of them have a mission for you..."
+				'Ah, you must be the new recruit. Welcome to Hut 8.',
+				'I’m Alan Turing. Our work here focuses on deciphering the German Navy\'s Enigma, which is even more complex than other versions.',
+				'To tackle this challenge, we\'ve designed an electromechanical machine',
+				'the BOMBE.',
+				'It helps us quickly find the right settings to decode messages.',
+				'Our goal is to break these codes as fast as possible. The sooner we succeed, the more valuable the information we uncover.',
+				'Now, come, I\'ll introduce you to the team. I think some of them have a mission for you...'
 			]
 		}
 		return self.use_create_dialog('alan_turing_presentation_0_dialog', dialog_data)
@@ -347,13 +375,13 @@ class Missions:
 
 	def hugh_alexander_presentation_0(self):
 		dialog_data = {
-		'messages': [
-			"Ah, so you’re the new recruit Alan mentioned. Welcome to the team!",
-			"I’m Hugh Alexander, head of the Hut 8 cryptanalysis team. Here, we focus on breaking the Enigma messages from the German Navy.",
-			"The machine helps, but cracking the code still requires sharp thinking and careful analysis.",
-			"Let’s see what you’re capable of. We just intercepted a fresh batch of encrypted messages.",
-			"Your task is to go to the mansion, find the encrypted message, examine it and decode it",
-			"Once you found it, come back to me."
+			'messages': [
+				'Ah, so you’re the new recruit Alan mentioned. Welcome to the team!',
+				'I’m Hugh Alexander, head of the Hut 8 cryptanalysis team. Here, we focus on breaking the Enigma messages from the German Navy.',
+				'The machine helps, but cracking the code still requires sharp thinking and careful analysis.',
+				'Let’s see what you’re capable of. We just intercepted a fresh batch of encrypted messages.',
+				'Your task is to go to the mansion, find the encrypted message, examine it and decode it',
+				'Once you found it, come back to me.'
 			]
 		}
 		return self.use_create_dialog('hugh_alexander_presentation_0_dialog', dialog_data)
@@ -361,3 +389,159 @@ class Missions:
 	def do(self, mission_name: str, index: int):
 		objective_method = getattr(self, mission_name + '_' + str(index), None)
 		return objective_method()
+
+
+
+	# --- DÉCOUVERTE DES BOMBES DE TURING ET WELCHMAN ---
+
+	def bombes_manipulation_0(self):
+		Player().get_map().set_allow_map_change(False)
+		dialog_data = {
+			'messages': [
+				'I have a mission for you, the bombe is broken, do you think you can repair it?',
+				'Great! Come back to me when you\'re done.'
+			]
+		}
+		return self.use_create_dialog('bombes_manipulation_0_dialog', dialog_data)
+
+	def bombes_manipulation_1(self):
+		if self.use_interaction('bombe'):
+
+			# gérer l'affichage du menu
+			GameLoop().get_menu_handler().set_current_menu('missions')
+			menu = GameLoop().get_menu_handler().get_current_menu()
+			if menu.get_element_by_id('bombe_background') is None:
+				background_data = {
+					'type': 'UIElement',
+					'id': 'bombe_background',
+					'image_path': 'bombe_background',
+					'image_height': 600
+				}
+				menu.add_element(background_data)
+		return 1 # à continuer
+
+
+
+	# --- DÉCRYPTAGE AVEC ENIGMA ---
+
+	def decrypt_enigma_0(self):
+		dialog_data = {
+			'messages': [
+				'Now the time has come! You have you serious mission, let me tell you what you will have to accomplish.',
+				'You\'re gonna decrypt a message with the Enigma machine that we collected from the nazis.',
+				'To get a little more technical in my explainations, Enigma encrypt a letter in another one. However, if it tries to encrypt an "h" for example, the encrypted letter corresponding won\'t be an "h".',
+				'We just have to find a probable word used by the nazis in the encrypted message, and find the corresponding word based on what I said. For example, the word "wheather" is traduced by "Wetter" in german.',
+				'The encrypted word of "Wetter" won\'t see its first letter as a "W" or its second letter as a "e", et ceatera.',
+				'We modified our Enigma machine, so in it, you will see the encrypted message that you have to slide and find the probable word. When you will be done, you should see a light turning on.'
+			]
+		}
+		return self.use_create_dialog('decrypt_enigma_0_dialog', dialog_data)
+
+	def decrypt_enigma_1(self):
+		return self.use_interaction('enigma')
+
+	def decrypt_enigma_2(self):
+		if 'decrypt_enigma_2_initialized' not in self.objectives_store:
+			self.objectives_store['decrypt_enigma_2_initialized'] = True
+			GameLoop().get_control_handler().disable_all_actions()
+			GameLoop().get_control_handler().enable_actions(['enter'])
+			GameLoop().get_mission_handler().get_current_mission().move_displayed_description('mission')
+			GameLoop().get_menu_handler().set_current_menu('mission')
+
+			enigma_bg_data = {
+				'type': 'UIElement',
+				'id': 'enigma_bg',
+				'width': 700,
+				'height': 575,
+				'x': 'center',
+				'y': 'center',
+				'color': (255, 255, 150)
+			}
+
+			light_data = {
+				'type': 'UIElement',
+				'id': 'light',
+				'width': 50,
+				'height': 50,
+				'border_radius': 25,
+				'color': (0, 0, 0),
+				'x': 'center',
+				'y': 'center',
+				'border_length': 4,
+				'border_color': (120,) * 3,
+			}
+
+			border_width = 250
+			border_data = {
+				'type': 'UIElement',
+				'id': 'border',
+				'width': border_width,
+				'height': 50,
+				'x': 'center',
+				'y': 250,
+				'border_length': 2,
+				'border_color': (0, 0, 0),
+				'color': 'transparent'
+			}
+
+			encrypted_message_data = {
+				'type': 'UIElement',
+				'id': 'encrypted_message',
+				'width': 'auto',
+				'height': 'auto',
+				'x': (SCREEN_WIDTH - border_width) / 2 + 3,
+				'y': 250,
+				'font_size': 40,
+				'font_family': 'monofonto',
+				'label': 'DFSU MKLE BJAP BCAHJ DKFL FJKD SQOF KWXA MNRO',
+				'color': 'transparent',
+				'text_align': 'left'
+			}
+
+			GameLoop().get_menu_handler().get_current_menu().add_element(enigma_bg_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(light_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(border_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
+		else:
+			element = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('encrypted_message')
+			for event in GameLoop().get_control_handler().get_pygame_events():
+				if event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+					x = element.get_position().get_x()
+    
+					if event.key == pygame.K_LEFT:
+						element.get_position().set_x(x + 20)
+					else:
+						element.get_position().set_x(x - 20)
+    
+			if 357 < element.get_position().get_x() < 359:
+				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((255,) * 4)
+				if GameLoop().get_control_handler().is_activated('enter'):
+					GameLoop().get_control_handler().enable_all_actions()
+					GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('enigma_bg')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('light')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('border')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
+					GameLoop().get_menu_handler().set_current_menu('in_game')
+					return 1
+			else:
+				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((0,) * 3)
+				if GameLoop().get_control_handler().is_activated('enter'):
+					return -1
+		return 0
+
+
+
+	# --- INSÉRER LA PUNCH CARD DANS COLOSSUS ---
+
+	def insert_colossus_0(self):
+		dialog_data = {
+			'messages': [
+				'Hey! we are preparing some tests and we need colossus.',
+				'Could you insert the punch card that you see on this table in Colossus please? The team would be very thankful.'
+			]
+		}
+		return self.use_create_dialog('insert_colossus_0_dialog', dialog_data)
+
+	def insert_colossus_1(self):
+		return self.use_wait_for_item('colossus_punch_card')

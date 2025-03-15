@@ -42,8 +42,12 @@ class ControlHandler:
 	def disable_all_actions(self):
 		self.disable_actions(self.keybinds.keys())
 
+	def enable_actions(self, actions: list[str]):
+		for key in actions:
+			self.disabled_actions.discard(key)
+
 	def enable_all_actions(self):
-		self.disabled_actions = set()
+		self.enable_actions(self.keybinds.keys())
 
 	def handle_events(self):
 		if not self.settings_initialized:

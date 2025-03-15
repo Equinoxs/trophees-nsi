@@ -8,10 +8,14 @@ class Mission:
 		self.required_level = mission_data.get('required_level', 1)
 		self.rewards = mission_data.get('rewards', 1)
 		self.objectives_len = Missions().get_objectives_len(name)
+		self.missions = Missions()
 		self.objective_index = 0
 		self.indicator = 0
 		self.description_menu_name = None
 		self.displayed_description = None
+
+	def get_missions(self):
+		return self.missions
 
 	def abort(self):
 		self.objective_index = 0

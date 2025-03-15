@@ -84,7 +84,6 @@ class TextInput(UIElement):
 					elif event.key == pygame.K_SPACE and self.intercept == 'keys':
 						self.last_event_key = event.key
 						self.event_keys.append(self.last_event_key)
-						self.text += ' '  # Remplace par un vrai espace
 
 					elif self.intercept == 'keys':
 						self.last_event_key = event.key

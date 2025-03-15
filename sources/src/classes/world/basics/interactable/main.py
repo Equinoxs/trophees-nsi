@@ -5,6 +5,7 @@ class Interactable:
 		self.interaction = interaction
 		self.interaction_marker = None
 		self.interaction_available = True
+		self.interaction_force = False
 		if self.interaction is None:
 			self.interaction_available = False
 
@@ -15,6 +16,13 @@ class Interactable:
 			self.mission_marker_x_offset = 0
 		if not hasattr(self, 'mission_marker_y_offset'):
 			self.mission_marker_y_offset = 0
+
+	def get_interaction(self):
+		return self.interaction
+
+	def set_interaction(self, interaction: str, force: bool = False):
+		self.interaction = interaction
+		self.interaction_force = force
 
 	def get_mission(self):
 		return self.mission
@@ -45,7 +53,7 @@ class Interactable:
 		self.mission_marker = MenuHandler().add_marker(mission_marker_data)
 
 	def is_interaction_available(self):
-		return self.interaction_available
+		return self.interaction_available or self.interaction_force
 
 	def set_interaction_available(self, available: bool):
 		self.interaction_available = available

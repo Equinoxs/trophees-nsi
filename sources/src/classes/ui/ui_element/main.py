@@ -68,6 +68,14 @@ class UIElement:
 
 		self.update_rect()
 
+	def get_position(self):
+		return self.position
+
+	def set_color(self, new_color):
+		self.color = new_color
+		if type(self.color) == list:
+			self.color = tuple(self.color)
+
 	def get_id(self):
 		return self.id
 

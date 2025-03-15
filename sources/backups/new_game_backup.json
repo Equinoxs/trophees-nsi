@@ -920,25 +920,25 @@
 				{
 					"type": "Wall",
 					"name": "side_wall",
-					"boundaries": [[0, 800], [0, 0], { "sticker": "window", "x_offset": 130 }, { "sticker": "thinking_board", "x_offset": 230 }, { "sticker": "wanted_poster", "x_offset": 340 }, { "sticker": "window", "x_offset": -130 }, [600, 0], [600, 800]],
+					"boundaries": [[0, 800], [0, 0], { "sticker": "window", "x_offset": 130 }, { "sticker": "blackboard", "x_offset": 250 }, { "sticker": "window", "x_offset": -130 }, [600, 0], [600, 800]],
 					"wall_type": "yellow"
 				},
 				{
 					"type": "Wall",
 					"name": "partition_1",
-					"boundaries": [[0, 266], { "sticker": "blackboard_papers", "x_offset": 40 }, { "sticker": "wanted_poster", "x_offset": 150 }, { "sticker": "notes", "x_offset": -30, "y_offset": -20 }, [250, 266], [250, 430]],
+					"boundaries": [[0, 266], [250, 266], [250, 430]],
 					"wall_type": "yellow"
 				},
 				{
 					"type": "Wall",
 					"name": "partition_2",
-					"boundaries": [[0, 533], { "sticker": "gccs_poster", "x_offset": 70, "y_offset": -30 }, { "sticker": "blackboard_riemann", "x_offset": 120 }, [250, 533], [250, 720]],
+					"boundaries": [[0, 533], { "sticker": "gccs_poster", "x_offset": 70, "y_offset": -30 }, { "sticker": "notes", "x_offset": 120 }, [250, 533], [250, 720]],
 					"wall_type": "yellow"
 				},
 				{
 					"type": "Wall",
 					"name": "partition_3",
-					"boundaries": [[600, 266], { "sticker": "blackboard", "x_offset": "middle" }, [350, 266], [350, 430]],
+					"boundaries": [[600, 266], { "sticker": "thinking_board", "x_offset": "middle" }, [350, 266], [350, 430]],
 					"wall_type": "yellow"
 				},
 				{
@@ -948,16 +948,11 @@
 					"wall_type": "yellow"
 				},
 				{
-					"type": "Door",
-					"name": "exit",
-					"position": [300, 840],
-					"interaction": "switch_door_hut_8"
-				},
-				{
 					"type": "NPC",
 					"name": "alan_turing",
 					"position": [300, 96],
 					"mission": "alan_turing_presentation",
+					"side_effects": ["handle_alan_turing"],
 					"image_path": "turing",
 					"pattern_timeline": [[303, 479], [303, 230], [303, 479],  "npc_event_test", [501, 467], [119, 483], [303, 479]],
 					"pattern_type": "loop",
@@ -972,6 +967,36 @@
 					"pattern_timeline": [[60, 154], [60, 56], "npc_event_test", [255, 82], [497, 72]],
 					"pattern_type": "back_and_forth",
 					"authorized_sound_tracks": ["footsteps", "voices"]
+				},
+				{
+					"type": "Furniture",
+					"name": "bombe",
+					"image_path": "library",
+					"position": [50, 180]
+				},
+				{
+					"type": "Table",
+					"name": "table_1",
+					"image_path": "light_round_high",
+					"position": [430, 50]
+				},
+				{
+					"type": "Furniture",
+					"name": "chair_table_1",
+					"image_path": "chair_light_left",
+					"position": [500, 20]
+				},
+				{
+					"type": "Table",
+					"name": "enigma",
+					"image_path": "light_round_high",
+					"position": [440, 320]
+				},
+				{
+					"type": "Door",
+					"name": "exit",
+					"position": [300, 840],
+					"interaction": "switch_door_hut_8"
 				}
 			]
 		},
