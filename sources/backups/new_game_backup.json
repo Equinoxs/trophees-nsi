@@ -979,7 +979,7 @@
 				{
 					"type": "Furniture",
 					"name": "bombe",
-					"image_path": "library",
+					"image_path": "bomb",
 					"position": [50, 180]
 				},
 				{

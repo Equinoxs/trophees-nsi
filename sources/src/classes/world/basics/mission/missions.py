@@ -47,7 +47,7 @@ class Missions:
 
 				'act2_upgrade_0': 'Listen to Denniston',
 
-				'bombes_manipulation_1': 'Interact with the Bombe',
+				'bombes_manipulation_1': 'Interact with the Bomb',
 				'bombes_manipulation_2': 'Connect the wires',
 
 				'decrypt_enigma_1': 'Interact with Enigma',
@@ -437,7 +437,7 @@ class Missions:
 				'id': 'green_wire',
 				'start_pos': pos_green.copy(),
 				'end_pos': pos_green.copy(),
-				'color': (0, 255, 0),
+				'color': (14, 181, 17),
 				'width': wires_width
 			}
 
@@ -446,7 +446,7 @@ class Missions:
 				'id': 'blue_wire',
 				'start_pos': pos_blue.copy(),
 				'end_pos': pos_blue.copy(),
-				'color': (0, 0, 255),
+				'color': (12,77,214),
 				'width': wires_width
 			}
 
@@ -455,7 +455,7 @@ class Missions:
 				'id': 'red_wire',
 				'start_pos': pos_red.copy(),
 				'end_pos': pos_red.copy(),
-				'color': (255, 0, 0),
+				'color': (246,31,0),
 				'width': wires_width
 			}
 

@@ -10,12 +10,16 @@
 			"text_color": [204, 174, 114]
 		},
 		"welcome_button": {
-			"class": "interactive_button",
 			"x": "center",
 			"width": 400,
 			"height": 50,
 			"font_family": "basic",
-			"font_size": 50
+			"font_size": 50,
+			"border_radius": 4,
+			"border_length": 3,
+			"border_color": [0, 0, 0],
+			"color": [125, 113, 89],
+			"text_color": [204, 174, 114]
 		},
 		"pause_button": {
 			"class": "interactive_button",
@@ -266,7 +270,8 @@
 				"y": 40,
 				"width": 140,
 				"height": "auto",
-				"action": "return_to_last_menu"
+				"action": "return_to_last_menu",
+				"font_family": "basic"
 			},
 			{
 				"type": "UIElement",
@@ -373,10 +378,6 @@
 				"action": "toggle_FPS",
 				"font_family": "basic"
 
-			},
-			{
-				"type": "FPSHelper",
-				"class": "fps"
 			}
 		],
 		"credits": [
@@ -405,7 +406,9 @@
 				"y": 40,
 				"width": 140,
 				"height": "auto",
-				"action": "return_to_title"
+				"action": "return_to_title",
+				"font_family": "basic"
+
 			},
 			{
 				"type": "FPSHelper",
@@ -520,11 +523,17 @@
 			},
 			{
 				"type": "UIElement",
-				"color": [71, 52, 14],
+				"image":"main_menu",
+				"image_height": 800,
+				"x": 0,
+				"y": 0
+			},
+			{
+				"type": "UIElement",
 				"text_color": [255, 255, 255],
 				"label": "Bletchley's Adventure",
 				"x": "center",
-				"y": 110,
+				"y": 10,
 				"width": "auto",
 				"height": "auto",
 				"font_family": "roboto",
@@ -535,34 +544,34 @@
 				"type": "Button",
 				"class": "welcome_button",
 				"label": "Start new game",
-				"y": 280,
+				"y": 200,
 				"action": "start_new_game"
 			},
 			{
 				"type": "Button",
 				"class": "welcome_button",
 				"label": "Continue",
-				"y": 360,
+				"y": 290,
 				"action": "focus_on_game"
 			},
 			{
 				"type": "Button",
 				"label": "Settings",
 				"class": "welcome_button",
-				"y": 520,
+				"y": 380,
 				"action": "open_settings"
 			},
 			{
 				"type": "Button",
 				"label": "Load game",
 				"class": "welcome_button",
-				"y": 440,
+				"y": 470,
 				"action": "open_loading"
 			},
 			{
 				"type": "Button",
 				"label": "Credits",
-				"y": 600,
+				"y": 560,
 				"class": "welcome_button",
 				"action": "open_credits"
 			},
@@ -570,13 +579,9 @@
 				"type": "Button",
 				"label": "Quit",
 				"class": "welcome_button",
-				"y": 680,
+				"y": 650,
 				"action": "quit_game",
 				"color": [61, 53, 39]
-			},
-			{
-				"type": "FPSHelper",
-				"class": "fps"
 			}
 		],
 		"loading": [
@@ -701,7 +706,8 @@
 				"y": 40,
 				"width": 140,
 				"height": "auto",
-				"action": "focus_on_game"
+				"action": "focus_on_game",
+				"font_family": "basic"
 			},
 			{
 				"type": "FPSHelper",
