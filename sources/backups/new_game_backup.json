@@ -546,7 +546,7 @@
 					"type": "Building",
 					"name": "block_h",
 					"image_path": "block_h",
-					"required_level": 5,
+					"required_level": 8,
 					"position": [0, 850]
 				},
 				{
@@ -970,6 +970,13 @@
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
+					"type": "NPC",
+					"name": "joan_clarke",
+					"position": [300, 50],
+					"image_path": "joan_clarke",
+					"authorized_sound_tracks": ["footsteps", "voices"]
+				},
+				{
 					"type": "Furniture",
 					"name": "bombe",
 					"image_path": "library",
@@ -1075,7 +1082,15 @@
 					"type": "Table",
 					"name": "colossus_table",
 					"image_path": "light_round_high",
-					"position": [805, -10]
+					"position": [805, 110],
+					"item_positions": [[35, 10]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"name": "colossus_punched_cards",
+							"image_path": "punched_cards"
+						}
+					]
 				},
 				{
 					"type": "Furniture",
@@ -1104,8 +1119,16 @@
 				{
 					"type": "NPC",
 					"name": "tommy_flowers",
-					"image_path": "turing",
+					"mission": "insert_colossus",
+					"image_path": "tommy_flowers",
 					"position": [940, 150]
+				},
+				{
+					"type": "NPC",
+					"name": "william_tutte",
+					"position": [300, 50],
+					"image_path": "tutte",
+					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
 					"type": "Door",

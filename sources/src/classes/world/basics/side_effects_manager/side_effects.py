@@ -56,8 +56,12 @@ class SideEffects:
 				host.set_objective(None)
 
 	def handle_alastair_denniston(_, denniston):
-		if denniston.get_mission() is None:
+		if Player().get_level() == 3 and denniston.get_mission() is None:
 			denniston.set_mission_name('act2_upgrade')
+		elif Player().get_level() == 7 and denniston.get_mission() is None:
+			denniston.set_mission_name('act3_upgrade')
+		elif Player().get_level() == 9 and denniston.get_mission() is None:
+			denniston.set_mission_name('final')
 
 	def handle_alan_turing(_, turing):
 		if turing.get_mission() is None:

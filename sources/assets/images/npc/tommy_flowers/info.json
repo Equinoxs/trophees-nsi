@@ -31,10 +31,10 @@
 				{ "width": 45, "time": 0.3 },
 				{ "width": 45, "time": 0.2 },
 				{ "width": 41, "time": 0.2 },
-				{ "width": 50, "time": 0.3 },
-				{ "width": 38, "time": 0.2 }
+				{ "width": 52, "time": 0.3 },
+				{ "width": 36, "time": 0.2 }
 			],
-			"height": 96
+			"height": 93
 		}
 	},
 	"hitbox": [

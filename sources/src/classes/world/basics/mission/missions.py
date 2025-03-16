@@ -48,12 +48,15 @@ class Missions:
 				'act2_upgrade_0': 'Listen to Denniston',
 
 				'bombes_manipulation_1': 'Interact with the Bombe',
+				'bombes_manipulation_2': 'Connect the wires',
 
 				'decrypt_enigma_1': 'Interact with Enigma',
 
-				'insert_colossus_1': 'Collect the punch card',
+				'act3_upgrade_0': 'Listen to Alastair Denniston',
+
+				'insert_colossus_1': 'Collect the punched cards',
 				'insert_colossus_2': 'Interact with Colossus',
-				'insert_colossus_3': 'Insert the punch card into Colossus'
+				'insert_colossus_3': 'Insert the punched cards into Colossus'
 			}
 
 			self.update_missions_set()
@@ -641,16 +644,48 @@ class Missions:
 
 
 
-	# --- INSÉRER LA PUNCH CARD DANS COLOSSUS ---
+	# --- DENNISTON DONNE ACCÈS LE BLOCK H AU JOUEUR ---
+
+	def act3_upgrade_0(self):
+		dialog_data = {
+			'messages': [
+				'After all that you have done for this country in here, I must thank you.',
+				'Moreover, from what I have heard, you are really talented. Now, you have access to Block H, some of my best men in it are waiting for you.'
+			]
+		}
+		return self.use_create_dialog('act3_upgrade_0_dialog', dialog_data)
+
+
+
+	# --- INSÉRER LES PUNCHED CARDS DANS COLOSSUS ---
 
 	def insert_colossus_0(self):
 		dialog_data = {
 			'messages': [
-				'Hey! we are preparing some tests and we need colossus.',
-				'Could you insert the punch card that you see on this table in Colossus please? The team would be very thankful.'
+				'Hey! We are preparing some tests and we need colossus.',
+				'Could you insert the punched cards that you see on this table in Colossus please? The team would be very thankful.'
 			]
 		}
 		return self.use_create_dialog('insert_colossus_0_dialog', dialog_data)
 
 	def insert_colossus_1(self):
-		return self.use_wait_for_item('colossus_punch_card')
+		return self.use_wait_for_item('colossus_punched_cards')
+
+	def insert_colossus_2(self):
+		if self.use_interaction('colossus') == 1 and Player().get_focus().get_inventory() is not None and Player().get_focus().get_inventory().get_name() == 'colossus_punched_cards':
+			Player().get_focus().purge_inventory()
+			return 1
+		else:
+			return 0
+
+
+
+	# --- DERNIÈRE MISSION DU JEU ---
+
+	def final_0(self):
+		dialog_data = {
+			'messages': [
+				'Hey! This is the last mission of the game',
+			]
+		}
+		return self.use_create_dialog('final_0_dialog', dialog_data)

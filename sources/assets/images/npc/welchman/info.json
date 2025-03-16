@@ -32,9 +32,9 @@
 				{ "width": 45, "time": 0.2 },
 				{ "width": 41, "time": 0.2 },
 				{ "width": 50, "time": 0.3 },
-				{ "width": 38, "time": 0.2 }
+				{ "width": 42, "time": 0.2 }
 			],
-			"height": 96
+			"height": 92
 		}
 	},
 	"hitbox": [

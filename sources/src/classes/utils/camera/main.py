@@ -25,6 +25,7 @@ class Camera:
 
 			self.is_map_rendered = False
 			self.is_full_map_rendered = False
+			self.is_full_map_calculated = False  # pour éviter de recalculer la full map à chaque frame 
 
 			self.initialize()
 
@@ -63,6 +64,8 @@ class Camera:
 
 	def set_is_full_map_rendered(self, is_full_map_rendered):
 		self.is_full_map_rendered = is_full_map_rendered
+		if not self.is_full_map_rendered:
+			self.is_full_map_calculated = False
 
 	def get_screen(self):
 		return self.screen
@@ -82,7 +85,8 @@ class Camera:
 		self.screen.fill((0,) * 3)  # Couleur de fond = noir
 
 		for surface_name in self.surfaces.keys():
-			self.surfaces[surface_name].fill((0,) * 4)
+			if surface_name != 'full_map':
+				self.surfaces[surface_name].fill((0,) * 4)
 
 		for element in Player().get_map().get_elements():
 			element.render()
@@ -93,6 +97,8 @@ class Camera:
 		if DEBUG:
 			self.screen.blit(self.surfaces['debug_info'], (0, 0))
 		self.screen.blit(self.surfaces['menu'], (0, 0))
+		if self.is_full_map_rendered:
+			self.is_full_map_calculated = True
 
 	def draw(self, surface_to_draw: pygame.Surface, position = (0, 0), surface_target_name: str = 'map', is_player_rendered: bool = False):
 		if isinstance(position, Vector2):
@@ -113,7 +119,7 @@ class Camera:
 							int(x * self.zoom - self.camera.x + SCREEN_WIDTH * (self.map_overflow_factor - 1) / 2),
 							int(y * self.zoom - self.camera.y + SCREEN_HEIGHT * (self.map_overflow_factor - 1) / 2)
 						))
-				if self.is_full_map_rendered:
+				if self.is_full_map_rendered and not self.is_full_map_calculated:
 					top_left_corner = DataHandler().load_save()['maps'][Player().get_map_name()]['top_left_corner']
 					self.surfaces['full_map'].blit(surface_to_draw, (int(self.zoom * (x - top_left_corner[0])), int(self.zoom * (y - top_left_corner[1]))))
 			case _:

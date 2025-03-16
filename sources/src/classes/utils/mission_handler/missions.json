@@ -47,12 +47,16 @@
 			"required_level": 6,
 			"description": "Break Enigma!"
 		},
-		"insert_colossus": {
+		"act3_upgrade": {
 			"required_level": 7,
+			"description": "Access granted"
+		},
+		"insert_colossus": {
+			"required_level": 8,
 			"description": "Get the hands on Colossus"
 		},
 		"final": {
-			"required_level": 8,
+			"required_level": 9,
 			"description": "Bletchley's adventure"
 		}
 	}

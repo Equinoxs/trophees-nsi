@@ -203,6 +203,9 @@ class NPC(PillarObject):
 	def get_inventory(self):
 		return self.inventory
 
+	def purge_inventory(self):
+		self.inventory = None
+
 	def pick_item(self, item: InventoryItem):
 		self.inventory = item
 		item.remove_pickup_marker()
