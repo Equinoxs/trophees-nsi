@@ -38,6 +38,7 @@ from .ui.saving_input.main import SavingInput
 from .utils.sound_mixer.main import SoundMixer
 from .ui.slider.actions import SliderActions
 from .ui.slider.main import Slider
+from .ui.line.main import Line
 
 # Objets enfant de Button
 from .ui.mini_map.main import MiniMap

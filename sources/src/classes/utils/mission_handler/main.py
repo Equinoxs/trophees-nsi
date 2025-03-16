@@ -94,7 +94,7 @@ class MissionHandler:
 				self.current_mission = None  # La mission est terminée
 
 				if self.mission_popup is not None:
-					GameLoop().get_menu_handler().get_menu('in_game').remove_element(self.mission_popup)
+					GameLoop().get_menu_handler().get_menu('in_game').delete_element(self.mission_popup)
 
 				data = {
 					'type': 'UIElement',

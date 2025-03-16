@@ -1,4 +1,4 @@
-from src.classes import GameLoop, TimeHandler, LogHandler, Player
+from src.classes import GameLoop, TimeHandler, LogHandler, Player, Missions
 
 
 class SideEffects:
@@ -56,12 +56,16 @@ class SideEffects:
 				host.set_objective(None)
 
 	def handle_alastair_denniston(_, denniston):
-		if Player().get_level() == 3 and denniston.get_mission() is None:
+		if denniston.get_mission() is None:
 			denniston.set_mission_name('act2_upgrade')
 
 	def handle_alan_turing(_, turing):
 		if turing.get_mission() is None:
 			turing.set_mission_name('decrypt_enigma')
+
+	def handle_hugh_alexander(_, alexander):
+		if alexander.get_mission() is None:
+			alexander.set_mission_name('bombes_manipulation')
 
 	def do(self, side_effect_name: str, host):
 		side_effect_method = getattr(self, side_effect_name, None)

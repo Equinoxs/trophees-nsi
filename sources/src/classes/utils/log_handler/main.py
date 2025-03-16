@@ -50,12 +50,23 @@ class LogHandler:
 			GameLoop().get_camera().draw(font.render(text, True, (255, 0, 0)), (0, 15*idx), 'debug_info')
 
 		# Player position
-		position_font = GameLoop().get_data_handler().load_font('default', 30)
+		position_font = GameLoop().get_data_handler().load_font('arial', 30)
 		player_pos = GameLoop().get_player().get_focus().get_position()
 		text = f'({int(player_pos.get_x() * 10) / 10}, {int(player_pos.get_y() * 10) / 10})'
 		position_text_surface = position_font.render(text, True, (0, 255, 255))
 		position_text_width, _ = position_text_surface.get_size()
 		GameLoop().get_camera().draw(position_text_surface, (SCREEN_WIDTH - position_text_width, SCREEN_HEIGHT / 2), 'debug_info')
+
+		# Souris position
+		mouse_font = GameLoop().get_data_handler().load_font('arial', 30)
+		mouse_x, mouse_y = pygame.mouse.get_pos()
+		text = f'({mouse_x}, {mouse_y})'
+		mouse_text_surface = mouse_font.render(text, True, (255, 255, 255))
+		mouse_text_width, mouse_text_height = mouse_text_surface.get_size()
+		mouse_bg = pygame.Surface((mouse_text_width, mouse_text_height), pygame.SRCALPHA)
+		mouse_bg.fill((0, 0, 0))
+		GameLoop().get_camera().draw(mouse_bg, ((SCREEN_WIDTH - mouse_text_width) / 2, 10), 'debug_info')
+		GameLoop().get_camera().draw(mouse_text_surface, ((SCREEN_WIDTH - mouse_text_width) / 2, 10), 'debug_info')
 
 		# Log
 		log = LogHandler().get_log()[::-1]

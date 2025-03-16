@@ -405,21 +405,130 @@ class Missions:
 		return self.use_create_dialog('bombes_manipulation_0_dialog', dialog_data)
 
 	def bombes_manipulation_1(self):
-		if self.use_interaction('bombe'):
+		return self.use_interaction('bombe')
 
-			# gérer l'affichage du menu
-			GameLoop().get_menu_handler().set_current_menu('missions')
-			menu = GameLoop().get_menu_handler().get_current_menu()
-			if menu.get_element_by_id('bombe_background') is None:
-				background_data = {
-					'type': 'UIElement',
-					'id': 'bombe_background',
-					'image_path': 'bombe_background',
-					'image_height': 600
-				}
-				menu.add_element(background_data)
-		return 1 # à continuer
+	def bombes_manipulation_2(self):
+		pos_green = Vector2(480, 170)
+		pos_blue = Vector2(480, 400)
+		pos_red = Vector2(480, 640)
+		if 'bombes_manipulation_2_initialized' not in self.objectives_store:
+			self.objectives_store['bombes_manipulation_2_initialized'] = True
+			GameLoop().get_control_handler().disable_all_actions()
+			GameLoop().get_mission_handler().get_current_mission().move_displayed_description('mission')
+			GameLoop().get_menu_handler().set_current_menu('mission')
 
+			background_data = {
+				'type': 'UIElement',
+				'id': 'background',
+				'image': 'bombe_wires',
+				'image_height': SCREEN_HEIGHT,
+				'color': 'transparent',
+				'x': 0,
+				'y': 0
+			}
+
+			wires_width = 40
+
+			green_wire_data = {
+				'type': 'Line',
+				'id': 'green_wire',
+				'start_pos': pos_green.copy(),
+				'end_pos': pos_green.copy(),
+				'color': (0, 255, 0),
+				'width': wires_width
+			}
+
+			blue_wire_data = {
+				'type': 'Line',
+				'id': 'blue_wire',
+				'start_pos': pos_blue.copy(),
+				'end_pos': pos_blue.copy(),
+				'color': (0, 0, 255),
+				'width': wires_width
+			}
+
+			red_wire_data = {
+				'type': 'Line',
+				'id': 'red_wire',
+				'start_pos': pos_red.copy(),
+				'end_pos': pos_red.copy(),
+				'color': (255, 0, 0),
+				'width': wires_width
+			}
+
+			GameLoop().get_menu_handler().get_current_menu().add_element(background_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(green_wire_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(blue_wire_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(red_wire_data)
+   
+			self.objectives_store['green_flag'] = False
+			self.objectives_store['blue_flag'] = False
+			self.objectives_store['red_flag'] = False
+
+			self.objectives_store['green_accomplished'] = False
+			self.objectives_store['blue_accomplished'] = False
+			self.objectives_store['red_accomplished'] = False
+		else:
+			mouse_x, mouse_y = pygame.mouse.get_pos()
+			mouse_pos = Vector2(mouse_x, mouse_y)
+			if GameLoop().get_control_handler().is_activated('clicked'):
+				acceptance = 60
+				green_end = Vector2(760, 640)
+				blue_end = Vector2(760, 170)
+				red_end = Vector2(760, 400)
+
+				# Gestion des flags
+				mouse_free = not self.objectives_store['green_flag'] and not self.objectives_store['blue_flag'] and not self.objectives_store['red_flag']
+				if mouse_pos.distance_to(pos_green) < acceptance and mouse_free and not self.objectives_store['green_accomplished']:
+					self.objectives_store['green_flag'] = True
+				elif mouse_pos.distance_to(pos_blue) < acceptance and mouse_free and not self.objectives_store['blue_accomplished']:
+					self.objectives_store['blue_flag'] = True
+				elif mouse_pos.distance_to(pos_red) < acceptance and mouse_free and not self.objectives_store['red_accomplished']:
+					self.objectives_store['red_flag'] = True
+
+				# Gestion de la réparation des câbles
+				elif mouse_pos.distance_to(green_end) < acceptance and self.objectives_store['green_flag']:
+					self.objectives_store['green_flag'] = False
+					self.objectives_store['green_accomplished'] = True
+				elif mouse_pos.distance_to(blue_end) < acceptance and self.objectives_store['blue_flag']:
+					self.objectives_store['blue_flag'] = False
+					self.objectives_store['blue_accomplished'] = True
+				elif mouse_pos.distance_to(red_end) < acceptance and self.objectives_store['red_flag']:
+					self.objectives_store['red_flag'] = False
+					self.objectives_store['red_accomplished'] = True
+
+				# Si on clique au milieu de nulle part, on échoue la mission
+				elif self.objectives_store['green_flag'] or self.objectives_store['blue_flag'] or self.objectives_store['red_flag']:
+					self.objectives_store['green_flag'] = False
+					self.objectives_store['blue_flag'] = False
+					self.objectives_store['red_flag'] = False
+					if not self.objectives_store['green_accomplished']:
+						GameLoop().get_menu_handler().get_current_menu().get_element_by_id('green_wire').get_end_pos().copy(pos_green)
+					if not self.objectives_store['blue_accomplished']:
+						GameLoop().get_menu_handler().get_current_menu().get_element_by_id('blue_wire').get_end_pos().copy(pos_blue)
+					if not self.objectives_store['red_accomplished']:
+						GameLoop().get_menu_handler().get_current_menu().get_element_by_id('red_wire').get_end_pos().copy(pos_red)
+					
+
+			# Gestion de l'affichage
+			if self.objectives_store['green_flag']:
+				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('green_wire').get_end_pos().set_all(mouse_x, mouse_y)
+			elif self.objectives_store['blue_flag']:
+				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('blue_wire').get_end_pos().set_all(mouse_x, mouse_y)
+			elif self.objectives_store['red_flag']:
+				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('red_wire').get_end_pos().set_all(mouse_x, mouse_y)
+
+			if self.objectives_store['green_accomplished'] and self.objectives_store['blue_accomplished'] and self.objectives_store['red_accomplished']:
+				GameLoop().get_control_handler().enable_all_actions()
+				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('background')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('green_wire')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('blue_wire')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('red_wire')
+				GameLoop().get_menu_handler().set_current_menu('in_game')
+				return 1
+
+		return 0
 
 
 	# --- DÉCRYPTAGE AVEC ENIGMA ---

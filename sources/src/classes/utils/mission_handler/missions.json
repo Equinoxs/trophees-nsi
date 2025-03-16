@@ -1,5 +1,6 @@
 {
 	"missions": {
+
 		"mission_test": {
 			"description": "The first Avenger: McGuire",
 			"rewards": 0
@@ -16,7 +17,14 @@
 			"description": "The Building 1",
 			"rewards": 0
 		},
+		"hugh_alexander_presentation": {
+			"required_level": 5,
+			"description": "Meet Hugh Alexander",
+			"rewards": 0
+		},
+
 		"introduction_denniston": {
+			"required_level": 1,
 			"description": "Introduction to Bletchley Park"
 		},
 		"first_job": {
@@ -35,18 +43,17 @@
 			"required_level": 5,
 			"description": "Discover the Turing-Welchman's bombes"
 		},
-		"hugh_alexander_presentation": {
-			"required_level": 5,
-			"description": "Meet Hugh Alexander",
-			"rewards": 0
-		},
 		"decrypt_enigma": {
-			"required_level": 1,
+			"required_level": 6,
 			"description": "Break Enigma!"
 		},
 		"insert_colossus": {
 			"required_level": 7,
-            "description": "Get the hands on Colossus"
+			"description": "Get the hands on Colossus"
+		},
+		"final": {
+			"required_level": 8,
+			"description": "Bletchley's adventure"
 		}
 	}
 }

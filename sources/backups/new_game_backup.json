@@ -963,6 +963,7 @@
 					"name": "hugh_alexander",
 					"position": [300, 96],
 					"mission": "hugh_alexander_presentation",
+					"side_effects": ["handle_hugh_alexander"],
 					"image_path": "alexander",
 					"pattern_timeline": [[60, 154], [60, 56], "npc_event_test", [255, 82], [497, 72]],
 					"pattern_type": "back_and_forth",
