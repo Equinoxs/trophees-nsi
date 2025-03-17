@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import  SCREEN_WIDTH, SCREEN_HEIGHT
+from src.classes import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class GameLoop:
 	_instance = None

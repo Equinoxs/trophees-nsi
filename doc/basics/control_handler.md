@@ -43,9 +43,42 @@ Elle récupère la liste des évènements à chaque rafraîchissement de l'écra
   Méthode exécutée à chaque rafraîchissement du jeu qui récupère les touches appuyées et le mouvement de la souris pour 
   mettre à jour `events`.
 
-- `is_activated(event)` &rarr; `bool` \
-  Renvoie l'état de l'évènement `event`. \
-  Paramètres :
-  * `event` : *`str`*
+- `is_activated(event_name)` &rarr; `bool` \
+  Renvoie l'état de l'évènement `event_name`. \
+  Paramètre :
+  * `event_name` : *`str`*
 
-# TODO: terminer
+- `is_clicked(button)` &rarr; `bool` \
+  Renvoie `True` si le bouton est cliqué et `False` sinon.
+  Paramètre :
+  * `button` : *`Button`*
+
+- `activate_event(event_name)` &rarr; `None` \
+  Paramètre :
+  * `event_name` : *`str`*
+
+- `finish_event(event_name)` &rarr; `None` \
+  Paramètre :
+  * `event_name` : *`str`*
+
+- `reset_keybinds()` &rarr; `None` \
+  Remet à zéro les associations de touches depuis le fichier de sauvegarde original.
+
+- `consume_event(event_name)` &rarr; `None` \
+  Termine l'évènement et l'ajoute à la liste des évènements consommés. \
+  Paramètres :
+  * `event_name` : *`str`*
+
+- `get_key_letter(event_name)` &rarr; `None` \
+  Retourne le nom de la touche associée à un événement. \
+  Paramètre :
+  * `event_name` : *`str`*
+
+- `set_keybind(event_name, key)` &rarr; `None` \
+  Associe une touche à un évènement.
+  Paramètres :
+  * `event_name` : *`str`*
+  * `key` : *`str`*
+
+- `initialize_settings_inputs()` &rarr; `None` \
+  Initialise les cases de texte associées aux touches des paramètres du jeu.

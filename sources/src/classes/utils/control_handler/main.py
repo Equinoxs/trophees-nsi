@@ -73,14 +73,14 @@ class ControlHandler:
 				case pygame.MOUSEBUTTONDOWN:
 					self.activate_event('clicked')
 
-	def is_activated(self, event: str):
-		return self.events.get(event, False)
+	def is_activated(self, event_name: str):
+		return self.events.get(event_name, False)
 
 	def is_clicked(self, button):
 		return self.is_activated('clicked') and button.get_rect().collidepoint(self.mouse_position)
 
-	def activate_event(self, event: str):
-		self.events[event] = True
+	def activate_event(self, event_name: str):
+		self.events[event_name] = True
 
 	def finish_event(self, event_name: str):
 		self.events[event_name] = False

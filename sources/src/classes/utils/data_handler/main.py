@@ -121,21 +121,20 @@ class DataHandler:
 
 		return data
 
-	def reload_game(self, reload: bool = True):
-		if reload:
-			GameLoop().get_control_handler().load_keybinds(self.current_save['keybinds'])
-			GameLoop().get_sound_mixer().free_all_channels()
-			Player().get_map().load_elements_from(self.current_save['player']['current_map_name'])
-			Player().load_new_data(self.current_save['player'])
-			GameLoop().get_camera().initialize()
+	def reload_game(self):
+		GameLoop().get_control_handler().load_keybinds(self.current_save['keybinds'])
+		GameLoop().get_sound_mixer().free_all_channels()
+		Player().get_map().load_elements_from(self.current_save['player']['current_map_name'])
+		Player().load_new_data(self.current_save['player'])
+		GameLoop().get_camera().initialize()
 
 	def load_save(self, name = None, new_game: bool = False, force = False, reload = False):
 		if new_game:
 			self.current_save = self.get_data_from_last_save(new_game=True)
-			self.reload_game(reload)
 		elif self.current_save is None or force:
 			self.current_save = self.get_data_from_last_save(name)
-			self.reload_game(reload)
+		if reload:
+			self.reload_game()
 		return self.current_save
 
 
