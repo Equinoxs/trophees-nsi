@@ -268,5 +268,8 @@ class NPC(PillarObject):
 	def get_data(self):
 		data = super().get_data()
 		if self.inventory is not None:
-			data['inventory'] = self.inventory.get_data()
+			if isinstance(self.inventory, InventoryItem):
+				data['inventory'] = self.inventory.get_data()
+			else:
+				data['inventory'] = None
 		return data

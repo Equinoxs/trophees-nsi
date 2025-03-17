@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import GameLoop, TimeHandler, Player, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT
+from src.classes import GameLoop, TimeHandler, Player, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT, DEBUG
 
 
 class Missions:
@@ -27,8 +27,6 @@ class Missions:
 				'gordon_welchman_presentation_0': 'Listen to the stranger',
 
 				'alan_turing_presentation_0': 'Listen to the stranger',
-				'alan_turing_presentation_1': 'Follow Alan Turing',
-				'alan_turing_presentation_2': 'Follow Alan Turing',
 				
 				'hugh_alexander_presentation_0': 'Listen to the stranger',
 
@@ -49,14 +47,20 @@ class Missions:
 
 				'bombes_manipulation_1': 'Interact with the Bomb',
 				'bombes_manipulation_2': 'Connect the wires',
+				'bombes_manipulation_3': 'Talk to Hugh Alexander',
+				'bombes_manipulation_4': 'Listen to Hugh Alexander',
 
 				'decrypt_enigma_1': 'Interact with Enigma',
+				'decrypt_enigma_2': 'Decrypt the message',
+				'decrypt_enigma_3': 'Come back to Alan Turing',
+				'decrypt_enigma_4': 'Listen to Alan Turing',
 
 				'act3_upgrade_0': 'Listen to Alastair Denniston',
 
 				'insert_colossus_1': 'Collect the punched cards',
-				'insert_colossus_2': 'Interact with Colossus',
-				'insert_colossus_3': 'Insert the punched cards into Colossus'
+				'insert_colossus_2': 'Insert the punched cards into Colossus',
+				'insert_colossus_3': 'Talk again to Tommy Flowers',
+				'insert_colossus_4': 'Listen to Tommy Flowers'
 			}
 
 			self.update_missions_set()
@@ -180,7 +184,7 @@ class Missions:
 			'messages': [
 				'Hello new one! I\'m glad to meet you.',
 				'My name is Gordon Welchman. I am the boss of this Hut.',
-				'Let me explain you what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans communicate via encrypted message, we have the but we don\'t know how to break them.',
+				'Let me explain you what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans communicate via encrypted message, we can intercept them but we don\'t know how to break those messages.',
 				'They use the Enigma machine to encrypt and decrypt their messages, by using a common cipher which changes every day, so we have to find a clever way to guess this cipher fast.',
 				'In conclusion, we try to manage to break the German Enigma machine cipher. If we do it, we would have very important pieces of information about the German organizations and plans.'
 			]
@@ -227,7 +231,7 @@ class Missions:
 			'messages': [
 				'Hello. Welcome to Bletchely Park',
 				"I am Alastair Denniston, your commandant. By now, you're gonna do what I say.",
-				'At Bletchley Park, we fight for peace, against the german people. Before I tell you more, would you please sign a contract. In a few words, you will remain under the silence about what is going on here. Otherwise you would be considered as a traitor that MI6 must deal with.',
+				'At Bletchley Park, we fight for peace, against the Nazis. Before I tell you more, would you please sign a contract. In a few words, you will remain under the silence about what is going on here. Otherwise you would be considered as a traitor that MI6 must deal with.',
 				'If you do consent, please continue. However, if you do not, please close that window, delete this game and never come back!',
 				'Congratulations, let me present you the Park.'
 			]
@@ -284,7 +288,7 @@ class Missions:
 			'messages': [
 				'So you\'re the new one, huh?',
 				'I saw you coming, you seem like a hard worker. And that\'s good, because I got a mission for you!',
-				'You need to get into Building 2, you will see a wide table with a letter in it, I need you to get it and bring it to Hut 6.',
+				'You need to get into Building 2, the orange building in front of us. You will see a wide table with a letter in it, I need you to get it and bring it to Hut 6.',
 				'In Hut 6, you\'ll see a table at the far end with letters like the one you will pick on it, put the mail on this table and we\'ll get the rest.',
 				'Thank you very much!'
 			]
@@ -310,7 +314,7 @@ class Missions:
 				'type': 'UIElement',
 				'id': 'encrypted_message',
 				'class': 'first_job_2_encrypted_message',
-				'label': 'Encrypted Message: ..-. .- .-.. -.-. --- -. / ...-- / .--. --- ... .. - .. --- -. / . .- --. .-.. . / .-- . ... - .-.-.- / ...- --- .-. -... . .-. . .. - ..- -. --. / ..-. ..- .-. / -- .. ... ... .. --- -. / -.-. --- -... .-.'
+				'label': 'Encrypted Message: ..-. .- .-.. -.-. --- -. / ...-- / .--. --- ... .. - .. --- -. / .-- . ... -'
 			}
 
 			morse_input_data = {
@@ -324,7 +328,7 @@ class Missions:
 			GameLoop().get_menu_handler().get_current_menu().add_element(morse_input_data)
 		else:
 			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('morse_input')
-			if input.get_text().upper() == 'FALCON 3 POSITION EAGLE WEST. VORBEREITUNG FUR MISSION COBR':
+			if input.get_text().upper() == 'FALCON 3 POSITION  WEST' or (DEBUG and input.get_text().upper() == 'PASS'):
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')
@@ -365,16 +369,14 @@ class Missions:
 				'the BOMBE.',
 				'It helps us quickly find the right settings to decode messages.',
 				'Our goal is to break these codes as fast as possible. The sooner we succeed, the more valuable the information we uncover.',
-				'Now, come, I\'ll introduce you to the team. I think some of them have a mission for you...'
+				'Now, I think Hugh Alexander over here has a mission for you, go see him!'
 			]
 		}
 		return self.use_create_dialog('alan_turing_presentation_0_dialog', dialog_data)
 
-	def alan_turing_presentation_1(self):
-		return self.use_move_npc('alan_turing', Vector2(303, 479))
-	
-	def alan_turing_presentation_2(self):
-		return self.use_move_npc('alan_turing', Vector2(303, 130))
+
+
+	# --- PRÉSENTATION DE HUGH ALEXANDER ---
 
 	def hugh_alexander_presentation_0(self):
 		dialog_data = {
@@ -382,16 +384,10 @@ class Missions:
 				'Ah, so you’re the new recruit Alan mentioned. Welcome to the team!',
 				'I’m Hugh Alexander, head of the Hut 8 cryptanalysis team. Here, we focus on breaking the Enigma messages from the German Navy.',
 				'The machine helps, but cracking the code still requires sharp thinking and careful analysis.',
-				'Let’s see what you’re capable of. We just intercepted a fresh batch of encrypted messages.',
-				'Your task is to go to the mansion, find the encrypted message, examine it and decode it',
-				'Once you found it, come back to me.'
+				'I do have a mission for you, come back and see me later'
 			]
 		}
 		return self.use_create_dialog('hugh_alexander_presentation_0_dialog', dialog_data)
-	
-	def do(self, mission_name: str, index: int):
-		objective_method = getattr(self, mission_name + '_' + str(index), None)
-		return objective_method()
 
 
 
@@ -529,9 +525,23 @@ class Missions:
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('blue_wire')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('red_wire')
 				GameLoop().get_menu_handler().set_current_menu('in_game')
+				del self.objectives_store['bombes_manipulation_2_initialized']
 				return 1
-
 		return 0
+
+	def bombes_manipulation_3(self):
+		self.use_interaction('hugh_alexander')
+
+	def bombes_manipulation_4(self):
+		dialog_data = {
+			'messages': [
+				'Great, thanks to you, the Bombe works again!',
+				'I saw Alan Turing while you were repairing the Bombe, he really would like to see you.',
+				'See you soon!'
+			]
+		}
+		return self.use_create_dialog('decrypt_enigma_4_dialog', dialog_data)
+
 
 
 	# --- DÉCRYPTAGE AVEC ENIGMA ---
@@ -539,7 +549,7 @@ class Missions:
 	def decrypt_enigma_0(self):
 		dialog_data = {
 			'messages': [
-				'Now the time has come! You have you serious mission, let me tell you what you will have to accomplish.',
+				'Now the time has come! I have a serious mission for you, let me explain what you will have to accomplish.',
 				'You\'re gonna decrypt a message with the Enigma machine that we collected from the nazis.',
 				'To get a little more technical in my explainations, Enigma encrypt a letter in another one. However, if it tries to encrypt an "h" for example, the encrypted letter corresponding won\'t be an "h".',
 				'We just have to find a probable word used by the nazis in the encrypted message, and find the corresponding word based on what I said. For example, the word "wheather" is traduced by "Wetter" in german.',
@@ -635,12 +645,32 @@ class Missions:
 					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('border')
 					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
 					GameLoop().get_menu_handler().set_current_menu('in_game')
+					del self.objectives_store['decrypt_enigma_2_initialized']
 					return 1
 			else:
 				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((0,) * 3)
 				if GameLoop().get_control_handler().is_activated('enter'):
+					GameLoop().get_control_handler().enable_all_actions()
+					GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('enigma_bg')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('light')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('border')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
+					del self.objectives_store['decrypt_enigma_2_initialized']
 					return -1
 		return 0
+
+	def decrypt_enigma_3(self):
+		self.use_interaction('alan_turing')
+
+	def decrypt_enigma_4(self):
+		dialog_data = {
+			'messages': [
+				'Well done! I see you are an expert.',
+				'Denniston told me he wanted to talk to you about something...'
+			]
+		}
+		return self.use_create_dialog('decrypt_enigma_4_dialog', dialog_data)
 
 
 
@@ -678,6 +708,18 @@ class Missions:
 		else:
 			return 0
 
+	def insert_colossus_3(self):
+		self.use_interaction('tommy_flowers')
+
+	def insert_colossus_4(self):
+		dialog_data = {
+			'messages': [
+				'Well done! I see you are an expert.',
+				'Denniston told me he wanted to talk to you about something...'
+			]
+		}
+		return self.use_create_dialog('insert_colossus_4_dialog', dialog_data)
+
 
 
 	# --- DERNIÈRE MISSION DU JEU ---
@@ -689,3 +731,9 @@ class Missions:
 			]
 		}
 		return self.use_create_dialog('final_0_dialog', dialog_data)
+
+
+
+	def do(self, mission_name: str, index: int):
+		objective_method = getattr(self, mission_name + '_' + str(index), None)
+		return objective_method()

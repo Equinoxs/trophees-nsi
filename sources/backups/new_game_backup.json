@@ -625,7 +625,7 @@
 				{
 					"type": "NPC",
 					"name": "building_1_master",
-					"image_path": "nathan",
+					"image_path": "jill",
 					"position": [510, 150],
 					"pattern_timeline": [[510, 150], "npc_event_test",[290, 255]],
 					"pattern_type": "back_and_forth",
@@ -890,7 +890,7 @@
 					"name": "gordon_welchman",
 					"mission": "gordon_welchman_presentation",
 					"position": [230, 45],
-					"image_path": "turing",
+					"image_path": "welchman",
 					"authorized_sound_tracks": ["footsteps", "voices"]
 				},
 				{
