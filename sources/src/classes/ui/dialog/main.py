@@ -92,9 +92,3 @@ class Dialog(UIElement):
 		self.wrapped_text_finish = False
 		self.set_label(self.messages[self.message_id])
 		self.text_display_duration = 0.025 * len(self.messages[self.message_id])
-
-	def update(self):
-		super().update()
-
-	def render(self):
-		super().render()

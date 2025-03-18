@@ -58,7 +58,7 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
   Initialise les attributs d'un élément à partir des données JSON fournies.  \
-  Paramètres :
+  Paramètre :
   * `data` : *`dict`* \
     Données pour configurer l'élément.
 

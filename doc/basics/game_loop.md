@@ -29,7 +29,7 @@ Elle appelle une méthode `update()` de chacun de ces composants régulièrement
 ## Méthodes
 - `__init__(screen, control_handler, time_handler, data_handler, player, sound_mixer, camera, mission_handler, 
   menu_handler, log_handler)` &rarr; `None` \
-  Initialise les attributs et lance la boucle infinie appellant `update()`. \
+  Initialise les attributs et lance la boucle de jeu appellant `update()`. \
   Paramètres :
   * `screen` : `pygame.Surface`
   * `control_handler` : `ControlHandler`
