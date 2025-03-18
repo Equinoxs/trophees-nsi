@@ -1,4 +1,4 @@
-from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents, InventoryItem, MenuHandler
+from src.classes import Vector2, TimeHandler, ControlHandler, PillarObject, Camera, DataHandler, GameLoop, Player, PatternEvents, InventoryItem
 
 
 class NPC(PillarObject):
@@ -31,6 +31,10 @@ class NPC(PillarObject):
 
 		self.inventory = data.get('inventory', None)
 		self.inventory_marker = None
+		self.sound = data.get('sound', None)
+
+	def get_sound(self):
+		return self.sound
 
 	def get_level(self):
 		return self.level
@@ -110,6 +114,9 @@ class NPC(PillarObject):
 	def resume_moving(self):
 		self.must_move = True
 
+	def get_must_move(self):
+		return self.must_move
+
 	def handle_animation(self):
 		if abs(self.speed_vector.get_y()) >= abs(2 * self.speed_vector.get_x()) + 1:  # ajout d'une constante pour prévenir des instabilités numériques
 			if self.speed_vector.get_y() > 0:
@@ -136,7 +143,7 @@ class NPC(PillarObject):
 		if self.objective is not None and self.must_move:
 			relative_objective = self.objective - self.position
 			if relative_objective.get_norm() <= 5 * Camera().get_zoom():
-				self.stop_moving()
+				self.objective = None
 				return False
 
 			self.speed_vector.copy(relative_objective).set_norm(self.speed / 1.5 * 100)
@@ -147,7 +154,6 @@ class NPC(PillarObject):
 				self.turn_right()
 			return True
 		else:
-			self.stop_moving()
 			return False
 
 	# Cette méthode est appelée à chaque fois que le NPC a atteint un objectif de son pattern
@@ -178,12 +184,12 @@ class NPC(PillarObject):
 		if not self.pattern:
 			return
 
-		if self.following_pattern:
+		if self.following_pattern and self.must_move:
 			if not self.is_moving:
 				do_again = self.handle_events()
 
 				if do_again:
-					self.objective = None
+					self.speed_vector.set_all(0, 0)
 					return  # on empêche le redéfinissement de l'objectif, le résultat sera le même la prochaine fois
 
 				else:
@@ -191,13 +197,12 @@ class NPC(PillarObject):
 					if self.pattern_index + 1 == len(self.pattern):
 						match self.pattern_type:
 							case 'loop':
-								self.pattern_index = 0
+								self.pattern_index = -1
 							case 'back_and_forth':
 								self.pattern_index = 0
 								self.pattern.reverse()
 					self.pattern_index += 1
 					self.set_objective(self.pattern[self.pattern_index])
-					self.resume_moving()
 		self.is_moving = self.move_npc_to_objective()
 
 	def get_inventory(self):
@@ -267,9 +272,8 @@ class NPC(PillarObject):
 
 	def get_data(self):
 		data = super().get_data()
-		if self.inventory is not None:
-			if isinstance(self.inventory, InventoryItem):
-				data['inventory'] = self.inventory.get_data()
-			else:
-				data['inventory'] = None
+		if isinstance(self.inventory, InventoryItem):
+			data['inventory'] = self.inventory.get_data()
+		elif self.inventory is None and 'inventory' in data:
+			del data['inventory']
 		return data

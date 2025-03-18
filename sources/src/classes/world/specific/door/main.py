@@ -1,4 +1,4 @@
-from src.classes import PillarObject, Player
+from src.classes import PillarObject, Player, DEBUG
 
 
 class Door(PillarObject):
@@ -13,9 +13,9 @@ class Door(PillarObject):
 		self.belongs_to_building = True
 
 	def update(self):
-		if self.is_interaction_available() and (not Player().get_map().get_allow_map_change() or Player().get_level() < self.required_level):
+		if self.is_interaction_available() and (not Player().get_map().get_allow_map_change() or Player().get_level() < self.required_level) and not DEBUG:
 			self.set_interaction_available(False)
-		elif not self.is_interaction_available() and Player().get_map().get_allow_map_change() and Player().get_level() >= self.required_level:
+		elif not self.is_interaction_available() and ((Player().get_map().get_allow_map_change() and Player().get_level() >= self.required_level) or DEBUG):
 			self.set_interaction_available(True)
 		super().update()
 
@@ -23,6 +23,6 @@ class Door(PillarObject):
 		return
 
 	def get_data(self):
-		if not self.belongs_to_building:
-			return super().get_data()
-		return None
+		if self.belongs_to_building:
+			return None
+		return super().get_data()

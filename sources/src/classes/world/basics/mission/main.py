@@ -62,7 +62,7 @@ class Mission:
 			'border_length': 1,
 			'border_color': (255,) * 3,
 			'text_color': (255,) * 3,
-			'color': (0, 0, 0, 80)
+			'color': (0, 0, 0, 200)
 		}
 
 		self.delete_objective_description()
@@ -71,7 +71,7 @@ class Mission:
 
 	def move_displayed_description(self, menu_name: str):
 		GameLoop().get_menu_handler().get_menu(self.description_menu_name).delete_element(self.displayed_description)
-		GameLoop().get_menu_handler().get_menu(menu_name).delete_element(self.displayed_description)
+		GameLoop().get_menu_handler().get_menu(menu_name).add_element_ref(self.displayed_description)
 		self.description_menu_name = menu_name
 
 	def delete_objective_description(self):

@@ -4,7 +4,7 @@
 			"widths":[
 				{ "width": 44, "time": 1000 }
 			],
-			"height": 94
+			"height": 96
 		},
 		"walking_forward": {
 			"widths": [
@@ -14,7 +14,7 @@
 				{ "width": 43, "time": 0.2 },
 				{ "width": 43, "time": 0.2 }
 			],
-			"height": 96
+			"height": 94
 		},
 		"walking_backward": {
 			"widths": [
@@ -30,26 +30,12 @@
 			"widths": [
 				{ "width": 45, "time": 0.3 },
 				{ "width": 45, "time": 0.2 },
-				{ "width": 44, "time": 0.2 },
-				{ "width": 50, "time": 0.3 },
-				{ "width": 38, "time": 0.2 }
+				{ "width": 41, "time": 0.2 },
+				{ "width": 52, "time": 0.3 },
+				{ "width": 36, "time": 0.2 }
 			],
-			"height": 93
-		},
-		"running": {
-			"widths": [
-				{ "width": 72, "time": 0.1 },
-				{ "width": 78, "time": 0.1 },
-				{ "width": 68, "time": 0.1 },
-				{ "width": 68, "time": 0.1 },
-				{ "width": 68, "time": 0.1 },
-				{ "width": 80, "time": 0.1 },
-				{ "width": 69, "time": 0.1 },
-				{ "width": 67, "time": 0.1 }
-			],
-			"height": 85
+			"height": 90
 		}
-
 	},
 	"hitbox": [
 		[-20, 0], [20, 0]

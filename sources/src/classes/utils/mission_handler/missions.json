@@ -58,6 +58,17 @@
 		"final": {
 			"required_level": 9,
 			"description": "Bletchley's adventure"
+		},
+
+		"epilogue_joan_clarke": {
+			"required_level": 10,
+			"description": "Meet Joan Clarke",
+			"rewards": 0
+		},
+		"epilogue_bill_tutte": {
+			"required_level": 10,
+			"description": "Meet William Tutte",
+			"rewards": 0
 		}
 	}
 }

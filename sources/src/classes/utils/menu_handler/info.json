@@ -533,7 +533,7 @@
 				"text_color": [255, 255, 255],
 				"label": "Bletchley's Adventure",
 				"x": "center",
-				"y": 10,
+				"y": 50,
 				"width": "auto",
 				"height": "auto",
 				"font_family": "roboto",
@@ -544,34 +544,27 @@
 				"type": "Button",
 				"class": "welcome_button",
 				"label": "Start new game",
-				"y": 200,
+				"y": 240,
 				"action": "start_new_game"
 			},
 			{
 				"type": "Button",
 				"class": "welcome_button",
 				"label": "Continue",
-				"y": 290,
+				"y": 330,
 				"action": "focus_on_game"
-			},
-			{
-				"type": "Button",
-				"label": "Settings",
-				"class": "welcome_button",
-				"y": 380,
-				"action": "open_settings"
 			},
 			{
 				"type": "Button",
 				"label": "Load game",
 				"class": "welcome_button",
-				"y": 470,
+				"y": 420,
 				"action": "open_loading"
 			},
 			{
 				"type": "Button",
 				"label": "Credits",
-				"y": 560,
+				"y": 510,
 				"class": "welcome_button",
 				"action": "open_credits"
 			},
@@ -579,7 +572,7 @@
 				"type": "Button",
 				"label": "Quit",
 				"class": "welcome_button",
-				"y": 650,
+				"y": 600,
 				"action": "quit_game",
 				"color": [61, 53, 39]
 			}

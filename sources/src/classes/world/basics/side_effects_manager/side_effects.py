@@ -37,7 +37,7 @@ class SideEffects:
 	def visit_player(_, host):
 		distance = host.get_position().distance_to(GameLoop().get_player().get_focus().get_position())
 		out = host.side_effect_data('visit_player_out')
-		sound = host.get_data().get('sound')  # Récupération du son depuis les données JSON
+		sound = host.get_sound()
 
 		if distance < 80:
 			if out and sound:
@@ -48,12 +48,28 @@ class SideEffects:
 			host.set_objective(GameLoop().get_player().get_focus().get_position())
 			host.move_npc_to_objective()
 			if distance < 30:
-				host.stop_moving()
-		else:
-			if not out:
-				host.side_effect_data('visit_player_out', True)
-				host.set_following_pattern(True)
 				host.set_objective(None)
+		elif not out:
+			host.side_effect_data('visit_player_out', True)
+			host.set_following_pattern(True)
+			host.set_objective(None)
+			host.resume_moving()
+
+	def fix_when_player(_, host):
+		if host.side_effect_data('fix_when_player') is None:
+			host.side_effect_data('fix_when_player', host.get_must_move())
+		if GameLoop().get_player().get_focus().get_position().distance_to(host.get_position()) < 50:
+			if host.get_must_move():
+				host.stop_moving()
+				host.side_effect_data('fix_when_player', False)
+		elif not host.get_must_move() and not host.side_effect_data('fix_when_player'):
+			host.resume_moving()
+			host.side_effect_data('fix_when_player', True)
+
+
+
+	# --- RÉSERVÉ À CERTAINS PERSONNAGES POUR LEUR PERMETTRE D'AVOIR PLUSIEURS MISSIONS ---
+
 
 	def handle_alastair_denniston(_, denniston):
 		if Player().get_level() == 3 and denniston.get_mission() is None:
@@ -66,10 +82,14 @@ class SideEffects:
 	def handle_alan_turing(_, turing):
 		if turing.get_mission() is None:
 			turing.set_mission_name('decrypt_enigma')
+		if Player().get_level() >= 10 and not turing.get_killed():
+			turing.kill()
 
 	def handle_hugh_alexander(_, alexander):
 		if alexander.get_mission() is None:
 			alexander.set_mission_name('bombes_manipulation')
+
+
 
 	def do(self, side_effect_name: str, host):
 		side_effect_method = getattr(self, side_effect_name, None)

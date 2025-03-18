@@ -629,7 +629,8 @@
 					"position": [510, 150],
 					"pattern_timeline": [[510, 150], "npc_event_test",[290, 255]],
 					"pattern_type": "back_and_forth",
-					"mission": "building_1_presentation"
+					"mission": "building_1_presentation",
+					"side_effects": ["fix_when_player"]
 				}
 			]
 		},
@@ -952,7 +953,7 @@
 					"name": "alan_turing",
 					"position": [300, 96],
 					"mission": "alan_turing_presentation",
-					"side_effects": ["handle_alan_turing"],
+					"side_effects": ["handle_alan_turing", "fix_when_player"],
 					"image_path": "turing",
 					"pattern_timeline": [[303, 479], [303, 230], [303, 479],  "npc_event_test", [501, 467], [119, 483], [303, 479]],
 					"pattern_type": "loop",
@@ -963,7 +964,7 @@
 					"name": "hugh_alexander",
 					"position": [300, 96],
 					"mission": "hugh_alexander_presentation",
-					"side_effects": ["handle_hugh_alexander"],
+					"side_effects": ["handle_hugh_alexander", "fix_when_player"],
 					"image_path": "alexander",
 					"pattern_timeline": [[60, 154], [60, 56], "npc_event_test", [255, 82], [497, 72]],
 					"pattern_type": "back_and_forth",
@@ -974,7 +975,8 @@
 					"name": "joan_clarke",
 					"position": [300, 50],
 					"image_path": "joan_clarke",
-					"authorized_sound_tracks": ["footsteps", "voices"]
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"mission": "epilogue_joan_clarke"
 				},
 				{
 					"type": "Furniture",
@@ -1128,7 +1130,8 @@
 					"name": "william_tutte",
 					"position": [300, 50],
 					"image_path": "tutte",
-					"authorized_sound_tracks": ["footsteps", "voices"]
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"mission": "epilogue_bill_tutte"
 				},
 				{
 					"type": "Door",

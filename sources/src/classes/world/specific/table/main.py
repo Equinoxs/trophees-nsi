@@ -58,6 +58,8 @@ class Table(Furniture):
 				Camera().draw(item.get_image(), self.get_item_position(item) - Vector2(item.get_image().get_width() / 2 / Camera().get_zoom(), item.get_image().get_height() / 2 / Camera().get_zoom()), 'map')
 
 	def get_data(self):
+		if self.killed:
+			return None
 		data = super().get_data()
 		data['items'] = []
 		for item in self.items:

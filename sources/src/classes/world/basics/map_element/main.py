@@ -10,6 +10,13 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		self.z_indexes_history = [self.z_index]
 		self.name = data['name']
 		self.data = data
+		self.killed = False
+
+	def get_killed(self):
+		return self.killed
+
+	def kill(self):
+		self.killed = True
 
 	def get_name(self):
 		return self.name
@@ -29,6 +36,11 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		pass
 
 	def update(self):
+		if self.killed:
+			if self.get_must_render():
+				self.set_must_render(False)
+			return
+
 		SoundMaker.update(self)
 		Animatable.update(self)
 		Sprite.update(self)
@@ -37,6 +49,8 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		SoundMaker.__del__(self)
 
 	def get_data(self):
+		if self.killed:
+			return None
 		for key in self.data:
 			if getattr(self, key, None) is not None:
 				self.data[key] = getattr(self, key)

@@ -60,7 +60,18 @@ class Missions:
 				'insert_colossus_1': 'Collect the punched cards',
 				'insert_colossus_2': 'Insert the punched cards into Colossus',
 				'insert_colossus_3': 'Talk again to Tommy Flowers',
-				'insert_colossus_4': 'Listen to Tommy Flowers'
+				'insert_colossus_4': 'Listen to Tommy Flowers',
+
+				'final_0': 'Listen to Alastair Denniston',
+				'final_1': 'Destroy Enigma',
+				'final_3': 'Destroy the Bombe',
+				'final_5': 'Destroy Colossus',
+				'final_7': 'Talk to Denniston',
+				'final_8': 'Listen to Denniston',
+
+				'epilogue_joan_clarke_0': 'Listen to Joan Clarke',
+		
+				'epilogue_bill_tutte_0': 'Listen to William (Bill) Tutte',
 			}
 
 			self.update_missions_set()
@@ -530,7 +541,7 @@ class Missions:
 		return 0
 
 	def bombes_manipulation_3(self):
-		self.use_interaction('hugh_alexander')
+		return self.use_interaction('hugh_alexander')
 
 	def bombes_manipulation_4(self):
 		dialog_data = {
@@ -615,7 +626,7 @@ class Missions:
 				'y': 250,
 				'font_size': 40,
 				'font_family': 'monofonto',
-				'label': 'DFSU MKLE BJAP BCAHJ DKFL FJKD SQOF KWXA MNRO',
+				'label': 'DFSU MKLE BJAP BCAHJ',
 				'color': 'transparent',
 				'text_align': 'left'
 			}
@@ -629,12 +640,12 @@ class Missions:
 			for event in GameLoop().get_control_handler().get_pygame_events():
 				if event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
 					x = element.get_position().get_x()
-    
+		
 					if event.key == pygame.K_LEFT:
 						element.get_position().set_x(x + 20)
 					else:
 						element.get_position().set_x(x - 20)
-    
+		
 			if 357 < element.get_position().get_x() < 359:
 				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((255,) * 4)
 				if GameLoop().get_control_handler().is_activated('enter'):
@@ -661,7 +672,7 @@ class Missions:
 		return 0
 
 	def decrypt_enigma_3(self):
-		self.use_interaction('alan_turing')
+		return self.use_interaction('alan_turing')
 
 	def decrypt_enigma_4(self):
 		dialog_data = {
@@ -709,7 +720,7 @@ class Missions:
 			return 0
 
 	def insert_colossus_3(self):
-		self.use_interaction('tommy_flowers')
+		return self.use_interaction('tommy_flowers')
 
 	def insert_colossus_4(self):
 		dialog_data = {
@@ -725,12 +736,78 @@ class Missions:
 	# --- DERNIÈRE MISSION DU JEU ---
 
 	def final_0(self):
+		if Player().get_level() < 10:
+			Player().set_level(10)
 		dialog_data = {
 			'messages': [
-				'Hey! This is the last mission of the game',
+				'A lot of years have passed since you\'ve been there. Now war is almost over.',
+				'Still, I need you for a last mission, you will have to destroy all the machines to erase all traces of this place and its activcities.',
+				'Destroy Enigma, the Bombe and Colossus, and come back to me when you are done.'
 			]
 		}
 		return self.use_create_dialog('final_0_dialog', dialog_data)
+
+	def final_1(self):
+		return self.use_interaction('enigma')
+
+	def final_2(self):
+		Player().get_map().search_by_name('enigma').kill()
+		return 1
+
+	def final_3(self):
+		return self.use_interaction('bombe')
+
+	def final_4(self):
+		Player().get_map().search_by_name('bombe').kill()
+		return 1
+
+	def final_5(self):
+		return self.use_interaction('colossus')
+
+	def final_6(self):
+		Player().get_map().search_by_name('colossus').kill()
+		return 1
+
+	def final_7(self):
+		return self.use_interaction('alastair_denniston')
+
+	def final_8(self):
+		dialog_data = {
+			'messages': [
+				'Thanks buddy, now just keep it quiet.',
+				'You can stay here more time if you want, you just have to know that this is in the public interest that you shut your mouth',
+				'You reall don\'t want to break the contract.'
+			]
+		}
+		return self.use_create_dialog('final_8_dialog', dialog_data)
+
+
+
+	# --- MISSIONS DE L'ÉPILOGUE ---
+
+	def epilogue_joan_clarke_0(self):
+		dialog_data = {
+			'messages': [
+				'Hello, you seem like a hero here.',
+				'I am Joan Clarke, I recently became the deputy manager of this hut. I used to decrypt encrypted messages from the nazis by using the bamburismus method.',
+				'It is a method that consists in finding the most probable word in the encrypted message, and then decrypt the message by using the word as a key. But I am sure you already know that.',
+				'I developed it with Alan Turing, who is a very good friend of mine. I am sure you know him too. It is so sad that he left Bletchley Park...',
+				'He really had appreciated you, for the work that you have done and for your sympathy with him.'
+			]
+		}
+		return self.use_create_dialog('epilogue_joan_clarke_0_dialog', dialog_data)
+
+	def epilogue_bill_tutte_0(self):
+		dialog_data = {
+			'messages': [
+				'Hey, my name is William Tutte, but every body calls me Bill here.',
+				'What did I do here you say? I am a mathematician, and I deduced the structure of the Lorenz cipher, which is a more complex cipher than the Enigma.',
+				'I did it by using the Colossus machine, which was designed by Tommy Flowers, you have already worked with it I think.',
+				'I am sure you know that the Colossus machine is the first programmable computer, and it is used to decrypt messages from the German Army.',
+				'You know, I am very proud of my work here, and I am sure you are too. I hope I will see you around soon.'
+			]
+		}
+		return self.use_create_dialog('epilogue_bill_tutte_0_dialog', dialog_data)
 
 
 

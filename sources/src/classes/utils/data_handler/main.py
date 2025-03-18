@@ -139,8 +139,6 @@ class DataHandler:
 
 
 	def save_data(self, original_data: dict, name: str):
-		self.update_current_save_map()
-
 		if name is None:
 			now = datetime.now()
 			date = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -155,7 +153,7 @@ class DataHandler:
 					saves.pop(0)
 		else:
 			if not self.save_name_valid(name):
-				return
+				return False
 			path = os.path.join(
 				os.path.dirname(os.path.abspath(__file__)),
 				'..', '..', '..', '..', 'backups', 'manual', name + '.json'
@@ -182,6 +180,7 @@ class DataHandler:
 		data['player'] = Player().get_data()
 		with open(path, 'w') as file:
 			json.dump(data, file, cls=JSONEncoder)
+		return True
 
 	def update_current_save_map(self):
 		current_map_elements = []
@@ -191,10 +190,11 @@ class DataHandler:
 		self.current_save['maps'][Player().get_map().get_name()]['elements'] = current_map_elements
 
 	def save(self, name: str = None, force: bool = False):
+		self.update_current_save_map()
 		if not SAVE or (not self.save_allowed and not force):
-			return  # ne pas faire de sauvegardes (debug)
+			return False  # ne pas faire de sauvegarde
 		LogHandler().add("Automatic save done")
-		self.save_data(self.current_save, name)
+		return self.save_data(self.current_save, name)
 
 	def get_save_files(self, names=False, manual: bool = True, automatic: bool = False):
 		save_files = []

@@ -1,4 +1,4 @@
-from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler
+from src.classes import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler, SAVE
 
 
 class ButtonActions:	
@@ -63,16 +63,17 @@ class ButtonActions:
 		GameLoop().get_menu_handler().set_current_menu('map_opened')
 
 	def open_saving(self, _):
-		GameLoop().pause_game()
-		GameLoop().get_menu_handler().set_current_menu('saving')
+		if SAVE and not MissionHandler().mission_ongoing():
+			GameLoop().pause_game()
+			GameLoop().get_menu_handler().set_current_menu('saving')
 
 	def save_game(self, _):
 		from src.classes import SavingInput
 		input_field = SavingInput.active_input
 		text = input_field.get_text()
 		LogHandler().add(f'Saved to file {text}')
-		DataHandler().save(text)
-		input_field.empty_text()
+		if DataHandler().save(text):
+			input_field.empty_text()
 
 	def load_game(self, button):
 		GameLoop().get_menu_handler().set_current_menu('loading', True)
