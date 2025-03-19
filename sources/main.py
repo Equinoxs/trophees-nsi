@@ -4,6 +4,7 @@ from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map,
 
 
 def main() -> int:
+	pygame.mixer.init()
 	pygame.init()
 	pygame.font.init()
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=1)

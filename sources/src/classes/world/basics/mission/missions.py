@@ -339,7 +339,7 @@ class Missions:
 			GameLoop().get_menu_handler().get_current_menu().add_element(morse_input_data)
 		else:
 			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('morse_input')
-			if input.get_text().upper() == 'FALCON 3 POSITION  WEST' or (DEBUG and input.get_text().upper() == 'PASS'):
+			if input.get_text().upper() == 'FALCON 3 POSITION WEST' or (DEBUG and input.get_text().upper() == 'PASS'):
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')

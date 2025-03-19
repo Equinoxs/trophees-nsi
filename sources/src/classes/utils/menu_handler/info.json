@@ -119,12 +119,12 @@
 			"x": "center",
 			"y": "center",
 			"width": 650,
-			"height": 750,
+			"height": 670,
 			"color": [255, 255, 255]
 		},
 		"first_job_2_encrypted_message": {
 			"x": "center",
-			"y": 75,
+			"y": 125,
 			"width": 550,
 			"return_line": true,
 			"height": "auto",
@@ -377,7 +377,10 @@
 				"height": "auto",
 				"action": "toggle_FPS",
 				"font_family": "basic"
-
+			},
+			{
+				"type": "FPSHelper",
+				"class": "fps"
 			}
 		],
 		"credits": [

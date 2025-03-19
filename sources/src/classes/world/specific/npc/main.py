@@ -143,6 +143,7 @@ class NPC(PillarObject):
 		if self.objective is not None and self.must_move:
 			relative_objective = self.objective - self.position
 			if relative_objective.get_norm() <= 5 * Camera().get_zoom():
+				self.speed_vector.set_all(0, 0)
 				self.objective = None
 				return False
 

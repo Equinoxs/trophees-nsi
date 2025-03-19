@@ -8,7 +8,7 @@ class SoundMaker:
 		self.sound_tracks = {}
 		for sound_track_name in authorized_sound_tracks:
 			data, sound_paths = DataHandler().get_sound_track_data(sound_track_name)
-			self.sound_tracks[sound_track_name] = SoundTrack(position, data, sound_paths)
+			self.sound_tracks[sound_track_name] = SoundTrack(self.position, data, sound_paths)
 
 	def play_sound(self, sound_name: str = None, loop: bool = False):
 		if sound_name is None:
