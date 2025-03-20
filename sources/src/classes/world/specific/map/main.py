@@ -1,4 +1,4 @@
-from src.classes import DataHandler, GameLoop, SoundMixer, Building, Vector2, GroundSurface, Wall, MapObject, InventoryItem, Table, Tree
+from src.classes import DataHandler, GameLoop, SoundMixer, Building, Vector2, GroundSurface, Wall, MapObject, InventoryItem, Table
 from src import classes
 
 

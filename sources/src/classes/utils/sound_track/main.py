@@ -4,7 +4,7 @@ from src.classes import Vector2, SoundMixer
 
 class SoundTrack:
 	def __init__(self, position: Vector2, data: dict, sound_paths: list[str]):
-		self.sounds = {}
+		self.sounds: dict[str, pygame.mixer.Sound] = {}
 		self.current_sound_name = None
 		for sound_name, sound_path in sound_paths.items():
 			self.sounds[sound_name] = pygame.mixer.Sound(sound_path)
@@ -49,7 +49,8 @@ class SoundTrack:
 			self.channel.unpause()
 
 	def set_volume(self, volume: float):
-		return self.channel.set_volume(volume)
+		if self.current_sound_name is not None:
+			return self.sounds[self.current_sound_name].set_volume(volume)
 
 	def get_busy(self):
 		return self.channel.get_busy()

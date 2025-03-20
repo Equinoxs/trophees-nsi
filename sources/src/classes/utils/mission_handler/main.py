@@ -110,7 +110,7 @@ class MissionHandler:
 
 			elif indicator == -1:
 				GameLoop().get_menu_handler().set_current_menu('loading', True)
-				GameLoop().get_data_handler().reload_game(True)
+				GameLoop().get_data_handler().reload_game()
 				GameLoop().get_data_handler().set_save_allowed(True)
 				GameLoop().get_menu_handler().set_current_menu('in_game')
 				GameLoop().get_sound_mixer().play_sfx('game_over')

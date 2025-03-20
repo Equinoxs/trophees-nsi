@@ -999,8 +999,8 @@
 				{
 					"type": "Table",
 					"name": "enigma",
-					"image_path": "light_round_high",
-					"position": [440, 320]
+					"image_path": "enigma",
+					"position": [440, 280]
 				},
 				{
 					"type": "Door",
@@ -1097,8 +1097,8 @@
 				{
 					"type": "Furniture",
 					"name": "colossus",
-					"image_path": "library",
-					"position": [900, -20]
+					"image_path": "colossus",
+					"position": [800, -80]
 				},
 				{
 					"type": "Furniture",
@@ -1123,7 +1123,7 @@
 					"name": "tommy_flowers",
 					"mission": "insert_colossus",
 					"image_path": "tommy_flowers",
-					"position": [940, 150]
+					"position": [860, 60]
 				},
 				{
 					"type": "NPC",
