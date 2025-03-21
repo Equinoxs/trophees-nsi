@@ -735,7 +735,7 @@ class Missions:
 
 
 
-	# --- DERNIÈRE MISSION DU JEU ---
+	# --- DERNIÈRE MISSION DU JEU => GÉNÉRIQUE DE FIN ---
 
 	def final_0(self):
 		if Player().get_level() < 10:
@@ -782,6 +782,46 @@ class Missions:
 			]
 		}
 		return self.use_create_dialog('final_8_dialog', dialog_data)
+
+	def final_9(self):
+		initial_y = 800
+		if 'final_9_initialized' not in self.objectives_store:
+			self.objectives_store['final_9_initialized'] = True
+
+			GameLoop().pause_game()
+			GameLoop().get_control_handler().disable_all_actions()
+			GameLoop().get_menu_handler().set_current_menu('missions')
+			GameLoop().get_sound_mixer().play_music('Cosmic - Lish Grooves')
+
+			background_data = {
+				'type': 'UIElement',
+				'id': 'background'
+			}
+
+			title_data = {
+				'type': 'UIElement',
+				'id': 'title',
+				'class': 'credits_writing',
+				'label': 'The End',
+				'font_size': 80
+			}
+
+			self.objectives_store['final_9_elements'] = []
+
+			GameLoop().get_menu_handler().get_current_menu().add_element(background_data)
+
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(title_data))
+
+		else:
+			elapsed_time = TimeHandler().add_chrono_tag('final_9')
+
+			if elapsed_time > 10:
+				return 1
+
+			for idx, element in enumerate(self.objectives_store['final_9_elements']):
+				element.set_y(initial_y + idx * 60 - elapsed_time * 30)
+
+		return 0
 
 
 

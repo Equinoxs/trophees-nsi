@@ -275,6 +275,6 @@ class NPC(PillarObject):
 		data = super().get_data()
 		if isinstance(self.inventory, InventoryItem):
 			data['inventory'] = self.inventory.get_data()
-		elif self.inventory is None and 'inventory' in data:
+		elif self.inventory is None and data is not None and 'inventory' in data:
 			del data['inventory']
 		return data
