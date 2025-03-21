@@ -17,6 +17,3 @@ class FPSHelper(UIElement):
 				self.nbr_frame = 0
 		else:
 			self.set_label('')
-
-	def render(self):
-		super().render()
