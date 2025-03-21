@@ -45,7 +45,7 @@ class Missions:
 
 				'act2_upgrade_0': 'Listen to Denniston',
 
-				'bombes_manipulation_1': 'Interact with the Bomb',
+				'bombes_manipulation_1': 'Interact with the Bombe',
 				'bombes_manipulation_2': 'Connect the wires',
 				'bombes_manipulation_3': 'Talk to Hugh Alexander',
 				'bombes_manipulation_4': 'Listen to Hugh Alexander',
@@ -194,7 +194,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hello new one! I\'m glad to meet you.',
-				'My name is Gordon Welchman. I am the boss of this Hut.',
+				'My name is Gordon Welchman. I am the head of this Hut.',
 				'Let me explain you what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans communicate via encrypted message, we can intercept them but we don\'t know how to break those messages.',
 				'They use the Enigma machine to encrypt and decrypt their messages, by using a common cipher which changes every day, so we have to find a clever way to guess this cipher fast.',
 				'In conclusion, we try to manage to break the German Enigma machine cipher. If we do it, we would have very important pieces of information about the German organizations and plans.'
@@ -210,9 +210,8 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hey! I hope you enjoy this place.',
-				'Well, here is the Mansion, if you want some peace moments, go there, you have to read and to work!',
-				'You just need to know that this place is to get some rest, take a coffee or a cup of tea, and get unstressed, which is very important in jobs like the guys do.',
-				'Finally, I hope I\'ll see you around soon, goodbye my friend!'
+				'the workload can be quite hard sometimes, good luck',
+				'I hope I\'ll see you around soon, goodbye my friend!'
 			]
 		}
 		return self.use_create_dialog('mansion_presentation_0_dialog', dialog_data)
@@ -225,7 +224,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Thank you for coming in Building 1!',
-				'A lot of work that we do here is focused on administrative stuff, it\'s not very important but let it be, somebody must do it huh!',
+				'A lot of work that we do here is focused on administrative stuff, it\'s not very important but that\'s the way it is, somebody must do it huh!',
 				'You know, what do we do here, they keep saying it\'s important but I don\'t know if we will manage to do it...'
 			]
 		}
@@ -241,10 +240,10 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hello. Welcome to Bletchely Park',
-				"I am Alastair Denniston, your commandant. By now, you're gonna do what I say.",
-				'At Bletchley Park, we fight for peace, against the Nazis. Before I tell you more, would you please sign a contract. In a few words, you will remain under the silence about what is going on here. Otherwise you would be considered as a traitor that MI6 must deal with.',
+				"I am Alexander Denniston, your commander. By now, you're gonna do what I say.",
+				'At Bletchley Park, we fight for peace, against the Nazis. Before I tell you more, would you please sign this secrecy act. In a few words, you have to remain silent about what is going on here, even to your coworkers from other buildings, Otherwise you will be considered as a national threat',
 				'If you do consent, please continue. However, if you do not, please close that window, delete this game and never come back!',
-				'Congratulations, let me present you the Park.'
+				'Congratulations, let me show you around.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data, immobilize_player=True)
@@ -255,8 +254,8 @@ class Missions:
 	def introduction_denniston_2(self):
 		dialog_data = {
 			'messages': [
-				'Do you see the house in front of us?',
-				"It is called the Little House, here you're gonna find some stuff that may be useful to you."
+				'Do you see the building in front of us?',
+				"you're going to find some stuff that may be useful in there."
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_2_dialog', dialog_data)
@@ -270,8 +269,8 @@ class Missions:
 	def introduction_denniston_5(self):
 		dialog_data = {
 			'messages': [
-				'This big building to your left is the Mansion. One of the most important edifice here.',
-				'I hope you remembered the names of the places I introduced, you will need them in a few moments.'
+				'This big building to your left is the mansion. One of the most important edifices here.',
+				'I hope you remember the names of the places I introduced you, you will need them in a few moments.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_5_dialog', dialog_data)
@@ -284,7 +283,7 @@ class Missions:
 			'messages': [
 				'There are the Huts, you can see the number 6 and the number 8 on these.',
 				'They will provide you some very important stuff you will need.',
-				'If you follow this way, you will find Building 1 and Building 2. I am sure you will enjoy this place!',
+				'If you follow this way, you will find Building 1 and Building 2. Good luck with your work.',
 				"Go! My men are waiting for you, and maybe I'll see you around."
 			]
 		}
@@ -298,9 +297,9 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'So you\'re the new one, huh?',
-				'I saw you coming, you seem like a hard worker. And that\'s good, because I got a mission for you!',
-				'You need to get into Building 2, the orange building in front of us. You will see a wide table with a letter in it, I need you to get it and bring it to Hut 6.',
-				'In Hut 6, you\'ll see a table at the far end with letters like the one you will pick on it, put the mail on this table and we\'ll get the rest.',
+				'I saw you coming, you look like a hard worker. And that\'s good, because I got a mission for you!',
+				'You need to get into Building 2, the orange building in front of us. There is a wide table with a letter on it, I need you to get it and bring it to Hut 6.',
+				'In Hut 6, there is a table at the far end with letters like the one you have to get, put the mail on this table and we\'ll do the rest.',
 				'Thank you very much!'
 			]
 		}
@@ -363,9 +362,9 @@ class Missions:
 	def act2_upgrade_0(self):
 		dialog_data = {
 			'messages': [
-				'You have been doing really well after hearing from my men.',
+				'You have been doing really well from what I\'ve heard.',
 				"That's why I give you the access to Hut 8.",
-				'You may take a tour in it, some people expect to see you there.'
+				'some people are expecting you there.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
@@ -375,7 +374,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Ah, you must be the new recruit. Welcome to Hut 8.',
-				'I’m Alan Turing. Our work here focuses on deciphering the German Navy\'s Enigma, which is even more complex than other versions.',
+				'I’m Alan Turing head of the Hut 8 cryptanalysis teams. Our work here focuses on deciphering the naval Enigma, which is even more complex than other versions.',
 				'To tackle this challenge, we\'ve designed an electromechanical machine',
 				'the BOMBE.',
 				'It helps us quickly find the right settings to decode messages.',
@@ -393,8 +392,8 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Ah, so you’re the new recruit Alan mentioned. Welcome to the team!',
-				'I’m Hugh Alexander, head of the Hut 8 cryptanalysis team. Here, we focus on breaking the Enigma messages from the German Navy.',
-				'The machine helps, but cracking the code still requires sharp thinking and careful analysis.',
+				'I’m Hugh Alexander, nice to meet you.  ',
+				'The machine helps, but cracking the code still requires some sharp thinking and careful analysis.',
 				'I do have a mission for you, come back and see me later'
 			]
 		}
@@ -547,7 +546,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Great, thanks to you, the Bombe works again!',
-				'I saw Alan Turing while you were repairing the Bombe, he really would like to see you.',
+				'I saw Alan while you were repairing the Bombe, he would like to see you.',
 				'See you soon!'
 			]
 		}
@@ -691,7 +690,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'After all that you have done for this country in here, I must thank you.',
-				'Moreover, from what I have heard, you are really talented. Now, you have access to Block H, some of my best men in it are waiting for you.'
+				'Moreover, from what I have heard, you are really talented. Now, you have access to Block H, some of my best cryptanalysts are waiting for you in it.'
 			]
 		}
 		return self.use_create_dialog('act3_upgrade_0_dialog', dialog_data)
@@ -703,8 +702,11 @@ class Missions:
 	def insert_colossus_0(self):
 		dialog_data = {
 			'messages': [
-				'Hey! We are preparing some tests and we need colossus.',
-				'Could you insert the punched cards that you see on this table in Colossus please? The team would be very thankful.'
+				'Hello, we\'ve been told someone new was going to join us, I\m Thomas Flowers, but you can call me Tommy.'
+				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.'
+				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage, you know Alan right ? He helps us for that part'
+				'By the way, we are preparing some tests and we need to use colossus, it\'s a digital computer I made.',
+				'Could you insert the punch cards that you see on this table in Colossus please? The team would be very thankful.'
 			]
 		}
 		return self.use_create_dialog('insert_colossus_0_dialog', dialog_data)
