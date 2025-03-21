@@ -374,7 +374,8 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Ah, you must be the new recruit. Welcome to Hut 8.',
-				'I’m Alan Turing head of the Hut 8 cryptanalysis teams. Our work here focuses on deciphering the naval Enigma, which is even more complex than other versions.',
+				'I\'m Alan Turing head of the Hut 8 cryptanalysis teams. Our work here focuses on deciphering the naval Enigma, code-named \'shark\', which is even more complex than other versions.',
+				'No one really wanted to try to tackle that one really, they all thought it was impossible',
 				'To tackle this challenge, we\'ve designed an electromechanical machine',
 				'the BOMBE.',
 				'It helps us quickly find the right settings to decode messages.',
@@ -391,8 +392,8 @@ class Missions:
 	def hugh_alexander_presentation_0(self):
 		dialog_data = {
 			'messages': [
-				'Ah, so you’re the new recruit Alan mentioned. Welcome to the team!',
-				'I’m Hugh Alexander, nice to meet you.  ',
+				'Ah, so you\'re the new recruit Alan mentioned. Welcome to the team!',
+				'I\'m Hugh Alexander, nice to meet you.',
 				'The machine helps, but cracking the code still requires some sharp thinking and careful analysis.',
 				'I do have a mission for you, come back and see me later'
 			]
@@ -690,7 +691,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'After all that you have done for this country in here, I must thank you.',
-				'Moreover, from what I have heard, you are really talented. Now, you have access to Block H, some of my best cryptanalysts are waiting for you in it.'
+				'Moreover, from what I have heard, you are really talented. Now, I\'ll grant you access to Block H, some of the best cryptanalysts are waiting for you in it.'
 			]
 		}
 		return self.use_create_dialog('act3_upgrade_0_dialog', dialog_data)
@@ -704,8 +705,8 @@ class Missions:
 			'messages': [
 				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.'
 				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.'
-				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage, you know Alan right ? He helps us for that part'
-				'By the way, we are preparing some tests and we need to use colossus, it\'s a digital computer I made.',
+				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan right ? He helps us for that part'
+				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made',
 				'Could you insert the punch cards that you see on this table in Colossus please? The team would be very thankful.'
 			]
 		}
@@ -776,9 +777,13 @@ class Missions:
 	def final_8(self):
 		dialog_data = {
 			'messages': [
-				'Thanks buddy, now just keep it quiet.',
-				'You can stay here more time if you want, you just have to know that this is in the public interest that you shut your mouth',
-				'You reall don\'t want to break the contract.'
+				'Your job here is now over, keep in mind that under no circumstances you may talk about this.',
+				'Your family, your friends, no one has to know. You must act like you\'ve never met all these people before'
+				'All of them, strangers.'
+				'None of this existed, Enigma was never broken, and there\'s no such thing as a Bombe or Colossus'
+				'You can stay here more time if you want, you just have to know that this is in the public interest that you keep your mouth shut',
+				'You really don\'t want to break the contract.',
+				'Thank you for your services, have a nice life'
 			]
 		}
 		return self.use_create_dialog('final_8_dialog', dialog_data)
@@ -790,11 +795,11 @@ class Missions:
 	def epilogue_joan_clarke_0(self):
 		dialog_data = {
 			'messages': [
-				'Hello, you seem like a hero here.',
+				'Hello, I\'ve never relly had the time to chat with you',
 				'I am Joan Clarke, I recently became the deputy manager of this hut. I used to decrypt encrypted messages from the nazis by using the bamburismus method.',
 				'It is a method that consists in finding the most probable word in the encrypted message, and then decrypt the message by using the word as a key. But I am sure you already know that.',
 				'I developed it with Alan Turing, who is a very good friend of mine. I am sure you know him too. It is so sad that he left Bletchley Park...',
-				'He really had appreciated you, for the work that you have done and for your sympathy with him.'
+				'He really appreciated you for the work that you have done and for your sympathy'
 			]
 		}
 		return self.use_create_dialog('epilogue_joan_clarke_0_dialog', dialog_data)
@@ -803,10 +808,11 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hey, my name is William Tutte, but every body calls me Bill here.',
-				'What did I do here you say? I am a mathematician, and I deduced the structure of the Lorenz cipher, which is a more complex cipher than the Enigma.',
-				'I did it by using the Colossus machine, which was designed by Tommy Flowers, you have already worked with it I think.',
-				'I am sure you know that the Colossus machine is the first programmable computer, and it is used to decrypt messages from the German Army.',
-				'You know, I am very proud of my work here, and I am sure you are too. I hope I will see you around soon.'
+				'What did I do here you say? I am a mathematician, and I deduced the structure of the Tunny cipher, which is, I must say, very complex.',
+				'How does it work ? Oh, well, it somehow uses XOR and different kind of wheels, it was a pain to deduce !'
+				'I did it by using the Colossus machine, which was designed by Tommy Flowers, you have already worked with him I think.',
+				'I am sure you know that the Colossus machine is the world\'s first programmable, electronic, digital computer !',
+				'You know, I am very proud of my work here, and I am sure you are too. I hope we will see you around soon.'
 			]
 		}
 		return self.use_create_dialog('epilogue_bill_tutte_0_dialog', dialog_data)
