@@ -1,6 +1,6 @@
 import pygame
 
-from src.classes import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler, SCREEN_WIDTH, SCREEN_HEIGHT
+from src import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 def main() -> int:
