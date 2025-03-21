@@ -702,7 +702,7 @@ class Missions:
 	def insert_colossus_0(self):
 		dialog_data = {
 			'messages': [
-				'Hello, we\'ve been told someone new was going to join us, I\m Thomas Flowers, but you can call me Tommy.'
+				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.'
 				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.'
 				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage, you know Alan right ? He helps us for that part'
 				'By the way, we are preparing some tests and we need to use colossus, it\'s a digital computer I made.',
