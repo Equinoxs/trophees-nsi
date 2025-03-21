@@ -22,7 +22,7 @@ class Missions:
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
 
-				'mission_test_1': 'get your y coordinate below 0 under 10 seconds!',
+				'mission_test_1': 'Get at the top of the map under 10 seconds!',
 		
 				'gordon_welchman_presentation_0': 'Listen to the stranger',
 
@@ -144,12 +144,13 @@ class Missions:
 		object = Player().get_map().search_by_name(object_name)
 		if object is None:
 			return 0
-		if object.get_interaction() is None:
+		if object_name + '_interacted' not in self.objectives_store:
 			self.objectives_store[object_name + '_interacted'] = False
 			object.set_interaction('mission_interaction', force=True)
 		elif self.objectives_store[object_name + '_interacted']:
 			self.objectives_store[object_name + '_interacted'] = False
 			object.set_interaction(None)
+			del self.objectives_store[object_name + '_interacted']
 			return 1
 		return 0
 
@@ -165,7 +166,7 @@ class Missions:
 
 	def mission_test_0(self):
 		dialog_data = {
-			'messages': ['Hello my friend!', 'I need you to do something a bit strange...', 'Could you get your y coordinate below 0?', 'Thank you very much!']
+			'messages': ['Hello my friend!', 'I need you to do something a bit strange...', 'Could you get at the top of the map please?', 'Thank you very much!']
 		}
 		return self.use_create_dialog('mission_test_0_dialog', dialog_data)
 
@@ -470,7 +471,7 @@ class Missions:
 			GameLoop().get_menu_handler().get_current_menu().add_element(green_wire_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(blue_wire_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(red_wire_data)
-   
+
 			self.objectives_store['green_flag'] = False
 			self.objectives_store['blue_flag'] = False
 			self.objectives_store['red_flag'] = False
@@ -574,6 +575,15 @@ class Missions:
 		return self.use_interaction('enigma')
 
 	def decrypt_enigma_2(self):
+		border_width = 250
+
+		words = [
+			'XGRTYPLM', 'WQAZNCVB', 'POIUYTRE', 'LKJHGFDS', 'MNBVCXZQ',
+			'ASDFGHJK', 'ZXCVBNML', 'QWERTYUI', 'WETTER', 'PLMOKNIJ',
+			'UHYGTFRE', 'EDCXSWZA', 'LOKIMJNH', 'RTYUIOPQ', 'GHJKLZXC',
+			'VBNMASDF', 'YTREWQPO', 'QAZXSWED', 'MLPOKIUJ', 'NHBVGTFD'
+		] 
+ 
 		if 'decrypt_enigma_2_initialized' not in self.objectives_store:
 			self.objectives_store['decrypt_enigma_2_initialized'] = True
 			GameLoop().get_control_handler().disable_all_actions()
@@ -584,11 +594,9 @@ class Missions:
 			enigma_bg_data = {
 				'type': 'UIElement',
 				'id': 'enigma_bg',
-				'width': 700,
-				'height': 575,
-				'x': 'center',
-				'y': 'center',
-				'color': (255, 255, 150)
+				'image': 'enigma',
+				'image_height': SCREEN_HEIGHT,
+				'color': 'transparent'
 			}
 
 			light_data = {
@@ -604,7 +612,6 @@ class Missions:
 				'border_color': (120,) * 3,
 			}
 
-			border_width = 250
 			border_data = {
 				'type': 'UIElement',
 				'id': 'border',
@@ -613,7 +620,7 @@ class Missions:
 				'x': 'center',
 				'y': 250,
 				'border_length': 2,
-				'border_color': (0, 0, 0),
+				'border_color': (255, 255, 255),
 				'color': 'transparent'
 			}
 
@@ -628,25 +635,62 @@ class Missions:
 				'font_family': 'monofonto',
 				'label': 'DFSU MKLE BJAP BCAHJ',
 				'color': 'transparent',
-				'text_align': 'left'
+				'text_align': 'left',
+				'text_color': (255, 255, 255)
 			}
+
+			probable_word_data = {
+				'type': 'UIElement',
+				'id': 'probable_word',
+				'width': 'auto',
+				'height': 'auto',
+				'x': 'center',
+				'y': 500,
+				'font_size': 40,
+				'font_family': 'monofonto',
+				'label': 'Probable word: WETTER',
+				'color': 'transparent',
+				'text_color': (255, 255, 255)
+			} 
+
+			current_word_data = {
+				'type': 'UIElement',
+				'id': 'current_word',
+				'width': 'auto',
+				'height': 'auto',
+				'x': 'center',
+				'y': 550,
+				'font_size': 40,
+				'font_family': 'monofonto',
+				'label': 'Current word: ' + words[0],
+				'text_color': (255, 255, 255)
+			}
+
+			self.objectives_store['words_index'] = 0
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(enigma_bg_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(light_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(border_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(probable_word_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(current_word_data)
+
 		else:
 			element = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('encrypted_message')
 			for event in GameLoop().get_control_handler().get_pygame_events():
 				if event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
-					x = element.get_position().get_x()
-		
+
 					if event.key == pygame.K_LEFT:
-						element.get_position().set_x(x + 20)
+						if self.objectives_store['words_index'] > -len(words) + 1:
+							self.objectives_store['words_index'] -= 1
 					else:
-						element.get_position().set_x(x - 20)
-		
-			if 357 < element.get_position().get_x() < 359:
+						if self.objectives_store['words_index'] < 11:
+							self.objectives_store['words_index'] += 1
+
+					element.get_position().set_x((SCREEN_WIDTH - border_width) / 2 + 3 + 20 * self.objectives_store['words_index'])
+					GameLoop().get_menu_handler().get_current_menu().get_element_by_id('current_word').set_label('Current word: ' + words[-self.objectives_store['words_index']])
+
+			if self.objectives_store['words_index'] == -8:
 				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((255,) * 4)
 				if GameLoop().get_control_handler().is_activated('enter'):
 					GameLoop().get_control_handler().enable_all_actions()
@@ -655,20 +699,14 @@ class Missions:
 					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('light')
 					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('border')
 					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('probable_word')
+					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('current_word')
 					GameLoop().get_menu_handler().set_current_menu('in_game')
 					del self.objectives_store['decrypt_enigma_2_initialized']
 					return 1
 			else:
 				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((0,) * 3)
-				if GameLoop().get_control_handler().is_activated('enter'):
-					GameLoop().get_control_handler().enable_all_actions()
-					GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
-					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('enigma_bg')
-					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('light')
-					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('border')
-					GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
-					del self.objectives_store['decrypt_enigma_2_initialized']
-					return -1
+
 		return 0
 
 	def decrypt_enigma_3(self):
@@ -793,14 +831,14 @@ class Missions:
 		if 'final_9_initialized' not in self.objectives_store:
 			self.objectives_store['final_9_initialized'] = True
 
-			GameLoop().pause_game()
 			GameLoop().get_control_handler().disable_all_actions()
-			GameLoop().get_menu_handler().set_current_menu('missions')
+			GameLoop().get_menu_handler().set_current_menu('mission')
 			GameLoop().get_sound_mixer().play_music('Cosmic - Lish Grooves')
 
 			background_data = {
 				'type': 'UIElement',
-				'id': 'background'
+				'id': 'background',
+				'color': (0, 0, 0, 255)
 			}
 
 			title_data = {
@@ -808,23 +846,95 @@ class Missions:
 				'id': 'title',
 				'class': 'credits_writing',
 				'label': 'The End',
-				'font_size': 80
+				'font_size': 80,
+				'y': 50
+			}
+
+			thanks_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Thank you for playing'
+			}
+
+			project_manager_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Project Manager - Alexis LAROSE'
+			}
+
+			editor_in_chief_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Editor-In-Chief - Diego GIMENEZ'
+			}
+
+			ui_designer_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'UI Designer - Dimitri NERRAND'
+			}
+
+			inventory_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Inventory System Designer - Maël KEN'
+			}
+
+			sound_engineer_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Sound Engineer - Diego GIMENEZ'
+			}
+
+			artistic_director_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Artistic Director - Maël KEN'
+			}
+
+			artistic_assistant_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Artistic Assistant - Dimitri NERRAND'
+			}
+
+			mathematical_expert_data = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'Mathematical Expert - Alexis LAROSE'
 			}
 
 			self.objectives_store['final_9_elements'] = []
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(background_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(title_data)
 
-			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(title_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(thanks_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(project_manager_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(editor_in_chief_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(ui_designer_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(inventory_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(sound_engineer_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_director_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_assistant_data))
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(mathematical_expert_data))
 
 		else:
 			elapsed_time = TimeHandler().add_chrono_tag('final_9')
 
-			if elapsed_time > 10:
+			if elapsed_time > 17:
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('background')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('title')
+				TimeHandler().remove_chrono_tag('final_9')
+				GameLoop().get_control_handler().enable_all_actions()
+				GameLoop().get_menu_handler().set_current_menu('in_game')
+				GameLoop().get_sound_mixer().play_music_prev()
 				return 1
 
 			for idx, element in enumerate(self.objectives_store['final_9_elements']):
-				element.set_y(initial_y + idx * 60 - elapsed_time * 30)
+				if element.get_position().get_y() <= 5 and elapsed_time > 0:
+					GameLoop().get_menu_handler().get_current_menu().delete_element(element)
+				element.get_position().set_y(initial_y + idx * 60 - elapsed_time * 80)
 
 		return 0
 
