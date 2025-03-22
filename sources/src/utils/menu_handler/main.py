@@ -25,7 +25,6 @@ class MenuHandler:
 			self.load_menus()
 			self.set_current_menu(self.current_menu_name, update=False)
 			self.button_actions = ButtonActions()
-			self.message_displayed = None
 			self.fps_toggled = True
 
 	def get_button_actions(self):
