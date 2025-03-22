@@ -4,7 +4,7 @@ Cette classe est nécessaire à l'affichage des boutons dans les menus.
 
 Elle permet d'appeler une méthode définie lors du clic de l'utilisateur.
 
-Elle dérive de `UIElement` et charge les méthodes *callback* depuis `ButtonActions`.
+Elle dérive de [`UIElement`](ui_element.md) et charge les méthodes *callback* depuis [`ButtonActions`](button_actions.md).
 
 ## Attributs
 - `action_name` : *`str`*

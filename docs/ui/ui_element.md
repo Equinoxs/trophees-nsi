@@ -2,7 +2,7 @@
 ## Description
 Cette classe est nécessaire pour pouvoir créer des éléments visuels (texte, bouton, image, rectangle, ...) et les afficher à l'écran.
 
-Elle permet d'automatiser leur création en utilisant les données renseignées dans le fichier `info.json` de `menu_handler` pour en faire un élément visible à l'écran.
+Elle permet d'automatiser leur création en utilisant les données renseignées dans le fichier `info.json` de [`MenuHandler`](../utils/menu_handler.md) pour en faire un élément visible à l'écran.
 
 >```json
 >{
@@ -28,7 +28,7 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
   Rayon des bordures de l'élément.
 - `label` : *`str`*  \
   Texte affiché dans l'élément.
-- `position` : *`Vector2`*  \
+- `position` : *[`Vector2`](../utils/vector_2.md)*  \
   Position de l'élément dans la fenêtre.
 - `color` : *`tuple`*  \
   Couleur de fond de l'élément (R, G, B, A).
@@ -36,9 +36,9 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
   Couleur du texte (R, G, B).
 - `image_path` : *`str`*  \
   Chemin vers l'image associée à l'élément (facultatif).
-- `original_image` : *`Surface`*  \
+- `original_image` : *`pygame.Surface`*  \
   Image d'origine chargée (si applicable).
-- `image` : *`Surface`*  \
+- `image` : *`pygame.Surface`*  \
   Image redimensionnée pour correspondre à la hauteur spécifiée.
 - `image_height` : *`int`*  \
   Hauteur de l'image (facultatif).
@@ -57,7 +57,7 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise les attributs d'un élément à partir des données JSON fournies.  \
+  Initialise les attributs d'un élément à partir des données JSON fournies. \
   Paramètre :
   * `data` : *`dict`* \
     Données pour configurer l'élément.
@@ -74,9 +74,9 @@ Elle permet d'automatiser leur création en utilisant les données renseignées 
 - `render()` &rarr; `None` \
   Affiche l'élément à l'écran en dessinant la surface, les bordures, le texte et l'image (si applicable).
 
-- `render_text(surface = 'menu')` &rarr; `None` \
-  Affiche le texte sur la surface `surface`.
-  Paramètres :
+- `render_text(surface='menu')` &rarr; `None` \
+  Affiche le texte sur la surface `surface`. \
+  Paramètre :
   * `surface` : *`str`*
 
 - `calculate_text_surface()` &rarr; `None` \

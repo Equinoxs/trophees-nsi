@@ -1,10 +1,10 @@
 # `Dialog` - dialogue de texte
 ## Description
-Cette classe est nécessaire à l'affichage des fenêtres de dialogue des `NPC`.
+Cette classe est nécessaire à l'affichage des fenêtres de dialogue des [`NPC`](../world/specific/npc.md).
 
 Elle permet d'afficher du texte de manière progressive dans une fenêtre en bas de l'écran.
 
-Elle dérive de `UIElement` et affiche le texte de manière autonome d'après une liste de messages.
+Elle dérive de [`UIElement`](ui_element.md) et affiche le texte de manière autonome d'après une liste de messages.
 
 ## Attributs
 - `_text_surface` : *`dict`* \
@@ -23,7 +23,7 @@ Elle dérive de `UIElement` et affiche le texte de manière autonome d'après un
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise `UIElement` et les attributs. \
+  Initialise [`UIElement`](ui_element.md) et les attributs. \
   Paramètre :
   * `data` : *`dict`* \
     Données pour configurer l'élément.
