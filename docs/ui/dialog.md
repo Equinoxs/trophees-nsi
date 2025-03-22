@@ -8,9 +8,11 @@ Elle dérive de [`UIElement`](ui_element.md) et affiche le texte de manière aut
 
 ## Attributs
 - `_text_surface` : *`dict`* \
-  Stockage interne des surfaces de texte.
+  Stockage interne des surfaces de texte (a.k.a. les lignes).
 - `messages` : *`list[str]`*
+  La liste des messages à aficher, chaque élément de la liste fait l'objet d'un affichage différé.
 - `title` : *`str`*
+  Ce titre sert à la gestion automatique des dialogues dans [`MenuHandler`](../utils/menu_handler.md)
 - `message_id` : *`int`* \
   Identifiant du message en cours d'affichage.
 - `text_margin` : *`int`* \

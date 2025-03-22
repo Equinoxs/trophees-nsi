@@ -90,5 +90,5 @@ Elle permet de charger une image en mémoire et de l'afficher à l'écran et en 
 - `update()` &rarr; `None` \
   Met à jour l'animation en cours.
 
-- `render` &rarr; `None` \
-  Méthode appelée par `Camera` pour effectuer le rendu. 
+- `render()` &rarr; `bool` \
+  Méthode appelée par `Camera` pour effectuer le rendu. Renvoie un booléen indiquant si le rendu a été effectué ou pas.

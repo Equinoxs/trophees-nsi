@@ -5,8 +5,9 @@ La classe `DataHandler` est responsable de la gestion de la sauvegarde et du cha
 Elle permet de charger, sauvegarder et manipuler les informations liées à l'état du jeu, y compris les données de l'environnement, des objets et des joueurs.
 
 Elle centralise l'accès aux différentes ressources comme les sons, les images, les éléments de mission.
-Les fonctions `load_XXXXX` et `get_XXXXX_data` sont différentes : la première charge les données depuis le cache avant 
+Les fonctions `load_XXXXX` et `get_XXXXX_data` sont différentes : la première charge les données depuis le cache avant
 d'appeler la deuxième qui charge depuis le stockage si l'objet demandé n'est pas caché.
+
 ## Attributs
 - `model` : *`dict`* \
   Modèle de données par défaut pour les éléments du jeu.

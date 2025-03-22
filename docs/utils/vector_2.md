@@ -5,8 +5,8 @@ Cette classe est nécessaire pour représenter les points pour les positions par
 Elle permet de stocker les valeurs `x` et `y` du vecteur, et d'effectuer toutes les opérations vectorielles nécessaires.
 
 ## Attributs
-- `x` : *`int`* **get / get**
-- `y` : *`int`* **get / get**
+- `x` : *`int`* **get / set**
+- `y` : *`int`* **get / set**
 
 ## Méthodes
 - `__init__(x=0, y=0)` &rarr; `None` \

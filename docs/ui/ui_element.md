@@ -1,8 +1,10 @@
 # `UIElement` - éléments de l'interface graphique
 ## Description
-Cette classe est nécessaire pour pouvoir créer des éléments visuels (texte, bouton, image, rectangle, ...) et les afficher à l'écran.
+Cette classe est nécessaire pour pouvoir créer des éléments visuels quelconques et les afficher à l'écran.
 
-Elle permet d'automatiser leur création en utilisant les données renseignées dans le fichier `info.json` de [`MenuHandler`](../utils/menu_handler.md) pour en faire un élément visible à l'écran.
+Un élément s'initialise à partir de données renseignées dans le fichier [`data/menus_info.json`](../../data/menus_info.json) pour en faire un élément visible à l'écran.
+
+Un élément permet d'avoir une `class`, c'est un concept inspiré du CSS afin de pouvoir réutiliser du syle, les class sont définies dans le même fichier que les `UIElement`. Une class peut avoir recour à d'autres classes et ses propriétés peuvent être réécrites selon la proximité de la class avec l'élément.
 
 >```json
 >{

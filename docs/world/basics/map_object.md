@@ -12,9 +12,10 @@ et des effets de bord.
 Elle rassemble les classes `MapElement`, `Collider`, `Interactable`, `Movable` et `SideEffectsManager`
 et assure leur mise à jour à chaque rafraîchissement d'écran.
 
+Ce qui faut comprendre avec cette classe, c'est qu'elle représente un, véritable objet du monde réel, contrairement à [`MapElement`](map_element.md).
+
 ## Attribut
-- `hitbox` : *`list`* \
-  Permet aux classes filles de définir une *hitbox* personnalisée et non pas récupérée depuis `info.json`.
+> *aucun*
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
@@ -22,6 +23,16 @@ et assure leur mise à jour à chaque rafraîchissement d'écran.
   Paramètre :
   * `data` : *`dict`*
 
+- `catch_event(event)` &rarr; `None` \
+  Permet d'intercepter un évènement provenant de la [`Map`](../specific/map.md), appelle la même méthode de [`Interactable`](interactable.md) et de [`MapElement`](map_element.md).
+  Paramètre :
+  * `event` : *`str | dict`*
+    l'évènement à traiter
+
 - `update()` &rarr; `None` \
+  Méthode exécutée à chaque rafraîchissement du jeu, permet de mettre à jour les classes parentes
+  et de gérer les interactions avec le joueur et les déplacements.
+
+- `__del__()` &rarr; `None` \
   Méthode exécutée à chaque rafraîchissement du jeu, permet de mettre à jour les classes parentes
   et de gérer les interactions avec le joueur et les déplacements.

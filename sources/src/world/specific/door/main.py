@@ -3,7 +3,6 @@ from src import PillarObject, Player, DEBUG
 
 class Door(PillarObject):
 	def __init__(self, data: dict):
-		self.image_type = 'door'
 		super().__init__(data)
 		self.must_render = False
 		self.belongs_to_building = False

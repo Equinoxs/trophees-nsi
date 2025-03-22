@@ -4,6 +4,9 @@ Cette classe est nécessaire au stockage des actions lors du clic des [`Button`]
 
 Elle implémente une méthode `do` permettant à la classe [`Button`](button.md) d'exécuter la méthode appropriée.
 
+Les autres méthodes sont spécifiques à des besoins précis dans le jeu et sont crées en conséquence
+*exemple* : mettre en pause le jeu, changer de menu, etc.
+
 ## Méthodes
 - `__init__()` &rarr; `None` \
   Méthode présente seulement à des fins de compatibilité.

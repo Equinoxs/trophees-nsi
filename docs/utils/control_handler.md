@@ -2,19 +2,27 @@
 ## Description
 Cette classe est nécessaire pour interagir avec le jeu à travers des contrôles.
 
-Elle permet d'interpréter les actions du clavier et de la souris du joueur dans le jeu et d'effectuer les actions appropriées.
+Ce singleton permet d'interpréter les actions du clavier et de la souris du joueur dans le jeu et d'effectuer les actions appropriées.
 
 Elle récupère la liste des évènements à chaque rafraîchissement de l'écran et permet aux autres classes de récupérer leur état.
 
+C'est un singleton par lequel passe la plupart des contrôles utilisateurs.
+
 ## Attributs
 - `events` : *`dict`*
+  Les différentes actions du jeu.
 - `mouse_position` : *`tuple(int)`*
-- `pygame_events` : *`list`*
+  La position de la souris.
+- `pygame_events` : *`list`* **get**
+  Une sauvegarde des évènements pygame depuis la dernière frame pour y ravoir accès.
 - `consumed_events` : *`set`*
+  Permet d'empêcher la réactivation d'une touche jusqu'à ce que celle ci soit relachée.
 - `disabled_actions` : *`list`*
+  Les actions qui ne s'activent pas, qui sont bloquées, c'est pratique pour certaines missions où on ne veut pas que le joueur ne bouge par exemple.
 - `settings_initialized` : *`bool`*
-- `keybinds` : *`dict`* \
-  Association des actions et des touches de clavier.
+  Indique si le menu des settings a été initialisé.
+- `keybinds` : *`dict`* **get** \
+  Les différents évènements associés à leur touche respective comme définis dans la sauvegarde du jeu.
 
 ## Méthodes
 - `__init__(saved_data)` &rarr; `None` \

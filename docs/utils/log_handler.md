@@ -1,6 +1,7 @@
 # `LogHandler` - gestion des journaux
 ## Description
 Cette classe est nécessaire au développement et au débogage du jeu.
+Elle ne sert que lorsque la variable `DEBUG` est à *`True`*.
 
 Elle permet de laisser des traces de tout le fonctionnement du jeu.
 

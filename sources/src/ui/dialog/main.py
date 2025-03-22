@@ -17,6 +17,8 @@ class Dialog(UIElement):
 		self.arrow_image = pygame.image.load(DataHandler().load_ui_elements_image('arrow'))
 		self.wrapped_text_finish = False
 
+		self.chrono_tag_set = False
+
 	def wrap_text(self, use_chrono_tag = False):
 		y = self.rect.top + self.text_margin
 		font_height = self.font.size('Tg')[1]

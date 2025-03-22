@@ -17,6 +17,7 @@ class ControlHandler:
 		if not hasattr(self, '_initialized'):
 			self._initialized = True
 			self.events = {'quit': False, 'clicked': False}
+			self.keybinds = {}
 			self.load_keybinds(saved_data['keybinds'])
 			self.mouse_position = None
 			self.pygame_events = []

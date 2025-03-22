@@ -4,21 +4,27 @@ Cette classe est nécessaire à l'affichage des éléments à l'écran.
 
 Elle permet de générer une image affichable en superposant les images de chaque `Sprite` ou `UIElement`.
 
-Elle appelle les méthodes `render()` de chaque élément à afficher, dans un ordre prédéfini, pour les afficher.
+Pour cela, le rendu est segmenté en plusieurs surfaces indépendantes les unes des autres. Par exemple, il y a une surface pour la map, et une pour les menus, ils ne rentrent pas en contact, ce qui permet d'appliquer des logiques différentes pour chacune d'elle et d'éviter certains bugs.
+
+Elle appelle ainsi les méthodes `render()` de chaque élément de la map à afficher, dans un ordre prédéfini pour qu'ils se superposent bien.
 
 ## Attributs
 - `screen` : *`Surface`* **get** \
-  Surface représentant l'écran fournie par `PyGame`.
+  Surface représentant l'écran fourni par `PyGame`.
 - `frame` : *`Rect`* **get** \
-  Rectangle représentant l'écran.
+  Rectangle représentant l'écran __par rapport à la carte du jeu__.
 - `camera` : *`Rect`* **get** \
   Copie de `frame` utilisée pour le rendu.
 - `zoom` : *`float`* **get**
+  Le facteur d'agrandissement de la carte.
 - `map_overflow_factor` : *`float`* \
-  Facteur de dépassement de la `Map` utilisé pour le rendu de celle-ci.
+  Facteur de dépassement de la `Map` utilisé pour le rendu de celle-ci et de la `MiniMap`.
 - `is_map_rendered` : *`float`* **get/set**
+  Utilisé pour optimiser le jeu et éviter des rendus de la carte inutiles
 - `is_full_map_rendered` : *`float`* **get/set**
-- `player_pos` : *`Vector2`* 
+  Pareil mais pour la grande map, quand elle est ouverte.
+- `player_pos` : *`Vector2`*
+  Un pointeur vers la position du joueur afin d'ajuster `camera`.
 - `surfaces` : *`dict`* \
   Dictionnaire contenant les surfaces à rendre pour chaque écran.
 
@@ -47,8 +53,7 @@ Elle appelle les méthodes `render()` de chaque élément à afficher, dans un o
   associée à `surface_target_name` dans `surfaces`. \
   Paramètres :
   * `surface_to_draw` : *`Surface`*
-  * `position` : *`Vector2`* / *`tuple`*
+  * `position` : *`Vector2 | tuple`*
   * `surface_target_name` : *`str`*
   * `is_player_rendered` : *`bool`* \
-    Indique si le `Sprite` en train d'être rendu est le joueur.
-
+    Indique si le `Sprite` en train d'être rendu est le joueur, si c'est le cas, il est rendu au centre de l'écran.

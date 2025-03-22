@@ -92,9 +92,6 @@ class UIElement:
 	def get_image(self):
 		return self.image
 
-	def get_position(self):
-		return self.position
-
 	def update_rect(self):
 		pos_x = self.position.get_x()
 		pos_y = self.position.get_y()

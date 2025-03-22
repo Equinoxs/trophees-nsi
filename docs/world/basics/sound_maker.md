@@ -2,7 +2,7 @@
 ## Description
 Cette classe est nécessaire aux classes enfant pour pouvoir émettre du son.
 
-En fournissant une interface indirecte aux [`SoundTrack`](../../utils/sound_track.md), elle leur permet de ne pas les manipuler directement pour une gestion plus simple et moins sujette aux erreurs. 
+En fournissant une interface indirecte aux [`SoundTrack`](../../utils/sound_track.md), ce singleton leur permet de ne pas les manipuler directement pour une gestion plus simple et moins sujette aux erreurs. 
 
 Elle permet à ses classes enfant de jouer un son à partir de son nom, en gérant la création de l'objet [`SoundTrack`](../../utils/sound_track.md) associé, et son stockage afin de ne pas le ré-instancier. 
 
@@ -13,7 +13,8 @@ Les sons sont rangés dans un dossier indiquant leur type, comme `footsteps` ou 
 >{
 >	"sounds": {
 >		"walking_leaves": {
->			"extension": "mp3"
+>			"extension": "mp3",
+>			"sound_coef": 2
 >		},
 >		"walking_concrete": {
 >			"extension": "opus"

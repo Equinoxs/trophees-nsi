@@ -4,6 +4,8 @@ Cette classe est nécessaire à l'exécution du jeu en étant exécutée continu
 
 Elle coordonne les différents composants du jeu comme tous les `Handler`, `Camera`, `Player` etc.
 
+C'est un singleton qui a pour autre fonction de permettre l'import des autres singletons du jeu lorsqu'un import circulaire se crée dans un des fichiers.
+
 Elle appelle une méthode `update()` de chacun de ces composants régulièrement pour leur permettre de se mettre à jour.
 
 ## Attributs

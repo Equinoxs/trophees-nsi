@@ -18,6 +18,7 @@ Elle implémente une liste de missions et d'objectifs avec leur description et l
 
 ## Méthodes
 - `__init__()` &rarr; `None`
+
 - `update_missions_set()` &rarr; `None` \
   Met à jour ou crée `missions_set` en fonction des objectifs.
 
@@ -52,6 +53,18 @@ Elle implémente une liste de missions et d'objectifs avec leur description et l
   Paramètres :
   * `npc_name` : *`str`*
   * `destination` : *`Vector2`*
+
+- `use_interaction(object_name)` &rarr; `int` \
+  renvoie 1 si l'objet en question a intéragit avec le joueur, 0 sinon.
+  Paramètre :
+  * `object_name` : *`str`*
+  Le nom de l'objet en question.
+
+- `use_wait_for_item(item_name)` &rarr; `int` \
+  renvoie 1 si l'item s'est retrouvé dans l'inventaire du joueur, 0 sinon.
+  Paramètre :
+  * `item_name` : *`str`*
+  Le nom de l'item en question.
 
 - `do(mission_name, index)` &rarr; `int` \
   Exécute la méthode associée à l'objectif `index` d'une mission `mission_name` et renvoie le résultat de cet objectif. \

@@ -1,6 +1,8 @@
 # `FPSHelper` - teste indicateur de FPS
 ## Description
-Cette classe est nécessaire à l'affichage du nombre d'images par seconde du jeu.
+Cette classe est nécessaire à l'affichage du nombre d'images par seconde du jeu, situé en bas à droite.
+
+Le calcul se fait sur un cycle de 0.3 secondes : *fps = nbr de frames écoulées depuis 0.3s / 0.3*
 
 Elle dérive de [`UIElement`](ui_element.md), se référer à sa documentation pour les attributs et méthodes surchargés.
 
