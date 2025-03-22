@@ -21,3 +21,4 @@ data/backups/manual/*.json
 # Autres fichiers
 *.orig
 *.DS_Store
+*lock*
