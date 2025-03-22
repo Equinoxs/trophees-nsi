@@ -30,104 +30,113 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
 ## Attributs
 - `initial_position` : *`Vector2`* \
   Copie de la position initiale du PNJ.
-- `sprint` : *`Vector2`* \
-  Copie de la position initiale du PNJ.
-- `is_player` : *`Vector2`* \
-  Copie de la position initiale du PNJ.
-- `initial_position` : *`Vector2`* \
-  Copie de la position initiale du PNJ.
+- `sprint` : *`bool`* \
+  Indique si le PNJ est en train de courir.
+- `is_player` : *`bool`* **set** \
+  Indique si le PNJ est en fait le joueur principal.
+- `speed` : *`float`* \
+  Sa vitesse en m/s.
+- `walking_on` : *`str | None`* \
+  Ce sur quoi marche le personnage.
+- `level` : *`int`* **get / set** \
+  Le niveau du PNJ
+
+- `pattern_timeline` : *`list[Vector2 | str]`* \
+  Le pattern du PNJ.
+- `pattern` : *`list[Vector2]`* \
+  Le pattern avec uniquement les positions, sans les évènements.
+- `following_pattern` : *`bool`* **set** \
+  Indique si le personnage est en train de suivre son pattern.
+- `pattern_index` : *`int`* \
+  L'index du pattern.
+- `pattern_type` : *`str`* \
+  Indique comment le PNJ effectue son pattern, valeurs possibles : `"back_and_forth"` ou `"loop"`
+
+- `objective` : *`Vector2`* **set** \
+  Position vers laquelle le PNJ doit se déplacer.
+
+- `is_moving` : *`bool`* \
+  Permet de savoir si le PNJ se déplace.
+- `must_move` : *`bool`* **get / set** \
+  Permet de contrôler si le PNJ a le droit de se déplacer ou non.
+
+- `inventory` : *`InventoryItem | None`* **get** \
+  L'inventaire du joueur (=l'item que le joueur porte sur lui)
+- `sound` : *`str`* **get** \
+  Le son que fait le PNJ lorsqu'il a un certain [side effect](../basics/side_effects.md)
 
 ## Méthodes
-- `__init__(map_name)` &rarr; `None`
-  Initialise ses attributs, charge les éléments de la carte, et fusionne tous les [`GroundSurface`](ground_surface.md) afin d'éviter de multiples collages pour rien.
+- `__init__(data)` &rarr; `None`
+  Initialise simplement ses attributs ainsi que sa classe parent.
   Paramètre :
-  * `map_name` : *`str`*
-  Le nom de la carte à charger
+  * `data` : *`dict`*
+  Le dictionnaire d'initialisation du PNJ.
 
-- `sort_once()` &rarr; `bool`
-  Trie les éléments de la map en itérant qu'une seule fois dessus, retourne `True` s'il y a eu des permutations et `False` sinon.
+- `go_initial()` &rarr; `None`
+  Fait retourner le PNJ à sa position d'origine
 
-- `sort_elements()` &rarr; `None`
-  Trie les éléments du jeu en fonction de leur superposition mutuelle, appelle plusieurs fois la méthode ci-dessus jusqu'à ce qu'il n'y ait plus de permutation.
+- `turn_right()` &rarr; `None`
+  Le PNJ tourne à droite.
 
-- `search_by_name(object_name)` &rarr; `MapElement | None`
-  Recherche un élément en fonction de son nom et le retourne si trouvé, `None` sinon.
+- `turn_left()` &rarr; `None`
+  Le PNJ tourne à gauche.
+
+- `update_player()` &rarr; `None`
+  Une fonction pour actualiser l'état du joueur si `is_player` est à *`True`*.
+
+- `set_objective(new_objective)` &rarr; `None`
+  Règle une nouvelle position pour le pnj.
   Paramètre :
-  * `object_name` : *`str`*
-  Le nom de l'objet à rechercher
+  * `new_objective` : *`Vector2 | None`*
+  Vers où le PNJ doit aller.
 
-- `add(element)` &rarr; `None`
-  Ajoute simplement un élément à la map.
-  Paramètre :
-  * `element` : *`MapElement`*
-  La référence de l'objet à ajouter
+- `stop_moving()` &rarr; `None`
+  Arrête le déplacement du personnage.
 
-- `remove_wall(wall_name)` &rarr; `None`
-  Enlève un [`Wall`](wall.md) de la carte.
-  Paramètre :
-  * `wall_name` : *`str`*
-  Le nom du mur à enlever
+- `stop_moving()` &rarr; `None`
+  Annule la méthode ci-dessus.
 
-- `remove(element_to_remove)` &rarr; `int | None`
-  Enlève l'élément spécifié de la carte, retourne le même élément s'il a été trouvé.
-  Paramètre :
-  * `element_to_remove` : *`MapElement`*
+- `handle_animation()` &rarr; `None`
+  Gère les animations du personnage en fonction de son dernier déplacement.
+  Annule la méthode ci-dessus.
 
-- `throw_event(event)` &rarr; `None`
-  Propage un évènement au sein de ses éléments.
-  Paramètre :
-  * `event` : *`str | dict`*
-  L'évènement à propager.
+- `move_npc_to_objective()` &rarr; `bool`
+  Se charge de bouger le PNJ vers son objectif, retourne *`True`* si le personnage s'est déplacé, *`False`* sinon.
 
-- `load_elements_from(map_name)` &rarr; `None`
-  Charge les éléments depuis une map spécifié
-  Paramètre :
-  * `map_name` : *`str`*
-  Le nom de la carte à charger.
+- `handle_events()` &rarr; `bool`
+  Vérifie si un pattern event doit être effectué, si oui, on l'exécute et on retourne *`True`*, *`False`* sinon.
 
-- `add_element(element_data)` &rarr; `None`
-  Ajoute un objet à la map selon ses données.
-  Paramètre :
-  * `element_data` : *`dict`*
-  Le dictionnaire d'initialisation de l'objet à ajouter.
+- `update_pattern()` &rarr; `None`
+  Se charge du bon déroulement de `pattern_timeline` et gère donc les appels de `handle_events()` et `move_npc_to_objective()`.
 
-- `add_element_ref(element_ref, index)` &rarr; `None`
-  Ajoute un objet à la map selon sa référence.
-  Paramètre :
-  * `element_ref` : *`MapElement`*
-  La référence de l'élément à ajouter.
-  * `index = None` : *`int | None`*
-  L'index du tableau par lequel il faut insérer l'élément.
+- `purge_inventory()` &rarr; `None`
+  Règle l'inventaire du joueur à *`None`*.
 
-- `get_index_of(element_ref)` &rarr; `int | None`
-  Retourne l'index de l'élément recherché s'il est trouvé.
+- `pick_item(item)` &rarr; `None`
+  Récupère l'item renseigné dans l'inventaire.
   Paramètre :
-  * `element_ref` : *`MapElement`*
-  La référence de l'élément à chercher.
+  * `item` : *`InventoryItem`*
+  l'item en question.
 
-- `remove_element(element_ref)` &rarr; `None`
-  Enlève l'élément spécifié de la carte selon une différente méthode que `remove(element_to_remove)`.
-  Paramètre :
-  * `element_ref` : *`MapElement`*
-  L'élément à retirer.
+- `drop_inventory()` &rarr; `None`
+  Lâche l'inventaire au sol.
 
-- `which_surface(position)` &rarr; `str | None`
-  Retourne le `ground_type` du [`GroundSurface`](ground_surface.md) sur lequel est la position indiquée.
-  Paramètre :
-  * `position` : *`Vector2`*
-  La position (du joueur en général).
+- `handle_invnetory()` &rarr; `None`
+  Gère l'état de l'inventaire si le personnage est contrôlé par le joueur.
 
-- `find_closest_item(position)` &rarr; `tuple[InventoryItem, Table | None]`
-  Retourne l'[`InventoryItem`](inventory_item.md) le plus proche de la position indiquée, utile pour en prendre un avec soi.
-  Paramètre :
-  * `position` : *`Vector2`*
-  La position (du joueur en général).
-
-- `find_closest_item_place(position)` &rarr; `dict`
-  Retourne l'emplacement d'item sur une [`Table`](table.md) le plus proche de la position indiquée.
-  Paramètre :
-  * `position` : *`Vector2`*
-  La position (du joueur en général).
+- `give_inventory_to(table, index_position)` &rarr; `None`
+  Lâche l'inventaire sur une [`Table`](table.md).
+  Paramètres :
+  * `table` : *`Table`*
+  La table destinataire de l'inventaire.
+  * `index_position` : *`int`*
+  La position de l'item sur la table.
 
 - `update()` &rarr; `None`
-  Update ses éléments si le jeu n'est pas en pause et trie ses éléments à chaque frame.
+  Actualise l'état du PNJ en coordonnant ses différentes activités (inventaire, pattern, joueur).
+
+- `render()` &rarr; `None`
+  Fais en sorte que la position du joueur soit au niveau de ses pieds.
+
+- `get_data()` &rarr; `None`
+  Retourne la data de la classe parent et y ajoute l'inventaire.

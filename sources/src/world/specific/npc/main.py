@@ -12,7 +12,6 @@ class NPC(PillarObject):
 		self.sprint = False
 		self.is_player = False
 		self.speed = 1.38  # m/s = 5 km/h
-		self.speed_vector = Vector2(0, 0)
 		self.walking_on = None
 		self.level = None
 		self.set_level(data['level'])
@@ -25,12 +24,10 @@ class NPC(PillarObject):
 
 		self.objective = self.pattern[self.pattern_index] if len(self.pattern) > 0 else None
 
-		self.delta_time_event = None
 		self.is_moving = False  # permet de SAVOIR si le NPC se dirige vers un objectif
 		self.must_move = True  # permet de CONTRÔLER si le NPC doit se diriger vers son objectif
 
 		self.inventory = data.get('inventory', None)
-		self.inventory_marker = None
 		self.sound = data.get('sound', None)
 
 	def get_sound(self):
