@@ -13,7 +13,7 @@ C'est une image avec une `hitbox` associée. Elle est utilisée pour créer des 
 *Remarque : la hitbox et l'interaction peuvent être définis dans les données de l'image*
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent ainsi que la hitbox et l'interaction comme décrit ci-dessus.
   Paramètre :
   * `data` : *`dict`*

@@ -39,7 +39,7 @@ Un autre exemple mais cette fois-ci en image :
   Le son que produit le sol à la marche.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent, l'image, la position et les autres propriétés.
   Paramètre :
   * `data` : *`dict`*

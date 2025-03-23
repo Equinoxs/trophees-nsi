@@ -26,12 +26,12 @@ Ces méthodes retournent *`True`* si elles doivent être exécutées à la proch
 - `__init__()` &rarr; `None`
   > pass
 
-- `do(pattern_event_name, host, delta_time)` &rarr; `bool`
+- `do(pattern_event_name, host, delta_time)` &rarr; `bool` \
   Appelle la méthode de l'event correspondant à `pattern_event_name`, et lui passe en paramètre `host` et `delta_time`, retourne ce que retourne la méthode.
   Paramètres :
-  * `pattern_event_name` : *`str`*
+  * `pattern_event_name` : *`str`* \
   Le nom du pattern event.
-  * `host` : *`NPC`*
+  * `host` : *`NPC`* \
   Le PNJ à l'origine de cet évènement.
-  * `delta_time` : *`float`*
+  * `delta_time` : *`float`* \
   La durée en secondes à partir de laquelle l'évènement a commencé.

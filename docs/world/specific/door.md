@@ -17,7 +17,7 @@ On peut les initialiser soit comme n'importe quel autre objet, soit à travers u
   Indique si la porte a été générée par un `Building`.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent ainsi que les deux attributs supplémentaires.
   Paramètre :
   * `data` : *`dict`*

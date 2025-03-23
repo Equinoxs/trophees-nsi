@@ -66,77 +66,77 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
   Le son que fait le PNJ lorsqu'il a un certain [side effect](../basics/side_effects.md)
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise simplement ses attributs ainsi que sa classe parent.
   Paramètre :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation du PNJ.
 
-- `go_initial()` &rarr; `None`
+- `go_initial()` &rarr; `None` \
   Fait retourner le PNJ à sa position d'origine
 
-- `turn_right()` &rarr; `None`
+- `turn_right()` &rarr; `None` \
   Le PNJ tourne à droite.
 
-- `turn_left()` &rarr; `None`
+- `turn_left()` &rarr; `None` \
   Le PNJ tourne à gauche.
 
-- `update_player()` &rarr; `None`
+- `update_player()` &rarr; `None` \
   Une fonction pour actualiser l'état du joueur si `is_player` est à *`True`*.
 
-- `set_objective(new_objective)` &rarr; `None`
+- `set_objective(new_objective)` &rarr; `None` \
   Règle une nouvelle position pour le pnj.
   Paramètre :
-  * `new_objective` : *`Vector2 | None`*
+  * `new_objective` : *`Vector2 | None`* \
   Vers où le PNJ doit aller.
 
-- `stop_moving()` &rarr; `None`
+- `stop_moving()` &rarr; `None` \
   Arrête le déplacement du personnage.
 
-- `stop_moving()` &rarr; `None`
+- `stop_moving()` &rarr; `None` \
   Annule la méthode ci-dessus.
 
-- `handle_animation()` &rarr; `None`
+- `handle_animation()` &rarr; `None` \
   Gère les animations du personnage en fonction de son dernier déplacement.
   Annule la méthode ci-dessus.
 
-- `move_npc_to_objective()` &rarr; `bool`
+- `move_npc_to_objective()` &rarr; `bool` \
   Se charge de bouger le PNJ vers son objectif, retourne *`True`* si le personnage s'est déplacé, *`False`* sinon.
 
 - `handle_events()` &rarr; `bool`
   Vérifie si un pattern event doit être effectué, si oui, on l'exécute et on retourne *`True`*, *`False`* sinon.
 
-- `update_pattern()` &rarr; `None`
+- `update_pattern()` &rarr; `None` \
   Se charge du bon déroulement de `pattern_timeline` et gère donc les appels de `handle_events()` et `move_npc_to_objective()`.
 
-- `purge_inventory()` &rarr; `None`
+- `purge_inventory()` &rarr; `None` \
   Règle l'inventaire du joueur à *`None`*.
 
-- `pick_item(item)` &rarr; `None`
+- `pick_item(item)` &rarr; `None` \
   Récupère l'item renseigné dans l'inventaire.
   Paramètre :
-  * `item` : *`InventoryItem`*
+  * `item` : *`InventoryItem`* \
   l'item en question.
 
-- `drop_inventory()` &rarr; `None`
+- `drop_inventory()` &rarr; `None` \
   Lâche l'inventaire au sol.
 
-- `handle_invnetory()` &rarr; `None`
+- `handle_invnetory()` &rarr; `None` \
   Gère l'état de l'inventaire si le personnage est contrôlé par le joueur.
 
-- `give_inventory_to(table, index_position)` &rarr; `None`
+- `give_inventory_to(table, index_position)` &rarr; `None` \
   Lâche l'inventaire sur une [`Table`](table.md).
   Paramètres :
-  * `table` : *`Table`*
+  * `table` : *`Table`* \
   La table destinataire de l'inventaire.
-  * `index_position` : *`int`*
+  * `index_position` : *`int`* \
   La position de l'item sur la table.
 
-- `update()` &rarr; `None`
+- `update()` &rarr; `None` \
   Actualise l'état du PNJ en coordonnant ses différentes activités (inventaire, pattern, joueur).
 
-- `render()` &rarr; `None`
+- `render()` &rarr; `None` \
   Fais en sorte que la position du joueur soit au niveau de ses pieds.
 
-- `get_data()` &rarr; `None`
+- `get_data()` &rarr; `None` \
   Retourne la data de la classe parent et y ajoute l'inventaire.

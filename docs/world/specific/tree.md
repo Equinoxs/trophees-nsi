@@ -15,11 +15,11 @@ Tout de suite, pour nous détendre, une image d'arbre du jeu :
 > hérités des classes parent
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent ainsi que les valeurs par défaut pour `hitbox` et `hitbox_action_radius`.
   Paramètres :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation de l'arbre.
 
-- `render()` &rarr; `None`
+- `render()` &rarr; `None` \
   Fais correspondre la position de l'arbre avec son tronc.

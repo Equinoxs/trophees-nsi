@@ -15,15 +15,15 @@ Elle gère, tout comme [`Interactable`](../basics/interactable.md), un [`Marker`
   Utilisé par [`Table`](table.md) pour savoir où est-ce que l'item se situe sur la table.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise les classes parent ainsi que les deux attributs supplémentaires.
   Paramètre :
   * `data` : *`dict`*
-- `remove_pickup_marker()` &rarr; `None`
+- `remove_pickup_marker()` &rarr; `None` \
   Retire le marker du jeu.
-- `update()` &rarr; `None`
+- `update()` &rarr; `None` \
   Gère l'état de `pickup_marker`.
-- `render()` &rarr; `None`
+- `render()` &rarr; `None` \
   Fais en sorte que la position de l'item corresponde au milieu de son image.
-- `__del__()` &rarr; `None`
+- `__del__()` &rarr; `None` \
   enlève le `pickup_marker` en plus d'appeler le destructeur de la class parent.

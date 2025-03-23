@@ -31,19 +31,19 @@ Le coeur de ce mur est `"boundaries"`, nous remarquons qu'il est constitué de c
   Le chemin parcouru par le mur.
 
 ## Méthodes
-- `__init__(data, map)` &rarr; `None`
+- `__init__(data, map)` &rarr; `None` \
   Initialise ses attributs et appelle `initialize_segments(map)`.
   Paramètres :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation de la table.
-  * `map` : *`Map`*
+  * `map` : *`Map`* \
   Une référence de la [`Map`](map.md) actuelle afin d'ajouter des [`WallSegment`](wall_segment.md) à cette dernière.
 
-- `initialize_segments(map)` &rarr; `None`
+- `initialize_segments(map)` &rarr; `None` \
   Se gère de créer les [`WallSegment`](wall_segment.md) et de les ajouter à `segments`.
   Paramètre :
-  * `map` : *`Map`*
+  * `map` : *`Map`* \
   Une référence de la [`Map`](map.md) actuelle afin d'ajouter des [`WallSegment`](wall_segment.md) à cette dernière.
 
-- `get_data()` &rarr; `dict`
+- `get_data()` &rarr; `dict` \
   Retourne `original_data` en prenant soin d'enlever la clé `"position"` de ce dernier afin d'éviter de sauvegarder des données inutiles.

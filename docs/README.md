@@ -68,7 +68,7 @@ Les classes "spécifiques" sont celles implémentables directement dans le jeu, 
 
 Pour manipuler et créer ce dernier type de classe, on peut soit passer par les méthodes de [`Map`](world/specific/map.md), soit les renseigner dans [`data/backups/new_game_backup.json`](../data/backups/new_game_backup.json). on y trouve les différentes cartes dans la propriété `"maps"`, et leurs éléments respectifs.
 
-> ![classes](../exemples/doc_1.png)
+> ![classes](../exemples/doc_1.png) \
 > Schéma représentatif de l'architecture des différentes classes
 
 # Références
@@ -87,7 +87,7 @@ Pour manipuler et créer ce dernier type de classe, on peut soit passer par les 
 - Classes dans [`ui`](../sources/src/ui/README.md), l'interface graphique :
     * [`Menu`](ui/menu.md)
     * [`UIElement`](ui/ui_element.md)
-    * [`Button`](ui/button.md)
+    * [`Button`](ui/button.md) \
     *Classe associée : [`ButtonActions`](ui/button_actions.md)*
     * [`Dialog`](ui/dialog.md)
     * [`Marker`](ui/marker.md)
@@ -97,11 +97,11 @@ Pour manipuler et créer ce dernier type de classe, on peut soit passer par les 
     * [`TextInput`](ui/text_input.md)
     * [`KeybindInput`](ui/keybind_input.md)
     * [`SavingInput`](ui/saving_input.md)
-    * [`Slider`](ui/slider.md)
+    * [`Slider`](ui/slider.md) \
     *Classe associée : [`SliderActions`](ui/slider_actions.md)*
 
 - Classes dans [`world/basics`](../sources/src/world/basics/README.md), les classes de base du monde :
-    * [`Mission`](world/basics/mission.md)
+    * [`Mission`](world/basics/mission.md) \
     *Classe associée : [`Missions`](world/basics/missions.md)*
     * [`Sprite`](world/basics/sprite.md)
     * [`Animatable`](world/basics/animatable.md)
@@ -119,10 +119,10 @@ Pour manipuler et créer ce dernier type de classe, on peut soit passer par les 
 
 - Classes dans [`world/specific`](../sources/src/world/specific/README.md), les classes implémentable du monde :
     * [`Map`](world/specific/map.md)
-    * [`NPC`](world/specific/npc.md)
+    * [`NPC`](world/specific/npc.md) \
     *Classe associée : [`PatternEvents`](world/specific/pattern_events.md)*
     * [`InventoryItem`](world/specific/inventory_item.md)
-    * [`Wall`](world/specific/wall.md)
+    * [`Wall`](world/specific/wall.md) \
     *Classe associée : [`WallSegment`](world/specific/wall_segment.md)*
     * [`GroundSurface`](world/specific/ground_surface.md)
     * [`Interior`](world/specific/interior.md)

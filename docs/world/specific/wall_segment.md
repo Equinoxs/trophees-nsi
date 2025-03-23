@@ -31,6 +31,7 @@ Ces 3 textures acquises, pour faire la fausse 3D, il a fallu, pour chacune des 3
 
 > ![Exemple](../../../exemples/ridge_object_1.png)
 > **Mur**
+
 Ici, nous pouvons clairement discerner les trois faces transformées.
 
 Ensuite, les murs prennent en charge un système de `stickers`. Réglables dans `boundaries` les stickers permettent de coller des irrégularités sur les murs.
@@ -77,27 +78,27 @@ Pour réaliser ceci, les données à renseigner dans `boundaries` se présentent
   Indique dans quelle direction est le mur : pointe-t-il en haut à gauche ou en haut à droite ?
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent, et calcule `image` en créant la fausse 3D (appelle `calculate_wall_image()`).
   Paramètre :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation du mur.
 
-- `calculate_front_image_perspective()` &rarr; `None`
+- `calculate_front_image_perspective()` &rarr; `None` \
   Calcule `front_image_perspective`, se charge également d'appliquer les stickers.
 
-- `calculate_side_image_perspective()` &rarr; `None`
+- `calculate_side_image_perspective()` &rarr; `None` \
   Calcule `side_image_perspective`.
 
-- `calculate_top_image_perspective()` &rarr; `None`
+- `calculate_top_image_perspective()` &rarr; `None` \
   Calcule `top_image_perspective`.
 
-- `calculate_wall_image()` &rarr; `None`
+- `calculate_wall_image()` &rarr; `None` \
   Appelle les 3 méthodes ci-dessus et colle les résultats sur `image`.
 
-- `render()` &rarr; `None`
+- `render()` &rarr; `None` \
   Rend le mur en faisant en sorte de régler la position de manière habile pour que la `hitbox` correspondent avec ce que l'on voit à l'écran.
 
-- `get_data()` &rarr; `None`
+- `get_data()` &rarr; `None` \
   Retourne *`None`* car on ne veut pas que les `WallSegment` soient sauvegardés, ils doivent forcément être crée par un [`Wall`](wall.md).
   

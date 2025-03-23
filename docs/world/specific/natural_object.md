@@ -10,8 +10,8 @@ Elle hérite de [`BaseObject`](../basics/base_object.md), dans son fonctionnemen
 > hérités des classes parent
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la hitbox et l'interaction, et la classe parent.
   Paramètre :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation.

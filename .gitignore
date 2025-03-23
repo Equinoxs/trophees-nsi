@@ -16,7 +16,6 @@ venv/
 
 # Sauvegardes automatiques et manuelles
 data/backups/automatic/*.json
-data/backups/manual/*.json
 
 # Autres fichiers
 *.orig

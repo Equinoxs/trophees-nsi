@@ -65,7 +65,7 @@ class Interactable:
 	def handle_interaction(self, closest_vector: Vector2) -> bool:
 		if (self.is_interaction_available() or Missions().is_mission(self.mission)) and ControlHandler().is_activated('interacted') and closest_vector.get_norm() <= 50:
 
-			if Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing():
+			if self.is_mission_available():
 				self.set_interaction_available(False)
 				MissionHandler().start_mission(self.mission)
 				return True
@@ -99,7 +99,7 @@ class Interactable:
 			self.set_mission(self.mission)
 
 		if closest_vector.get_norm() <= 50:
-			if self.interaction_marker is None and (self.is_interaction_available() or (Missions().is_mission(self.mission) and not MissionHandler().mission_ongoing())):
+			if self.interaction_marker is None and (self.is_interaction_available() or self.is_mission_available()):
 				data = {
 					'label': ControlHandler().get_key_letter('interacted'),
 					'color': (20, 20, 20, 200),

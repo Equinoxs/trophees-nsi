@@ -43,34 +43,34 @@ Dans cet exemple, `"blue_book"` va aller à la position `[20, 50]` étant donné
   La liste des emplacements possibles.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent, `item_positions` et `items`.
   Paramètres :
-  * `data` : *`dict`*
+  * `data` : *`dict`* \
   Le dictionnaire d'initialisation de la table.
 
-- `take_item(item, index_position)` &rarr; `None`
+- `take_item(item, index_position)` &rarr; `None` \
   Prend un item à la position indiquée.
   Paramètres :
   * `item` : *`InventoryItem`*
   * `index_position` : *`int`*
 
-- `release_item(item)` &rarr; `None`
+- `release_item(item)` &rarr; `None` \
   Relâche l'item indiquée au sol.
   Paramètres :
   * `item` : *`InventoryItem`*
 
-- `get_item_position(item_ref)` &rarr; `Vector2`
+- `get_item_position(item_ref)` &rarr; `Vector2` \
   Retourne la position de l'item indiquée relativement à la map.
   Paramètres :
   * `item_ref` : *`InventoryItem`*
 
-- `get_item(item_name)` &rarr; `InventoryItem`
+- `get_item(item_name)` &rarr; `InventoryItem` \
   Retourne l'item indiquée selon son nom s'il est trouvé.
   Paramètres :
   * `item_name` : *`str`*
 
-- `item_position_taken(index_position)` &rarr; `bool`
+- `item_position_taken(index_position)` &rarr; `bool` \
   Indique si la position indiquée est occupée par un item.
   Paramètres :
   * `index_position` : *`int`*

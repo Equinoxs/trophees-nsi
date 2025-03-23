@@ -22,7 +22,7 @@ Cette classe hérite ainsi de [`GroundSurface`](ground_surface.md) afin de profi
   Les coordonnées de l'intérieur.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise les classes parent et les boundaries.
   Paramètre :
   * `data` : *`dict`*

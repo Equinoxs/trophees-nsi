@@ -28,7 +28,7 @@ Comme vous pouvez le constater, une porte peut être rajouté au `Building`. La 
   Le niveau requis pour rentrer dans le bâtiment.
 
 ## Méthodes
-- `__init__(data)` &rarr; `None`
+- `__init__(data)` &rarr; `None` \
   Initialise la classe parent, la `hitbox` et la `Door` comme précisé ci-dessus.
   Paramètre :
   * `data` : *`dict`*
