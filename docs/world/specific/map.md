@@ -4,7 +4,9 @@
 
 Cette classe a pour rôle de gérer tous les objets du jeu.
 
-Il faut donc les trier pour savoir qui est rendu au dessus de qui, et de l'optimisation est préférable.
+`Map` s'occupe de l'initialisation des différents objets de la carte en fonction de son `type` qui correspond à la classe à instancier, une classe qui est forcément "spécifique".
+
+Il faut donc les trier pour savoir qui est rendu au dessus de qui, de l'optimisation est préférable.
 
 ## Attributs
 - `elements` : *`list[MapElement]`* **get** \

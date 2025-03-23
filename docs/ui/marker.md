@@ -1,9 +1,10 @@
-# `Marker` - marqueur "!" 
-Cette classe est nécessaire à l'affichage de marqueurs "!".
+# `Marker` - marqueur sur la carte
+Cette classe est nécessaire à l'affichage de marqueurs d'éléments graphiques fixés à une position sur la carte.
 
-Elle pointe un [`NPC`](../world/specific/npc.md) par une image et indique sa position dans le jeu.
+C'est ce qui permet l'affichage des marqueurs "!" pour les missions.
+*Remarque : ceux là sont dits marqueurs spéciaux, c'est-à-dire que s'ils sortent de l'écran, ils restent collés au bord.*
 
-Elle dérive de [`UIElement`](ui_element.md), se référer à sa documentation pour les attributs et méthodes surchargés.
+Le popup `e` ou `r` pour les interactions pour les items sont aussi des marqueurs mais ceux-là ne sont pas spéciaux.
 
 ## Attributs
 - `position` : *[`Vector2`](../utils/vector_2.md)* \

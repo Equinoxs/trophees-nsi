@@ -1,4 +1,3 @@
 # src
 
-La totalité de notre code source se présentera dans ce dossier
-	-> voir les règles fixées dans le Canva pour l'écriture du code
+La totalité du jeu est présent dans ce dossier, ce sont les définitions des différentes classes architecturées selon la [documentation](../../docs/README.md).
