@@ -741,9 +741,9 @@ class Missions:
 	def insert_colossus_0(self):
 		dialog_data = {
 			'messages': [
-				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.'
-				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.'
-				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan right ? He helps us for that part'
+				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.',
+				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.',
+				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan right ? He helps us for that part',
 				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made',
 				'Could you insert the punch cards that you see on this table in Colossus please? The team would be very thankful.'
 			]
@@ -816,9 +816,9 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Your job here is now over, keep in mind that under no circumstances you may talk about this.',
-				'Your family, your friends, no one has to know. You must act like you\'ve never met all these people before'
-				'All of them, strangers.'
-				'None of this existed, Enigma was never broken, and there\'s no such thing as a Bombe or Colossus'
+				'Your family, your friends, no one has to know. You must act like you\'ve never met all these people before',
+				'All of them, strangers.',
+				'None of this existed, Enigma was never broken, and there\'s no such thing as a Bombe or Colossus',
 				'You can stay here more time if you want, you just have to know that this is in the public interest that you keep your mouth shut',
 				'You really don\'t want to break the contract.',
 				'Thank you for your services, have a nice life'
@@ -959,7 +959,7 @@ class Missions:
 			'messages': [
 				'Hey, my name is William Tutte, but every body calls me Bill here.',
 				'What did I do here you say? I am a mathematician, and I deduced the structure of the Tunny cipher, which is, I must say, very complex.',
-				'How does it work ? Oh, well, it somehow uses XOR and different kind of wheels, it was a pain to deduce !'
+				'How does it work ? Oh, well, it somehow uses XOR and different kind of wheels, it was a pain to deduce !',
 				'I did it by using the Colossus machine, which was designed by Tommy Flowers, you have already worked with him I think.',
 				'I am sure you know that the Colossus machine is the world\'s first programmable, electronic, digital computer !',
 				'You know, I am very proud of my work here, and I am sure you are too. I hope we will see you around soon.'
