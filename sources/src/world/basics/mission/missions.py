@@ -34,10 +34,10 @@ class Missions:
 		
 				'building_1_presentation_0': 'Listen to the stranger',
 
-				'introduction_denniston_1': 'Follow Alastair Denniston',
-				'introduction_denniston_3': 'Follow Alastair Denniston',
-				'introduction_denniston_4': 'Follow Alastair Denniston',
-				'introduction_denniston_6': 'Follow Alastair Denniston',
+				'introduction_denniston_1': 'Follow Alexander Denniston',
+				'introduction_denniston_3': 'Follow Alexander Denniston',
+				'introduction_denniston_4': 'Follow Alexander Denniston',
+				'introduction_denniston_6': 'Follow Alexander Denniston',
 
 				'first_job_1': 'Get the letter in Building 2',
 				'first_job_2': 'Decrypt the morse encrypted message',
@@ -55,14 +55,14 @@ class Missions:
 				'decrypt_enigma_3': 'Come back to Alan Turing',
 				'decrypt_enigma_4': 'Listen to Alan Turing',
 
-				'act3_upgrade_0': 'Listen to Alastair Denniston',
+				'act3_upgrade_0': 'Listen to Alexander Denniston',
 
 				'insert_colossus_1': 'Collect the punched cards',
 				'insert_colossus_2': 'Insert the punched cards into Colossus',
 				'insert_colossus_3': 'Talk again to Tommy Flowers',
 				'insert_colossus_4': 'Listen to Tommy Flowers',
 
-				'final_0': 'Listen to Alastair Denniston',
+				'final_0': 'Listen to Alexander Denniston',
 				'final_1': 'Destroy Enigma',
 				'final_3': 'Destroy the Bombe',
 				'final_5': 'Destroy Colossus',
@@ -196,9 +196,9 @@ class Missions:
 			'messages': [
 				'Hello new one! I\'m glad to meet you.',
 				'My name is Gordon Welchman. I am the head of this Hut.',
-				'Let me explain you what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans communicate via encrypted message, we can intercept them but we don\'t know how to break those messages.',
-				'They use the Enigma machine to encrypt and decrypt their messages, by using a common cipher which changes every day, so we have to find a clever way to guess this cipher fast.',
-				'In conclusion, we try to manage to break the German Enigma machine cipher. If we do it, we would have very important pieces of information about the German organizations and plans.'
+				'Let me explain what do we do here. In Hut 6, we work on traffic analysis of encrypted German communications. You see, the Germans encrypt their messages, we can intercept them but we don\'t know how to break that cipher.',
+				'They use the Enigma machine to encrypt and decrypt their messages, by using a common key which changes every day, so we have to find a clever way to guess this key fast.',
+				'If we manage to get rid of it, we\'ll have very important pieces of information about the German organization and plans.'
 			]
 		}
 		return self.use_create_dialog('gordon_welchman_presentation_0_dialog', dialog_data)
@@ -211,7 +211,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hey! I hope you enjoy this place.',
-				'the workload can be quite hard sometimes, good luck',
+				'The workload can be quite hard sometimes, good luck',
 				'I hope I\'ll see you around soon, goodbye my friend!'
 			]
 		}
@@ -240,9 +240,9 @@ class Missions:
 		Player().get_map().remove_wall('beginning_wall')
 		dialog_data = {
 			'messages': [
-				'Hello. Welcome to Bletchely Park',
-				"I am Alexander Denniston, your commander. By now, you're gonna do what I say.",
-				'At Bletchley Park, we fight for peace, against the Nazis. Before I tell you more, would you please sign this secrecy act. In a few words, you have to remain silent about what is going on here, even to your coworkers from other buildings, Otherwise you will be considered as a national threat',
+				'Hello. Welcome to Bletchley Park',
+				'I am Alexander Denniston, your commander. By now, you\'re going to do what I say.',
+				'At Bletchley Park, we are fighting for peace, against the Nazi regime. Before I tell you more, you will have to sign this secrecy act. In a few words, you have to remain silent about what is going on here, even to your coworkers from other buildings, Otherwise you will be considered as a national threat',
 				'If you do consent, please continue. However, if you do not, please close that window, delete this game and never come back!',
 				'Congratulations, let me show you around.'
 			]
@@ -256,7 +256,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Do you see the building in front of us?',
-				"you're going to find some stuff that may be useful in there."
+				'You\'re going to find some stuff that may be useful in there.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_2_dialog', dialog_data)
@@ -285,7 +285,7 @@ class Missions:
 				'There are the Huts, you can see the number 6 and the number 8 on these.',
 				'They will provide you some very important stuff you will need.',
 				'If you follow this way, you will find Building 1 and Building 2. Good luck with your work.',
-				"Go! My men are waiting for you, and maybe I'll see you around."
+				'Go! My men are waiting for you, and maybe I\'ll see you around.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_7_dialog', dialog_data)
@@ -301,7 +301,7 @@ class Missions:
 				'I saw you coming, you look like a hard worker. And that\'s good, because I got a mission for you!',
 				'You need to get into Building 2, the orange building in front of us. There is a wide table with a letter on it, I need you to get it and bring it to Hut 6.',
 				'In Hut 6, there is a table at the far end with letters like the one you have to get, put the mail on this table and we\'ll do the rest.',
-				'Thank you very much!'
+				'By the way, remember that you can always check what you have to do by looking at the top of your screen. Thank you very much!'
 			]
 		}
 		return self.use_create_dialog('first_job_0_dialog', dialog_data)
@@ -364,8 +364,8 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'You have been doing really well from what I\'ve heard.',
-				"That's why I give you the access to Hut 8.",
-				'some people are expecting you there.'
+				'That\'s why I give you access to Hut 8.',
+				'Some people are expecting you there.'
 			]
 		}
 		return self.use_create_dialog('introduction_denniston_0_dialog', dialog_data)
@@ -375,7 +375,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Ah, you must be the new recruit. Welcome to Hut 8.',
-				'I\'m Alan Turing head of the Hut 8 cryptanalysis teams. Our work here focuses on deciphering the naval Enigma, code-named \'shark\', which is even more complex than other versions.',
+				'I\'m Alan Turing, head of the Hut 8 cryptanalysis teams. Our work here focuses on deciphering the naval Enigma, code-named \'shark\', which is even more complex than other versions.',
 				'No one really wanted to try to tackle that one really, they all thought it was impossible',
 				'To tackle this challenge, we\'ve designed an electromechanical machine',
 				'the BOMBE.',
@@ -562,11 +562,11 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Now the time has come! I have a serious mission for you, let me explain what you will have to accomplish.',
-				'You\'re gonna decrypt a message with the Enigma machine that we collected from the nazis.',
-				'To get a little more technical in my explainations, Enigma encrypt a letter in another one. However, if it tries to encrypt an "h" for example, the encrypted letter corresponding won\'t be an "h".',
-				'We just have to find a probable word used by the nazis in the encrypted message, and find the corresponding word based on what I said. For example, the word "wheather" is traduced by "Wetter" in german.',
-				'The encrypted word of "Wetter" won\'t see its first letter as a "W" or its second letter as a "e", et ceatera.',
-				'We modified our Enigma machine, so in it, you will see the encrypted message that you have to slide and find the probable word. When you will be done, you should see a light turning on.'
+				'You\'re going to decrypt a message with the Enigma machine that we collected from the Nazis.',
+				'To get a little more technical in my explanations, Enigma encrypts a letter to another one. However, if you give it an "h" for example, the encrypted letter won\'t be an "h".',
+				'We just have to find a probable word used by the nazis in the encrypted message, and find the corresponding word based on what I said. For example, the word "weather" is translated by "Wetter" in german.',
+				'The encrypted word of "Wetter" won\'t see its first letter as a "W" or its second letter as a "e", et cetera.',
+				'We modified our Enigma machine, so in it, you will see the encrypted message that you have to slide and find the probable key. When you will be done, you should see a light turning on.'
 			]
 		}
 		return self.use_create_dialog('decrypt_enigma_0_dialog', dialog_data)
@@ -578,10 +578,10 @@ class Missions:
 		border_width = 250
 
 		words = [
-			'XGRTYPLM', 'WQAZNCVB', 'POIUYTRE', 'LKJHGFDS', 'MNBVCXZQ',
-			'ASDFGHJK', 'ZXCVBNML', 'QWERTYUI', 'WETTER', 'PLMOKNIJ',
-			'UHYGTFRE', 'EDCXSWZA', 'LOKIMJNH', 'RTYUIOPQ', 'GHJKLZXC',
-			'VBNMASDF', 'YTREWQPO', 'QAZXSWED', 'MLPOKIUJ', 'NHBVGTFD'
+			'XGRTYP', 'WQNCVB', 'PUYTRE', 'LHGFDS', 'MVCXZQ',
+			'ASDFGK', 'ZXCNML', 'LSDFJK', 'WETTER', 'POKNIJ',
+			'UHYFRE', 'EDSWZA', 'LOKJNH', 'RTYOPQ', 'GHJZXC',
+			'VMASDF', 'YTREPO', 'QAZWED', 'MLPIUJ', 'NHGTFD'
 		] 
  
 		if 'decrypt_enigma_2_initialized' not in self.objectives_store:
@@ -742,8 +742,8 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.',
-				'basically, our job here consists in cracking german high commands comunications, the ones Hitler sends to his generals.',
-				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan right ? He helps us for that part',
+				'Basically, our job here consists in cracking german high commands communications, the ones Hitler sends to his generals.',
+				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan, right ? He helps us for that part',
 				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made',
 				'Could you insert the punch cards that you see on this table in Colossus please? The team would be very thankful.'
 			]
@@ -782,7 +782,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'A lot of years have passed since you\'ve been there. Now war is almost over.',
-				'Still, I need you for a last mission, you will have to destroy all the machines to erase all traces of this place and its activcities.',
+				'Still, I need you for a last mission, you will have to destroy all the machines to erase all traces of this place and its activities.',
 				'Destroy Enigma, the Bombe and Colossus, and come back to me when you are done.'
 			]
 		}
@@ -946,7 +946,7 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Hello, I\'ve never relly had the time to chat with you',
-				'I am Joan Clarke, I recently became the deputy manager of this hut. I used to decrypt encrypted messages from the nazis by using the bamburismus method.',
+				'I am Joan Clarke, I recently became the deputy manager of this hut. I used to decrypt encrypted messages from the Nazis by using the bamburismus method.',
 				'It is a method that consists in finding the most probable word in the encrypted message, and then decrypt the message by using the word as a key. But I am sure you already know that.',
 				'I developed it with Alan Turing, who is a very good friend of mine. I am sure you know him too. It is so sad that he left Bletchley Park...',
 				'He really appreciated you for the work that you have done and for your sympathy'
