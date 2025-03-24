@@ -1341,7 +1341,7 @@
 				{
 					"type": "NPC",
 					"name": "mansion_npc_1",
-					"image_path": "albert",
+					"image_path": "linda",
 					"position": [50, 650],
 					"pattern_timeline": ["npc_event_test", [330, 650], [320, 870], [80, 860], "npc_event_test"],
 					"pattern_type": "back_and_forth"
@@ -1357,7 +1357,7 @@
 				{
 					"type": "NPC",
 					"name": "mansion_master",
-					"image_path": "albert",
+					"image_path": "roger",
 					"mission": "mansion_presentation",
 					"position": [230, 42]
 				},
