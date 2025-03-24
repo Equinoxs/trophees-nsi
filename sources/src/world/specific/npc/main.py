@@ -30,6 +30,12 @@ class NPC(PillarObject):
 		self.inventory = data.get('inventory', None)
 		self.sound = data.get('sound', None)
 
+		self.cropped = False  # Permet d'éviter un bug :)
+
+	def go_to_frame(self, frame_index, animation_name):
+		self.cropped = True
+		super().go_to_frame(frame_index, animation_name)
+
 	def get_sound(self):
 		return self.sound
 
@@ -260,6 +266,9 @@ class NPC(PillarObject):
 			self.update_pattern()
 
 	def render(self):
+		if not self.cropped:
+			return
+
 		width, height = self.image.get_size()
 		x, y = self.position.convert_to_tuple()
 		self.position.set_all(x - width / 2 / Camera().get_zoom(), y - height / Camera().get_zoom())
