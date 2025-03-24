@@ -431,23 +431,23 @@ class Missions:
 				'label': 'Encrypted Message: MDJXDU 2 REMHFWLYH VHFXUHG'
 			}
 
-			césar_input_data = {
+			cesar_input_data = {
 				'type': 'TextInput',
-				'id': 'césar_input',
-				'class': 'alexander_césar_input'
+				'id': 'cesar_input',
+				'class': 'alexander_cesar_input'
 			}
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(paper_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
-			GameLoop().get_menu_handler().get_current_menu().add_element(césar_input_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(cesar_input_data)
 		else:
-			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('césar_input')
+			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('cesar_input')
 			if input.get_text().upper() == 'JAGUAR 2 OBJECTIVE SECURED' or (DEBUG and input.get_text().upper() == 'PASS'):
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')			
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('alexander_encrypted_message')
-				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('césar_input')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('cesar_input')
 				GameLoop().get_menu_handler().set_current_menu('in_game')
 				Player().get_focus().purge_inventory()
 				return 1
