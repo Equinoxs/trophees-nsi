@@ -22,13 +22,15 @@ class Missions:
 			# Les clés ci-dessous doivent être de la forme <nom_de_la_mission>_<index_de_l'objectif>
 			self.objective_descriptions = {
 
-				'mission_test_1': 'Get at the top of the map under 10 seconds!',
+				'mission_test_0': 'Meet an employee',
 		
 				'gordon_welchman_presentation_0': 'Listen to the stranger',
 
 				'alan_turing_presentation_0': 'Listen to the stranger',
 				
 				'hugh_alexander_presentation_0': 'Listen to the stranger',
+				'hugh_alexander_presentation_1': 'Go to the mansion',
+				'hugh_alexander_presentation_2': 'Decrypt the caesar encrypted message',
 
 				'mansion_presentation_0': 'Listen to the stranger',
 		
@@ -166,28 +168,16 @@ class Missions:
 
 	def mission_test_0(self):
 		dialog_data = {
-			'messages': ['Hello my friend!', 'I need you to do something a bit strange...', 'Could you get at the top of the map please?', 'Thank you very much!']
+			'messages': [
+            'Ah, there you are!',
+            'You know, I’ve spent so much time here that I’ve learned all sorts of curious things...',
+            'For instance, there’s a hidden radio transmitter in the attic of one of the buildings. I’ve actually seen it myself, it\'s an incredible piece of kit!',
+            'They used it to send decoded messages straight to command. Imagine the pressure those operators must’ve felt...',
+            'I sometimes wonder what it must’ve been like to be part of that... working under the clock, knowing lives depended on every word you transmitted.',
+            'Must’ve taken nerves of steel...'
+			]
 		}
 		return self.use_create_dialog('mission_test_0_dialog', dialog_data)
-
-	def mission_test_1(self):
-		time = TimeHandler().add_chrono_tag('mission_test_0')
-		index = 0
-		if time == 0:
-			GameLoop().get_sound_mixer().play_music('mission')
-		if time > 10:
-			index = -1  # mission échouée
-		else:
-			if Player().get_focus().get_position().get_y() <= 0:
-				index = 1  # objectif réussi
-			else:
-				index = 0  # objectif en cours
-		if index != 0:
-			GameLoop().get_sound_mixer().play_music_prev()
-			TimeHandler().remove_chrono_tag('mission_test_0')
-		return index
-
-
 
 	# --- PRÉSENTATION DE GORDON WELCHMAN ---
 
@@ -320,6 +310,18 @@ class Missions:
 				'id': 'paper_bg',
 				'class': 'first_job_2_paper_bg'
 			}
+			paper_data_2 = {
+				'type': 'UIElement',
+				'id': 'paper_bg_2',
+				'class': 'first_job_2_paper_bg_2'
+			}
+
+			morse_code_trad = {
+				'type': 'UIElement',
+				'id':'morse_code',
+				'class':'morse_code_paper',
+				'image':'code_morse'
+			}
 
 			encrypted_message_data = {
 				'type': 'UIElement',
@@ -335,6 +337,8 @@ class Missions:
 			}
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(paper_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(paper_data_2)
+			GameLoop().get_menu_handler().get_current_menu().add_element(morse_code_trad)
 			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
 			GameLoop().get_menu_handler().get_current_menu().add_element(morse_input_data)
 		else:
@@ -343,6 +347,8 @@ class Missions:
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg_2')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('morse_code')				
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('encrypted_message')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('morse_input')
 				GameLoop().get_menu_handler().set_current_menu('in_game')
@@ -396,11 +402,56 @@ class Missions:
 				'Ah, so you\'re the new recruit Alan mentioned. Welcome to the team!',
 				'I\'m Hugh Alexander, nice to meet you.',
 				'The machine helps, but cracking the code still requires some sharp thinking and careful analysis.',
-				'I do have a mission for you, come back and see me later'
+				'I do have a mission for you, first go in the mansion, find the letter on the big table near a red book.',
+				'Then you will need to decode the message that we intercepted.',
+				'Someone told me it had something to do with a letter shift, a certain Caesar code...'
 			]
 		}
 		return self.use_create_dialog('hugh_alexander_presentation_0_dialog', dialog_data)
+	
+	def hugh_alexander_presentation_1(self):
+		return self.use_wait_for_item('mansion_big_table_letter')
+	
+	def hugh_alexander_presentation_2(self):
+		if GameLoop().get_menu_handler().get_current_menu_name() != 'mission':
+			GameLoop().get_control_handler().disable_all_actions()
+			GameLoop().get_mission_handler().get_current_mission().move_displayed_description('mission')
+			GameLoop().get_menu_handler().set_current_menu('mission')
 
+			paper_data = {
+				'type': 'UIElement',
+				'id': 'paper_bg',
+				'class': 'alexander_paper_bg'
+			}
+
+			encrypted_message_data = {
+				'type': 'UIElement',
+				'id': 'encrypted_message',
+				'class': 'alexander_encrypted_message',
+				'label': 'Encrypted Message: MDJXDU 2 REMHFWLYH VHFXUHG'
+			}
+
+			césar_input_data = {
+				'type': 'TextInput',
+				'id': 'césar_input',
+				'class': 'alexander_césar_input'
+			}
+
+			GameLoop().get_menu_handler().get_current_menu().add_element(paper_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(encrypted_message_data)
+			GameLoop().get_menu_handler().get_current_menu().add_element(césar_input_data)
+		else:
+			input = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('césar_input')
+			if input.get_text().upper() == 'JAGUAR 2 OBJECTIVE SECURED' or (DEBUG and input.get_text().upper() == 'PASS'):
+				GameLoop().get_control_handler().enable_all_actions()
+				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')			
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('alexander_encrypted_message')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('césar_input')
+				GameLoop().get_menu_handler().set_current_menu('in_game')
+				Player().get_focus().purge_inventory()
+				return 1
+		return 0
 
 
 	# --- DÉCOUVERTE DES BOMBES DE TURING ET WELCHMAN ---
@@ -409,7 +460,8 @@ class Missions:
 		Player().get_map().set_allow_map_change(False)
 		dialog_data = {
 			'messages': [
-				'I have a mission for you, the bombe is broken, do you think you can repair it?',
+				'Nice job !',
+				'I have another mission for you, the bombe is broken, do you think you can repair it?',
 				'Great! Come back to me when you\'re done.'
 			]
 		}
@@ -745,7 +797,7 @@ class Missions:
 				'Basically, our job here consists in cracking german high commands communications, the ones Hitler sends to his generals.',
 				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan, right ? He helps us for that part',
 				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made',
-				'Could you insert the punch cards that you see on this table in Colossus please? The team would be very thankful.'
+				'Could you insert the punched cards you\'ll find in the first house that Denniston showed you (the little house) in the Colossus, please? The team would be very thankful.'
 			]
 		}
 		return self.use_create_dialog('insert_colossus_0_dialog', dialog_data)

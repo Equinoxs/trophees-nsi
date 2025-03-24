@@ -116,16 +116,23 @@
 			"action": "focus_on_game"
 		},
 		"first_job_2_paper_bg": {
-			"x": "center",
+			"x": 700,
 			"y": "center",
-			"width": 650,
+			"width": 550,
+			"height": 670,
+			"color": [255, 255, 255]
+		},
+		"first_job_2_paper_bg_2": {
+			"x": 30,
+			"y": "center",
+			"width": 550,
 			"height": 670,
 			"color": [255, 255, 255]
 		},
 		"first_job_2_encrypted_message": {
-			"x": "center",
+			"x": 755,
 			"y": 125,
-			"width": 550,
+			"width": 400,
 			"return_line": true,
 			"height": "auto",
 			"text_align": "left",
@@ -135,14 +142,53 @@
 		"first_job_2_morse_input": {
 			"type": "TextInput",
 			"underscore": true,
-			"x": "center",
+			"x": 755,
 			"y": 300,
-			"width": 600,
+			"width": 400,
 			"height": "auto",
 			"font_size": 36,
 			"default_text": "decrypted message...",
 			"text_align": "left",
+			"return_line": false,
+			"max_event_key": 22,
+			"border_length": 2
+		},
+		"morse_code_paper":{
+			"type": "UIElement",
+			"image_height": 620,
+			"x": 50,
+			"y": 90
+		},
+		"alexander_paper_bg": {
+			"x": "center",
+			"y": "center",
+			"width": 550,
+			"height": 670,
+			"color": [255, 255, 255]
+		},
+
+		"alexander_encrypted_message": {
+			"x": "center",
+			"y": 125,
+			"width": 400,
 			"return_line": true,
+			"height": "auto",
+			"text_align": "center",
+			"font_size": 40,
+			"font_family": "basic"
+		},
+		"alexander_césar_input": {
+			"type": "TextInput",
+			"underscore": true,
+			"x": "center",
+			"y": 300,
+			"width": 400,
+			"height": "auto",
+			"font_size": 36,
+			"default_text": "decrypted message...",
+			"text_align": "left",
+			"return_line": false,
+			"max_event_key": 26,
 			"border_length": 2
 		},
 		"credits_writing": {

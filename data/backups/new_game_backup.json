@@ -770,7 +770,15 @@
 					"type": "Table",
 					"name": "table_1",
 					"image_path": "light_round_high",
-					"position": [475, 190]
+					"position": [475, 190],
+					"item_positions": [[35, 10]],
+					"items": [
+						{
+							"type": "InventoryItem",
+							"name": "colossus_punched_cards",
+							"image_path": "punched_cards"
+						}
+					]
 				},
 				{
 					"type": "Furniture",
@@ -1084,15 +1092,7 @@
 					"type": "Table",
 					"name": "colossus_table",
 					"image_path": "light_round_high",
-					"position": [805, 110],
-					"item_positions": [[35, 10]],
-					"items": [
-						{
-							"type": "InventoryItem",
-							"name": "colossus_punched_cards",
-							"image_path": "punched_cards"
-						}
-					]
+					"position": [805, 110]
 				},
 				{
 					"type": "Furniture",
@@ -1201,8 +1201,7 @@
 						{
 							"type": "InventoryItem",
 							"image_path": "letter",
-							"name": "mansion_big_table_letter",
-							"action":"crypted_message"
+							"name": "mansion_big_table_letter"
 						}
 					],
 					"position": [120, 15]
@@ -1341,7 +1340,7 @@
 				{
 					"type": "NPC",
 					"name": "mansion_npc_1",
-					"image_path": "linda",
+					"image_path": "albert",
 					"position": [50, 650],
 					"pattern_timeline": ["npc_event_test", [330, 650], [320, 870], [80, 860], "npc_event_test"],
 					"pattern_type": "back_and_forth"
@@ -1357,7 +1356,7 @@
 				{
 					"type": "NPC",
 					"name": "mansion_master",
-					"image_path": "roger",
+					"image_path": "albert",
 					"mission": "mansion_presentation",
 					"position": [230, 42]
 				},
