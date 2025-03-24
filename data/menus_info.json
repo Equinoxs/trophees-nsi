@@ -149,15 +149,15 @@
 			"x": "center",
 			"height": "auto",
 			"width": "auto",
-			"font_size": 40,
+			"font_size": 25,
 			"font_family": "basic",
 			"color": "transparent",
-			"text_color": [255, 255, 255]
+			"text_color": [255, 248, 220]
 		},
 		"credits_menu_writing": {
 			"class": "credits_writing",
 			"width": 600,
-			"font_size": 50
+			"font_size": 40
 		}
 	},
 	"menus": {
@@ -404,11 +404,11 @@
 			},
 			{
 				"type": "UIElement",
-				"color": [71, 52, 14],
+				"color": [40, 30, 5],
 				"text_color": [255, 255, 255],
 				"label": "Credits",
 				"x": "center",
-				"y": 40,
+				"y": 25,
 				"width": "auto",
 				"height": "auto",
 				"font_size": 100
@@ -421,15 +421,105 @@
 			{
 				"type": "UIElement",
 				"class": "credits_menu_writing",
-				"label": "blablabla",
+				"label": "Design Graphique",
+				"y": 160
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Bâtiments : Maël | Textures au sol : Dimitri, Maël | Sprite du joueur : Maël | PNJ : Maël, Dimitri | Arbres et buissons : Dimitri",
 				"y": 200
 			},
 			{
 				"type": "UIElement",
 				"class": "credits_menu_writing",
-				"label": "blablabla",
-				"y": 260
-			}
+				"label": "Systèmes et Mécaniques",
+				"y": 240
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Système de dialogues : Diego | Système d’inventaire : Maël | Système de sauvegarde : Diego, Dimitri | Système de missions : Alexis",
+				"y": 280
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Système de son : Diego | Système des PNJ : Alexis | Système de placement d’objet : Alexis",
+				"y": 310
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Système de création de murs : Alexis | Système de map et minimap : Alexis",
+				"y": 340
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_menu_writing",
+				"label": "Sons et Polices",
+				"y": 380
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Choix des polices : Dimitri | Choix des sons : Alexis, Dimitri",
+				"y": 420
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_menu_writing",
+				"label": "Missions et Narration",
+				"y": 460
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Création des missions : Alexis, Diego, Dimitri | Correction des dialogues : Maël | Histoire : Maël",
+				"y": 500
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_menu_writing",
+				"label": "Interface et Affichage",
+				"y": 540
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Affichage et UI : Dimitri, Alexis | Menus : Dimitri | Chargement des sauvegardes : Alexis",
+				"y": 580
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_menu_writing",
+				"label": "Fonctionnalités spécifiques",
+				"y": 620
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Caméra : Alexis, Diego, Maël | Marker des PNJ : Diego | Mapping : Alexis",
+				"y": 660
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Base technique : Alexis",
+				"y": 680
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_menu_writing",
+				"label": "Tests et Débogage",
+				"y": 720
+			},
+			{
+				"type": "UIElement",
+				"class": "credits_writing",
+				"label": "Testeur : Dimitri | Ajout de bugs : Tout le monde | Correction de bugs : Alexis, Diego, Dimitri",
+				"y": 760
+			}			
 		],
 		"loading_games": [
 			{

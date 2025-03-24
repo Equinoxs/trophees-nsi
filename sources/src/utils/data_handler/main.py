@@ -372,7 +372,7 @@ class DataHandler:
 	def get_menus_data(self):
 		json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..', 'data', 'menus_info.json')
 
-		with open(json_path, 'r') as file:
+		with open(json_path, 'r', encoding="utf-8") as file:
 			data = json.load(file)
 
 		return data
