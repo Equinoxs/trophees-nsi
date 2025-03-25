@@ -977,6 +977,12 @@ class Missions:
 				'label': 'Mathematical Expert - Alexis LAROSE'
 			}
 
+			helpers = {
+				'type': 'UIElement',
+				'class': 'credits_writing',
+				'label': 'proofreading and help - Alexandre Daspe, Jacques Zahar'
+			}
+
 			self.objectives_store['final_9_elements'] = []
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(background_data)
@@ -991,7 +997,7 @@ class Missions:
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_director_data))
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_assistant_data))
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(mathematical_expert_data))
-
+			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(helpers))
 		else:
 			elapsed_time = TimeHandler().add_chrono_tag('final_9')
 

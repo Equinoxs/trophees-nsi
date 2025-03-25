@@ -91,9 +91,10 @@ class TextInput(UIElement):
 						key_name = pygame.key.name(self.event_keys[-1])
 						self.text += key_name
 
-				elif event.type == pygame.TEXTINPUT and self.intercept == 'text' and len(self.text) <= self.max_event_key:
-					self.text += event.text
-					self.update_label()
+				elif event.type == pygame.TEXTINPUT and self.intercept == 'text':
+					if self.text == None or len(self.text) <= self.max_event_key:
+						self.text += event.text
+						self.update_label()
 
 		# Met à jour l'affichage du texte s'il y a eu un changement
 		if self.last_event_key is not None and self.intercept == 'keys':

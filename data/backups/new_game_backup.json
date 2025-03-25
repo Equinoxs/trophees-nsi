@@ -1340,17 +1340,21 @@
 				{
 					"type": "NPC",
 					"name": "mansion_npc_1",
-					"image_path": "albert",
+					"image_path": "jill",
 					"position": [50, 650],
 					"pattern_timeline": ["npc_event_test", [330, 650], [320, 870], [80, 860], "npc_event_test"],
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"side_effects": ["visit_player"],
 					"pattern_type": "back_and_forth"
 				},
 				{
 					"type": "NPC",
 					"name": "mansion_npc_2",
-					"image_path": "albert",
+					"image_path": "linda",
 					"position": [650, 650],
 					"pattern_timeline": [[650, 650], [385, 650], [340, 320], [50, 310]],
+					"authorized_sound_tracks": ["footsteps", "voices"],
+					"side_effects": ["visit_player"],
 					"pattern_type": "back_and_forth"
 				},
 				{
@@ -1379,7 +1383,7 @@
 		"go_left": "K_q",
 		"sprint": "K_LSHIFT",
 		"toggle_map": "K_m",
-		"pass_message_dialog": "K_DOWN",
+		"pass_message_dialog": "K_SPACE",
 		"enter": "K_RETURN",
 		"pass_mission": "K_a",
 		"skip_dialog": "K_TAB"

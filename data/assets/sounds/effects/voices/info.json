@@ -12,6 +12,9 @@
 		"scream": {
 			"extension": "mp3"
 		},
+		"hello_female": {
+			"extension": "mp3"
+		},
 		"hello": {
 			"extension": "mp3"
 		},

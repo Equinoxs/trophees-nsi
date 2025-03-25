@@ -40,7 +40,7 @@ Les missions sont marqués par un point d'exclamation au-dessus de la tête du p
 
 ## Gérer les dialogues
 
-lorsque vous êtes dans un dialogue, vous pouvez appuyer sur `Entrée` ou la flèche du bas une fois que le message s'est affiché entièrement pour passer au suivant.
+lorsque vous êtes dans un dialogue, vous pouvez appuyer sur `Espace` ou la flèche du bas une fois que le message s'est affiché entièrement pour passer au suivant.
 Si vous souhaitez passer le dialogue complètement, appuyez sur `Tab` à n'importe quel moment même si cela est déconseillé pour une bonne compréhensions de l'hisoire.
 
 > ![Dialogue](../exemples/user_guide_5.png) \

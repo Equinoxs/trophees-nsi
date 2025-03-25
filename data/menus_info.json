@@ -573,7 +573,7 @@
 			{
 				"type": "UIElement",
 				"class": "credits_writing",
-				"label": "Testeur : Dimitri | Ajout de bugs : Tout le monde | Correction de bugs : Alexis, Diego, Dimitri",
+				"label": "Testeur : Dimitri, Alexandre| Ajout de bugs : Tout le monde | Correction de bugs : Alexis, Diego, Dimitri",
 				"y": 760
 			}			
 		],
