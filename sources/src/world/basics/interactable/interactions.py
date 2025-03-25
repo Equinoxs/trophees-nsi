@@ -13,11 +13,11 @@ class Interactions:
 	def __init__(self):
 		pass
 
-	def test(_, host):
+	def test(self, _):
 		GameLoop().get_player().get_focus().get_position().set_all(-20, -20)
 		GameLoop().get_player().get_focus().play_sound('meow')
 
-	def switch_with_test_2(_, host):
+	def switch_with_test_2(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('test_2')
 			Player().teleport_to(Vector2())
@@ -25,10 +25,12 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to(Vector2())
 
-	def mission_interaction(_, host):
-		GameLoop().get_mission_handler().get_current_mission().get_missions().get_objectives_store()[host.get_name() + '_interacted'] = True
+	def mission_interaction(self, host):
+		current_mission = GameLoop().get_mission_handler().get_current_mission()
+		if current_mission is not None:
+			current_mission.get_missions().get_objectives_store()[host.get_name() + '_interacted'] = True
 
-	def switch_door_building_1(_, host):
+	def switch_door_building_1(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('building_1')
 			Player().teleport_to('front_door_interior_1')
@@ -36,7 +38,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('building_1_door')
 
-	def switch_door_building_2(_, host):
+	def switch_door_building_2(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('building_2')
 			Player().teleport_to('exit')
@@ -44,7 +46,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('building_2_door')
 
-	def switch_door_little_house(_, host):
+	def switch_door_little_house(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('little_house')
 			Player().teleport_to('exit')
@@ -52,7 +54,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('little_house_door')
 
-	def switch_door_hut_6(_, host):
+	def switch_door_hut_6(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('hut_6')
 			Player().teleport_to('exit')
@@ -60,7 +62,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('hut_6_door')
 
-	def switch_door_hut_8(_, host):
+	def switch_door_hut_8(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('hut_8')
 			Player().teleport_to('exit')
@@ -68,7 +70,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('hut_8_door')
 
-	def switch_door_block_h(_, host):
+	def switch_door_block_h(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('block_h')
 			Player().teleport_to('exit')
@@ -76,7 +78,7 @@ class Interactions:
 			Player().change_map('bletchley_park')
 			Player().teleport_to('block_h_door')
 
-	def switch_door_mansion(_, host):
+	def switch_door_mansion(self, _):
 		if Player().get_map().get_name() == 'bletchley_park':
 			Player().change_map('mansion')
 			Player().teleport_to('exit')

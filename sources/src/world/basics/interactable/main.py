@@ -54,7 +54,7 @@ class Interactable:
 		self.mission_marker = MenuHandler().add_marker(mission_marker_data)
 
 	def is_interaction_available(self):
-		return self.interaction_available or self.interaction_force
+		return (self.interaction_available or self.interaction_force) and self.interaction is not None
 
 	def set_interaction_available(self, available: bool):
 		self.interaction_available = available

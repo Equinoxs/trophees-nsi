@@ -1,4 +1,4 @@
-from src import Sprite, Animatable, SoundMaker
+from src import Sprite, Animatable, SoundMaker, Player
 
 
 class MapElement(Sprite, SoundMaker, Animatable):
@@ -37,6 +37,7 @@ class MapElement(Sprite, SoundMaker, Animatable):
 
 	def update(self):
 		if self.killed:
+			Player().get_map().remove_element(self)  # Se $uicider
 			if self.get_must_render():
 				self.set_must_render(False)
 			return
@@ -52,7 +53,7 @@ class MapElement(Sprite, SoundMaker, Animatable):
 		if self.killed:
 			return None
 		for key in self.data:
-			if getattr(self, key, None) is not None:
+			if hasattr(self, key):
 				self.data[key] = getattr(self, key)
 			if isinstance(self.data[key], set):
 				self.data[key] = list(self.data[key])  # sets are not json serializable

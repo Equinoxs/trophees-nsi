@@ -40,7 +40,7 @@ Les missions sont marqués par un point d'exclamation au-dessus de la tête du p
 
 ## Gérer les dialogues
 
-lorsque vous êtes dans un dialogue, vous pouvez appuyer sur `Espace` ou la flèche du bas une fois que le message s'est affiché entièrement pour passer au suivant.
+lorsque vous êtes dans un dialogue, vous pouvez appuyer sur `Espace` ou `Entrée` une fois que le message s'est affiché entièrement pour passer au suivant.
 Si vous souhaitez passer le dialogue complètement, appuyez sur `Tab` à n'importe quel moment même si cela est déconseillé pour une bonne compréhensions de l'hisoire.
 
 > ![Dialogue](../exemples/user_guide_5.png) \
@@ -88,4 +88,8 @@ Si vous souhaitez basculer en mode développement, il vous faudra aller dans [`s
 > ![Debug](../exemples/user_guide_9.png) \
 > Jeu en mode développement
 
-Plus d'information sur la référence de [`LogHandler`](utils/log_handler.md).
+*Plus d'information technique sur la référence de [`LogHandler`](utils/log_handler.md).*
+
+Une fois en mode développement, vous pourrez passer les missions directement en cours en appuyant sur `a`, afin d'éviter de refaire des missions fastidieuses lorsque vous souhaitez simplement vous balader dans l'histoire.
+
+*Remarque : cette fonctionnalité est sujet à de potentiels bugs, notamment lorsque vous passez une mission alors que vous êtes dans un menu géré automatiquement par cette dernière. Exemple : en plein déchiffrement d'une lettre.*

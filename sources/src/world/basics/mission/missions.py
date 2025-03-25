@@ -61,10 +61,11 @@ class Missions:
 
 				'act3_upgrade_0': 'Listen to Alexander Denniston',
 
-				'insert_colossus_1': 'Collect the punched cards',
-				'insert_colossus_2': 'Insert the punched cards into Colossus',
-				'insert_colossus_3': 'Talk again to Tommy Flowers',
-				'insert_colossus_4': 'Listen to Tommy Flowers',
+				'insert_colossus_1': 'Enter The Little House',
+				'insert_colossus_2': 'Collect the punched cards',
+				'insert_colossus_3': 'Insert the punched cards into Colossus',
+				'insert_colossus_4': 'Talk again to Tommy Flowers',
+				'insert_colossus_5': 'Listen to Tommy Flowers',
 
 				'final_0': 'Listen to Alexander Denniston',
 				'final_1': 'Destroy Enigma',
@@ -75,7 +76,7 @@ class Missions:
 
 				'epilogue_joan_clarke_0': 'Listen to Joan Clarke',
 		
-				'epilogue_bill_tutte_0': 'Listen to William (Bill) Tutte',
+				'epilogue_bill_tutte_0': 'Listen to William "Bill" Tutte',
 			}
 
 			self.update_missions_set()
@@ -181,6 +182,9 @@ class Missions:
 		}
 		return self.use_create_dialog('mission_test_0_dialog', dialog_data)
 
+
+
+
 	# --- PRÉSENTATION DE GORDON WELCHMAN ---
 
 	def gordon_welchman_presentation_0(self):
@@ -232,9 +236,9 @@ class Missions:
 		Player().get_map().remove_wall('beginning_wall')
 		dialog_data = {
 			'messages': [
-				'Hello. Welcome to Bletchley Park',
+				'Hello. Welcome to Bletchley Park!',
 				'I am Alexander Denniston, your commander. By now, you\'re going to do what I say.',
-				'At Bletchley Park, we are fighting for peace, against the Nazi regime. Before I tell you more, you will have to sign this secrecy act. In a few words, you have to remain silent about what is going on here, even to your coworkers from other buildings, Otherwise you will be considered as a national threat',
+				'At Bletchley Park, we are fighting for peace, against the Nazi regime. Before I tell you more, you will have to sign this secrecy act. In a few words, you have to remain silent about what is going on here, even to your coworkers from other buildings, Otherwise you will be considered as a national threat.',
 				'If you do consent, please continue. However, if you do not, please close that window, delete this game and never come back!',
 				'Congratulations, let me show you around.'
 			]
@@ -247,7 +251,7 @@ class Missions:
 	def introduction_denniston_2(self):
 		dialog_data = {
 			'messages': [
-				'Do you see the building in front of us?',
+				'Do you see the building in front of us? It is called The Little House.',
 				'You\'re going to find some stuff that may be useful in there.'
 			]
 		}
@@ -262,7 +266,7 @@ class Missions:
 	def introduction_denniston_5(self):
 		dialog_data = {
 			'messages': [
-				'This big building to your left is the mansion. One of the most important edifices here.',
+				'This big building to your left is the Mansion. One of the most important edifices here.',
 				'I hope you remember the names of the places I introduced you, you will need them in a few moments.'
 			]
 		}
@@ -404,7 +408,7 @@ class Missions:
 				'Ah, so you\'re the new recruit Alan mentioned. Welcome to the team!',
 				'I\'m Hugh Alexander, nice to meet you.',
 				'The machine helps, but cracking the code still requires some sharp thinking and careful analysis.',
-				'I do have a mission for you, first go in the mansion, find the letter on the big table near a red book.',
+				'I do have a mission for you, first go in the Mansion, find the letter on the big table near a red book.',
 				'Then you will need to decode the message that we intercepted.',
 				'Someone told me it had something to do with a letter shift, a certain Caesar code...'
 			]
@@ -433,7 +437,7 @@ class Missions:
 
 			encrypted_message_data = {
 				'type': 'UIElement',
-				'id': 'encrypted_message',
+				'id': 'cesar_message',
 				'class': 'alexander_encrypted_message',
 				'label': 'Encrypted Message: MDJXDU 2 REMHFWLYH VHFXUHG'
 			}
@@ -453,7 +457,7 @@ class Missions:
 				GameLoop().get_control_handler().enable_all_actions()
 				GameLoop().get_mission_handler().get_current_mission().move_displayed_description('in_game')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('paper_bg')			
-				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('alexander_encrypted_message')
+				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('cesar_message')
 				GameLoop().get_menu_handler().get_current_menu().delete_element_by_id('cesar_input')
 				GameLoop().get_menu_handler().set_current_menu('in_game')
 				Player().get_focus().purge_inventory()
@@ -749,7 +753,6 @@ class Missions:
 			GameLoop().get_menu_handler().get_current_menu().add_element(current_word_data)
 
 		else:
-			element = GameLoop().get_menu_handler().get_current_menu().get_element_by_id('encrypted_message')
 			for event in GameLoop().get_control_handler().get_pygame_events():
 				if event.type == pygame.KEYDOWN and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
 
@@ -760,8 +763,8 @@ class Missions:
 						if self.objectives_store['words_index'] < 11:
 							self.objectives_store['words_index'] += 1
 
-					element.get_position().set_x((SCREEN_WIDTH - border_width) / 2 + 3 + 20 * self.objectives_store['words_index'])
-					GameLoop().get_menu_handler().get_current_menu().get_element_by_id('current_word').set_label('Current word: ' + words[-self.objectives_store['words_index']])
+			GameLoop().get_menu_handler().get_current_menu().get_element_by_id('encrypted_message').get_position().set_x((SCREEN_WIDTH - border_width) / 2 + 3 + 20 * self.objectives_store['words_index'])
+			GameLoop().get_menu_handler().get_current_menu().get_element_by_id('current_word').set_label('Current word: ' + words[-self.objectives_store['words_index']])
 
 			if self.objectives_store['words_index'] == -8:
 				GameLoop().get_menu_handler().get_current_menu().get_element_by_id('light').set_color((255,) * 4)
@@ -816,27 +819,32 @@ class Missions:
 			'messages': [
 				'Hello, we\'ve been told someone new was going to join us, I\'m Thomas Flowers, but you can call me Tommy.',
 				'Basically, our job here consists in cracking german high commands communications, the ones Hitler sends to his generals.',
-				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan, right ? He helps us for that part',
-				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made',
-				'Could you insert the punched cards you\'ll find in the first house that Denniston showed you (the little house) in the Colossus, please? The team would be very thankful.'
+				'We don\'t know what the machine looks like, we code-named it Tunny, but we\'ll manage. You know Alan, right ? He helps us for that part.',
+				'By the way, we are preparing some tests and we need to use Colossus, it\'s a digital computer I made.',
+				'Could you get the punched cards, they are in The Little House. Then could you insert them into the Colossus, please? The team would be very thankful.'
 			]
 		}
 		return self.use_create_dialog('insert_colossus_0_dialog', dialog_data)
 
 	def insert_colossus_1(self):
-		return self.use_wait_for_item('colossus_punched_cards')
+		if Player().get_map().get_name() == 'little_house':
+			return 1
+		return 0
 
 	def insert_colossus_2(self):
+		return self.use_wait_for_item('colossus_punched_cards')
+
+	def insert_colossus_3(self):
 		if self.use_interaction('colossus') == 1 and Player().get_focus().get_inventory() is not None and Player().get_focus().get_inventory().get_name() == 'colossus_punched_cards':
 			Player().get_focus().purge_inventory()
 			return 1
 		else:
 			return 0
 
-	def insert_colossus_3(self):
+	def insert_colossus_4(self):
 		return self.use_interaction('tommy_flowers')
 
-	def insert_colossus_4(self):
+	def insert_colossus_5(self):
 		dialog_data = {
 			'messages': [
 				'Well done! I see you are an expert.',
@@ -889,12 +897,12 @@ class Missions:
 		dialog_data = {
 			'messages': [
 				'Your job here is now over, keep in mind that under no circumstances you may talk about this.',
-				'Your family, your friends, no one has to know. You must act like you\'ve never met all these people before',
+				'Your family, your friends, no one has to know. You must act like you\'ve never met all these people before.',
 				'All of them, strangers.',
-				'None of this existed, Enigma was never broken, and there\'s no such thing as a Bombe or Colossus',
-				'You can stay here more time if you want, you just have to know that this is in the public interest that you keep your mouth shut',
+				'None of this existed, Enigma was never broken, and there\'s no such thing as a Bombe or Colossus.',
+				'You can stay here more time if you want, you just have to know that this is in the public interest that you keep your mouth shut.',
 				'You really don\'t want to break the contract.',
-				'Thank you for your services, have a nice life'
+				'Thank you for your services, have a nice life.'
 			]
 		}
 		return self.use_create_dialog('final_8_dialog', dialog_data)
@@ -977,12 +985,6 @@ class Missions:
 				'label': 'Mathematical Expert - Alexis LAROSE'
 			}
 
-			helpers = {
-				'type': 'UIElement',
-				'class': 'credits_writing',
-				'label': 'proofreading and help - Alexandre Daspe, Jacques Zahar'
-			}
-
 			self.objectives_store['final_9_elements'] = []
 
 			GameLoop().get_menu_handler().get_current_menu().add_element(background_data)
@@ -997,7 +999,6 @@ class Missions:
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_director_data))
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(artistic_assistant_data))
 			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(mathematical_expert_data))
-			self.objectives_store['final_9_elements'].append(GameLoop().get_menu_handler().get_current_menu().add_element(helpers))
 		else:
 			elapsed_time = TimeHandler().add_chrono_tag('final_9')
 

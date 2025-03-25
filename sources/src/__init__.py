@@ -1,8 +1,8 @@
 # Constantes
-DEBUG = True # Ne pas pousser avec cette constante activée !!!
+DEBUG = False  # Active le mode développement si DEBUG est à True
 SAVE = True
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 1280  # Ce jeu a été créé en partant du principe que ces valeurs restent inchangées
+SCREEN_HEIGHT = 800  # Merci de ne pas les modifier au risque de ne pas apprécier l'expérience de jeu
 
 # Il est important de mettre les classes dans l'ordre d'importation.
 # ex : si A importe B, alors on devra importer B avant A dans ce fichier
