@@ -1,5 +1,5 @@
 # Constantes
-DEBUG = True # Ne pas pousser avec cette constante activée !!!
+DEBUG = False # Ne pas pousser avec cette constante activée !!!
 SAVE = True
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
