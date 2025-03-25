@@ -1,4 +1,4 @@
-from src import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler, SAVE
+from src import GameLoop, LogHandler, DataHandler, MissionHandler, ControlHandler, SoundMixer, SAVE
 
 
 class ButtonActions:	
@@ -21,25 +21,27 @@ class ButtonActions:
 	def focus_on_game(self, _):
 		GameLoop().get_camera().set_is_map_rendered(True)
 		GameLoop().get_menu_handler().set_current_menu('in_game')
-		GameLoop().get_sound_mixer().unpause_music()
+		SoundMixer().unpause_music()
+		if SoundMixer().get_current_music() != 'On the Island - Godmode':
+			SoundMixer().play_music('On the Island - Godmode')
 		GameLoop().unpause_game()
 
 	def pause_game(self, _):
 		GameLoop().pause_game()
 		DataHandler().save()
 		GameLoop().get_menu_handler().set_current_menu('game_paused')
-		GameLoop().get_sound_mixer().pause_music()
+		SoundMixer().pause_music()
 
 	def return_to_title(self, _):
 		GameLoop().pause_game()
 		MissionHandler().abort_mission()
 		GameLoop().get_menu_handler().set_current_menu('welcome')
-		GameLoop().get_sound_mixer().pause_music()
+		SoundMixer().unpause_music()
 
 	def open_settings(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('settings')
-		GameLoop().get_sound_mixer().pause_music()
+		SoundMixer().pause_music()
 
 	def quit_game(self, _):
 		GameLoop().quit_game()
@@ -50,7 +52,6 @@ class ButtonActions:
 	def open_credits(self, _):
 		GameLoop().pause_game()
 		GameLoop().get_menu_handler().set_current_menu('credits')
-		GameLoop().get_sound_mixer().pause_music()
 
 	def toggle_fullscreen(self, _):
 		GameLoop().toggle_fullscreen()
@@ -103,9 +104,8 @@ class ButtonActions:
 			})
 
 	def reset_keybinds(self, _):
-		control_handler = ControlHandler()
-		ControlHandler.reset_keybinds(control_handler)
-	
+		ControlHandler().reset_keybinds()
+
 
 	def do(self, action_name, button = None):
 		LogHandler().add(f'Button action {action_name} activated')

@@ -29,8 +29,10 @@ class Missions:
 				'alan_turing_presentation_0': 'Listen to the stranger',
 				
 				'hugh_alexander_presentation_0': 'Listen to the stranger',
-				'hugh_alexander_presentation_1': 'Go to the mansion',
-				'hugh_alexander_presentation_2': 'Decrypt the caesar encrypted message',
+				'hugh_alexander_presentation_1': 'Go to the Mansion',
+				'hugh_alexander_presentation_2': 'Get the letter near the red book on the big table',
+				'hugh_alexander_presentation_3': 'Decrypt the caesar encrypted message',
+				'hugh_alexander_presentation_4': 'Come back and talk to Hugh Alexander again',
 
 				'mansion_presentation_0': 'Listen to the stranger',
 		
@@ -169,12 +171,12 @@ class Missions:
 	def mission_test_0(self):
 		dialog_data = {
 			'messages': [
-            'Ah, there you are!',
-            'You know, I’ve spent so much time here that I’ve learned all sorts of curious things...',
-            'For instance, there’s a hidden radio transmitter in the attic of one of the buildings. I’ve actually seen it myself, it\'s an incredible piece of kit!',
-            'They used it to send decoded messages straight to command. Imagine the pressure those operators must’ve felt...',
-            'I sometimes wonder what it must’ve been like to be part of that... working under the clock, knowing lives depended on every word you transmitted.',
-            'Must’ve taken nerves of steel...'
+			'Ah, there you are!',
+			'You know, I’ve spent so much time here that I’ve learned all sorts of curious things...',
+			'For instance, there’s a hidden radio transmitter in the attic of one of the buildings. I’ve actually seen it myself, it\'s an incredible piece of kit!',
+			'They used it to send decoded messages straight to command. Imagine the pressure those operators must’ve felt...',
+			'I sometimes wonder what it must’ve been like to be part of that... working under the clock, knowing lives depended on every word you transmitted.',
+			'Must’ve taken nerves of steel...'
 			]
 		}
 		return self.use_create_dialog('mission_test_0_dialog', dialog_data)
@@ -408,11 +410,16 @@ class Missions:
 			]
 		}
 		return self.use_create_dialog('hugh_alexander_presentation_0_dialog', dialog_data)
-	
+
 	def hugh_alexander_presentation_1(self):
-		return self.use_wait_for_item('mansion_big_table_letter')
+		if Player().get_map().get_name() == 'mansion':
+			return 1
+		return 0
 	
 	def hugh_alexander_presentation_2(self):
+		return self.use_wait_for_item('mansion_big_table_letter')
+	
+	def hugh_alexander_presentation_3(self):
 		if GameLoop().get_menu_handler().get_current_menu_name() != 'mission':
 			GameLoop().get_control_handler().disable_all_actions()
 			GameLoop().get_mission_handler().get_current_mission().move_displayed_description('mission')
@@ -453,6 +460,21 @@ class Missions:
 				return 1
 		return 0
 
+	def hugh_alexander_presentation_4(self):
+		return self.use_interaction('hugh_alexander')
+
+	def hugh_alexander_presentation_5(self):
+		dialog_data = {
+			'messages': [
+				'Congratulations ! You are really helpful !'
+			]
+		}
+		return self.use_create_dialog('bombes_manipulation_0_dialog', dialog_data)
+
+	def hugh_alexander_presentation_6(self):
+		if self.use_wait_for_item('mansion_big_table_letter') == 1:
+			Player().get_focus().purge_inventory()
+		return 1
 
 	# --- DÉCOUVERTE DES BOMBES DE TURING ET WELCHMAN ---
 
@@ -460,7 +482,6 @@ class Missions:
 		Player().get_map().set_allow_map_change(False)
 		dialog_data = {
 			'messages': [
-				'Nice job !',
 				'I have another mission for you, the bombe is broken, do you think you can repair it?',
 				'Great! Come back to me when you\'re done.'
 			]

@@ -21,8 +21,6 @@ class Map:
 			)
 			self.elements[i].set_must_render(False)
 
-		SoundMixer().play_music('On the Island - Godmode')
-
 	def get_allow_map_change(self):
 		return self.allow_map_change
 

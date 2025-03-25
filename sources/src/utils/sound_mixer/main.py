@@ -71,6 +71,14 @@ class SoundMixer(object):
 		if not pygame.mixer.music.get_busy():
 			pygame.mixer.music.unpause()
 
+	def get_musics_historic(self):
+		return self.musics_historic
+
+	def get_current_music(self):
+		if len(self.musics_historic) == 0:
+			return None
+		return self.musics_historic[-1]
+
 	def play_music(self, music_name):
 		self.musics_historic.append(music_name)
 		pygame.mixer.music.load(DataHandler().load_music(music_name)[1])

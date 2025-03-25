@@ -9,7 +9,7 @@ Elle gère la lecture des [`SoundTrack`](sound_track.md) au sein de *channels* (
 ## Attributs
 - `sound_tracks` : *`list[`[`SoundTrack`](sound_track.md)`]`*
 - `channels` : *`list`*
-- `musics_historics` : *`list`*
+- `musics_historic` : *`list`* **get**
 - `music_coefficient` : *`float`* **set** \
   Volume de la musique, par défaut 0.25.
 - `sound_coefficient` : *`float`* **set** \

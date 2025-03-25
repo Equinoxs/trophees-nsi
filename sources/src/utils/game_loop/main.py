@@ -133,6 +133,10 @@ class GameLoop:
 		if self.control_handler.is_activated('enter') and self.menu_handler.get_current_menu_name() == 'welcome':
 			self.menu_handler.get_button_actions().do('focus_on_game')
 
+		# La musique dans le menu principal
+		if self.menu_handler.get_current_menu_name() == 'welcome' and self.sound_mixer.get_current_music() != 'Loading Screen - Dyalla':
+			self.sound_mixer.play_music('Loading Screen - Dyalla')
+
 		# Updates
 		self.time_handler.update()
 		self.sound_mixer.update()

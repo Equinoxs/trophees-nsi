@@ -23,7 +23,7 @@ class InventoryItem(PillarObject):
 		super().update()
 
 		distance = Player().get_focus().get_position().distance_to(self.position)
-		if distance <= 50 and self.pickup_marker is None and Player().get_focus().get_inventory() is None:
+		if distance <= 100 and self.pickup_marker is None and Player().get_focus().get_inventory() is None:
 			data = {
 				'label': ControlHandler().get_key_letter('pick_drop'),
 				'border_radius': 10,
@@ -38,7 +38,7 @@ class InventoryItem(PillarObject):
 			}
 			self.pickup_marker = MenuHandler().add_marker(data)
 
-		elif distance > 50 and self.pickup_marker is not None:
+		elif distance > 100 and self.pickup_marker is not None:
 			self.remove_pickup_marker()
 
 	def render(self):

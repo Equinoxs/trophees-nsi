@@ -23,6 +23,9 @@ from .utils.mission_handler.main import MissionHandler
 # DataHandler importe utils/interactions qui importe GameLoop
 from .utils.data_handler.main import DataHandler
 
+# SoundMixer importe DataHandler
+from .utils.sound_mixer.main import SoundMixer
+
 # ControlHandler importe DataHandler
 from .utils.control_handler.main import ControlHandler
 
@@ -35,7 +38,6 @@ from .ui.button.main import Button
 from .ui.text_input.main import TextInput
 from .ui.keybind_input.main import KeybindInput
 from .ui.saving_input.main import SavingInput
-from .utils.sound_mixer.main import SoundMixer
 from .ui.slider.actions import SliderActions
 from .ui.slider.main import Slider
 from .ui.line.main import Line

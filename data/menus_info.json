@@ -177,7 +177,7 @@
 			"font_size": 40,
 			"font_family": "basic"
 		},
-		"alexander_césar_input": {
+		"alexander_cesar_input": {
 			"type": "TextInput",
 			"underscore": true,
 			"x": "center",
@@ -219,6 +219,16 @@
 				"font_size": 60,
 				"font_family": "basic",
 				"action": "pause_game"
+			},
+			{
+				"type": "UIElement",
+				"x": 998,
+				"y": 28,
+				"width": 244,
+				"height": 154,
+				"border_length": 2,
+				"border_color": [0, 0, 0],
+				"color": [40, 40, 40]
 			},
 			{
 				"type": "MiniMap",
