@@ -263,7 +263,9 @@
 					"position": [670, 1200],
 					"image_path": "jill",
 					"authorized_sound_tracks": ["footsteps", "voices"],
-					"side_effects": ["visit_player"]
+					"side_effects": ["visit_player"],
+					"sound": "hello_female"
+
 				},
 				{
 					"type": "Tree",
@@ -647,8 +649,8 @@
 				{
 					"type": "GroundSurface",
 					"name": "carpet",
-					"image_path": "carpet_3",
-					"boundaries": [[150, 140], [500, 140], [500, 350], [150, 350]]
+					"image_path": "carpet_2",
+					"boundaries": [[150, 120], [500, 120], [500, 350], [150, 350]]
 				},
 				{
 					"type": "Wall",
@@ -1345,7 +1347,8 @@
 					"pattern_timeline": ["npc_event_test", [330, 650], [320, 870], [80, 860], "npc_event_test"],
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"],
-					"pattern_type": "back_and_forth"
+					"pattern_type": "back_and_forth",
+					"sound": "hello_female"
 				},
 				{
 					"type": "NPC",
@@ -1355,7 +1358,8 @@
 					"pattern_timeline": [[650, 650], [385, 650], [340, 320], [50, 310]],
 					"authorized_sound_tracks": ["footsteps", "voices"],
 					"side_effects": ["visit_player"],
-					"pattern_type": "back_and_forth"
+					"pattern_type": "back_and_forth",
+					"sound": "hello_female"
 				},
 				{
 					"type": "NPC",
