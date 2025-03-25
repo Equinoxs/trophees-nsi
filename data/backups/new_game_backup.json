@@ -1360,7 +1360,7 @@
 				{
 					"type": "NPC",
 					"name": "mansion_master",
-					"image_path": "albert",
+					"image_path": "roger",
 					"mission": "mansion_presentation",
 					"position": [230, 42]
 				},
