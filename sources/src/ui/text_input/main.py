@@ -91,7 +91,7 @@ class TextInput(UIElement):
 						key_name = pygame.key.name(self.event_keys[-1])
 						self.text += key_name
 
-				elif event.type == pygame.TEXTINPUT and self.intercept == 'text' and len(self.text) <= self.max_event_key:
+				elif event.type == pygame.TEXTINPUT and self.intercept == 'text' and (self.max_event_key is None or len(self.text) <= self.max_event_key):
 					self.text += event.text
 					self.update_label()
 
