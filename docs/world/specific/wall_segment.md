@@ -2,13 +2,13 @@
 
 ## Description
 
-Cette classe est nécessaire pour pouvoir avoir des murs dans le jeu et ainsi lui donner plus de réalisme.
+Cette classe est nécessaire pour pouvoir avoir des murs dans le jeu et ainsi donner plus de réalisme.
 
-Son rôle en soit est simple : recréer l'image d'un mur avec une fausse 3D et l'intégrer au jeu avec la bonne `hitbox` et `position`.
+Son rôle en soit est simple : recréer l'image d'un mur avec une fausse 3D et l'intégrer au jeu avec la bonne `hitbox` et `position`. \
 Pour cela, il manipuler des effets de cisaillement et de *scale* pour avoir un semblant de 3D sur la face principale, celle de coupe, et celle du dessus.
 
-Il faut donc 3 textures différentes pour ces 3 faces nommées respectivement `front`, `side` et `top`.
-Ils sont définis dans les données de l'image du mur.
+Il faut donc 3 textures différentes pour ces 3 faces nommées respectivement `front`, `side` et `top`. \
+Elles sont définies dans les données de l'image du mur. \
 *Exemple :*
 
 > ```json
@@ -26,7 +26,8 @@ Ils sont définis dans les données de l'image du mur.
 
 Ici, dans `"images"`, les clés correspondent aux faces choisies et les valeurs correspondent aux nom des images, il y a donc `front.png`, `side.png` et `top.png`.
 
-Ces 3 textures acquises, pour faire la fausse 3D, il a fallu, pour chacune des 3 faces, leur appliquer un redimensionnement (réduire leur largeur et non leur hauteur pour être plus précis) ainsi qu'un cisaillement qui pourrait imiter une projection isométrique.
+Une fois ces 3 textures acquises, pour faire la fausse 3D, il a fallu, pour chacune des 3 faces, leur appliquer un redimensionnement (réduire leur largeur et non leur hauteur pour être plus précis) ainsi qu'un cisaillement qui pourrait imiter une projection isométrique.
+
 *Exemple :*
 
 > ![Exemple](../../../exemples/ridge_object_1.png)
@@ -35,6 +36,7 @@ Ces 3 textures acquises, pour faire la fausse 3D, il a fallu, pour chacune des 3
 Ici, nous pouvons clairement discerner les trois faces transformées.
 
 Ensuite, les murs prennent en charge un système de `stickers`. Réglables dans `boundaries` les stickers permettent de coller des irrégularités sur les murs.
+
 *Exemple :*
 
 ![Exemple](../../../exemples/wall_segment_1.png)
@@ -79,7 +81,7 @@ Pour réaliser ceci, les données à renseigner dans `boundaries` se présentent
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise la classe parent, et calcule `image` en créant la fausse 3D (appelle `calculate_wall_image()`).
+  Initialise la classe parent, et calcule `image` en créant la fausse 3D (appelle `calculate_wall_image()`). \
   Paramètre :
   * `data` : *`dict`* \
   Le dictionnaire d'initialisation du mur.

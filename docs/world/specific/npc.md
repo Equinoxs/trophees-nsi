@@ -25,7 +25,7 @@ Les personnages peuvent se déplacer vers un objectif et effectuer une série de
 
 Les informations nécessaires à ces parcours prédéfinis sont stockées dans les propriétés `"pattern_timeline"` et `"pattern_type"`.
 
-Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un déplacement, lorsqu'il y a une chaîne de caractère, le PNJ effectue l'action spécifiée dans [`PatternEvents`](pattern_events.md).
+Dans `"pattern_timeline"`, lorsqu'il y a un couple de points, cela signifie un déplacement, lorsqu'il y a une chaîne de caractères, le PNJ effectue l'action spécifiée dans [`PatternEvents`](pattern_events.md).
 
 ## Attributs
 - `initial_position` : *`Vector2`* \
@@ -67,7 +67,7 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise simplement ses attributs ainsi que sa classe parent.
+  Initialise simplement ses attributs ainsi que sa classe parent. \
   Paramètre :
   * `data` : *`dict`* \
   Le dictionnaire d'initialisation du PNJ.
@@ -85,7 +85,7 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
   Une fonction pour actualiser l'état du joueur si `is_player` est à *`True`*.
 
 - `set_objective(new_objective)` &rarr; `None` \
-  Règle une nouvelle position pour le pnj.
+  Règle une nouvelle position pour le pnj. \
   Paramètre :
   * `new_objective` : *`Vector2 | None`* \
   Vers où le PNJ doit aller.
@@ -113,7 +113,7 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
   Règle l'inventaire du joueur à *`None`*.
 
 - `pick_item(item)` &rarr; `None` \
-  Récupère l'item renseigné dans l'inventaire.
+  Récupère l'item renseigné dans l'inventaire. \
   Paramètre :
   * `item` : *`InventoryItem`* \
   l'item en question.
@@ -125,7 +125,7 @@ Dans `"pattern_timeline"`, lorsqu'il y a un couple de point, cela signifie un d�
   Gère l'état de l'inventaire si le personnage est contrôlé par le joueur.
 
 - `give_inventory_to(table, index_position)` &rarr; `None` \
-  Lâche l'inventaire sur une [`Table`](table.md).
+  Lâche l'inventaire sur une [`Table`](table.md). \
   Paramètres :
   * `table` : *`Table`* \
   La table destinataire de l'inventaire.

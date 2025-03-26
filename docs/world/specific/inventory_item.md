@@ -16,7 +16,7 @@ Elle gère, tout comme [`Interactable`](../basics/interactable.md), un [`Marker`
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise les classes parent ainsi que les deux attributs supplémentaires.
+  Initialise les classes parent ainsi que les deux attributs supplémentaires. \
   Paramètre :
   * `data` : *`dict`*
 - `remove_pickup_marker()` &rarr; `None` \

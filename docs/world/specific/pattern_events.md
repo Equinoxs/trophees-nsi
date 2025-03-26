@@ -4,7 +4,7 @@
 
 Cette classe est nécessaire pour fournir aux PNJ les pattern events dont ils ont besoin.
 
-C'est un singleton dont les méthodes sont crées au besoin.
+C'est un singleton dont les méthodes sont créées au besoin.
 
 Ces méthodes retournent *`True`* si elles doivent être exécutées à la prochaine frame, et *`False`* sinon.
 
@@ -27,7 +27,7 @@ Ces méthodes retournent *`True`* si elles doivent être exécutées à la proch
   > pass
 
 - `do(pattern_event_name, host, delta_time)` &rarr; `bool` \
-  Appelle la méthode de l'event correspondant à `pattern_event_name`, et lui passe en paramètre `host` et `delta_time`, retourne ce que retourne la méthode.
+  Appelle la méthode de l'event correspondant à `pattern_event_name`, et lui passe en paramètre `host` et `delta_time`, retourne ce que renvoie la méthode. \
   Paramètres :
   * `pattern_event_name` : *`str`* \
   Le nom du pattern event.

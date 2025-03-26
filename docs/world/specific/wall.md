@@ -4,7 +4,8 @@
 
 Cette classe est nécessaire pour pouvoir bâtir des murs complexes suivant un tracé de points.
 
-`Wall` est un peu spécial : ce n'est pas un [`MapElement`](../basics/map_element.md). En effet, cette classe, initialisé par [`Map`](map.md), a en réalité comme seule fonction d'initialiser des [`WallSegment`](wall_segment.md). Ceci permet une meilleure gestion des superpositions, en faisant des murs séparés comme ceci, nous avons la possibilité d'intercaler un objet entre deux façades d'un même mur lors du rendu.
+`Wall` est un peu spécial : ce n'est pas un [`MapElement`](../basics/map_element.md). En effet, cette classe, initialisée par [`Map`](map.md), a en réalité comme seule fonction d'initialiser des [`WallSegment`](wall_segment.md), permettant une meilleure gestion des superpositions. \
+En faisant des murs séparés comme ceci, nous avons la possibilité d'intercaler un objet entre deux façades d'un même mur lors du rendu.
 
 > ```json
 > {
@@ -32,7 +33,7 @@ Le coeur de ce mur est `"boundaries"`, nous remarquons qu'il est constitué de c
 
 ## Méthodes
 - `__init__(data, map)` &rarr; `None` \
-  Initialise ses attributs et appelle `initialize_segments(map)`.
+  Initialise ses attributs et appelle `initialize_segments(map)`. \
   Paramètres :
   * `data` : *`dict`* \
   Le dictionnaire d'initialisation de la table.
@@ -40,7 +41,7 @@ Le coeur de ce mur est `"boundaries"`, nous remarquons qu'il est constitué de c
   Une référence de la [`Map`](map.md) actuelle afin d'ajouter des [`WallSegment`](wall_segment.md) à cette dernière.
 
 - `initialize_segments(map)` &rarr; `None` \
-  Se gère de créer les [`WallSegment`](wall_segment.md) et de les ajouter à `segments`.
+  Se gère de créer les [`WallSegment`](wall_segment.md) et de les ajouter à `segments`. \
   Paramètre :
   * `map` : *`Map`* \
   Une référence de la [`Map`](map.md) actuelle afin d'ajouter des [`WallSegment`](wall_segment.md) à cette dernière.

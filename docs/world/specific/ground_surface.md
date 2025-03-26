@@ -4,11 +4,12 @@
 
 Pour la faire simple, cette classe se matérialise par un polygône de texture. Ainsi cela représente le sol.
 
-Pour accompagner le tout, dans les données de l'image du sol, on peut préciser un `ground_type` via la propriété `"type"`. Cela représente le son produit par un personnage lorsqu'il marche dessus.
+Pour accompagner le tout, dans les données de l'image du sol, on peut préciser un `ground_type` via la propriété `"type"` des données de l'image. Cela représente le son produit par un personnage lorsqu'il marche dessus.
 
 Le sol peut masquer son contenu si le joueur n'a pas le niveau requis, il se trouve que ce système n'est pas utilisé dans notre jeu
 
-les sommets du polygône sont représentés par la propriété `"boundaries"` dans `data`, le dictionnaire d'initialisation de la classe.``
+les sommets du polygône sont représentés par la propriété `"boundaries"` dans `data`, le dictionnaire d'initialisation de la classe.
+
 *Exemple :*
 
 > ```json
@@ -21,7 +22,7 @@ les sommets du polygône sont représentés par la propriété `"boundaries"` da
 > ```
 > Exemple de création d'un `GroundSurface`.
 
-Un autre exemple mais cette fois-ci en image :
+Voyons un autre exemple mais cette fois-ci en image :
 
 > ![Exemple](../../../exemples/ground_surface_1.png)
 > Exemple de rendu d'un `GroundSurface`.
@@ -40,7 +41,7 @@ Un autre exemple mais cette fois-ci en image :
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise la classe parent, l'image, la position et les autres propriétés.
+  Initialise la classe parent, l'image, la position et les autres propriétés. \
   Paramètre :
   * `data` : *`dict`*
 

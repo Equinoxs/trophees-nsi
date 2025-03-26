@@ -17,10 +17,10 @@ Ses autres attributs étant initialisés selon ses classes parent, `Building` in
 > 		"position": [78, 99]
 > 	}
 > }
-> ```
+> ``` 
 > Exemple de données dans `data/assets/images/building/XXX/info.json`.
 
-Comme vous pouvez le constater, une porte peut être rajouté au `Building`. La position de la porte est également sous forme de pourcentage.
+Comme vous pouvez le constater, une porte peut être rajoutée au `Building`. La position de la porte est également sous forme de pourcentages.
 *Plus d'informations dans la [`documentation de Door`](door.md)
 
 ## Attributs
@@ -29,7 +29,7 @@ Comme vous pouvez le constater, une porte peut être rajouté au `Building`. La 
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise la classe parent, la `hitbox` et la `Door` comme précisé ci-dessus.
+  Initialise la classe parent, la `hitbox` et la `Door` comme précisées ci-dessus. \
   Paramètre :
   * `data` : *`dict`*
 

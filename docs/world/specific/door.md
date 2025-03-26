@@ -4,9 +4,9 @@
 
 Comme tout jeu contient plusieurs complexes à explorer, cette classe nous permet ainsi de voyager entre les cartes.
 
-Ce sont des classes fantômes, c'est-à-dire qu'elles n'ont pas d'image à rendre, ce sont juste des entités permettant de voyager.
+Ce sont des classes fantômes, c'est-à-dire qu'elles n'ont pas d'image à rendre, ce sont juste des entités permettant de voyager entre les différentes cartes du jeu.
 
-La destination de ces portes est déterminé par une interaction. *Voir [`Interactable`](../basics/interactable.md).*
+La destination de ces portes est déterminée par une interaction. *Voir [`Interactable`](../basics/interactable.md).*
 
 On peut les initialiser soit comme n'importe quel autre objet, soit à travers un [`Building`](building.md).
 
@@ -18,7 +18,7 @@ On peut les initialiser soit comme n'importe quel autre objet, soit à travers u
 
 ## Méthodes
 - `__init__(data)` &rarr; `None` \
-  Initialise la classe parent ainsi que les deux attributs supplémentaires.
+  Initialise la classe parent ainsi que les deux attributs supplémentaires. \
   Paramètre :
   * `data` : *`dict`*
 
