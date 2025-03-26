@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 from copy import deepcopy
 
 from src import DataHandler, Player, Camera, Furniture, Vector2, InventoryItem

@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 import re
 
 d = "m 874.66919,601.44722 -71.24792,-1.37115 -0.21715,-30.25484 -37.69907,-1.117 0.33268,156.37191 107.31904,0.22904 z"

@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 import pygame
 
 from src import Player, MenuHandler, LogHandler, DataHandler, Vector2, SCREEN_WIDTH, SCREEN_HEIGHT, DEBUG

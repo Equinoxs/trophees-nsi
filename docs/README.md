@@ -108,7 +108,7 @@ Pour manipuler et créer ce dernier type de classe, on peut soit passer par les 
     * [`Interactable`](world/basics/interactable.md)
     * [`Collider`](world/basics/collider.md)
     * [`SoundMaker`](world/basics/sound_maker.md)
-    * [`SideEffectManager`](world/basics/side_effects_manager.md)
+    * [`SideEffectManager`](world/basics/side_effects_manager.md) \
     *Classe associée : [`SideEffects`](world/basics/side_effects.md)*
     * [`Movable`](world/basics/movable.md)
     * [`MapElement`](world/basics/map_element.md)

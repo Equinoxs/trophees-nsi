@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 # Constantes
 DEBUG = False  # Active le mode développement si DEBUG est à True
 SAVE = True

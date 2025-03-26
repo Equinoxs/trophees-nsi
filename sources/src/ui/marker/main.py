@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 from src import UIElement, GameLoop, SCREEN_HEIGHT, SCREEN_WIDTH
 
 

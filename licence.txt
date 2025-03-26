@@ -1,4 +1,4 @@
-Copyright (C) 2025 Equinoxs, Popashoubi, Dim-Bananox, AdlarX9
+Copyright (C) 2025 Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
 
 Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier
 selon les termes de la licence GNU General Public License publiée par la Free Software Foundation,
@@ -17,7 +17,7 @@ Cela signifie que vous êtes libres de :
 - Adapter : remixer, transformer et créer à partir du matériel pour toute utilisation, y compris commerciale.
 
 Sous les conditions suivantes :
-- Attribution : vous devez créditer l’auteur original (Equinoxs, Popashoubi, Dim-Bananox, AdlarX9) et fournir un lien vers la licence.
+- Attribution : vous devez créditer les auteurs originaux (Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND) et fournir un lien vers la licence.
 - Partage dans les mêmes conditions : si vous modifiez, vous devez partager sous la même licence.
 
 Texte complet de la licence disponible ici :

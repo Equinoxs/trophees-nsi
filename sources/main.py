@@ -1,3 +1,6 @@
+#Projet : Bletchley's Adventure
+#Auteurs : Diego GIMENEZ, Maël KEN, Alexis LAROSE, Dimitri NERRAND
+
 '''
 Fichier principal du jeu, seuls Python 3.10 ou une version ultérieure et les requirements sont nécessaires pour l'exécuter.
 Python 3.13 est recommandé pour éviter tout problème de version.
