@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Le jeu est programmé en python 3, il utilise pour seule bibliothèque externe `PyGame`, comme spécifiée dans les [`requirements.txt`](../requirements.txt). Il est entièrement fait en Programmation Orientée Objet (POO) afin de garantir une structure solide malgré la taille conséquente du code.
+Le jeu est programmé en python 3 (version >= 3.10 pour la compatibilité), il utilise pour seule bibliothèque externe `PyGame`, comme spécifiée dans les [`requirements.txt`](../requirements.txt). Il est entièrement fait en Programmation Orientée Objet (POO) afin de garantir une structure solide malgré la taille conséquente du code.
 
 Le point d'entrée du jeu se trouve dans le fichier [`main.py`](../sources/main.py). Ce fichier initialise `PyGame` et les différents singletons du jeu, puis les passe dans la surcharge de [`GameLoop`](utils/game_loop.md). Cette classe fait tourner la boucle de jeu, c'est elle qui coordonne toutes les autres et qui met à jour l'état de toute l'application à chaque nouveau rendu.
 

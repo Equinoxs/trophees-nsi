@@ -1,3 +1,12 @@
+'''
+Fichier principal du jeu, seuls Python 3.10 ou une version ultérieure et les requirements sont nécessaires pour l'exécuter.
+Python 3.13 est recommandé pour éviter tout problème de version.
+'''
+
+import sys
+if sys.version_info < (3, 10):  # Empêcher l'exécution du script si Python n'est pas assez récent
+	sys.exit('Python 3.10 or a more recent version is required.')
+
 import pygame
 
 from src import TimeHandler, ControlHandler, DataHandler, GameLoop, Map, Player, SoundMixer, Camera, MissionHandler, MenuHandler, LogHandler, SCREEN_WIDTH, SCREEN_HEIGHT
